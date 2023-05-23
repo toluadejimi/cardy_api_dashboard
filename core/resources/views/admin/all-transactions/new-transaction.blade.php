@@ -58,7 +58,9 @@
                                         <option value=" ">Select </option>
                                         <option value="CashOut">Cash Out</option>
                                         <option value="Refund">Refund</option>
-                                        <option value="TerminalPayment">Terminal Payment</option>
+                                        <option value="TerminalPayment">Terminal Payment Outright</option>
+                                        <option value="TerminalPaymentDaily">Terminal Payment Daily</option>
+                                        <option value="TerminalPaymentMonthly">Terminal Payment Daily</option>
                                         <option value="FundTransfer">Fund Transfer</option>
                                         <option value="EPVAS">EP VAS</option>
                                         <option value="EnkPayTransfer">EnkPay Transfer</option>

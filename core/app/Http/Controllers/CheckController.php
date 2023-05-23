@@ -78,52 +78,56 @@ class CheckController extends Controller
         $this->middleware('auth');
     }
 
-    public function vcard(){
-        $data['title']='Virtual Cards';
-        $data['card']=Virtual::orderBy('created_at', 'DESC')->get();
+    public function vcard()
+    {
+        $data['title'] = 'Virtual Cards';
+        $data['card'] = Virtual::orderBy('created_at', 'DESC')->get();
         return view('admin.virtual.index', $data);
     }
 
-    public function all_transactions(){
-        $data['title']='Transactions';
-        $data['transactions']=Transactions::latest()->get();
+    public function all_transactions()
+    {
+        $data['title'] = 'Transactions';
+        $data['transactions'] = Transactions::latest()->get();
         return view('admin.all-transactions.index', $data);
     }
 
-    public function bpay(){
-        $data['title']='Bill payment';
-        $data['trans']=Billtransactions::orderBy('created_at', 'DESC')->get();
+    public function bpay()
+    {
+        $data['title'] = 'Bill payment';
+        $data['trans'] = Billtransactions::orderBy('created_at', 'DESC')->get();
         return view('admin.bill.index', $data);
     }
 
-    public function transactionsvcard($id){
-        $data['title']='Transaction History';
-        $val=Virtual::wherecard_hash($id)->first();
+    public function transactionsvcard($id)
+    {
+        $data['title'] = 'Transaction History';
+        $val = Virtual::wherecard_hash($id)->first();
         $curl = curl_init();
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.flutterwave.com/v3/virtual-cards/".$val->card_hash."/transactions?from=".date('Y-m-d', strtotime($val['created_at']))."&to=".Carbon::tomorrow()->format('Y-m-d')."&index=1&size=100",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-            "Content-Type: application/json",
-            "Authorization: Bearer ".env('SECRET_KEY')
-        ),
+            CURLOPT_URL => "https://api.flutterwave.com/v3/virtual-cards/" . $val->card_hash . "/transactions?from=" . date('Y-m-d', strtotime($val['created_at'])) . "&to=" . Carbon::tomorrow()->format('Y-m-d') . "&index=1&size=100",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer " . env('SECRET_KEY')
+            ),
         ));
         $response = curl_exec($curl);
         curl_close($curl);
-        $data['log']=$response;
+        $data['log'] = $response;
         return view('admin.virtual.log', $data);
     }
 
     public function Destroyuser($id)
     {
-        $check=User::whereid($id)->first();
-        $set=Settings::first();
+        $check = User::whereid($id)->first();
+        $set = Settings::first();
         // if($set->stripe_connect==1){
         //     if($check->stripe_id!=null){
         //         $gate = Gateway::find(103);
@@ -191,70 +195,70 @@ class CheckController extends Controller
 
 
 
-        $data['title']='Dashboard';
-        $data['pool']= get_pool();
-        $data['received']=Charges::sum('amount');
-        $data['twallet']=User::all()->sum('main_wallet');
+        $data['title'] = 'Dashboard';
+        $data['pool'] = get_pool();
+        $data['received'] = Charges::sum('amount');
+        $data['twallet'] = User::all()->sum('main_wallet');
         $pp2 = str_replace(',', '', $data['pool']);
         $pp3 = (int)$pp2;
-        $data['diff']= $pp3 - $data['twallet'];
-        $data['wd']=Withdraw::whereStatus(1)->sum('amount');
-        $data['wdc']=Withdraw::whereStatus(1)->sum('charge');
-        $data['mer']=Exttransfer::whereStatus(1)->sum('amount');
-        $data['merc']=Exttransfer::whereStatus(1)->sum('charge');
-        $data['in']=Invoice::whereStatus(1)->sum('amount');
-        $data['inc']=Invoice::whereStatus(1)->sum('charge');
-        $data['req']=Requests::whereStatus(1)->sum('amount');
-        $data['reqc']=Requests::whereStatus(1)->sum('charge');
-        $data['tran']=Transfer::whereStatus(1)->sum('amount');
-        $data['tranc']=Transfer::whereStatus(1)->sum('charge');
-        $data['sin']=Transactions::whereStatus(1)->wheretype(1)->sum('amount');
-        $data['sinc']=Transactions::whereStatus(1)->wheretype(1)->sum('charge');
-        $data['do']=Transactions::whereStatus(1)->wheretype(2)->sum('amount');
-        $data['doc']=Transactions::whereStatus(1)->wheretype(2)->sum('charge');
-        $data['in']=Transactions::all()->sum('credit');
-        $data['out']=Transactions::all()->sum('debit');
-        $data['or']=Order::whereStatus(1)->sum('total');
-        $data['orc']=Order::whereStatus(1)->sum('charge');
-        $data['tfee']=TerminalPayment::where('transaction_type', 'TerminalPayment')->sum('debit');
-        $data['dec']=Deposits::whereStatus(1)->sum('charge');
-        $data['totalusers']=User::count();
-        $data['blockedusers']=User::whereStatus(1)->count();
-        $data['activeusers']=User::whereStatus(0)->count();
+        $data['diff'] = $pp3 - $data['twallet'];
+        $data['wd'] = Withdraw::whereStatus(1)->sum('amount');
+        $data['wdc'] = Withdraw::whereStatus(1)->sum('charge');
+        $data['mer'] = Exttransfer::whereStatus(1)->sum('amount');
+        $data['merc'] = Exttransfer::whereStatus(1)->sum('charge');
+        $data['in'] = Invoice::whereStatus(1)->sum('amount');
+        $data['inc'] = Invoice::whereStatus(1)->sum('charge');
+        $data['req'] = Requests::whereStatus(1)->sum('amount');
+        $data['reqc'] = Requests::whereStatus(1)->sum('charge');
+        $data['tran'] = Transfer::whereStatus(1)->sum('amount');
+        $data['tranc'] = Transfer::whereStatus(1)->sum('charge');
+        $data['sin'] = Transactions::whereStatus(1)->wheretype(1)->sum('amount');
+        $data['sinc'] = Transactions::whereStatus(1)->wheretype(1)->sum('charge');
+        $data['do'] = Transactions::whereStatus(1)->wheretype(2)->sum('amount');
+        $data['doc'] = Transactions::whereStatus(1)->wheretype(2)->sum('charge');
+        $data['in'] = Transactions::all()->sum('credit');
+        $data['out'] = Transactions::all()->sum('debit');
+        $data['or'] = Order::whereStatus(1)->sum('total');
+        $data['orc'] = Order::whereStatus(1)->sum('charge');
+        $data['tfee'] = TerminalPayment::where('transaction_type', 'TerminalPayment')->sum('debit');
+        $data['dec'] = Deposits::whereStatus(1)->sum('charge');
+        $data['totalusers'] = User::count();
+        $data['blockedusers'] = User::whereStatus(1)->count();
+        $data['activeusers'] = User::whereStatus(0)->count();
         return view('admin.dashboard.index', $data);
     }
 
     public function Users()
     {
-		$data['title']='Clients';
-		$data['users']=User::orderBy('first_name', 'ASC')->get();
+        $data['title'] = 'Clients';
+        $data['users'] = User::orderBy('first_name', 'ASC')->get();
         return view('admin.user.index', $data);
     }
 
     public function Staffs()
     {
-		$data['title']='Staffs';
-		$data['users']=Admin::where('id', '!=', 1)->latest()->get();
+        $data['title'] = 'Staffs';
+        $data['users'] = Admin::where('id', '!=', 1)->latest()->get();
         return view('admin.user.staff', $data);
     }
 
     public function Messages()
     {
-		$data['title']='Messages';
-		$data['message']=Contact::latest()->get();
+        $data['title'] = 'Messages';
+        $data['message'] = Contact::latest()->get();
         return view('admin.user.message', $data);
     }
 
     public function Newstaff()
     {
-		$data['title']='New Staff';
+        $data['title'] = 'New Staff';
         return view('admin.user.new-staff', $data);
     }
 
 
     public function Newtransaction()
     {
-		$data['title']='New Transaction';
+        $data['title'] = 'New Transaction';
         $data['users'] = User::where('is_active', "1")->orderBy('first_name', 'ASC')->get();
         $data['ref_trans_id'] = "ENK-" . random_int(000000, 9999999);
 
@@ -267,191 +271,276 @@ class CheckController extends Controller
     {
 
 
-            $chk_trx = Transactions::where('ref_trans_id', $request->ref_trans_id)->first()->ref_trans_id ?? null;
-    
-            if ($chk_trx == $request->ref_trans_id) {
-                return back()->with('alert', 'Duplicate Transaction');
+        $chk_trx = Transactions::where('ref_trans_id', $request->ref_trans_id)->first()->ref_trans_id ?? null;
+
+        if ($chk_trx == $request->ref_trans_id) {
+            return back()->with('alert', 'Duplicate Transaction');
+        }
+
+        $user = User::find(Auth::id());
+        if (Hash::check($request->pin, $user->pin)) {
+
+            if ($request->transaction_type == 'FundTransfer') {
+
+                $wallet = User::where('id', $request->user_id)
+                    ->first()->main_wallet;
+
+
+                $serial_no = Terminal::where('user_id', $request->user_id)->first()->serial_no;
+
+
+                $updated_debit =  $wallet - $request->debit;
+
+                $amount = $request->debit - 25;
+
+                $update_user = User::where('id', $request->user_id)
+                    ->update(['main_wallet' => $updated_debit]);
+
+                $trasnaction = new Transactions();
+                $trasnaction->user_id = $request->user_id;
+                $trasnaction->ref_trans_id = $request->ref_trans_id;
+                $trasnaction->e_ref = $request->e_ref;
+                $trasnaction->transaction_type = $request->transaction_type;
+                $trasnaction->debit = $request->debit;
+                $trasnaction->e_charges = 15;
+                $trasnaction->title = "EP Transfer";
+                $trasnaction->note = $request->note;
+                $trasnaction->fee = 10;
+                $trasnaction->amount = $amount;
+                $trasnaction->enkPay_Cashout_profit = 15;
+                $trasnaction->balance = $updated_debit;
+                $trasnaction->serial_no = $serial_no;
+                $trasnaction->status = 1;
+                $trasnaction->save();
+
+                return back()->with('success', 'Transaction Updated Successfully');
             }
-    
-            $user = User::find(Auth::id());
-            if (Hash::check($request->pin, $user->pin)) {
-    
-                if ($request->transaction_type == 'FundTransfer') {
-    
-                    $wallet = User::where('id', $request->user_id)
-                        ->first()->main_wallet;
-    
-                    $updated_debit =  $wallet - $request->debit;
-    
-                    $amount = $request->debit - 25;
-    
-                    $update_user = User::where('id', $request->user_id)
-                        ->update(['main_wallet' => $updated_debit]);
-    
-                    $trasnaction = new Transactions();
-                    $trasnaction->user_id = $request->user_id;
-                    $trasnaction->ref_trans_id = $request->ref_trans_id;
-                    $trasnaction->e_ref = $request->e_ref;
-                    $trasnaction->transaction_type = $request->transaction_type;
-                    $trasnaction->debit = $request->debit;
-                    $trasnaction->e_charges = 15;
-                    $trasnaction->title = "EP Transfer";
-                    $trasnaction->note = $request->note;
-                    $trasnaction->fee = 10;
-                    $trasnaction->amount = $amount;
-                    $trasnaction->enkPay_Cashout_profit = 15;
-                    $trasnaction->balance = $updated_debit;
-                    $trasnaction->serial_no = $request->serial_no;
-                    $trasnaction->status = 1;
-                    $trasnaction->save();
-    
-                    return back()->with('success', 'Transaction Updated Successfully');
-    
+
+            if ($request->transaction_type == 'TerminalPayment') {
+
+                $wallet = User::where('id', $request->user_id)
+                    ->first()->main_wallet;
+
+                $serial_no = Terminal::where('user_id', $request->user_id)->first()->serial_no;
+
+                $updated_debit =  $wallet - $request->debit;
+
+                $update_user = User::where('id', $request->user_id)
+                    ->update(['main_wallet' => $updated_debit]);
+
+                $trasnaction = new TerminalPayment();
+                $trasnaction->user_id = $request->user_id;
+                $trasnaction->ref_trans_id = $request->ref_trans_id;
+                $trasnaction->e_ref = $request->e_ref;
+                $trasnaction->transaction_type = $request->transaction_type;
+                $trasnaction->debit = $request->debit;
+                $trasnaction->e_charges = 0;
+                $trasnaction->title = "TerminalPayment";
+                $trasnaction->note = $request->note;
+                $trasnaction->fee = 0;
+                $trasnaction->amount = $request->amount;
+                $trasnaction->enkPay_Cashout_profit = 0;
+                $trasnaction->balance = $updated_debit;
+                $trasnaction->serial_no = $serial_no;
+                $trasnaction->status = 1;
+                $trasnaction->save();
+
+                $trasnaction = new Transactions();
+                $trasnaction->user_id = $request->user_id;
+                $trasnaction->ref_trans_id = $request->ref_trans_id;
+                $trasnaction->e_ref = $request->e_ref;
+                $trasnaction->transaction_type = $request->transaction_type;
+                $trasnaction->debit = $request->debit;
+                $trasnaction->e_charges = 0;
+                $trasnaction->title = "TerminalPayment";
+                $trasnaction->note = $request->note;
+                $trasnaction->fee = 0;
+                $trasnaction->amount = $request->amount;
+                $trasnaction->enkPay_Cashout_profit = 0;
+                $trasnaction->balance = $updated_debit;
+                $trasnaction->serial_no = $serial_no;
+                $trasnaction->status = 1;
+                $trasnaction->save();
+
+                Terminal::where('serial_no', $serial_no)->update(['amount' => $request->amount, 'p_type' => 1]);
+
+                return back()->with('success', 'Transaction Updated Successfully');
+            }
+
+
+            if ($request->transaction_type == 'TerminalPaymentDaily') {
+                $wallet = User::where('id', $request->user_id)
+                    ->first()->main_wallet;
+
+                $updated_debit =  $wallet - $request->debit;
+
+                $update_user = User::where('id', $request->user_id)
+                    ->update(['main_wallet' => $updated_debit]);
+
+                $serial_no = Terminal::where('user_id', $request->user_id)->first()->serial_no;
+
+                Terminal::where('serial_no', $serial_no)->increment('amount', $request->amount);
+
+                Terminal::where('serial_no', $serial_no)->update(['p_type' => 3]);
+
+                $total_paid = Terminal::where('serial_no', $serial_no)->sum('amount');
+
+
+                if ($total_paid == 25000) {
+
+                    $total_paid = Terminal::where('serial_no', $serial_no)->update(['p_type' => 2]);
+
                 }
 
-                if ($request->transaction_type == 'TerminalPayment') {
-    
-                    $wallet = User::where('id', $request->user_id)
-                        ->first()->main_wallet;
-    
-                    $updated_debit =  $wallet - $request->debit;
-        
-                    $update_user = User::where('id', $request->user_id)
-                        ->update(['main_wallet' => $updated_debit]);
-    
-                    $trasnaction = new TerminalPayment();
-                    $trasnaction->user_id = $request->user_id;
-                    $trasnaction->ref_trans_id = $request->ref_trans_id;
-                    $trasnaction->e_ref = $request->e_ref;
-                    $trasnaction->transaction_type = $request->transaction_type;
-                    $trasnaction->debit = $request->debit;
-                    $trasnaction->e_charges = 0;
-                    $trasnaction->title = "TerminalPayment";
-                    $trasnaction->note = $request->note;
-                    $trasnaction->fee = 0;
-                    $trasnaction->amount = $request->amount;
-                    $trasnaction->enkPay_Cashout_profit = 0;
-                    $trasnaction->balance = $updated_debit;
-                    $trasnaction->serial_no = $request->serial_no;
-                    $trasnaction->status = 1;
-                    $trasnaction->save();
 
-                    $trasnaction = new Transactions();
-                    $trasnaction->user_id = $request->user_id;
-                    $trasnaction->ref_trans_id = $request->ref_trans_id;
-                    $trasnaction->e_ref = $request->e_ref;
-                    $trasnaction->transaction_type = $request->transaction_type;
-                    $trasnaction->debit = $request->debit;
-                    $trasnaction->e_charges = 0;
-                    $trasnaction->title = "TerminalPayment";
-                    $trasnaction->note = $request->note;
-                    $trasnaction->fee = 0;
-                    $trasnaction->amount = $amount;
-                    $trasnaction->enkPay_Cashout_profit = 0;
-                    $trasnaction->balance = $updated_debit;
-                    $trasnaction->serial_no = $request->serial_no;
-                    $trasnaction->status = 1;
-                    $trasnaction->save();
-    
-                    return back()->with('success', 'Transaction Updated Successfully');
-    
+                if ($total_paid == 60000) {
+
+                    $total_paid = Terminal::where('serial_no', $serial_no)->update(['p_type' => 1]);
+
+                    return back()->with('alert', 'Terminal Paid in Full');
                 }
 
-                if ($request->transaction_type == 'Refund') {
-    
-                    $wallet = User::where('id', $request->user_id)
-                        ->first()->main_wallet;
-    
-                    $updated_credit =  $wallet + $request->credit;
-        
-                    $update_user = User::where('id', $request->user_id)
-                        ->update(['main_wallet' => $updated_credit]);
-    
-                    $trasnaction = new Transactions();
-                    $trasnaction->user_id = $request->user_id;
-                    $trasnaction->ref_trans_id = $request->ref_trans_id;
-                    $trasnaction->e_ref = $request->e_ref;
-                    $trasnaction->transaction_type = $request->transaction_type;
-                    $trasnaction->credit = $request->credit;
-                    $trasnaction->e_charges = 0;
-                    $trasnaction->title = "Refund";
-                    $trasnaction->note = $request->note;
-                    $trasnaction->fee = 0;
-                    $trasnaction->amount = $$request->amount;
-                    $trasnaction->enkPay_Cashout_profit = 0;
-                    $trasnaction->balance = $updated_credit;
-                    $trasnaction->serial_no = $request->serial_no;
-                    $trasnaction->status = 1;
-                    $trasnaction->save();
-    
-                    return back()->with('success', 'Transaction Updated Successfully');
-    
-                }
-    
-                if ($request->transaction_type == 'EPVAS') {
-    
-                    $wallet = User::where('id', $request->user_id)
-                        ->first()->main_wallet;
-    
-                    $updated_debit =  $wallet - $request->debit;
-    
-                    //$amount = $request->debit - 25;
-    
-                    $update_user = User::where('id', $request->user_id)
-                        ->update(['main_wallet' => $updated_debit]);
-    
-                    $trasnaction = new Transactions();
-                    $trasnaction->user_id = $request->user_id;
-                    $trasnaction->ref_trans_id = $request->ref_trans_id;
-                    $trasnaction->e_ref = $request->e_ref;
-                    $trasnaction->transaction_type = $request->transaction_type;
-                    $trasnaction->debit = $request->debit;
-                    $trasnaction->e_charges = 0;
-                    $trasnaction->title = "EP VAS";
-                    $trasnaction->note = $request->note;
-                    //$trasnaction->fee = 10;
-                    $trasnaction->amount = $request->amount;
-                    $trasnaction->enkPay_Cashout_profit = 0;
-                    $trasnaction->balance = $updated_debit;
-                    $trasnaction->serial_no = $request->serial_no;
-                    $trasnaction->status = 1;
-                    $trasnaction->save();
-    
-                    return back()->with('success', 'Transaction Updated Successfully');
-    
-                }
-    
-                if ($request->transaction_type == 'CashOut') {
-    
-                    $wallet = User::where('id', $request->user_id)
-                        ->first()->main_wallet;
-    
-                    $updated_credit = $wallet + $request->credit;
 
-                    $update_user = User::where('id', $request->user_id)
-                        ->update(['main_wallet' => $updated_credit]);
-                    $trasnaction = new Transactions();
-                    $trasnaction->user_id = $request->user_id;
-                    $trasnaction->ref_trans_id = $request->ref_trans_id;
-                    $trasnaction->e_ref = $request->e_ref;
-                    $trasnaction->transaction_type = $request->transaction_type;
-                    $trasnaction->credit = $request->credit;
-                    $trasnaction->e_charges = $request->enkPay_Cashout_profit;
-                    $trasnaction->title = $request->title;
-                    $trasnaction->note = $request->note;
-                    $trasnaction->fee = $request->fee;
-                    $trasnaction->amount = $request->amount;
-                    $trasnaction->enkPay_Cashout_profit = $request->enkPay_Cashout_profit;
-                    $trasnaction->balance = $updated_credit;
-                    $trasnaction->serial_no = $request->serial_no;
-                    $trasnaction->status = 1;
-                    $trasnaction->save();
-                    return back()->with('success', 'Transaction Updated Successfully');
-                }
-    
-    
+                $trasnaction = new TerminalPayment();
+                $trasnaction->user_id = $request->user_id;
+                $trasnaction->ref_trans_id = $request->ref_trans_id;
+                $trasnaction->e_ref = $request->e_ref;
+                $trasnaction->transaction_type = $request->transaction_type;
+                $trasnaction->debit = $request->debit;
+                $trasnaction->e_charges = 0;
+                $trasnaction->title = "TerminalPayment";
+                $trasnaction->note = $request->note;
+                $trasnaction->fee = 0;
+                $trasnaction->amount = $request->amount;
+                $trasnaction->enkPay_Cashout_profit = 0;
+                $trasnaction->balance = $updated_debit;
+                $trasnaction->serial_no = $serial_no;
+                $trasnaction->status = 1;
+                $trasnaction->save();
+
+                $trasnaction = new Transactions();
+                $trasnaction->user_id = $request->user_id;
+                $trasnaction->ref_trans_id = $request->ref_trans_id;
+                $trasnaction->e_ref = $request->e_ref;
+                $trasnaction->transaction_type = $request->transaction_type;
+                $trasnaction->debit = $request->debit;
+                $trasnaction->e_charges = 0;
+                $trasnaction->title = "TerminalPayment";
+                $trasnaction->note = $request->note;
+                $trasnaction->fee = 0;
+                $trasnaction->amount = $request->amount;
+                $trasnaction->enkPay_Cashout_profit = 0;
+                $trasnaction->balance = $updated_debit;
+                $trasnaction->serial_no = $serial_no;
+                $trasnaction->status = 1;
+                $trasnaction->save();
+
+                return back()->with('success', 'Transaction Updated Successfully');
+            }
+
+            if ($request->transaction_type == 'Refund') {
+
+                $serial_no = Terminal::where('user_id', $request->user_id)->first()->serial_no;
+
+
+                $wallet = User::where('id', $request->user_id)
+                    ->first()->main_wallet;
+
+                $updated_credit =  $wallet + $request->credit;
+
+                $update_user = User::where('id', $request->user_id)
+                    ->update(['main_wallet' => $updated_credit]);
+
+                $trasnaction = new Transactions();
+                $trasnaction->user_id = $request->user_id;
+                $trasnaction->ref_trans_id = $request->ref_trans_id;
+                $trasnaction->e_ref = $request->e_ref;
+                $trasnaction->transaction_type = $request->transaction_type;
+                $trasnaction->credit = $request->credit;
+                $trasnaction->e_charges = 0;
+                $trasnaction->title = "Refund";
+                $trasnaction->note = $request->note;
+                $trasnaction->fee = 0;
+                $trasnaction->amount = $$request->amount;
+                $trasnaction->enkPay_Cashout_profit = 0;
+                $trasnaction->balance = $updated_credit;
+                $trasnaction->serial_no = $serial_no;
+                $trasnaction->status = 1;
+                $trasnaction->save();
+
+                return back()->with('success', 'Transaction Updated Successfully');
+            }
+
+            if ($request->transaction_type == 'EPVAS') {
+
+
+                $serial_no = Terminal::where('user_id', $request->user_id)->first()->serial_no;
+
+
+                $wallet = User::where('id', $request->user_id)
+                    ->first()->main_wallet;
+
+                $updated_debit =  $wallet - $request->debit;
+
+                //$amount = $request->debit - 25;
+
+                $update_user = User::where('id', $request->user_id)
+                    ->update(['main_wallet' => $updated_debit]);
+
+                $trasnaction = new Transactions();
+                $trasnaction->user_id = $request->user_id;
+                $trasnaction->ref_trans_id = $request->ref_trans_id;
+                $trasnaction->e_ref = $request->e_ref;
+                $trasnaction->transaction_type = $request->transaction_type;
+                $trasnaction->debit = $request->debit;
+                $trasnaction->e_charges = 0;
+                $trasnaction->title = "EP VAS";
+                $trasnaction->note = $request->note;
+                //$trasnaction->fee = 10;
+                $trasnaction->amount = $request->amount;
+                $trasnaction->enkPay_Cashout_profit = 0;
+                $trasnaction->balance = $updated_debit;
+                $trasnaction->serial_no = $serial_no;
+                $trasnaction->status = 1;
+                $trasnaction->save();
+
+                return back()->with('success', 'Transaction Updated Successfully');
+            }
+
+            if ($request->transaction_type == 'CashOut') {
+
+
+                $serial_no = Terminal::where('user_id', $request->user_id)->first()->serial_no;
+
+
+                $wallet = User::where('id', $request->user_id)
+                    ->first()->main_wallet;
+
+                $updated_credit = $wallet + $request->credit;
+
+                $update_user = User::where('id', $request->user_id)
+                    ->update(['main_wallet' => $updated_credit]);
+                $trasnaction = new Transactions();
+                $trasnaction->user_id = $request->user_id;
+                $trasnaction->ref_trans_id = $request->ref_trans_id;
+                $trasnaction->e_ref = $request->e_ref;
+                $trasnaction->transaction_type = $request->transaction_type;
+                $trasnaction->credit = $request->credit;
+                $trasnaction->e_charges = $request->enkPay_Cashout_profit;
+                $trasnaction->title = $request->title;
+                $trasnaction->note = $request->note;
+                $trasnaction->fee = $request->fee;
+                $trasnaction->amount = $request->amount;
+                $trasnaction->enkPay_Cashout_profit = $request->enkPay_Cashout_profit;
+                $trasnaction->balance = $updated_credit;
+                $trasnaction->serial_no = $serial_no;
+                $trasnaction->status = 1;
+                $trasnaction->save();
+                return back()->with('success', 'Transaction Updated Successfully');
+            }
+
+
             return redirect('admin.all-transactions.new-transaction.blade.php')->with('alert', 'Incorrect Pin');
-    
         }
 
         //     return redirect()->route('admin.staffs')->with('success', 'Staff was successfully created');
@@ -463,40 +552,40 @@ class CheckController extends Controller
 
     public function Ticket()
     {
-		$data['title']='Ticket system';
-		$data['ticket']=Ticket::latest()->get();
+        $data['title'] = 'Ticket system';
+        $data['ticket'] = Ticket::latest()->get();
         return view('admin.user.ticket', $data);
     }
 
-    public function Email($id,$name)
+    public function Email($id, $name)
     {
-		$data['title']='Send email';
-		$data['email']=$id;
-		$data['name']=$name;
+        $data['title'] = 'Send email';
+        $data['email'] = $id;
+        $data['name'] = $name;
         return view('admin.user.email', $data);
     }
 
     public function Promo()
     {
-		$data['title']='Send email';
-        $data['client']=$user=User::all();
+        $data['title'] = 'Send email';
+        $data['client'] = $user = User::all();
         return view('admin.user.promo', $data);
     }
 
     public function Sendemail(Request $request)
     {
-        $set=Settings::first();
+        $set = Settings::first();
         send_email($request->to, $request->name, $request->subject, $request->message);
         return back()->with('success', 'Mail Sent Successfuly!');
     }
 
     public function Sendpromo(Request $request)
     {
-        $set=Settings::first();
-        $user=User::all();
+        $set = Settings::first();
+        $user = User::all();
         foreach ($user as $val) {
-            $x=User::whereEmail($val->email)->first();
-            if($set->email_notify==1){
+            $x = User::whereEmail($val->email)->first();
+            if ($set->email_notify == 1) {
                 send_email($x->email, $x->username, $request->subject, $request->message);
             }
         }
@@ -510,11 +599,11 @@ class CheckController extends Controller
         $data['status'] = 0;
         $data['staff_id'] = $request->staff_id;
         $res = Reply::create($data);
-        $set=Settings::first();
-        $ticket=Ticket::whereticket_id($request->ticket_id)->first();
-        $user=User::find($ticket->user_id);
-        if($set['email_notify']==1){
-            send_email($user->email, $user->username, 'New Reply - '.$request->ticket_id, $request->reply);
+        $set = Settings::first();
+        $ticket = Ticket::whereticket_id($request->ticket_id)->first();
+        $user = User::find($ticket->user_id);
+        if ($set['email_notify'] == 1) {
+            send_email($user->email, $user->username, 'New Reply - ' . $request->ticket_id, $request->reply);
         }
         if ($res) {
             return back();
@@ -525,8 +614,8 @@ class CheckController extends Controller
 
     public function Createstaff(Request $request)
     {
-        $check=Admin::whereusername($request->username)->get();
-        if(count($check)<1){
+        $check = Admin::whereusername($request->username)->get();
+        if (count($check) < 1) {
             $data['username'] = $request->username;
             $data['last_name'] = $request->last_name;
             $data['first_name'] = $request->first_name;
@@ -551,7 +640,7 @@ class CheckController extends Controller
             $data['vcard'] = $request->vcard;
             $res = Admin::create($data);
             return redirect()->route('admin.staffs')->with('success', 'Staff was successfully created');
-        }else{
+        } else {
             return back()->with('alert', 'username already taken');
         }
     }
@@ -585,7 +674,7 @@ class CheckController extends Controller
     {
 
         $check_business_name = Compliance::where('user_id', $id)->first()->first_name ?? null;
-        if($check_business_name ==null){
+        if ($check_business_name == null) {
             $get_temp_user = User::where('id', $id)->first();
             $com = new Compliance();
             $com->first_name = $get_temp_user->first_name;
@@ -593,29 +682,28 @@ class CheckController extends Controller
             $com->user_id = $get_temp_user->id;
             $com->state = $get_temp_user->state;
             $com->save();
-
         }
-        $data['client']=$user=User::find($id);
-        $data['title']=$user->business_name;
-        $data['deposit']=Deposits::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
+        $data['client'] = $user = User::find($id);
+        $data['title'] = $user->business_name;
+        $data['deposit'] = Deposits::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
 
-        $data['terminal']=Terminal::where('user_id',$user->id)->get();
-        $data['v_account']=VirtualAccount::where('user_id',$user->id)->get();
+        $data['terminal'] = Terminal::where('user_id', $user->id)->get();
+        $data['v_account'] = VirtualAccount::where('user_id', $user->id)->get();
 
-        $data['transactions']= Transactions::latest()->where('user_id',$user->id)->get();
+        $data['transactions'] = Transactions::latest()->where('user_id', $user->id)->get();
 
-        $data['transfer']=Transfer::wheresender_id($user->id)->orderBy('id', 'DESC')->get();
-        $data['withdraw']=Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
-        $data['ticket']=Ticket::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
-        $data['audit']=Audit::whereUser_id($user->id)->orderBy('created_at', 'DESC')->get();
-        $data['xver']=Compliance::whereUser_id($user->id)->first();
+        $data['transfer'] = Transfer::wheresender_id($user->id)->orderBy('id', 'DESC')->get();
+        $data['withdraw'] = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
+        $data['ticket'] = Ticket::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
+        $data['audit'] = Audit::whereUser_id($user->id)->orderBy('created_at', 'DESC')->get();
+        $data['xver'] = Compliance::whereUser_id($user->id)->first();
         return view('admin.user.edit', $data);
     }
 
     public function Managestaff($id)
     {
-        $data['staff']=$user=Admin::find($id);
-        $data['title']=$user->username;
+        $data['staff'] = $user = Admin::find($id);
+        $data['title'] = $user->username;
         return view('admin.user.edit-staff', $data);
     }
 
@@ -625,87 +713,86 @@ class CheckController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
         return back()->with('success', 'Password Changed Successfully.');
-
     }
 
     public function Manageticket($id)
     {
-        $data['ticket']=$ticket=Ticket::find($id);
-        $data['title']='#'.$ticket->ticket_id;
-        $data['client']=User::whereId($ticket->user_id)->first();
-        $data['reply']=Reply::whereTicket_id($ticket->ticket_id)->get();
+        $data['ticket'] = $ticket = Ticket::find($id);
+        $data['title'] = '#' . $ticket->ticket_id;
+        $data['client'] = User::whereId($ticket->user_id)->first();
+        $data['reply'] = Reply::whereTicket_id($ticket->ticket_id)->get();
         return view('admin.user.edit-ticket', $data);
     }
 
     public function Closeticket($id)
     {
-        $ticket=Ticket::find($id);
-        $ticket->status=1;
+        $ticket = Ticket::find($id);
+        $ticket->status = 1;
         $ticket->save();
         return back()->with('success', 'Ticket has been closed.');
     }
 
     public function Blockuser($id)
     {
-        $user=User::find($id);
-        $user->status=1;
+        $user = User::find($id);
+        $user->status = 1;
         $user->save();
         return back()->with('success', 'User has been suspended.');
     }
 
     public function Unblockuser($id)
     {
-        $user=User::find($id);
-        $user->status=0;
+        $user = User::find($id);
+        $user->status = 0;
         $user->save();
         return back()->with('success', 'User was successfully unblocked.');
     }
 
     public function Blockstaff($id)
     {
-        $user=Admin::find($id);
-        $user->status=1;
+        $user = Admin::find($id);
+        $user->status = 1;
         $user->save();
         return back()->with('success', 'Staff has been suspended.');
     }
 
     public function Unblockstaff($id)
     {
-        $user=Admin::find($id);
-        $user->status=0;
+        $user = Admin::find($id);
+        $user->status = 0;
         $user->save();
         return back()->with('success', 'Staff was successfully unblocked.');
     }
 
     public function Approvekyc($id)
     {
-        $set=Settings::first();
-        $com=Compliance::whereid($id)->first();
-        $user=User::find($com->user_id);
-            if($com->business_type=="Starter Business"){
-                $user->business_level=2;
-            }elseif($com->business_type=="Registered Business"){
-                $user->business_level=3;
-            }
-            $com->status=2;
-            $user->save();
-            $com->save();
-            if($set['email_notify']==1){
-                send_email($user->email, $user->business_name, 'Compliance request:'. $user->business_name, "Compliance request was succefully approved, you can now use your account with out restrictions");
-            }
-            return back()->with('success', 'Compliance has been approved.');
+        $set = Settings::first();
+        $com = Compliance::whereid($id)->first();
+        $user = User::find($com->user_id);
+        if ($com->business_type == "Starter Business") {
+            $user->business_level = 2;
+        } elseif ($com->business_type == "Registered Business") {
+            $user->business_level = 3;
+        }
+        $com->status = 2;
+        $user->save();
+        $com->save();
+        if ($set['email_notify'] == 1) {
+            send_email($user->email, $user->business_name, 'Compliance request:' . $user->business_name, "Compliance request was succefully approved, you can now use your account with out restrictions");
+        }
+        return back()->with('success', 'Compliance has been approved.');
     }
 
     public function Rejectkyc($id)
     {
-        $com=Compliance::whereid($id)->first();
-        $user=User::find($com->user_id);
-        $com->status=3;
-        $com->proof=null;
-        $com->idcard=null;
+        $com = Compliance::whereid($id)->first();
+        $user = User::find($com->user_id);
+        $com->status = 3;
+        $com->proof = null;
+        $com->idcard = null;
         $com->save();
-        if($set['email_notify']==1){
-            send_email($user->email, $user->business_name, 'Compliance request:'. $user->business_name, "Compliance request was declined");
+        if ($set['email_notify'] == 1) {
+            send_email($user->email, $user->business_name, 'Compliance request:' . $user->business_name, "Compliance request was declined");
         }
         return back()->with('success', 'Compliance has been declined.');
     }
@@ -713,46 +800,46 @@ class CheckController extends Controller
     public function Profileupdate(Request $request)
     {
         $data = User::findOrFail($request->id);
-        $data->business_name=$request->business_name;
-        $data->first_name=$request->first_name;
-        $data->last_name=$request->last_name;
-        $data->phone=$request->mobile;
-        $data->type=$request->type;
-        $data->office_address=$request->address;
-        $data->main_wallet=$request->main_wallet;
-        $data->website_link=$request->website;
-        if(empty($request->is_email_verified)){
-            $data->is_email_verified=0;
-        }else{
-            $data->is_email_verified=$request->is_email_verified;
+        $data->business_name = $request->business_name;
+        $data->first_name = $request->first_name;
+        $data->last_name = $request->last_name;
+        $data->phone = $request->mobile;
+        $data->type = $request->type;
+        $data->office_address = $request->address;
+        $data->main_wallet = $request->main_wallet;
+        $data->website_link = $request->website;
+        if (empty($request->is_email_verified)) {
+            $data->is_email_verified = 0;
+        } else {
+            $data->is_email_verified = $request->is_email_verified;
         }
-        if(empty($request->is_phone_verified)){
-            $data->is_phone_verified=0;
-        }else{
-            $data->is_phone_verified=$request->is_phone_verified;
+        if (empty($request->is_phone_verified)) {
+            $data->is_phone_verified = 0;
+        } else {
+            $data->is_phone_verified = $request->is_phone_verified;
         }
-        if(empty($request->status)){
-            $data->status=0;
-        }else{
-            $data->status=$request->status;
-        }
-
-        if(empty($request->is_bvn_verified)){
-            $data->is_bvn_verified=0;
-        }else{
-            $data->is_bvn_verified=$request->is_bvn_verified;
+        if (empty($request->status)) {
+            $data->status = 0;
+        } else {
+            $data->status = $request->status;
         }
 
-        if(empty($request->is_identification_verified)){
-            $data->is_identification_verified=0;
-        }else{
-            $data->is_identification_verified=$request->is_identification_verified;
+        if (empty($request->is_bvn_verified)) {
+            $data->is_bvn_verified = 0;
+        } else {
+            $data->is_bvn_verified = $request->is_bvn_verified;
         }
 
-        if(empty($request->is_kyc_verified)){
-            $data->is_kyc_verified=0;
-        }else{
-            $data->is_kyc_verified=$request->is_identification_verified;
+        if (empty($request->is_identification_verified)) {
+            $data->is_identification_verified = 0;
+        } else {
+            $data->is_identification_verified = $request->is_identification_verified;
+        }
+
+        if (empty($request->is_kyc_verified)) {
+            $data->is_kyc_verified = 0;
+        } else {
+            $data->is_kyc_verified = $request->is_identification_verified;
         }
 
 
@@ -764,7 +851,7 @@ class CheckController extends Controller
 
 
 
-        $res=$data->save();
+        $res = $data->save();
         if ($res) {
             return back()->with('success', 'Update was Successful!');
         } else {
@@ -774,118 +861,118 @@ class CheckController extends Controller
     public function Staffupdate(Request $request)
     {
         $data = Admin::whereid($request->id)->first();
-        $data->username=$request->username;
-        $data->first_name=$request->first_name;
-        $data->last_name=$request->last_name;
-        if(empty($request->profile)){
-            $data->profile=0;
-        }else{
-            $data->profile=$request->profile;
+        $data->username = $request->username;
+        $data->first_name = $request->first_name;
+        $data->last_name = $request->last_name;
+        if (empty($request->profile)) {
+            $data->profile = 0;
+        } else {
+            $data->profile = $request->profile;
         }
 
-        if(empty($request->support)){
-            $data->support=0;
-        }else{
-            $data->support=$request->support;
+        if (empty($request->support)) {
+            $data->support = 0;
+        } else {
+            $data->support = $request->support;
         }
 
-        if(empty($request->promo)){
-            $data->promo=0;
-        }else{
-            $data->promo=$request->promo;
+        if (empty($request->promo)) {
+            $data->promo = 0;
+        } else {
+            $data->promo = $request->promo;
         }
 
-        if(empty($request->message)){
-            $data->message=0;
-        }else{
-            $data->message=$request->message;
+        if (empty($request->message)) {
+            $data->message = 0;
+        } else {
+            $data->message = $request->message;
         }
 
-        if(empty($request->deposit)){
-            $data->deposit=0;
-        }else{
-            $data->deposit=$request->deposit;
+        if (empty($request->deposit)) {
+            $data->deposit = 0;
+        } else {
+            $data->deposit = $request->deposit;
         }
 
-        if(empty($request->settlement)){
-            $data->settlement=0;
-        }else{
-            $data->settlement=$request->settlement;
+        if (empty($request->settlement)) {
+            $data->settlement = 0;
+        } else {
+            $data->settlement = $request->settlement;
         }
 
-        if(empty($request->transfer)){
-            $data->transfer=0;
-        }else{
-            $data->transfer=$request->transfer;
+        if (empty($request->transfer)) {
+            $data->transfer = 0;
+        } else {
+            $data->transfer = $request->transfer;
         }
 
-        if(empty($request->request_money)){
-            $data->request_money=0;
-        }else{
-            $data->request_money=$request->request_money;
+        if (empty($request->request_money)) {
+            $data->request_money = 0;
+        } else {
+            $data->request_money = $request->request_money;
         }
 
-        if(empty($request->donation)){
-            $data->donation=0;
-        }else{
-            $data->donation=$request->donation;
+        if (empty($request->donation)) {
+            $data->donation = 0;
+        } else {
+            $data->donation = $request->donation;
         }
 
-        if(empty($request->single_charge)){
-            $data->single_charge=0;
-        }else{
-            $data->single_charge=$request->single_charge;
+        if (empty($request->single_charge)) {
+            $data->single_charge = 0;
+        } else {
+            $data->single_charge = $request->single_charge;
         }
 
-        if(empty($request->subscription)){
-            $data->subscription=0;
-        }else{
-            $data->subscription=$request->subscription;
+        if (empty($request->subscription)) {
+            $data->subscription = 0;
+        } else {
+            $data->subscription = $request->subscription;
         }
 
-        if(empty($request->merchant)){
-            $data->merchant=0;
-        }else{
-            $data->merchant=$request->merchant;
+        if (empty($request->merchant)) {
+            $data->merchant = 0;
+        } else {
+            $data->merchant = $request->merchant;
         }
 
-        if(empty($request->invoice)){
-            $data->invoice=0;
-        }else{
-            $data->invoice=$request->invoice;
+        if (empty($request->invoice)) {
+            $data->invoice = 0;
+        } else {
+            $data->invoice = $request->invoice;
         }
 
-        if(empty($request->charges)){
-            $data->charges=0;
-        }else{
-            $data->charges=$request->charges;
+        if (empty($request->charges)) {
+            $data->charges = 0;
+        } else {
+            $data->charges = $request->charges;
         }
 
-        if(empty($request->store)){
-            $data->store=0;
-        }else{
-            $data->store=$request->store;
+        if (empty($request->store)) {
+            $data->store = 0;
+        } else {
+            $data->store = $request->store;
         }
 
-        if(empty($request->blog)){
-            $data->blog=0;
-        }else{
-            $data->blog=$request->blog;
+        if (empty($request->blog)) {
+            $data->blog = 0;
+        } else {
+            $data->blog = $request->blog;
         }
 
-        if(empty($request->bill)){
-            $data->bill=0;
-        }else{
-            $data->bill=$request->bill;
+        if (empty($request->bill)) {
+            $data->bill = 0;
+        } else {
+            $data->bill = $request->bill;
         }
 
-        if(empty($request->vcard)){
-            $data->vcard=0;
-        }else{
-            $data->vcard=$request->vcard;
+        if (empty($request->vcard)) {
+            $data->vcard = 0;
+        } else {
+            $data->vcard = $request->vcard;
         }
 
-        $res=$data->save();
+        $res = $data->save();
         if ($res) {
             return back()->with('success', 'Update was Successful!');
         } else {
@@ -905,17 +992,16 @@ class CheckController extends Controller
     public function terminal(request $request)
     {
 
-        $data['title']='Terminal';
+        $data['title'] = 'Terminal';
 
-        $data['all_terminal']= Terminal::latest()->select('*')->get();
-        $data['user']= User::select('*')->get();
-        $data['pcount']= Transactions::where('transaction_type', 'CashOut')->count();
-        $data['tcount']= Terminal::all()->count();
+        $data['all_terminal'] = Terminal::latest()->select('*')->get();
+        $data['amount'] = Terminal::select('*')->sum('amount');
+        $data['user'] = User::select('*')->get();
+        $data['pcount'] = Transactions::where('transaction_type', 'CashOut')->count();
+        $data['tcount'] = Terminal::all()->count();
 
 
         return view('admin.terminal.index', $data);
-
-
     }
 
 
@@ -953,12 +1039,11 @@ class CheckController extends Controller
     {
 
         $check = Terminal::where('serial_no', $request->serial_no)
-        ->first()->serial_no ?? null;
+            ->first()->serial_no ?? null;
 
         if ($check == $request->serial_no) {
 
             return back()->with('alert', 'Terminal  Already Exist');
-
         }
 
         $terminal = new Terminal();
@@ -969,8 +1054,6 @@ class CheckController extends Controller
         $terminal->save();
 
         return back()->with('success', 'Terminal Successfully Created');
-
-
     }
 
 
@@ -984,12 +1067,11 @@ class CheckController extends Controller
         if ($check == $request->v_account_no) {
 
             return back()->with('alert', 'Account  Already Exist');
-
         }
 
         $terminal = new VirtualAccount();
         $terminal->v_account_no = $request->v_account_no;
-        $terminal->	v_account_name = $request->	v_account_name;
+        $terminal->v_account_name = $request->v_account_name;
         $terminal->v_bank_name = $request->v_bank_name;
         $terminal->serial_no = $request->serial_no;
         $terminal->user_id = $request->user_id;
@@ -1006,8 +1088,4 @@ class CheckController extends Controller
         VirtualAccount::where('v_account_no', $request->v_account_no)->delete();
         return back()->with('alert', 'Account deleted  Successfully');
     }
-
-
-
-
 }

@@ -22,6 +22,19 @@
                       </div>
                     </div>
                  </div>
+
+                 <div class="card mr-5 ml-4">
+                    <div class="card-body">
+                      <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                        <div>
+                          <h3 class="mb-2">Sales Amount</h3>
+                          <ul class="list list-unstyled mb-0">
+                            <h2><span class="text-default text-sm">{{(number_format($amount))}}</span></h2>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                 </div>
     
     
                  <div class="card">
@@ -112,8 +125,10 @@
                                     <th>{{__('S / N')}}</th>
                                     <th>{{__('Serial No')}}</th>
                                     <th>Customer</th>
+                                    <th>State</th>
                                     <th>Description</th>
                                     <th>Amount</th>
+                                    <th>Purchase Type</th>
                                     <th>V_account</th>
                                     <th>Status</th>
                                     <th>Transfer Status</th>
@@ -127,8 +142,20 @@
                                     <td>{{++$k}}.</td>
                                     <td>{{$item->serial_no}}</td>
                                     <td>{{$item->user->first_name ?? "name"}} {{$item->user->last_name ?? "name"}} </td>
+                                    <td>{{$item->user->state ?? "name"}} </td>
                                     <td>{{$item->description}}</td>
-                                    <td>{{number_format($item->user->main_wallet ?? 0) }}</td>
+                                    <td>{{number_format($item->amount ?? 0) }}</td>
+
+                                    @if($item->p_type == "1")
+                                    <td><span class="badge rounded-pill bg-success text-white ">Outright</span></td>
+                                    @elseif($item->p_type == "2")
+                                    <td><span class="badge rounded-pill bg-warning text-white">Lease</span></td>
+                                    @elseif($item->p_type == "3")
+                                    <td><span class="badge rounded-pill bg-primary text-white">Installmental</span></td>
+                                    @else
+                                    <td><span class="badge rounded-pill bg-danger text-white">Not Paid</span></td>
+                                    @endif
+
                                     <td>{{$item->user->v_account_no ?? "No Account"}}</td>
                                    
                                    
