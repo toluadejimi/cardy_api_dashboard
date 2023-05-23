@@ -215,6 +215,14 @@ class CheckController extends Controller
         $data['sin'] = Transactions::whereStatus(1)->wheretype(1)->sum('amount');
         $data['sinc'] = Transactions::whereStatus(1)->wheretype(1)->sum('charge');
         $data['do'] = Transactions::whereStatus(1)->wheretype(2)->sum('amount');
+
+        $data['money_in_today'] = Transactions::whereDate('created_at', Carbon::today())
+        ->sum('credit');
+
+        $data['money_out_today'] = Transactions::whereDate('created_at', Carbon::today())
+        ->sum('debit');
+    
+
         $data['doc'] = Transactions::whereStatus(1)->wheretype(2)->sum('charge');
         $data['in'] = Transactions::all()->sum('credit');
         $data['out'] = Transactions::all()->sum('debit');

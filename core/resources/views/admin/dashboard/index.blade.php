@@ -181,21 +181,20 @@
 
 
 
-                {{--
+                
                 <div class="card">
                     <div class="card-body">
                         <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
                             <div>
-                                <h3 class="mb-2">{{__('Invoice')}}</h3>
+                                <h3 class="mb-2">{{__('Total Money In Today')}}</h3>
                                 <ul class="list list-unstyled mb-0">
-                                    <li><span class="text-default text-sm">{{__('Amount/Charges:')}}
-                                            {{$currency->symbol.number_format($in)}}/{{$currency->symbol.number_format($inc)}}</span>
+                                    <li><span class="text-default text-sm">{{$currency->symbol.number_format($money_in_today)}}</span>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
 
 
                 {{--
@@ -285,20 +284,19 @@
 
 
 
-                {{-- <div class="card">
+                <div class="card">
                     <div class="card-body">
                         <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
                             <div>
-                                <h3 class="mb-2">{{__('Transfers')}}</h3>
+                                <h3 class="mb-2">{{__('Total Money Out Today')}}</h3>
                                 <ul class="list list-unstyled mb-0">
-                                    <li><span class="text-default text-sm">{{__('Amount/Charges:')}}
-                                            {{$currency->symbol.number_format($tran)}}/{{$currency->symbol.number_format($tranc)}}</span>
+                                    <li><span class="text-default text-sm">{{$currency->symbol.number_format($money_out_today)}}</span>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
 
 
                 
