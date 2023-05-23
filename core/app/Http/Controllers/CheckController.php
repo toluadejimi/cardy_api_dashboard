@@ -219,12 +219,15 @@ class CheckController extends Controller
         $data['in'] = Transactions::all()->sum('credit');
         $data['out'] = Transactions::all()->sum('debit');
         $data['or'] = Order::whereStatus(1)->sum('total');
-        $data['orc'] = Order::whereStatus(1)->sum('charge');
-        $data['tfee'] = TerminalPayment::where('transaction_type', 'TerminalPayment')->sum('debit');
+        $data['transactions'] = Transactions::latest()->get();
+        $data['tfee'] = Terminal::select('*')->sum('amount');
         $data['dec'] = Deposits::whereStatus(1)->sum('charge');
         $data['totalusers'] = User::count();
-        $data['blockedusers'] = User::whereStatus(1)->count();
-        $data['activeusers'] = User::whereStatus(0)->count();
+        $data['agent'] = User::whereType(1)->count();
+        $data['customer'] = User::whereType(2)->count();
+        $data['business'] = User::whereType(3)->count();
+
+
         return view('admin.dashboard.index', $data);
     }
 
