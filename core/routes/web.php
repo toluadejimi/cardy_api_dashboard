@@ -377,12 +377,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::post('add/vaccount}', [CheckController::class, 'add_vaccount'])->name('add.vaccount');
 
 
-    
 
 
-    
 
-    
+
+
+
 
 
     //Web controller
@@ -524,7 +524,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     //User controller
     Route::get('staff', [CheckController::class, 'Staffs'])->name('admin.staffs');
+    Route::get('trasnaction', [CheckController::class, 'trasnaction'])->name('admin.trasnaction');
+    Route::post('new-transaction', [CheckController::class, 'Createtransaction'])->name('create.transaction');
     Route::get('new-staff', [CheckController::class, 'Newstaff'])->name('new.staff');
+    Route::get('new-transaction', [CheckController::class, 'Newtransaction'])->name('new.transaction');
     Route::post('new-staff', [CheckController::class, 'Createstaff'])->name('create.staff');
     Route::get('users', [CheckController::class, 'Users'])->name('admin.users');
     Route::get('messages', [CheckController::class, 'Messages'])->name('admin.message');
@@ -566,13 +569,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     //Vcard
     Route::get('vcard', [CheckController::class, 'vcard'])->name('admin.vcard');
 
-    Route::get('transactions', [CheckController::class, 'transactions'])->name('admin.transactions');
+    Route::get('all-transactions', [CheckController::class, 'all_transactions'])->name('admin.all-transactions');
     Route::get('vaccount', [CheckController::class, 'vaccount'])->name('admin.vaccount');
     Route::get('terminals', [CheckController::class, 'terminals'])->name('admin.terminals');
 
 
 
-    
+
 
 
 

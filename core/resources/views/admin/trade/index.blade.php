@@ -14,13 +14,13 @@
                         <th>{{__('S/N')}}</th>
                         <th>{{__('Ref')}}</th>
                         <th>{{__('Name')}}</th>
-                        <th>{{__('Amount')}}</th>                                                                       
-                        <th>{{__('To get')}}</th>                                                                       
-                        <th>{{__('Type')}}</th>                                                                       
-                        <th>{{__('Status')}}</th>                                                                       
+                        <th>{{__('Amount')}}</th>
+                        <th>{{__('To get')}}</th>
+                        <th>{{__('Type')}}</th>
+                        <th>{{__('Status')}}</th>
                         <th>{{__('Created')}}</th>
                         <th>{{__('Updated')}}</th>
-                        <th scope="col"></th>    
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,31 +33,31 @@
                             <td>${{number_format($val->amount/$val->rate)}}</td>
                             <td>{{$currency->symbol.number_format($val->amount, 2, '.', '')}}</td>
                             @endif
-                            @if($val->type==1 || $val->type==4)                           
+                            @if($val->type==1 || $val->type==4)
                             <td>{{$currency->symbol.number_format($val->total, 2, '.', '')}}</td>
                             <td>${{number_format($val->amount)}}</td>
-                            @endif                                    
+                            @endif
                             @if($val->type==3)
                             <td>{{$currency->symbol.number_format($val->amount, 2, '.', '')}}</td>
                             @endif
-                            <td>          
+                            <td>
                                 @if($val->type==1)
                                     <span class="badge badge-primary badge-pill">{{__('Buy | Bitcoin')}}</span>
                                 @elseif($val->type==2)
                                     <span class="badge badge-primary badge-pill">{{__('Sell | Bitcoin')}}</span>
                                 @elseif($val->type==4)
-                                    <span class="badge badge-primary badge-pill">{{__('Buy | Ethereum')}}</span>                                
+                                    <span class="badge badge-primary badge-pill">{{__('Buy | Ethereum')}}</span>
                                 @elseif($val->type==5)
-                                    <span class="badge badge-primary badge-pill">{{__('Sell | Ethereum')}}</span>                                                        
+                                    <span class="badge badge-primary badge-pill">{{__('Sell | Ethereum')}}</span>
                                 @endif
                             </td>
                             <td>
                             @if($val->status==0)
                                 <span class="badge badge-danger badge-pill">{{__('Pending')}}</span>
                             @elseif($val->status==1)
-                                <span class="badge badge-success badge-pill">{{__('Paid off')}}</span>                             
+                                <span class="badge badge-success badge-pill">{{__('Paid off')}}</span>
                             @elseif($val->status==2)
-                                <span class="badge badge-primary badge-pill">{{__('Decliend')}}</span> 
+                                <span class="badge badge-primary badge-pill">{{__('Decliend')}}</span>
                             @endif
                         </td>
                             <td>{{date("Y/m/d h:i:A", strtotime($val->created_at))}}</td>
@@ -78,10 +78,10 @@
                                         <a data-toggle="modal" data-target="#delete{{$val->id}}" href="" class="dropdown-item">{{__('Delete')}}</a>
                                     </div>
                                 </div>
-                            </td>                   
+                            </td>
                         </tr>
-                    @endforeach               
-                </tbody>                    
+                    @endforeach
+                </tbody>
             </table>
         </div>
     </div>
@@ -98,7 +98,7 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
     <div class="modal fade" id="proof{{$val->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered modal-md" role="document">
             <div class="castro-fade">
@@ -111,7 +111,7 @@
                 </div>
             </div>
         </div>
-    </div>                                    
+    </div>
     <div class="modal fade" id="comment{{$val->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered modal-md" role="document">
             <div class="modal-content">
@@ -124,7 +124,7 @@
                 </div>
             </div>
         </div>
-    </div>       
+    </div>
     <div class="modal fade" id="bank{{$val->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered modal-md" role="document">
             <div class="modal-content">
@@ -143,7 +143,7 @@
                 </div>
             </div>
         </div>
-    </div>                                    
+    </div>
     <div class="modal fade" id="delete{{$val->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered modal-md" role="document">
             <div class="modal-content">
@@ -160,7 +160,7 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
     @endforeach
 
 @stop

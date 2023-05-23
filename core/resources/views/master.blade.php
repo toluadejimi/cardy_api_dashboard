@@ -3,10 +3,15 @@
     <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <base href="{{url('/')}}"/>
         <title>{{ $title }} | {{$set->site_name}}</title>
-        
+
+
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
         <meta name="description" content="{{$set->site_desc}}" />
+
+
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
         <link rel="shortcut icon" href="{{url('/')}}/asset/{{ $logo->image_link2}}" />
         <link rel="stylesheet" href="{{url('/')}}/asset/css/toast.css" type="text/css">
         <link rel="stylesheet" href="{{url('/')}}/asset/dashboard/vendor/nucleo/css/nucleo.css" type="text/css">
@@ -52,33 +57,33 @@
                 <i class="fad fa-globe"></i>
                 <span class="nav-link-text">{{__('Summary')}}</span>
               </a>
-            </li>                                             
+            </li>
           </ul>
           <h6 class="navbar-heading p-0 text-muted">{{__('Client')}}</h6>
-          <ul class="navbar-nav mb-3"> 
+          <ul class="navbar-nav mb-3">
             @if($admin->profile==1)
             <li class="nav-item">
               <a class="nav-link @if(route('admin.users')==url()->current()) active @endif" href="{{route('admin.users')}}">
                 <i class="fad fa-user"></i>
                 <span class="nav-link-text">{{__('Customers')}}</span>
               </a>
-            </li> 
-            @endif         
-            @if($admin->id==1)    
+            </li>
+            @endif
+            @if($admin->id==1)
             <li class="nav-item">
               <a class="nav-link @if(route('admin.staffs')==url()->current()) active @endif" href="{{route('admin.staffs')}}">
                 <i class="fad fa-user"></i>
                 <span class="nav-link-text">{{__('Staffs')}}</span>
               </a>
-            </li> 
-            @endif     
-            @if($admin->promo==1)                  
+            </li>
+            @endif
+            @if($admin->promo==1)
             <li class="nav-item">
               <a class="nav-link @if(route('admin.promo')==url()->current()) active @endif" href="{{route('admin.promo')}}">
                 <i class="fad fa-envelope"></i>
                 <span class="nav-link-text">{{__('Promotional Emails')}}</span>
               </a>
-            </li>   
+            </li>
             @endif
             @if($admin->support==1)
             <li class="nav-item">
@@ -90,15 +95,15 @@
                   @endif
                 </span>
               </a>
-            </li>  
+            </li>
             @endif
-            @if($admin->message==1)        
+            @if($admin->message==1)
             <li class="nav-item">
               <a class="nav-link @if(route('admin.message')==url()->current()) active @endif" href="{{route('admin.message')}}">
                 <i class="fad fa-sticky-note"></i>
                 <span class="nav-link-text">{{__('Messages')}}</span>
               </a>
-            </li>  
+            </li>
             @endif
             @if($admin->deposit==1)
             <li class="nav-item">
@@ -129,10 +134,10 @@
                       </span>
                       @endif
                       </a>
-                  </li>                          
+                  </li>
                 </ul>
               </div>
-            </li> 
+            </li>
             @endif
             <li class="nav-item">
               <a class="nav-link @if(route('admin.deposit.method')==url()->current()) active @endif" href="{{route('admin.deposit.method')}}">
@@ -146,24 +151,24 @@
                 <i class="fad fa-building"></i>
                 <span class="nav-link-text">{{__('Bill Payment')}}</span>
               </a>
-            </li> 
-            @endif 
+            </li>
+            @endif
             @if($admin->terminal==1)
             <li class="nav-item">
               <a class="nav-link @if(route('admin.terminals')==url()->current()) active @endif" href="admin/terminal">
                 <i class="fad fa-building"></i>
                 <span class="nav-link-text">{{__('Terminals')}}</span>
               </a>
-            </li> 
-            @endif 
+            </li>
+            @endif
 
             @if($admin->transactions==1)
             <li class="nav-item">
-              <a class="nav-link @if(route('admin.transactions')==url()->current()) active @endif" href="admin/transctions">
+              <a class="nav-link @if(route('admin.all-transactions')==url()->current()) active @endif" href="{{route('admin.all-transactions')}}">
                 <i class="fad fa-building"></i>
                 <span class="nav-link-text">{{__('Transactions')}}</span>
               </a>
-            </li> 
+            </li>
             @endif
             @if($admin->vcard==1)
             <li class="nav-item">
@@ -180,24 +185,24 @@
                 <span class="nav-link-text">{{__('Virtual Account')}}</span>
               </a>
             </li>
-            @endif  
+            @endif
             <!--
-              @if($admin->crypto==1) 
+              @if($admin->crypto==1)
               <li class="nav-item">
                 <a class="nav-link @if(route('admin.trades')==url()->current()) active @endif" href="{{route('admin.trades')}}">
                   <i class="fad fa-sync"></i>
                   <span class="nav-link-text">{{__('Cryptocurrency')}}</span>
                 </a>
-              </li>  
-              @endif 
-            -->          
+              </li>
+              @endif
+            -->
             @if($admin->store==1)
             <li class="nav-item">
               <a class="nav-link @if(route('admin.product')==url()->current()) active @endif" href="{{route('admin.product')}}">
                 <i class="fad fa-shopping-bag"></i>
                 <span class="nav-link-text">{{__('Products')}}</span>
               </a>
-            </li> 
+            </li>
             @endif
             @if($admin->single_charge==1 || $admin->donation==1)
             <li class="nav-item">
@@ -211,16 +216,16 @@
                   @if($admin->single_charge==1)
                   <li class="nav-item @if(route('admin.sclinks')==url()->current()) active @endif text-default">
                     <a href="{{route('admin.sclinks')}}" class="nav-link">{{__('Single Charge')}}</a>
-                  </li>  
+                  </li>
                   @endif
-                  @if($admin->donation==1)                               
+                  @if($admin->donation==1)
                   <li class="nav-item @if(route('user.dplinks')==url()->current()) active @endif text-default">
                     <a href="{{route('admin.dplinks')}}" class="nav-link">{{__('Donation')}}</a>
-                  </li>       
-                  @endif                        
+                  </li>
+                  @endif
                 </ul>
               </div>
-            </li> 
+            </li>
             @endif
             @if($admin->transfer==1)
             <li class="nav-item">
@@ -236,7 +241,7 @@
                 <i class="fad fa-handshake"></i>
                 <span class="nav-link-text">{{__('Request Money')}}</span>
               </a>
-            </li> 
+            </li>
             @endif
             @if($admin->invoice==1)
             <li class="nav-item">
@@ -244,7 +249,7 @@
                 <i class="fad fa-envelope"></i>
                 <span class="nav-link-text">{{__('Invoice')}}</span>
               </a>
-            </li> 
+            </li>
             @endif
             @if($admin->merchant==1)
             <li class="nav-item">
@@ -252,7 +257,7 @@
                 <i class="fad fa-laptop"></i>
                 <span class="nav-link-text">{{__('Website Integration')}}</span>
               </a>
-            </li>  
+            </li>
             @endif
             @if($admin->subscription==1)
             <li class="nav-item">
@@ -260,7 +265,7 @@
                 <i class="fad fa-layer-group"></i>
                 <span class="nav-link-text">{{__('Payment Plans')}}</span>
               </a>
-            </li> 
+            </li>
             @endif
             @if($admin->settlement==1)
             <li class="nav-item">
@@ -288,22 +293,22 @@
                 <i class="fad fa-globe"></i>
                 <span class="nav-link-text">{{__('Country Supported')}}</span>
               </a>
-            </li>           
+            </li>
             <li class="nav-item">
               <a class="nav-link @if(route('admin.currency')==url()->current()) active @endif" href="{{route('admin.currency')}}">
                 <i class="fad fa-money-bill-wave-alt"></i>
                 <span class="nav-link-text">{{__('Currency')}}</span>
               </a>
-            </li>	            
+            </li>
             <li class="nav-item">
               <a class="nav-link @if(route('admin.lbank')==url()->current()) active @endif" href="{{route('admin.lbank')}}">
                 <i class="fad fa-university"></i>
                 <span class="nav-link-text">{{__('Bank supported')}}</span>
               </a>
-            </li>					     
+            </li>
           </ul>
           <h6 class="navbar-heading p-0 text-muted">{{__('More')}}</h6>
-          <ul class="navbar-nav mb-3"> 
+          <ul class="navbar-nav mb-3">
             @if($admin->blog==1)
             <li class="nav-item">
               <a class="nav-link @if(route('admin.blog')==url()->current() || route('admin.cat')==url()->current()) show @endif" href="#brcard" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
@@ -317,7 +322,7 @@
                 </ul>
               </div>
             </li>
-            @endif 
+            @endif
             @if($admin->id==1)
             <li class="nav-item">
               <a class="nav-link  @if(route('homepage')==url()->current() || route('admin.service')==url()->current() || route('admin.brand')==url()->current() || route('admin.logo')==url()->current() || route('admin.review')==url()->current() || route('admin.page')==url()->current() || route('admin.faq')==url()->current() || route('admin.terms')==url()->current() || route('privacy-policy')==url()->current() || route('about-us')==url()->current() || route('social-links')==url()->current()) active @endif" href="#xx" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
@@ -327,8 +332,8 @@
               <div class="collapse @if(route('homepage')==url()->current() || route('admin.service')==url()->current() || route('admin.brand')==url()->current() || route('admin.logo')==url()->current() || route('admin.review')==url()->current() || route('admin.page')==url()->current() || route('admin.faq')==url()->current() || route('admin.terms')==url()->current() || route('privacy-policy')==url()->current() || route('about-us')==url()->current() || route('social-links')==url()->current()) show @endif " id="xx">
                 <ul class="nav nav-sm flex-column">
                     <li class="nav-item @if(route('homepage')==url()->current()) active @endif"><a href="{{route('homepage')}}" class="nav-link">{{__('Homepage')}}</a></li>
-                    <li class="nav-item @if(route('admin.brand')==url()->current()) active @endif"><a href="{{route('admin.brand')}}" class="nav-link">{{__('Brands')}}</a></li>	
-                    <li class="nav-item @if(route('admin.logo')==url()->current()) active @endif"><a href="{{route('admin.logo')}}" class="nav-link">{{__('Logo & Favicon')}}</a></li>	
+                    <li class="nav-item @if(route('admin.brand')==url()->current()) active @endif"><a href="{{route('admin.brand')}}" class="nav-link">{{__('Brands')}}</a></li>
+                    <li class="nav-item @if(route('admin.logo')==url()->current()) active @endif"><a href="{{route('admin.logo')}}" class="nav-link">{{__('Logo & Favicon')}}</a></li>
                     <li class="nav-item @if(route('admin.review')==url()->current()) active @endif"><a href="{{route('admin.review')}}"class="nav-link">{{__('Platform Review')}}</a></li>
 					          <li class="nav-item @if(route('admin.service')==url()->current()) active @endif"><a href="{{route('admin.service')}}"class="nav-link">Services</a></li>
                     <li class="nav-item @if(route('admin.page')==url()->current()) active @endif"><a href="{{route('admin.page')}}" class="nav-link">{{__('Webpages')}}</a></li>
@@ -336,7 +341,7 @@
                     <li class="nav-item @if(route('admin.terms')==url()->current()) active @endif"><a href="{{route('admin.terms')}}" class="nav-link">{{__('Terms & Condition')}}</a></li>
                     <li class="nav-item @if(route('privacy-policy')==url()->current()) active @endif"><a href="{{route('privacy-policy')}}" class="nav-link">{{__('Privacy policy')}}</a></li>
                     <li class="nav-item @if(route('about-us')==url()->current()) active @endif"><a href="{{route('about-us')}}" class="nav-link">{{__('About us')}}</a></li>
-                    <li class="nav-item @if(route('social-links')==url()->current()) active @endif"><a href="{{route('social-links')}}" class="nav-link">{{__('Social Links')}}</a></li>                           
+                    <li class="nav-item @if(route('social-links')==url()->current()) active @endif"><a href="{{route('social-links')}}" class="nav-link">{{__('Social Links')}}</a></li>
                 </ul>
               </div>
             </li>
@@ -345,8 +350,8 @@
                 <i class="fad fa-cogs"></i>
                 <span class="nav-link-text">{{__('Settings')}}</span>
               </a>
-            </li> 
-            @endif           
+            </li>
+            @endif
           </ul>
         </div>
       </div>
@@ -358,7 +363,7 @@
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
-            
+
           <!-- Navbar links -->
           <ul class="navbar-nav align-items-center ml-md-auto">
             <li class="nav-item d-xl-none">
@@ -384,12 +389,12 @@
                     </div>
                 </div>
               </a>
-            </li> 
+            </li>
             <li class="nav-item">
               <a href="{{route('admin.logout')}}" class="nav-link pr-0">
                 <i class="fad fa-sign-out text-dark"></i>
               </a>
-            </li>             
+            </li>
           </ul>
         </div>
       </div>
@@ -448,6 +453,12 @@
   <script src="{{url('/')}}/asset/js/toast.js"></script>
   <script src="{{url('/')}}/asset/tinymce/tinymce.min.js"></script>
 	<script src="{{url('/')}}/asset/tinymce/init-tinymce.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+
 </body>
 
 </html>
@@ -456,7 +467,7 @@
     <script>
       "use strict";
       toastr.success("{{ session('success') }}");
-    </script>    
+    </script>
 @endif
 
 @if (session('alert'))
@@ -472,7 +483,7 @@ function exchange(){
 	var duration = $("#duration").val();
 	var period = $("#period").find(":selected").text();
 	var myarr1 = period.split("-");
-  	var dar1 = myarr1[1].split("<");	
+  	var dar1 = myarr1[1].split("<");
 	var compound = parseFloat(percent)*parseFloat(duration)*parseInt(dar1);
 	var interest = compound-100;
   $("#compound").val(compound);
@@ -484,4 +495,4 @@ function exchange(){
   exchange();
   $("#period").change(exchange);
   exchange();
-</script> 
+</script>

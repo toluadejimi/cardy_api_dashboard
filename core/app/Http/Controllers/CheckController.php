@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Terminal;
+use App\Models\TerminalPayment;
 use App\Models\VirtualAccount;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -81,6 +82,12 @@ class CheckController extends Controller
         $data['title']='Virtual Cards';
         $data['card']=Virtual::orderBy('created_at', 'DESC')->get();
         return view('admin.virtual.index', $data);
+    }
+
+    public function all_transactions(){
+        $data['title']='Transactions';
+        $data['transactions']=Transactions::latest()->get();
+        return view('admin.all-transactions.index', $data);
     }
 
     public function bpay(){
@@ -244,6 +251,216 @@ class CheckController extends Controller
         return view('admin.user.new-staff', $data);
     }
 
+
+    public function Newtransaction()
+    {
+		$data['title']='New Transaction';
+        $data['users'] = User::where('is_active', "1")->orderBy('first_name', 'ASC')->get();
+        $data['ref_trans_id'] = "ENK-" . random_int(000000, 9999999);
+
+        return view('admin.all-transactions.new-transaction', $data);
+    }
+
+
+
+    public function Createtransaction(Request $request)
+    {
+
+
+            $chk_trx = Transactions::where('ref_trans_id', $request->ref_trans_id)->first()->ref_trans_id ?? null;
+    
+            if ($chk_trx == $request->ref_trans_id) {
+                return back()->with('alert', 'Duplicate Transaction');
+            }
+    
+            $user = User::find(Auth::id());
+            if (Hash::check($request->pin, $user->pin)) {
+    
+                if ($request->transaction_type == 'FundTransfer') {
+    
+                    $wallet = User::where('id', $request->user_id)
+                        ->first()->main_wallet;
+    
+                    $updated_debit =  $wallet - $request->debit;
+    
+                    $amount = $request->debit - 25;
+    
+                    $update_user = User::where('id', $request->user_id)
+                        ->update(['main_wallet' => $updated_debit]);
+    
+                    $trasnaction = new Transactions();
+                    $trasnaction->user_id = $request->user_id;
+                    $trasnaction->ref_trans_id = $request->ref_trans_id;
+                    $trasnaction->e_ref = $request->e_ref;
+                    $trasnaction->transaction_type = $request->transaction_type;
+                    $trasnaction->debit = $request->debit;
+                    $trasnaction->e_charges = 15;
+                    $trasnaction->title = "EP Transfer";
+                    $trasnaction->note = $request->note;
+                    $trasnaction->fee = 10;
+                    $trasnaction->amount = $amount;
+                    $trasnaction->enkPay_Cashout_profit = 15;
+                    $trasnaction->balance = $updated_debit;
+                    $trasnaction->serial_no = $request->serial_no;
+                    $trasnaction->status = 1;
+                    $trasnaction->save();
+    
+                    return back()->with('success', 'Transaction Updated Successfully');
+    
+                }
+
+                if ($request->transaction_type == 'TerminalPayment') {
+    
+                    $wallet = User::where('id', $request->user_id)
+                        ->first()->main_wallet;
+    
+                    $updated_debit =  $wallet - $request->debit;
+        
+                    $update_user = User::where('id', $request->user_id)
+                        ->update(['main_wallet' => $updated_debit]);
+    
+                    $trasnaction = new TerminalPayment();
+                    $trasnaction->user_id = $request->user_id;
+                    $trasnaction->ref_trans_id = $request->ref_trans_id;
+                    $trasnaction->e_ref = $request->e_ref;
+                    $trasnaction->transaction_type = $request->transaction_type;
+                    $trasnaction->debit = $request->debit;
+                    $trasnaction->e_charges = 0;
+                    $trasnaction->title = "TerminalPayment";
+                    $trasnaction->note = $request->note;
+                    $trasnaction->fee = 0;
+                    $trasnaction->amount = $request->amount;
+                    $trasnaction->enkPay_Cashout_profit = 0;
+                    $trasnaction->balance = $updated_debit;
+                    $trasnaction->serial_no = $request->serial_no;
+                    $trasnaction->status = 1;
+                    $trasnaction->save();
+
+                    $trasnaction = new Transactions();
+                    $trasnaction->user_id = $request->user_id;
+                    $trasnaction->ref_trans_id = $request->ref_trans_id;
+                    $trasnaction->e_ref = $request->e_ref;
+                    $trasnaction->transaction_type = $request->transaction_type;
+                    $trasnaction->debit = $request->debit;
+                    $trasnaction->e_charges = 0;
+                    $trasnaction->title = "TerminalPayment";
+                    $trasnaction->note = $request->note;
+                    $trasnaction->fee = 0;
+                    $trasnaction->amount = $amount;
+                    $trasnaction->enkPay_Cashout_profit = 0;
+                    $trasnaction->balance = $updated_debit;
+                    $trasnaction->serial_no = $request->serial_no;
+                    $trasnaction->status = 1;
+                    $trasnaction->save();
+    
+                    return back()->with('success', 'Transaction Updated Successfully');
+    
+                }
+
+                if ($request->transaction_type == 'Refund') {
+    
+                    $wallet = User::where('id', $request->user_id)
+                        ->first()->main_wallet;
+    
+                    $updated_credit =  $wallet + $request->credit;
+        
+                    $update_user = User::where('id', $request->user_id)
+                        ->update(['main_wallet' => $updated_credit]);
+    
+                    $trasnaction = new Transactions();
+                    $trasnaction->user_id = $request->user_id;
+                    $trasnaction->ref_trans_id = $request->ref_trans_id;
+                    $trasnaction->e_ref = $request->e_ref;
+                    $trasnaction->transaction_type = $request->transaction_type;
+                    $trasnaction->credit = $request->credit;
+                    $trasnaction->e_charges = 0;
+                    $trasnaction->title = "Refund";
+                    $trasnaction->note = $request->note;
+                    $trasnaction->fee = 0;
+                    $trasnaction->amount = $$request->amount;
+                    $trasnaction->enkPay_Cashout_profit = 0;
+                    $trasnaction->balance = $updated_credit;
+                    $trasnaction->serial_no = $request->serial_no;
+                    $trasnaction->status = 1;
+                    $trasnaction->save();
+    
+                    return back()->with('success', 'Transaction Updated Successfully');
+    
+                }
+    
+                if ($request->transaction_type == 'EPVAS') {
+    
+                    $wallet = User::where('id', $request->user_id)
+                        ->first()->main_wallet;
+    
+                    $updated_debit =  $wallet - $request->debit;
+    
+                    //$amount = $request->debit - 25;
+    
+                    $update_user = User::where('id', $request->user_id)
+                        ->update(['main_wallet' => $updated_debit]);
+    
+                    $trasnaction = new Transactions();
+                    $trasnaction->user_id = $request->user_id;
+                    $trasnaction->ref_trans_id = $request->ref_trans_id;
+                    $trasnaction->e_ref = $request->e_ref;
+                    $trasnaction->transaction_type = $request->transaction_type;
+                    $trasnaction->debit = $request->debit;
+                    $trasnaction->e_charges = 0;
+                    $trasnaction->title = "EP VAS";
+                    $trasnaction->note = $request->note;
+                    //$trasnaction->fee = 10;
+                    $trasnaction->amount = $request->amount;
+                    $trasnaction->enkPay_Cashout_profit = 0;
+                    $trasnaction->balance = $updated_debit;
+                    $trasnaction->serial_no = $request->serial_no;
+                    $trasnaction->status = 1;
+                    $trasnaction->save();
+    
+                    return back()->with('success', 'Transaction Updated Successfully');
+    
+                }
+    
+                if ($request->transaction_type == 'CashOut') {
+    
+                    $wallet = User::where('id', $request->user_id)
+                        ->first()->main_wallet;
+    
+                    $updated_credit = $wallet + $request->credit;
+
+                    $update_user = User::where('id', $request->user_id)
+                        ->update(['main_wallet' => $updated_credit]);
+                    $trasnaction = new Transactions();
+                    $trasnaction->user_id = $request->user_id;
+                    $trasnaction->ref_trans_id = $request->ref_trans_id;
+                    $trasnaction->e_ref = $request->e_ref;
+                    $trasnaction->transaction_type = $request->transaction_type;
+                    $trasnaction->credit = $request->credit;
+                    $trasnaction->e_charges = $request->enkPay_Cashout_profit;
+                    $trasnaction->title = $request->title;
+                    $trasnaction->note = $request->note;
+                    $trasnaction->fee = $request->fee;
+                    $trasnaction->amount = $request->amount;
+                    $trasnaction->enkPay_Cashout_profit = $request->enkPay_Cashout_profit;
+                    $trasnaction->balance = $updated_credit;
+                    $trasnaction->serial_no = $request->serial_no;
+                    $trasnaction->status = 1;
+                    $trasnaction->save();
+                    return back()->with('success', 'Transaction Updated Successfully');
+                }
+    
+    
+            return redirect('admin.all-transactions.new-transaction.blade.php')->with('alert', 'Incorrect Pin');
+    
+        }
+
+        //     return redirect()->route('admin.staffs')->with('success', 'Staff was successfully created');
+        // }else{
+        //     return back()->with('alert', 'username already taken');
+        // }
+    }
+
+
     public function Ticket()
     {
 		$data['title']='Ticket system';
@@ -338,6 +555,8 @@ class CheckController extends Controller
             return back()->with('alert', 'username already taken');
         }
     }
+
+
 
 
     public function Destroymessage($id)
@@ -536,11 +755,11 @@ class CheckController extends Controller
             $data->is_kyc_verified=$request->is_identification_verified;
         }
 
-   
 
 
 
-        
+
+
 
 
 
@@ -711,7 +930,7 @@ class CheckController extends Controller
     }
 
 
-    
+
 
 
     public function add_terminal(request $request)
@@ -735,10 +954,10 @@ class CheckController extends Controller
 
         return back()->with('success', 'Terminal Successfully Created');
 
-        
+
     }
 
-    
+
 
     public function add_vaccount(Request $request)
     {
@@ -763,7 +982,7 @@ class CheckController extends Controller
         return back()->with('success', 'Account Successfully Created');
     }
 
-    
+
 
     public function delete_v_account(request $request)
     {
@@ -773,6 +992,6 @@ class CheckController extends Controller
     }
 
 
-    
+
 
 }
