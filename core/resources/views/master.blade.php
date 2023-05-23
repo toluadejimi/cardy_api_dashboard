@@ -155,7 +155,7 @@
             @endif
             @if($admin->terminal==1)
             <li class="nav-item">
-              <a class="nav-link @if(route('admin.terminals')==url()->current()) active @endif" href="admin/terminal">
+              <a class="nav-link @if(route('admin.terminals')==url()->current()) active @endif" href="{{route('admin.terminal')}}">
                 <i class="fad fa-building"></i>
                 <span class="nav-link-text">{{__('Terminals')}}</span>
               </a>

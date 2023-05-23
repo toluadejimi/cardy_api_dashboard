@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
+
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -15,16 +18,26 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'facebook', 
-        'twitter', 
-        'instagram', 
-        'linkedin', 
-        'youtube'
+        'first_name',
+        'last_name',
+        'phone',
+        'gender',
+        'address_line1',
+        'lga',
+        'state',
+        'serial_no',
+        'v_account_no',
+        'v_account_name',
+        'v_bank_name',
+        'c_account_number',
+        'c_account_name',
+        'c_bank_name',
+        'v_account_no',
+        'email',
+        'password',
+        'v_account_no',
     ];
-    protected $guard = 'user';
-
-    protected $table = 'users';
-
+    
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -39,6 +52,17 @@ class User extends Authenticatable
         return $this->hasMany('App\Model\Deposit', 'user_id');
     }
 
+
+    public function terminal()
+    {
+        return $this->hasMany('App\Model\Terminal', 'user_id');
+    }
+
+
+    // public function terminal()
+    // {
+    //     return $this->hasMany(Terminal::class, 'user_id');
+    // }
     
 
 

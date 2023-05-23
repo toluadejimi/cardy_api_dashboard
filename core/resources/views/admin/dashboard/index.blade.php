@@ -224,9 +224,9 @@
               <div class="card-body">
                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
                   <div>
-                    <h3 class="mb-2">{{__('Funding account')}}</h3>
+                    <h3 class="mb-2">{{__('Terminal Fee')}}</h3>
                     <ul class="list list-unstyled mb-0">
-                      <li><span class="text-default text-sm">{{__('Amount/Charges:')}} {{$currency->symbol.number_format($de)}}/{{$currency->symbol.number_format($dec)}}</span></li>
+                      <h2><span class="text-default text-sm">{{$currency->symbol.number_format($tfee)}}</span></h2>
                     </ul>
                   </div>
                 </div>

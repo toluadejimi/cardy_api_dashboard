@@ -12,6 +12,10 @@ class Deposits extends Model {
     {
         return $this->belongsTo('App\Models\User');
     }
+
+
+
+    
     public function gateway()
     {
         return $this->belongsTo('App\Models\Gateway','gateway_id');

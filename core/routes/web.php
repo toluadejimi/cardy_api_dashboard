@@ -583,4 +583,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     //Bill payment
     Route::get('bpay', [CheckController::class, 'bpay'])->name('admin.bpay');
+    Route::get('terminal', [CheckController::class, 'terminal'])->name('admin.terminal');
+
 });

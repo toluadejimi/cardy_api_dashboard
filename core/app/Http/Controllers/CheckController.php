@@ -216,7 +216,7 @@ class CheckController extends Controller
         $data['out']=Transactions::all()->sum('debit');
         $data['or']=Order::whereStatus(1)->sum('total');
         $data['orc']=Order::whereStatus(1)->sum('charge');
-        $data['de']=Deposits::whereStatus(1)->sum('amount');
+        $data['tfee']=TerminalPayment::where('transaction_type', 'TerminalPayment')->sum('debit');
         $data['dec']=Deposits::whereStatus(1)->sum('charge');
         $data['totalusers']=User::count();
         $data['blockedusers']=User::whereStatus(1)->count();
@@ -901,6 +901,22 @@ class CheckController extends Controller
         return redirect('/admin');
     }
 
+
+    public function terminal(request $request)
+    {
+
+        $data['title']='Terminal';
+
+        $data['all_terminal']= Terminal::latest()->select('*')->get();
+        $data['user']= User::select('*')->get();
+        $data['pcount']= Transactions::where('transaction_type', 'CashOut')->count();
+        $data['tcount']= Terminal::all()->count();
+
+
+        return view('admin.terminal.index', $data);
+
+
+    }
 
 
     public function deactivate_terminal(request $request)
