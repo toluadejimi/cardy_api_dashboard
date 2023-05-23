@@ -3,11 +3,12 @@
 namespace Curl;
 
 use Curl\ArrayUtil;
+use Curl\BaseCurl;
 use Curl\Url;
 
-class Curl
+class Curl extends BaseCurl
 {
-    const VERSION = '9.12.3';
+    const VERSION = '9.14.5';
     const DEFAULT_TIMEOUT = 30;
 
     public $curl = null;
@@ -34,11 +35,7 @@ class Curl
     public $response = null;
     public $rawResponse = null;
 
-    public $beforeSendCallback = null;
     public $downloadCompleteCallback = null;
-    public $successCallback = null;
-    public $errorCallback = null;
-    public $completeCallback = null;
     public $fileHandle = null;
     public $downloadFileName = null;
 
@@ -54,7 +51,6 @@ class Curl
     private $headerCallbackData;
     private $cookies = [];
     private $headers = [];
-    private $options = [];
 
     private $jsonDecoderArgs = [];
     private $jsonPattern = '/^(?:application|text)\/(?:[a-z]+(?:[\.-][0-9a-z]+){0,}[\+\.]|x-)?json(?:-[a-z]+)?/i';
@@ -95,6 +91,14 @@ class Curl
         's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '|', '}', '~',
     ];
 
+    public $curlErrorCodeConstant;
+    public $curlErrorCodeConstants;
+    public $curlOptionCodeConstants;
+    public $effectiveUrl;
+    public $rfc2616;
+    public $rfc6265;
+    public $totalTime;
+
     private static $deferredProperties = [
         'curlErrorCodeConstant',
         'curlErrorCodeConstants',
@@ -118,19 +122,16 @@ class Curl
             throw new \ErrorException('cURL library is not loaded');
         }
 
+        unset($this->curlErrorCodeConstant);
+        unset($this->curlErrorCodeConstants);
+        unset($this->curlOptionCodeConstants);
+        unset($this->effectiveUrl);
+        unset($this->rfc2616);
+        unset($this->rfc6265);
+        unset($this->totalTime);
+
         $this->curl = curl_init();
         $this->initialize($base_url, $options);
-    }
-
-    /**
-     * Before Send
-     *
-     * @access public
-     * @param  $callback callable|null
-     */
-    public function beforeSend($callback)
-    {
-        $this->beforeSendCallback = $callback;
     }
 
     /**
@@ -177,6 +178,8 @@ class Curl
                         $data[$key] = new \CURLFile(substr($value, 1));
                     }
                 } elseif ($value instanceof \CURLFile) {
+                    $binary_data = true;
+                } elseif ($value instanceof \CURLStringFile) {
                     $binary_data = true;
                 }
             }
@@ -250,17 +253,6 @@ class Curl
         $this->xmlDecoderArgs = null;
         $this->headerCallbackData = null;
         $this->defaultDecoder = null;
-    }
-
-    /**
-     * Complete
-     *
-     * @access public
-     * @param  $callback callable|null
-     */
-    public function complete($callback)
-    {
-        $this->completeCallback = $callback;
     }
 
     /**
@@ -372,7 +364,8 @@ class Curl
      *
      * @return boolean
      */
-    public function _fastDownload($url, $filename, $connections = 4) {
+    public function _fastDownload($url, $filename, $connections = 4)
+    {
         // First we need to retrive the 'Content-Length' header.
         // Use GET because not all hosts support HEAD requests.
         $this->setOpts([
@@ -460,17 +453,6 @@ class Curl
         fclose($mainfp);
 
         return true;
-    }
-
-    /**
-     * Error
-     *
-     * @access public
-     * @param  $callback callable|null
-     */
-    public function error($callback)
-    {
-        $this->errorCallback = $callback;
     }
 
     /**
@@ -635,19 +617,6 @@ class Curl
         }
 
         return call_user_func_array('curl_getinfo', $args);
-    }
-
-    /**
-     * Get Opt
-     *
-     * @access public
-     * @param  $option
-     *
-     * @return mixed
-     */
-    public function getOpt($option)
-    {
-        return isset($this->options[$option]) ? $this->options[$option] : null;
     }
 
     /**
@@ -829,32 +798,6 @@ class Curl
     }
 
     /**
-     * Set Basic Authentication
-     *
-     * @access public
-     * @param  $username
-     * @param  $password
-     */
-    public function setBasicAuthentication($username, $password = '')
-    {
-        $this->setOpt(CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        $this->setOpt(CURLOPT_USERPWD, $username . ':' . $password);
-    }
-
-    /**
-     * Set Digest Authentication
-     *
-     * @access public
-     * @param  $username
-     * @param  $password
-     */
-    public function setDigestAuthentication($username, $password = '')
-    {
-        $this->setOpt(CURLOPT_HTTPAUTH, CURLAUTH_DIGEST);
-        $this->setOpt(CURLOPT_USERPWD, $username . ':' . $password);
-    }
-
-    /**
      * Set Cookie
      *
      * @access public
@@ -920,28 +863,6 @@ class Curl
             return $downloaded > $bytes ? 1 : 0;
         };
         $this->progress($callback);
-    }
-
-    /**
-     * Set Port
-     *
-     * @access public
-     * @param  $port
-     */
-    public function setPort($port)
-    {
-        $this->setOpt(CURLOPT_PORT, (int) $port);
-    }
-
-    /**
-     * Set Connect Timeout
-     *
-     * @access public
-     * @param  $seconds
-     */
-    public function setConnectTimeout($seconds)
-    {
-        $this->setOpt(CURLOPT_CONNECTTIMEOUT, $seconds);
     }
 
     /**
@@ -1063,17 +984,6 @@ class Curl
         $curl_version = curl_version();
         $user_agent .= ' curl/' . $curl_version['version'];
         $this->setUserAgent($user_agent);
-    }
-
-    /**
-     * Set File
-     *
-     * @access public
-     * @param  $file
-     */
-    public function setFile($file)
-    {
-        $this->setOpt(CURLOPT_FILE, $file);
     }
 
     /**
@@ -1203,109 +1113,17 @@ class Curl
     }
 
     /**
-     * Set Proxy
+     * Set Protocols
      *
-     * Set an HTTP proxy to tunnel requests through.
-     *
-     * @access public
-     * @param  $proxy - The HTTP proxy to tunnel requests through. May include port number.
-     * @param  $port - The port number of the proxy to connect to. This port number can also be set in $proxy.
-     * @param  $username - The username to use for the connection to the proxy.
-     * @param  $password - The password to use for the connection to the proxy.
-     */
-    public function setProxy($proxy, $port = null, $username = null, $password = null)
-    {
-        $this->setOpt(CURLOPT_PROXY, $proxy);
-        if ($port !== null) {
-            $this->setOpt(CURLOPT_PROXYPORT, $port);
-        }
-        if ($username !== null && $password !== null) {
-            $this->setOpt(CURLOPT_PROXYUSERPWD, $username . ':' . $password);
-        }
-    }
-
-    /**
-     * Set Proxy Auth
-     *
-     * Set the HTTP authentication method(s) to use for the proxy connection.
+     * Limit what protocols libcurl will accept for a request.
      *
      * @access public
-     * @param  $auth
+     * @param  $protocols
+     * @see    Curl::setRedirectProtocols()
      */
-    public function setProxyAuth($auth)
+    public function setProtocols($protocols)
     {
-        $this->setOpt(CURLOPT_PROXYAUTH, $auth);
-    }
-
-    /**
-     * Set Proxy Type
-     *
-     * Set the proxy protocol type.
-     *
-     * @access public
-     * @param  $type
-     */
-    public function setProxyType($type)
-    {
-        $this->setOpt(CURLOPT_PROXYTYPE, $type);
-    }
-
-    /**
-     * Set Proxy Tunnel
-     *
-     * Set the proxy to tunnel through HTTP proxy.
-     *
-     * @access public
-     * @param  $tunnel boolean
-     */
-    public function setProxyTunnel($tunnel = true)
-    {
-        $this->setOpt(CURLOPT_HTTPPROXYTUNNEL, $tunnel);
-    }
-
-    /**
-     * Unset Proxy
-     *
-     * Disable use of the proxy.
-     *
-     * @access public
-     */
-    public function unsetProxy()
-    {
-        $this->setOpt(CURLOPT_PROXY, null);
-    }
-
-    /**
-     * Set Range
-     *
-     * @access public
-     * @param  $range
-     */
-    public function setRange($range)
-    {
-        $this->setOpt(CURLOPT_RANGE, $range);
-    }
-
-    /**
-     * Set Referer
-     *
-     * @access public
-     * @param  $referer
-     */
-    public function setReferer($referer)
-    {
-        $this->setReferrer($referer);
-    }
-
-    /**
-     * Set Referrer
-     *
-     * @access public
-     * @param  $referrer
-     */
-    public function setReferrer($referrer)
-    {
-        $this->setOpt(CURLOPT_REFERER, $referrer);
+        $this->setOpt(CURLOPT_PROTOCOLS, $protocols);
     }
 
     /**
@@ -1333,24 +1151,17 @@ class Curl
     }
 
     /**
-     * Set Timeout
+     * Set Redirect Protocols
+     *
+     * Limit what protocols libcurl will accept when following a redirect.
      *
      * @access public
-     * @param  $seconds
+     * @param  $redirect_protocols
+     * @see    Curl::setProtocols()
      */
-    public function setTimeout($seconds)
+    public function setRedirectProtocols($redirect_protocols)
     {
-        $this->setOpt(CURLOPT_TIMEOUT, $seconds);
-    }
-
-    /**
-     * Disable Timeout
-     *
-     * @access public
-     */
-    public function disableTimeout()
-    {
-        $this->setTimeout(null);
+        $this->setOpt(CURLOPT_REDIR_PROTOCOLS, $redirect_protocols);
     }
 
     /**
@@ -1371,31 +1182,6 @@ class Curl
         }
 
         $this->setOpt(CURLOPT_URL, $this->url);
-    }
-
-    /**
-     * Set User Agent
-     *
-     * @access public
-     * @param  $user_agent
-     */
-    public function setUserAgent($user_agent)
-    {
-        $this->setOpt(CURLOPT_USERAGENT, $user_agent);
-    }
-
-    /**
-     * Set Interface
-     *
-     * The name of the outgoing network interface to use.
-     * This can be an interface name, an IP address or a host name.
-     *
-     * @access public
-     * @param  $interface
-     */
-    public function setInterface($interface)
-    {
-        $this->setOpt(CURLOPT_INTERFACE, $interface);
     }
 
     /**
@@ -1423,17 +1209,6 @@ class Curl
     }
 
     /**
-     * Success
-     *
-     * @access public
-     * @param  $callback callable|null
-     */
-    public function success($callback)
-    {
-        $this->successCallback = $callback;
-    }
-
-    /**
      * Unset Header
      *
      * Remove extra header previously set using Curl::setHeader().
@@ -1449,45 +1224,6 @@ class Curl
             $headers[] = $key . ': ' . $value;
         }
         $this->setOpt(CURLOPT_HTTPHEADER, $headers);
-    }
-
-    /**
-     * Remove Header
-     *
-     * Remove an internal header from the request.
-     * Using `curl -H "Host:" ...' is equivalent to $curl->removeHeader('Host');.
-     *
-     * @access public
-     * @param  $key
-     */
-    public function removeHeader($key)
-    {
-        $this->setHeader($key, '');
-    }
-
-    /**
-     * Verbose
-     *
-     * @access public
-     * @param  bool $on
-     * @param  resource|string $output
-     */
-    public function verbose($on = true, $output = 'STDERR')
-    {
-        if ($output === 'STDERR') {
-            if (!defined('STDERR')) {
-                define('STDERR', fopen('php://stderr', 'wb'));
-            }
-            $output = STDERR;
-        }
-
-        // Turn off CURLINFO_HEADER_OUT for verbose to work. This has the side
-        // effect of causing Curl::requestHeaders to be empty.
-        if ($on) {
-            $this->setOpt(CURLINFO_HEADER_OUT, false);
-        }
-        $this->setOpt(CURLOPT_VERBOSE, $on);
-        $this->setOpt(CURLOPT_STDERR, $output);
     }
 
     /**
@@ -1513,7 +1249,23 @@ class Curl
         if ($this->attempts === 0) {
             echo 'No HTTP requests have been made.' . "\n";
         } else {
-            $request_method = $this->getOpt(CURLOPT_CUSTOMREQUEST);
+            $request_types = array(
+                'DELETE' => $this->getOpt(CURLOPT_CUSTOMREQUEST) === 'DELETE',
+                'GET' => $this->getOpt(CURLOPT_CUSTOMREQUEST) === 'GET' || $this->getOpt(CURLOPT_HTTPGET),
+                'HEAD' => $this->getOpt(CURLOPT_CUSTOMREQUEST) === 'HEAD',
+                'OPTIONS' => $this->getOpt(CURLOPT_CUSTOMREQUEST) === 'OPTIONS',
+                'PATCH' => $this->getOpt(CURLOPT_CUSTOMREQUEST) === 'PATCH',
+                'POST' => $this->getOpt(CURLOPT_CUSTOMREQUEST) === 'POST' || $this->getOpt(CURLOPT_POST),
+                'PUT' => $this->getOpt(CURLOPT_CUSTOMREQUEST) === 'PUT',
+                'SEARCH' => $this->getOpt(CURLOPT_CUSTOMREQUEST) === 'SEARCH',
+            );
+            $request_method = '';
+            foreach ($request_types as $http_method_name => $http_method_used) {
+                if ($http_method_used) {
+                    $request_method = $http_method_name;
+                    break;
+                }
+            }
             $request_url = $this->getOpt(CURLOPT_URL);
             $request_options_count = count($this->options);
             $request_headers_count = count($this->requestHeaders);
@@ -1571,10 +1323,10 @@ class Curl
 
             if ($request_headers_count === 0 && (
                 $this->getOpt(CURLOPT_VERBOSE) ||
-                $this->getOpt(CURLINFO_HEADER_OUT) !== true
+                !$this->getOpt(CURLINFO_HEADER_OUT)
             )) {
                 echo
-                    'Warning: Request headers (Curl::requestHeaders) are expected be empty ' .
+                    'Warning: Request headers (Curl::requestHeaders) are expected to be empty ' .
                     '(CURLOPT_VERBOSE was enabled or CURLINFO_HEADER_OUT was disabled).' . "\n";
             }
 
@@ -1582,23 +1334,11 @@ class Curl
                 $allowed_request_types = array_map(function ($v) {
                     return trim($v);
                 }, explode(',', strtoupper($this->responseHeaders['allow'])));
-
-                $request_types = array(
-                    'DELETE' => $this->getOpt(CURLOPT_CUSTOMREQUEST) === 'DELETE',
-                    'GET' => $this->getOpt(CURLOPT_CUSTOMREQUEST) === 'GET' || $this->getOpt(CURLOPT_HTTPGET),
-                    'HEAD' => $this->getOpt(CURLOPT_CUSTOMREQUEST) === 'HEAD',
-                    'OPTIONS' => $this->getOpt(CURLOPT_CUSTOMREQUEST) === 'OPTIONS',
-                    'PATCH' => $this->getOpt(CURLOPT_CUSTOMREQUEST) === 'PATCH',
-                    'POST' => $this->getOpt(CURLOPT_CUSTOMREQUEST) === 'POST' || $this->getOpt(CURLOPT_POST),
-                    'PUT' => $this->getOpt(CURLOPT_CUSTOMREQUEST) === 'PUT',
-                    'SEARCH' => $this->getOpt(CURLOPT_CUSTOMREQUEST) === 'SEARCH',
-                );
-
                 foreach ($request_types as $http_method_name => $http_method_used) {
                     if ($http_method_used && !in_array($http_method_name, $allowed_request_types, true)) {
                         echo
-                            'Warning: A ' . $http_method_name . ' request was made, but only the following request ' .
-                            'types are allowed: ' . implode(', ', $allowed_request_types) . "\n";
+                            'Warning: An HTTP ' . $http_method_name . ' request was made, but only the following ' .
+                            'request types are allowed: ' . implode(', ', $allowed_request_types) . "\n";
                     }
                 }
             }
@@ -1616,11 +1356,11 @@ class Curl
             }
 
             if (!isset($this->responseHeaders['Content-Type'])) {
-                echo 'Response did not set a content type' . "\n";
+                echo 'Response did not set a content type.' . "\n";
             } elseif (preg_match($this->jsonPattern, $this->responseHeaders['Content-Type'])) {
-                echo 'Response appears to be JSON' . "\n";
+                echo 'Response appears to be JSON.' . "\n";
             } elseif (preg_match($this->xmlPattern, $this->responseHeaders['Content-Type'])) {
-                echo 'Response appears to be XML' . "\n";
+                echo 'Response appears to be XML.' . "\n";
             }
 
             if ($this->curlError) {
@@ -1647,6 +1387,34 @@ class Curl
                     echo 'Response content length (from content-length header): ' . $response_header_length . "\n";
                 } else {
                     echo 'Response content length (calculated): ' . $response_calculated_length . "\n";
+                }
+
+                if (isset($this->responseHeaders['Content-Type']) &&
+                    preg_match($this->jsonPattern, $this->responseHeaders['Content-Type'])) {
+                    $parsed_response = json_decode($this->rawResponse, true);
+                    if ($parsed_response !== null) {
+                        $messages = [];
+                        array_walk_recursive($parsed_response, function ($value, $key) use (&$messages) {
+                            if (in_array($key, ['code', 'error', 'message'], true)) {
+                                $message = $key . ': ' . $value;
+                                $messages[] = $message;
+                            }
+                        });
+                        $messages = array_unique($messages);
+
+                        $messages_count = count($messages);
+                        if ($messages_count) {
+                            echo
+                                'Found ' . $messages_count . ' ' . ($messages_count === 1 ? 'message' : 'messages') .
+                                ' in response:' . "\n";
+
+                            $i = 1;
+                            foreach ($messages as $message) {
+                                echo '    ' . $i . ' ' . $message . "\n";
+                                $i += 1;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1679,56 +1447,6 @@ class Curl
         $this->setDefaultHeaderOut();
 
         $this->initialize();
-    }
-
-    /**
-     * Set auto referer
-     *
-     * @access public
-     */
-    public function setAutoReferer($auto_referer = true)
-    {
-        $this->setAutoReferrer($auto_referer);
-    }
-
-    /**
-     * Set auto referrer
-     *
-     * @access public
-     */
-    public function setAutoReferrer($auto_referrer = true)
-    {
-        $this->setOpt(CURLOPT_AUTOREFERER, $auto_referrer);
-    }
-
-    /**
-     * Set follow location
-     *
-     * @access public
-     */
-    public function setFollowLocation($follow_location = true)
-    {
-        $this->setOpt(CURLOPT_FOLLOWLOCATION, $follow_location);
-    }
-
-    /**
-     * Set forbid reuse
-     *
-     * @access public
-     */
-    public function setForbidReuse($forbid_reuse = true)
-    {
-        $this->setOpt(CURLOPT_FORBID_REUSE, $forbid_reuse);
-    }
-
-    /**
-     * Set maximum redirects
-     *
-     * @access public
-     */
-    public function setMaximumRedirects($maximum_redirects)
-    {
-        $this->setOpt(CURLOPT_MAXREDIRS, $maximum_redirects);
     }
 
     public function getCurl()
@@ -1904,7 +1622,8 @@ class Curl
     public function __get($name)
     {
         $return = null;
-        if (in_array($name, self::$deferredProperties, true) && is_callable([$this, $getter = '_get_' . $name])) {
+        if (in_array($name, self::$deferredProperties, true) &&
+            is_callable([$this, $getter = '_get' . ucfirst($name)])) {
             $return = $this->$name = $this->$getter();
         }
         return $return;
@@ -1915,7 +1634,7 @@ class Curl
      *
      * @access private
      */
-    private function _get_curlErrorCodeConstants()
+    private function _getCurlErrorCodeConstants()
     {
         $constants = get_defined_constants(true);
         $filtered_array = array_filter(
@@ -1934,7 +1653,7 @@ class Curl
      *
      * @access private
      */
-    private function _get_curlErrorCodeConstant()
+    private function _getCurlErrorCodeConstant()
     {
         $curl_const_by_code = $this->curlErrorCodeConstants;
         if (isset($curl_const_by_code[$this->curlErrorCode])) {
@@ -1948,7 +1667,7 @@ class Curl
      *
      * @access private
      */
-    private function _get_curlOptionCodeConstants()
+    private function _getCurlOptionCodeConstants()
     {
         $constants = get_defined_constants(true);
         $filtered_array = array_filter(
@@ -1972,7 +1691,7 @@ class Curl
      *
      * @access private
      */
-    private function _get_effectiveUrl()
+    private function _getEffectiveUrl()
     {
         return $this->getInfo(CURLINFO_EFFECTIVE_URL);
     }
@@ -1982,7 +1701,7 @@ class Curl
      *
      * @access private
      */
-    private function _get_rfc2616()
+    private function _getRfc2616()
     {
         return array_fill_keys(self::$RFC2616, true);
     }
@@ -1992,7 +1711,7 @@ class Curl
      *
      * @access private
      */
-    private function _get_rfc6265()
+    private function _getRfc6265()
     {
         return array_fill_keys(self::$RFC6265, true);
     }
@@ -2002,7 +1721,7 @@ class Curl
      *
      * @access private
      */
-    private function _get_totalTime()
+    private function _getTotalTime()
     {
         return $this->getInfo(CURLINFO_TOTAL_TIME);
     }
@@ -2178,7 +1897,7 @@ class Curl
         $response_header_array = explode("\r\n\r\n", $raw_response_headers);
         $response_header  = '';
         for ($i = count($response_header_array) - 1; $i >= 0; $i--) {
-            if (stripos($response_header_array[$i], 'HTTP/') === 0) {
+            if (isset($response_header_array[$i]) && stripos($response_header_array[$i], 'HTTP/') === 0) {
                 $response_header = $response_header_array[$i];
                 break;
             }
@@ -2231,6 +1950,9 @@ class Curl
      */
     private function initialize($base_url = null, $options = [])
     {
+        $this->setProtocols(CURLPROTO_HTTPS | CURLPROTO_HTTP);
+        $this->setRedirectProtocols(CURLPROTO_HTTPS | CURLPROTO_HTTP);
+
         if (isset($options)) {
             $this->setOpts($options);
         }
@@ -2324,7 +2046,8 @@ class Curl
  *
  * @return callable
  */
-function createHeaderCallback($header_callback_data) {
+function createHeaderCallback($header_callback_data)
+{
     return function ($ch, $header) use ($header_callback_data) {
         if (preg_match('/^Set-Cookie:\s*([^=]+)=([^;]+)/mi', $header, $cookie) === 1) {
             $header_callback_data->responseCookies[$cookie[1]] = trim($cookie[2], " \n\r\t\0\x0B");
@@ -2353,7 +2076,8 @@ function createHeaderCallback($header_callback_data) {
  *
  * @return callable
  */
-function createStopRequestFunction($header_callback_data) {
+function createStopRequestFunction($header_callback_data)
+{
     return function (
         $resource,
         $download_size,

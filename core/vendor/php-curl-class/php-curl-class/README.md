@@ -2,8 +2,8 @@
 
 [![](https://img.shields.io/github/release/php-curl-class/php-curl-class.svg?style=flat-square&sort=semver)](https://github.com/php-curl-class/php-curl-class/releases/)
 [![](https://img.shields.io/github/license/php-curl-class/php-curl-class.svg?style=flat-square)](https://github.com/php-curl-class/php-curl-class/blob/master/LICENSE)
-[![](https://img.shields.io/github/workflow/status/php-curl-class/php-curl-class/ci?style=flat-square)](https://github.com/php-curl-class/php-curl-class/actions/workflows/ci.yml)
-[![](https://img.shields.io/github/workflow/status/php-curl-class/php-curl-class/release?style=flat-square&label=release)](https://github.com/php-curl-class/php-curl-class/releases/)
+[![](https://img.shields.io/github/actions/workflow/status/php-curl-class/php-curl-class/ci.yml?style=flat-square&label=build&branch=master)](https://github.com/php-curl-class/php-curl-class/actions/workflows/ci.yml)
+[![](https://img.shields.io/github/actions/workflow/status/php-curl-class/php-curl-class/release.yml?style=flat-square&label=release&branch=master)](https://github.com/php-curl-class/php-curl-class/releases/)
 [![](https://img.shields.io/packagist/dt/php-curl-class/php-curl-class.svg?style=flat-square)](https://github.com/php-curl-class/php-curl-class/releases/)
 
 PHP Curl Class makes it easy to send HTTP requests and integrate with web APIs.
@@ -53,6 +53,7 @@ $curl->get('https://www.example.com/');
 
 if ($curl->error) {
     echo 'Error: ' . $curl->errorMessage . "\n";
+    $curl->diagnose();
 } else {
     echo 'Response:' . "\n";
     var_dump($curl->response);
@@ -198,7 +199,7 @@ More examples are available under [/examples](https://github.com/php-curl-class/
 Curl::__construct($base_url = null, $options = [])
 Curl::__destruct()
 Curl::__get($name)
-Curl::_fastDownload($url, $filename, $connections = 4) {
+Curl::_fastDownload($url, $filename, $connections = 4)
 Curl::attemptRetry()
 Curl::beforeSend($callback)
 Curl::buildPostData($data)
@@ -286,11 +287,13 @@ Curl::setMaximumRedirects($maximum_redirects)
 Curl::setOpt($option, $value)
 Curl::setOpts($options)
 Curl::setPort($port)
+Curl::setProtocols($protocols)
 Curl::setProxy($proxy, $port = null, $username = null, $password = null)
 Curl::setProxyAuth($auth)
 Curl::setProxyTunnel($tunnel = true)
 Curl::setProxyType($type)
 Curl::setRange($range)
+Curl::setRedirectProtocols($redirect_protocols)
 Curl::setReferer($referer)
 Curl::setReferrer($referrer)
 Curl::setRetry($mixed)
@@ -365,7 +368,7 @@ MultiCurl::stop()
 MultiCurl::success($callback)
 MultiCurl::unsetHeader($key)
 MultiCurl::unsetProxy()
-MultiCurl::verbose($on = true, $output = STDERR)
+MultiCurl::verbose($on = true, $output = 'STDERR')
 ```
 
 ### Security

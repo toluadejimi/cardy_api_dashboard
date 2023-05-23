@@ -81,16 +81,11 @@ class LoginController extends Controller
 	        $user->last_login=Carbon::now();
 	        $user->ip_address=$ip_address;
             $user->save();
-            if($user->fa_status==1){
-                return redirect()->route('2fa');
-            }else{
-                if(Session::has('oldLink')){
-                    return Redirect::to(Session::get('oldLink'));
-                }else{
-                    return redirect()->route('user.dashboard');
-                }
 
-            }
+      
+
+            return view('user.dashboard');
+
             
         } else {
         	return back()->with('alert', 'Oops! You have entered invalid credentials')->withInput($request->only('email', 'remember'));

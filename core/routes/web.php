@@ -32,6 +32,8 @@ use App\Http\Controllers\User\ResetPasswordController;
 |
 */
 
+
+
 //Fund account IPN
 Route::get('lang/{locale}', [LocalizationController::class, 'index']);
 Route::get('ipncoinpaybtc', [PaymentController::class, 'ipnCoinPayBtc'])->name('ipn.coinPay.btc');
@@ -112,7 +114,7 @@ Route::get('register', [RegisterController::class, 'register'])->name('register'
 Route::get('/forget', [UserController::class, 'forget'])->name('forget');
 Route::get('/r_pass', [UserController::class, 'r_pass'])->name('r_pass');
 Route::group(['prefix' => 'user', ], function () {
-    Route::get('blocked', [UserController::class, 'blocked'])->name('user.blocked');
+    // Route::get('blocked', [UserController::class, 'blocked'])->name('user.blocked');
     Route::get('authorization', [UserController::class, 'authCheck'])->name('user.authorization');
     Route::post('verification', [UserController::class, 'sendVcode'])->name('user.send-vcode');
     Route::post('smsVerify', [UserController::class, 'smsVerify'])->name('user.sms-verify');
@@ -123,7 +125,7 @@ Route::group(['prefix' => 'user', ], function () {
             Route::get('no-country', [UserController::class, 'no_country'])->name('update.support.country');
             Route::post('compliance', [UserController::class, 'submitcompliance'])->name('submit.compliance');
             Route::post('country', [UserController::class, 'submitcountry'])->name('submit.country');
-            Route::middleware(['Ban', 'Country', 'Blocked', 'CheckStatus', 'Tfa'])->group(function () {
+            Route::middleware(['Ban', 'Country'])->group(function () {
                 Route::middleware(['Banks'])->group(function () {
                     Route::middleware(['Kyc'])->group(function () {
                         Route::post('card', [UserController::class, 'card'])->name('card');
@@ -343,6 +345,7 @@ Route::post('admin', [AdminController::class, 'submitadminlogin'])->name('admin.
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::get('/logout', [CheckController::class, 'logout'])->name('admin.logout');
     Route::get('/dashboard', [CheckController::class, 'dashboard'])->name('admin.dashboard');
+
     //Blog controller
     Route::post('/createcategory', [PostController::class, 'CreateCategory']);
     Route::post('/updatecategory', [PostController::class, 'UpdateCategory']);
@@ -356,6 +359,31 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::get('category/delete/{id}', [PostController::class, 'delcategory'])->name('blog.delcategory');
     Route::get('blog/edit/{id}', [PostController::class, 'edit'])->name('blog.edit');
     Route::post('blog-update', [PostController::class, 'updatePost'])->name('blog.update');
+
+
+    Route::get('user/destory/{id}', [CheckController::class, 'Destroyuser'])->name('user.destory');
+
+    Route::post('add/terminal}', [CheckController::class, 'add_terminal'])->name('add.terminal');
+
+    Route::post('deactivate/terminal/{serial_no}', [CheckController::class, 'deactivate_terminal'])->name('deactivate.terminal');
+    Route::post('activate/terminal/{serial_no}', [CheckController::class, 'activate_terminal'])->name('activate.terminal');
+
+
+    Route::post('delete/terminal/{serial_no}', [CheckController::class, 'delete_terminal'])->name('delete.terminal');
+
+    Route::post('delete/accountno/{v_account_no}', [CheckController::class, 'delete_v_account'])->name('delete.v_account');
+
+
+    Route::post('add/vaccount}', [CheckController::class, 'add_vaccount'])->name('add.vaccount');
+
+
+    
+
+
+    
+
+    
+
 
     //Web controller
     Route::post('social-links/update', [WebController::class, 'UpdateSocial'])->name('social-links.update');
@@ -537,6 +565,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     //Vcard
     Route::get('vcard', [CheckController::class, 'vcard'])->name('admin.vcard');
+
+    Route::get('transactions', [CheckController::class, 'transactions'])->name('admin.transactions');
+    Route::get('vaccount', [CheckController::class, 'vaccount'])->name('admin.vaccount');
+    Route::get('terminals', [CheckController::class, 'terminals'])->name('admin.terminals');
+
+
+
+    
+
+
+
     Route::get('transactions-virtual/{id}', [CheckController::class, 'transactionsvcard'])->name('transactions.vcard');
 
     //Bill payment

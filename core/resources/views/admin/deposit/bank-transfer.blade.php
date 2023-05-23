@@ -30,7 +30,7 @@
                                 <div class="col-lg-10">
                                 <input type="text" name="address" class="form-control" value="{{$bank->address}}">
                                 </div>
-                            </div>  
+                            </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-2">{{__('IBAN code')}}</label>
                                 <div class="col-lg-10">
@@ -48,9 +48,9 @@
                                 <div class="col-lg-10">
                                 <input type="number" name="acct_no" class="form-control" value="{{$bank->acct_no}}">
                                 </div>
-                            </div>  
+                            </div>
                             <div class="form-group row">
-                                <div class="col-lg-5"> 
+                                <div class="col-lg-5">
                                     <div class="custom-control custom-control-alternative custom-checkbox">
                                         @if($bank->status==1)
                                             <input type="checkbox" name="status" id="customCheckLogin" class="custom-control-input" value="1" checked>
@@ -58,17 +58,17 @@
                                             <input type="checkbox" name="status" id="customCheckLogin"  class="custom-control-input" value="1">
                                         @endif
                                         <label class="custom-control-label" for="customCheckLogin">
-                                        <span class="text-muted">{{__('Status')}}</span>     
+                                        <span class="text-muted">{{__('Status')}}</span>
                                         </label>
-                                    </div> 
-                                </div> 
-                            </div>               
+                                    </div>
+                                </div>
+                            </div>
                             <div class="text-right">
                                 <button type="submit" class="btn btn-success btn-sm">{{__('Save')}}</button>
                             </div>
                         </form>
                     </div>
-                </div> 
+                </div>
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">{{__('Bank transfer')}}</h3>
@@ -79,18 +79,18 @@
                                 <tr>
                                     <th>{{__('S/N')}}</th>
                                     <th>{{__('Name')}}</th>
-                                    <th>{{__('Amount')}}</th>                                                                       
+                                    <th>{{__('Amount')}}</th>
                                     <th>{{__('Status')}}</th>
                                     <th>{{__('Created')}}</th>
                                     <th>{{__('Updated')}}</th>
-                                    <th class="text-center">{{__('Action')}}</th>    
+                                    <th class="text-center">{{__('Action')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
                             @foreach($deposit as $k=>$val)
                                 <tr>
                                     <td>{{++$k}}.</td>
-                                    <td><a href="{{url('admin/manage-user')}}/{{$val->user['id']}}">{{$val->user['first_name'].' '.$val->user['last_name']}}</a></td>
+                                    {{-- <td><a href="{{url('admin/manage-user')}}/{{$val->user['id']?? "me"}}">{{$val->user['first_name'].' '.$val->user['last_name']}}</a></td> --}}
                                     <td>{{$currency->symbol.number_format($val->amount)}}</td>
                                     <td>
                                         @if($val->status==0)
@@ -98,9 +98,9 @@
                                         @elseif($val->status==1)
                                             <span class="badge badge-success badge-pill">{{__('Approved')}}</span>
                                         @elseif($val->status==2)
-                                            <span class="badge badge-info badge-pill">{{__('Declined')}}</span> 
+                                            <span class="badge badge-info badge-pill">{{__('Declined')}}</span>
                                         @endif
-                                    </td>  
+                                    </td>
                                     <td>{{date("Y/m/d h:i:A", strtotime($val->created_at))}}</td>
                                     <td>{{date("Y/m/d h:i:A", strtotime($val->updated_at))}}</td>
                                     <td class="text-center">
@@ -117,11 +117,11 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                        </div> 
-                                    </td>                  
+                                        </div>
+                                    </td>
                                 </tr>
-                                @endforeach               
-                            </tbody>                    
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                     <div id="details{{$val->id}}" class="modal fade" tabindex="-1">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header">   
+                                <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <div class="modal-body text-center">
@@ -157,7 +157,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                     <div class="modal fade" id="screenshot{{$val->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
                         <div class="modal-dialog modal- modal-dialog-centered modal-md" role="document">
                             <div class="castro-fade">

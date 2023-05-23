@@ -68,7 +68,7 @@
       <div class="col-lg-4">
         <div class="row align-items-center text-center">
           <div class="col-12 mt-5">
-            <h5 class="text-gray mb-3 h4"><i class="fad fa-sack-dollar"></i> {{__('Issueing Wallet Balance')}}</h5>
+            <h5 class="text-gray mb-3 h4"><i class="fad fa-sack-dollar"></i> {{__('Main Wallet')}}</h5>
             <h5 class="mb-1 h2">{{$currency->name}} {{number_format($balance)}}</h5>
             <hr>
           </div>

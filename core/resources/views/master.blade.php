@@ -148,6 +148,23 @@
               </a>
             </li> 
             @endif 
+            @if($admin->terminal==1)
+            <li class="nav-item">
+              <a class="nav-link @if(route('admin.terminals')==url()->current()) active @endif" href="admin/terminal">
+                <i class="fad fa-building"></i>
+                <span class="nav-link-text">{{__('Terminals')}}</span>
+              </a>
+            </li> 
+            @endif 
+
+            @if($admin->transactions==1)
+            <li class="nav-item">
+              <a class="nav-link @if(route('admin.transactions')==url()->current()) active @endif" href="admin/transctions">
+                <i class="fad fa-building"></i>
+                <span class="nav-link-text">{{__('Transactions')}}</span>
+              </a>
+            </li> 
+            @endif
             @if($admin->vcard==1)
             <li class="nav-item">
               <a class="nav-link @if(route('admin.vcard')==url()->current()) active @endif" href="{{route('admin.vcard')}}">
@@ -155,7 +172,15 @@
                 <span class="nav-link-text">{{__('Virtual Cards')}}</span>
               </a>
             </li>
-            @endif 
+            @endif
+            @if($admin->vaccount==1)
+            <li class="nav-item">
+              <a class="nav-link @if(route('admin.vaccount')==url()->current()) active @endif" href="admin/vaccount">
+                <i class="fad fa-credit-card"></i>
+                <span class="nav-link-text">{{__('Virtual Account')}}</span>
+              </a>
+            </li>
+            @endif  
             <!--
               @if($admin->crypto==1) 
               <li class="nav-item">

@@ -58,7 +58,7 @@
                             <tr>
                                 <td>{{++$k}}.</td>
                                 <td>{{$val->ref_id}}</td>
-                                <td>{{$val->ddlink['name']}}</td>
+                                {{-- <td>{{$val->ddlink['name']}}</td> --}}
                                 <td>@if($val->sender_id!=null) {{$val->sender->first_name.' '.$val->sender->last_name}} [{{$val->sender->email}}] @else {{$val->first_name.' '.$val->last_name}} [{{$val->email}}] @endif</td>
                                 <td>@if($val->sender_id==$user->id) Debit @else Credit @endif</td>
                                 <td>@if($val->status==0) <span class="badge badge-pill badge-danger"><i class="fad fa-ban"></i> failed - {{$val->payment_type}}</span> @elseif($val->status==1) <span class="badge badge-pill badge-success"><i class="fad fa-check"></i> paid - {{$val->payment_type}}</span> @elseif($val->status==2) refunded @endif</td>

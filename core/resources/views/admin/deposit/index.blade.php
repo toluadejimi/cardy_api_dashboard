@@ -29,7 +29,7 @@
                             @foreach($deposit as $k=>$val)
                                 <tr>
                                     <td>{{++$k}}.</td>
-                                    <td><a href="{{url('admin/manage-user')}}/{{$val->user['id']}}">{{$val->user['first_name'].' '.$val->user['last_name']}}</a></td>
+                                    {{-- <td><a href="{{url('admin/manage-user')}}/{{$val->user['id']}}">{{$val->user['first_name'].' '.$val->user['last_name']}}</a></td> --}}
                                     <td>{{$currency->symbol.number_format($val->amount-$val->charge, '2', '.', '')}}</td>
                                     <td>{{$val->gateway['name']}}</td>
                                     <td>{{$val->trx}}</td> 

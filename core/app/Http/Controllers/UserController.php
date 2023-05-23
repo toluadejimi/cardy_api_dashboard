@@ -126,7 +126,7 @@ class UserController extends Controller
         {
             $set=Settings::first();
             $data['title']=$set->site_name.' Dashboard';
-            $data['balance']=User::where('id', Auth::id())->first()->balance;
+            $data['balance']=User::where('id', Auth::id())->first()->main_wallet;
             $data['revenue']=History::whereuser_id(Auth::guard('user')->user()->id)->wheretype(1)->where('amount', '!=', null)->sum('amount');
             $data['t_payout']=Withdraw::whereuser_id(Auth::guard('user')->user()->id)->wherestatus(1)->sum('amount');
             $data['n_payout']=Withdraw::whereuser_id(Auth::guard('user')->user()->id)->wherestatus(0)->sum('amount');
@@ -3448,23 +3448,27 @@ class UserController extends Controller
     //End of Withdrawal
 
     //Verification
-        public function blocked()
-        {
-            if (Auth::guard('user')->user()->status==0) {
-                return redirect()->route('user.dashboard');
-            } else {
-                $data['title'] = "Account suspended";
-                return view('user.profile.blocked', $data);
-            }
-        }
+        // public function blocked()
+        // {
+
+        //     return redirect()->route('user.dashboard');
+
+           
+        //     // if (Auth::guard('user')->user()->is_active==0) {
+        //     //     return redirect()->route('user.dashboard');
+        //     // } else {
+        //     //     $data['title'] = "Account suspended";
+        //     //     return view('user.profile.blocked', $data);
+        //     // }
+        // }
 
         public function authCheck()
         {
-            if (Auth()->guard('user')->user()->status == 0 && Auth()->guard('user')->user()->email_verify == 1) {
-                return redirect()->route('user.dashboard');
+            if (Auth()->guard('user')->user()->status == 2) {
+                return view('dashboard');
             } else {
-                $data['title'] = "Authorization";
-                return view('user.profile.verify', $data);
+                // $data['title'] = "Authorization";
+                // return view('user.profile.verify', $data);
             }
         }
 
@@ -4979,49 +4983,49 @@ class UserController extends Controller
         public function Createbank(Request $request)
         {
             $set=Settings::first();
-            if($set->stripe_connect==1){
-                $gate = Gateway::find(103);
-                $stripe = new StripeClient($gate->val2);
-                try {
-                    $country=Country::whereid(Auth::guard('user')->user()->country)->first();
-                    $currency=Currency::whereStatus(1)->first();
-                    $charge=$stripe->accounts->update(Auth::guard('user')->user()->stripe_id,[
-                            'external_account' => [
-                            'object' => 'bank_account',
-                            'country' => $country->iso,
-                            'currency' => $currency->name,
-                            'account_holder_name' => $request->acct_name,
-                            'account_holder_type' => $request->account_type,
-                            'routing_number' => $request->routing_number,
-                            'account_number' => $request->acct_no,
-                        ],
-                    ]);
-                    $data['acct_no']=$request->acct_no;
-                    $data['acct_name']=$request->acct_name;
-                    $data['account_type']=$request->account_type;
-                    $data['routing_number']=$request->routing_number;
-                    $data['bank_id']=$request->bank;
-                    $data['user_id']=Auth::guard('user')->user()->id;
-                    $all = Bank::whereuser_id(Auth::guard('user')->user()->id)->wherestatus(1)->get();
-                    if(count($all)<1){
-                        $data['status']=1;
-                    }
-                    Bank::create($data);
-                    return redirect()->route('user.bank')->with('success', 'Bank account was successfully added.');
-                } catch (\Stripe\Exception\RateLimitException $e) {
-                    return back()->with('alert', $e->getMessage());
-                } catch (\Stripe\Exception\InvalidRequestException $e) {
-                    return back()->with('alert', $e->getMessage());
-                } catch (\Stripe\Exception\AuthenticationException $e) {
-                    return back()->with('alert', $e->getMessage());
-                } catch (\Stripe\Exception\ApiConnectionException $e) {
-                    return back()->with('alert', $e->getMessage());
-                } catch (\Stripe\Exception\ApiErrorException $e) {
-                    return back()->with('alert', $e->getMessage());
-                } catch (Exception $e) {
-                    return back()->with('alert', $e->getMessage());
-                }
-            }else{
+            // if($set->stripe_connect==1){
+            //     $gate = Gateway::find(103);
+            //     $stripe = new StripeClient($gate->val2);
+            //     try {
+            //         $country=Country::whereid(Auth::guard('user')->user()->country)->first();
+            //         $currency=Currency::whereStatus(1)->first();
+            //         $charge=$stripe->accounts->update(Auth::guard('user')->user()->stripe_id,[
+            //                 'external_account' => [
+            //                 'object' => 'bank_account',
+            //                 'country' => $country->iso,
+            //                 'currency' => $currency->name,
+            //                 'account_holder_name' => $request->acct_name,
+            //                 'account_holder_type' => $request->account_type,
+            //                 'routing_number' => $request->routing_number,
+            //                 'account_number' => $request->acct_no,
+            //             ],
+            //         ]);
+            //         $data['acct_no']=$request->acct_no;
+            //         $data['acct_name']=$request->acct_name;
+            //         $data['account_type']=$request->account_type;
+            //         $data['routing_number']=$request->routing_number;
+            //         $data['bank_id']=$request->bank;
+            //         $data['user_id']=Auth::guard('user')->user()->id;
+            //         $all = Bank::whereuser_id(Auth::guard('user')->user()->id)->wherestatus(1)->get();
+            //         if(count($all)<1){
+            //             $data['status']=1;
+            //         }
+            //         Bank::create($data);
+            //         return redirect()->route('user.bank')->with('success', 'Bank account was successfully added.');
+            //     } catch (\Stripe\Exception\RateLimitException $e) {
+            //         return back()->with('alert', $e->getMessage());
+            //     } catch (\Stripe\Exception\InvalidRequestException $e) {
+            //         return back()->with('alert', $e->getMessage());
+            //     } catch (\Stripe\Exception\AuthenticationException $e) {
+            //         return back()->with('alert', $e->getMessage());
+            //     } catch (\Stripe\Exception\ApiConnectionException $e) {
+            //         return back()->with('alert', $e->getMessage());
+            //     } catch (\Stripe\Exception\ApiErrorException $e) {
+            //         return back()->with('alert', $e->getMessage());
+            //     } catch (Exception $e) {
+            //         return back()->with('alert', $e->getMessage());
+            //     }
+            // }else{
                 $data['acct_no']=$request->acct_no;
                 $data['acct_name']=$request->acct_name;
                 $data['account_type']=$request->account_type;
@@ -5034,7 +5038,7 @@ class UserController extends Controller
                 }
                 Bank::create($data);
                 return redirect()->route('user.bank')->with('success', 'Bank account was successfully added.');
-            }
+            // }
         }
     //End of bank functions
 
@@ -5284,7 +5288,8 @@ class UserController extends Controller
         {
             $data['title']='Transactions';
             $user=Auth::guard('user')->user()->id;
-            $data['single']=Transactions::wheresender_id($user)->wheretype(1)->orWhere('receiver_id', $user)->where('type', 1)->latest()->get();
+            $data['single']=Transactions::latest()->whereuser_id($user)->get();
+
             $data['donation']=Transactions::wheresender_id($user)->wheretype(2)->orWhere('receiver_id', $user)->where('type', 2)->latest()->get();
             $data['invoice']=Transactions::wheresender_id($user)->wheretype(3)->orWhere('receiver_id', $user)->where('type', 3)->latest()->get();
             $data['bank_transfer']=Banktransfer::whereUser_id(Auth::guard('user')->user()->id)->latest()->get();

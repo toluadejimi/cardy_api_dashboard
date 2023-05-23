@@ -6,6 +6,53 @@ backwards-incompatible changes that will affect existing usage.
 
 <!-- CHANGELOG_PLACEHOLDER -->
 
+## 9.14.5 - 2023-05-16
+
+- Handle missing content-type response header in Curl::diagnose() ([#778](https://github.com/php-curl-class/php-curl-class/pull/778))
+
+## 9.14.4 - 2023-05-08
+
+- Update article in Curl::diagnose() Allow header warning ([#776](https://github.com/php-curl-class/php-curl-class/pull/776))
+
+## 9.14.3 - 2023-03-13
+
+- Remove use of array_merge() inside loop ([#774](https://github.com/php-curl-class/php-curl-class/pull/774))
+
+## 9.14.2 - 2023-03-09
+
+- Clean up: Reduce nesting ([#771](https://github.com/php-curl-class/php-curl-class/pull/771))
+
+## 9.14.1 - 2023-02-27
+
+- Remove coding standard ruleset exclusion ([#768](https://github.com/php-curl-class/php-curl-class/pull/768))
+
+## 9.14.0 - 2023-02-26
+
+- Make https:// and http:// the allowed request protocols by default ([#767](https://github.com/php-curl-class/php-curl-class/pull/767))
+
+## 9.13.1 - 2023-01-16
+
+- Allow uploads with CURLStringFile type  ([#762](https://github.com/php-curl-class/php-curl-class/pull/762))
+
+## 9.13.0 - 2023-01-13
+
+- Implement abstract class BaseCurl for Curl and MultiCurl ([#759](https://github.com/php-curl-class/php-curl-class/pull/759))
+- Display error messages found in Curl::diagnose() ([#758](https://github.com/php-curl-class/php-curl-class/pull/758))
+- Fix Curl::diagnose() request type output for POST requests ([#757](https://github.com/php-curl-class/php-curl-class/pull/757))
+
+## 9.12.6 - 2023-01-11
+
+- Replace use of #[\AllowDynamicProperties] ([#756](https://github.com/php-curl-class/php-curl-class/pull/756))
+- silence PHP 8.2 deprecation notices ([#754](https://github.com/php-curl-class/php-curl-class/pull/754))
+
+## 9.12.5 - 2022-12-20
+
+- Fix static analysis error ([#752](https://github.com/php-curl-class/php-curl-class/pull/752))
+
+## 9.12.4 - 2022-12-17
+
+- Exclude additional files from git archive ([#751](https://github.com/php-curl-class/php-curl-class/pull/751))
+
 ## 9.12.3 - 2022-12-13
 
 - Ensure string response before gzip decode ([#749](https://github.com/php-curl-class/php-curl-class/pull/749))

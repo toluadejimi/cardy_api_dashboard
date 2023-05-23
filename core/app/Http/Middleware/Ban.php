@@ -22,6 +22,7 @@ class Ban
     {
         $set=Settings::find(1);
         $cc=Countrysupported::whereid(Auth::guard('user')->user()->pay_support)->wherestatus(1)->count();
+
         if($cc==0){
             Auth::guard('user')->logout();
             return redirect()->route('login')->with('alert', 'Your country is not supported');

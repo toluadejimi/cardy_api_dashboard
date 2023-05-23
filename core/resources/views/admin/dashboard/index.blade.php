@@ -5,6 +5,37 @@
       @if($admin->id==1)
         <div class="row">
           <div class="col-md-4">
+
+
+            <div class="card">
+                <div class="card-body">
+                  <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                    <div>
+                      <h3 class="mb-2">Total In</h3>
+                      <ul class="list list-unstyled mb-0">
+                        <h2><span class="text-default text-sm">{{$currency->symbol.number_format($in)}}</span></h2>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+             </div>
+
+
+             <div class="card">
+                <div class="card-body">
+                  <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                    <div>
+                      <h3 class="mb-2">Total in Wallet</h3>
+                      <ul class="list list-unstyled mb-0">
+                        <h2><span class="text-default text-sm">{{$currency->symbol.number_format($twallet)}}</span></h2>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+             </div>
+
+          
+
             <div class="card">
               <div class="card-body">
                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
@@ -16,7 +47,43 @@
                   </div>
                 </div>
               </div>
-            </div>                      
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div class="card">
               <div class="card-body">
                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
@@ -28,7 +95,7 @@
                   </div>
                 </div>
               </div>
-            </div>            
+            </div>
             <div class="card">
               <div class="card-body">
                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
@@ -41,8 +108,43 @@
                 </div>
               </div>
             </div>
-          </div>          
+          </div>
+
+
+
           <div class="col-md-4">
+
+
+
+            <div class="card">
+                <div class="card-body">
+                  <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                    <div>
+                      <h3 class="mb-2">Total Out</h3>
+                      <ul class="list list-unstyled mb-0">
+                        <h2><span class="text-default text-sm">{{$currency->symbol.number_format($out)}}</span></h2>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+             </div>
+
+
+             <div class="card">
+                <div class="card-body">
+                  <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                    <div>
+                      <h3 class="mb-2">ENKPAY Overflow</h3>
+                      <ul class="list list-unstyled mb-0">
+                        <h2><span class="text-default text-sm">{{$currency->symbol.number_format($diff)}}</span></h2>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+             </div>
+
+
+
             <div class="card">
               <div class="card-body">
                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
@@ -54,7 +156,17 @@
                   </div>
                 </div>
               </div>
-            </div>            
+            </div>
+
+
+
+
+
+
+
+
+
+
             <div class="card">
               <div class="card-body">
                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
@@ -66,7 +178,7 @@
                   </div>
                 </div>
               </div>
-            </div>            
+            </div>
             <div class="card">
               <div class="card-body">
                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
@@ -78,7 +190,7 @@
                   </div>
                 </div>
               </div>
-            </div>   
+            </div>
             <div class="card">
               <div class="card-body">
                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
@@ -90,9 +202,24 @@
                   </div>
                 </div>
               </div>
-            </div>                      
-          </div>  
+            </div>
+          </div>
           <div class="col-md-4">
+
+            <div class="card">
+                <div class="card-body">
+                  <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                    <div>
+                      <h3 class="mb-2">Total Pool</h3>
+                      <ul class="list list-unstyled mb-0">
+                        <h2><span class="text-default text-sm">{{$currency->symbol.($pool)}}</span></h2>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+             </div>
+
+
             <div class="card">
               <div class="card-body">
                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
@@ -128,8 +255,8 @@
                   </div>
                 </div>
               </div>
-            </div> 
-          </div>        
+            </div>
+          </div>
 
   @endif
           @stop

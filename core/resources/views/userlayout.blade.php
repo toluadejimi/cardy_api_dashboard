@@ -309,7 +309,7 @@
           </ul>
             <ul class="navbar-nav align-items-center ml-auto ml-md-0">
               <li class="nav-item mr-2">
-                <h6 class="h4 mb-0 text-gray font-weight-bolder"><span class="text-primary"><i class="fad fa-wallet"></i>   {{$currency->name. ' ' .number_format($user->balance)}}</span></h6>
+                <h6 class="h4 mb-0 text-gray font-weight-bolder"><span class="text-primary"><i class="fad fa-wallet"></i>   {{$currency->name. ' ' .number_format($user->main_wallet)}}</span></h6>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link pr-0" aria-haspopup="true" aria-expanded="fadse">

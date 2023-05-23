@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Terminal;
+use App\Models\VirtualAccount;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
@@ -66,16 +68,12 @@ use Stripe\Charge;
 use Stripe\StripeClient;
 use Image;
 
-
-
-
-
 class CheckController extends Controller
 {
 
-        
+
     public function __construct()
-    {		
+    {
         $this->middleware('auth');
     }
 
@@ -83,8 +81,8 @@ class CheckController extends Controller
         $data['title']='Virtual Cards';
         $data['card']=Virtual::orderBy('created_at', 'DESC')->get();
         return view('admin.virtual.index', $data);
-    }    
-    
+    }
+
     public function bpay(){
         $data['title']='Bill payment';
         $data['trans']=Billtransactions::orderBy('created_at', 'DESC')->get();
@@ -119,31 +117,31 @@ class CheckController extends Controller
     {
         $check=User::whereid($id)->first();
         $set=Settings::first();
-        if($set->stripe_connect==1){
-            if($check->stripe_id!=null){
-                $gate = Gateway::find(103);
-                $stripe = new StripeClient($gate->val2);
-                try{
-                    $charge=$stripe->accounts->delete(
-                        $check->stripe_id,
-                        []
-                    );
-                } catch (\Stripe\Exception\RateLimitException $e) {
-                    return back()->with('alert', $e->getMessage());
-                } catch (\Stripe\Exception\InvalidRequestException $e) {
-                    return back()->with('alert', $e->getMessage());
-                } catch (\Stripe\Exception\AuthenticationException $e) {
-                    return back()->with('alert', $e->getMessage());
-                } catch (\Stripe\Exception\ApiConnectionException $e) {
-                    return back()->with('alert', $e->getMessage());
-                } catch (\Stripe\Exception\ApiErrorException $e) {
-                    return back()->with('alert', $e->getMessage());
-                } catch (Exception $e) {
-                    return back()->with('alert', $e->getMessage());
-                }
-            }
-        }
-        $transfer = Transfer::where('Receiver_id', $id)->orWhere('Temp', $check->email)->delete();
+        // if($set->stripe_connect==1){
+        //     if($check->stripe_id!=null){
+        //         $gate = Gateway::find(103);
+        //         $stripe = new StripeClient($gate->val2);
+        //         try{
+        //             $charge=$stripe->accounts->delete(
+        //                 $check->stripe_id,
+        //                 []
+        //             );
+        //         } catch (\Stripe\Exception\RateLimitException $e) {
+        //             return back()->with('alert', $e->getMessage());
+        //         } catch (\Stripe\Exception\InvalidRequestException $e) {
+        //             return back()->with('alert', $e->getMessage());
+        //         } catch (\Stripe\Exception\AuthenticationException $e) {
+        //             return back()->with('alert', $e->getMessage());
+        //         } catch (\Stripe\Exception\ApiConnectionException $e) {
+        //             return back()->with('alert', $e->getMessage());
+        //         } catch (\Stripe\Exception\ApiErrorException $e) {
+        //             return back()->with('alert', $e->getMessage());
+        //         } catch (Exception $e) {
+        //             return back()->with('alert', $e->getMessage());
+        //         }
+        //     }
+        // }
+        $transfer = Transfer::where('user_id', $id)->delete();
         $bank_transfer = Banktransfer::whereUser_id($id)->delete();
         $deposit = Deposits::whereUser_id($id)->delete();
         $ticket = Ticket::whereUser_id($id)->delete();
@@ -162,111 +160,121 @@ class CheckController extends Controller
         $sub = Subscribers::whereUser_id($id)->delete();
         $btc = Btctrades::whereUser_id($id)->delete();
         $his = History::whereUser_id($id)->delete();
-        $trans = Transactions::where('Receiver_id', $id)->orWhere('Sender_id', $id)->delete();
+        $trans = Transactions::where('user_id', $id)->delete();
         $com = Compliance::whereUser_id($id)->delete();
         $sa = Subaccounts::whereUser_id($id)->delete();
         $store = Storefront::whereUser_id($id)->delete();
         $ship = Shipping::whereUser_id($id)->delete();
         $pro = Productcategory::whereUser_id($id)->delete();
         $vr = Virtual::whereUser_id($id)->delete();
-        $vtt = Virtualtransactions::whereUser_id($id)->delete();
+        $vtt = VirtualAccount::whereUser_id($id)->delete();
         $bill = Billtransactions::whereUser_id($id)->delete();
         $user = User::whereId($id)->delete();
         return back()->with('success', 'User was successfully deleted');
-    }     
-    
+    }
+
     public function Destroystaff($id)
     {
         $staff = Admin::whereId($id)->delete();
         return back()->with('success', 'Staff was successfully deleted');
-    }  
-        
+    }
+
     public function dashboard()
     {
+
+
+
         $data['title']='Dashboard';
+        $data['pool']= get_pool();
         $data['received']=Charges::sum('amount');
+        $data['twallet']=User::all()->sum('main_wallet');
+        $pp2 = str_replace(',', '', $data['pool']);
+        $pp3 = (int)$pp2;
+        $data['diff']= $pp3 - $data['twallet'];
         $data['wd']=Withdraw::whereStatus(1)->sum('amount');
         $data['wdc']=Withdraw::whereStatus(1)->sum('charge');
         $data['mer']=Exttransfer::whereStatus(1)->sum('amount');
-        $data['merc']=Exttransfer::whereStatus(1)->sum('charge');        
+        $data['merc']=Exttransfer::whereStatus(1)->sum('charge');
         $data['in']=Invoice::whereStatus(1)->sum('amount');
-        $data['inc']=Invoice::whereStatus(1)->sum('charge');        
+        $data['inc']=Invoice::whereStatus(1)->sum('charge');
         $data['req']=Requests::whereStatus(1)->sum('amount');
-        $data['reqc']=Requests::whereStatus(1)->sum('charge');        
+        $data['reqc']=Requests::whereStatus(1)->sum('charge');
         $data['tran']=Transfer::whereStatus(1)->sum('amount');
-        $data['tranc']=Transfer::whereStatus(1)->sum('charge');        
+        $data['tranc']=Transfer::whereStatus(1)->sum('charge');
         $data['sin']=Transactions::whereStatus(1)->wheretype(1)->sum('amount');
-        $data['sinc']=Transactions::whereStatus(1)->wheretype(1)->sum('charge');        
+        $data['sinc']=Transactions::whereStatus(1)->wheretype(1)->sum('charge');
         $data['do']=Transactions::whereStatus(1)->wheretype(2)->sum('amount');
-        $data['doc']=Transactions::whereStatus(1)->wheretype(2)->sum('charge');        
+        $data['doc']=Transactions::whereStatus(1)->wheretype(2)->sum('charge');
+        $data['in']=Transactions::all()->sum('credit');
+        $data['out']=Transactions::all()->sum('debit');
         $data['or']=Order::whereStatus(1)->sum('total');
-        $data['orc']=Order::whereStatus(1)->sum('charge');        
+        $data['orc']=Order::whereStatus(1)->sum('charge');
         $data['de']=Deposits::whereStatus(1)->sum('amount');
         $data['dec']=Deposits::whereStatus(1)->sum('charge');
         $data['totalusers']=User::count();
         $data['blockedusers']=User::whereStatus(1)->count();
         $data['activeusers']=User::whereStatus(0)->count();
         return view('admin.dashboard.index', $data);
-    }    
-    
+    }
+
     public function Users()
     {
 		$data['title']='Clients';
-		$data['users']=User::latest()->get();
+		$data['users']=User::orderBy('first_name', 'ASC')->get();
         return view('admin.user.index', $data);
-    }    
-    
+    }
+
     public function Staffs()
     {
 		$data['title']='Staffs';
 		$data['users']=Admin::where('id', '!=', 1)->latest()->get();
         return view('admin.user.staff', $data);
-    }       
+    }
 
     public function Messages()
     {
 		$data['title']='Messages';
 		$data['message']=Contact::latest()->get();
         return view('admin.user.message', $data);
-    }     
+    }
 
     public function Newstaff()
     {
 		$data['title']='New Staff';
         return view('admin.user.new-staff', $data);
-    }    
-    
+    }
+
     public function Ticket()
     {
 		$data['title']='Ticket system';
 		$data['ticket']=Ticket::latest()->get();
         return view('admin.user.ticket', $data);
-    }   
-    
+    }
+
     public function Email($id,$name)
     {
 		$data['title']='Send email';
 		$data['email']=$id;
 		$data['name']=$name;
         return view('admin.user.email', $data);
-    }    
-    
+    }
+
     public function Promo()
     {
 		$data['title']='Send email';
         $data['client']=$user=User::all();
         return view('admin.user.promo', $data);
-    } 
-    
+    }
+
     public function Sendemail(Request $request)
-    {        	
+    {
         $set=Settings::first();
-        send_email($request->to, $request->name, $request->subject, $request->message);  
+        send_email($request->to, $request->name, $request->subject, $request->message);
         return back()->with('success', 'Mail Sent Successfuly!');
     }
-    
+
     public function Sendpromo(Request $request)
-    {        	
+    {
         $set=Settings::first();
         $user=User::all();
         foreach ($user as $val) {
@@ -274,32 +282,32 @@ class CheckController extends Controller
             if($set->email_notify==1){
                 send_email($x->email, $x->username, $request->subject, $request->message);
             }
-        }      
+        }
         return back()->with('success', 'Mail Sent Successfuly!');
-    }     
-    
+    }
+
     public function Replyticket(Request $request)
-    {        
+    {
         $data['ticket_id'] = $request->ticket_id;
         $data['reply'] = $request->reply;
         $data['status'] = 0;
         $data['staff_id'] = $request->staff_id;
-        $res = Reply::create($data);  
-        $set=Settings::first();   
+        $res = Reply::create($data);
+        $set=Settings::first();
         $ticket=Ticket::whereticket_id($request->ticket_id)->first();
         $user=User::find($ticket->user_id);
         if($set['email_notify']==1){
             send_email($user->email, $user->username, 'New Reply - '.$request->ticket_id, $request->reply);
-        } 
+        }
         if ($res) {
             return back();
         } else {
             return back()->with('alert', 'An error occured');
         }
-    }    
-    
+    }
+
     public function Createstaff(Request $request)
-    {        
+    {
         $check=Admin::whereusername($request->username)->get();
         if(count($check)<1){
             $data['username'] = $request->username;
@@ -324,14 +332,14 @@ class CheckController extends Controller
             $data['blog'] = $request->blog;
             $data['bill'] = $request->bill;
             $data['vcard'] = $request->vcard;
-            $res = Admin::create($data);  
+            $res = Admin::create($data);
             return redirect()->route('admin.staffs')->with('success', 'Staff was successfully created');
         }else{
             return back()->with('alert', 'username already taken');
         }
-    }       
-     
-    
+    }
+
+
     public function Destroymessage($id)
     {
         $data = Contact::findOrFail($id);
@@ -341,8 +349,8 @@ class CheckController extends Controller
         } else {
             return back()->with('alert', 'Problem With Deleting Request');
         }
-    }     
-    
+    }
+
     public function Destroyticket($id)
     {
         $data = Ticket::findOrFail($id);
@@ -352,27 +360,45 @@ class CheckController extends Controller
         } else {
             return back()->with('alert', 'Problem With Deleting Request');
         }
-    } 
+    }
 
     public function Manageuser($id)
     {
+
+        $check_business_name = Compliance::where('user_id', $id)->first()->first_name ?? null;
+        if($check_business_name ==null){
+            $get_temp_user = User::where('id', $id)->first();
+            $com = new Compliance();
+            $com->first_name = $get_temp_user->first_name;
+            $com->last_name = $get_temp_user->last_name;
+            $com->user_id = $get_temp_user->id;
+            $com->state = $get_temp_user->state;
+            $com->save();
+
+        }
         $data['client']=$user=User::find($id);
         $data['title']=$user->business_name;
         $data['deposit']=Deposits::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
+
+        $data['terminal']=Terminal::where('user_id',$user->id)->get();
+        $data['v_account']=VirtualAccount::where('user_id',$user->id)->get();
+
+        $data['transactions']= Transactions::latest()->where('user_id',$user->id)->get();
+
         $data['transfer']=Transfer::wheresender_id($user->id)->orderBy('id', 'DESC')->get();
         $data['withdraw']=Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
         $data['ticket']=Ticket::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
         $data['audit']=Audit::whereUser_id($user->id)->orderBy('created_at', 'DESC')->get();
         $data['xver']=Compliance::whereUser_id($user->id)->first();
         return view('admin.user.edit', $data);
-    }    
-    
+    }
+
     public function Managestaff($id)
     {
         $data['staff']=$user=Admin::find($id);
         $data['title']=$user->username;
         return view('admin.user.edit-staff', $data);
-    }    
+    }
 
     public function staffPassword(Request $request)
     {
@@ -382,7 +408,7 @@ class CheckController extends Controller
         return back()->with('success', 'Password Changed Successfully.');
 
     }
-    
+
     public function Manageticket($id)
     {
         $data['ticket']=$ticket=Ticket::find($id);
@@ -390,23 +416,23 @@ class CheckController extends Controller
         $data['client']=User::whereId($ticket->user_id)->first();
         $data['reply']=Reply::whereTicket_id($ticket->ticket_id)->get();
         return view('admin.user.edit-ticket', $data);
-    }    
-    
+    }
+
     public function Closeticket($id)
     {
         $ticket=Ticket::find($id);
         $ticket->status=1;
         $ticket->save();
         return back()->with('success', 'Ticket has been closed.');
-    }     
-    
+    }
+
     public function Blockuser($id)
     {
         $user=User::find($id);
         $user->status=1;
         $user->save();
         return back()->with('success', 'User has been suspended.');
-    } 
+    }
 
     public function Unblockuser($id)
     {
@@ -414,15 +440,15 @@ class CheckController extends Controller
         $user->status=0;
         $user->save();
         return back()->with('success', 'User was successfully unblocked.');
-    }    
-    
+    }
+
     public function Blockstaff($id)
     {
         $user=Admin::find($id);
         $user->status=1;
         $user->save();
         return back()->with('success', 'Staff has been suspended.');
-    } 
+    }
 
     public function Unblockstaff($id)
     {
@@ -449,7 +475,7 @@ class CheckController extends Controller
                 send_email($user->email, $user->business_name, 'Compliance request:'. $user->business_name, "Compliance request was succefully approved, you can now use your account with out restrictions");
             }
             return back()->with('success', 'Compliance has been approved.');
-    }    
+    }
 
     public function Rejectkyc($id)
     {
@@ -472,26 +498,60 @@ class CheckController extends Controller
         $data->first_name=$request->first_name;
         $data->last_name=$request->last_name;
         $data->phone=$request->mobile;
+        $data->type=$request->type;
         $data->office_address=$request->address;
-        $data->balance=$request->balance;
+        $data->main_wallet=$request->main_wallet;
         $data->website_link=$request->website;
-        if(empty($request->email_verify)){
-            $data->email_verify=0;	
+        if(empty($request->is_email_verified)){
+            $data->is_email_verified=0;
         }else{
-            $data->email_verify=$request->email_verify;
-        }             
-        if(empty($request->fa_status)){
-            $data->fa_status=0;	
+            $data->is_email_verified=$request->is_email_verified;
+        }
+        if(empty($request->is_phone_verified)){
+            $data->is_phone_verified=0;
         }else{
-            $data->fa_status=$request->fa_status;
-        }         
+            $data->is_phone_verified=$request->is_phone_verified;
+        }
+        if(empty($request->status)){
+            $data->status=0;
+        }else{
+            $data->status=$request->status;
+        }
+
+        if(empty($request->is_bvn_verified)){
+            $data->is_bvn_verified=0;
+        }else{
+            $data->is_bvn_verified=$request->is_bvn_verified;
+        }
+
+        if(empty($request->is_identification_verified)){
+            $data->is_identification_verified=0;
+        }else{
+            $data->is_identification_verified=$request->is_identification_verified;
+        }
+
+        if(empty($request->is_kyc_verified)){
+            $data->is_kyc_verified=0;
+        }else{
+            $data->is_kyc_verified=$request->is_identification_verified;
+        }
+
+   
+
+
+
+        
+
+
+
+
         $res=$data->save();
         if ($res) {
             return back()->with('success', 'Update was Successful!');
         } else {
             return back()->with('alert', 'An error occured');
         }
-    }    
+    }
     public function Staffupdate(Request $request)
     {
         $data = Admin::whereid($request->id)->first();
@@ -499,112 +559,112 @@ class CheckController extends Controller
         $data->first_name=$request->first_name;
         $data->last_name=$request->last_name;
         if(empty($request->profile)){
-            $data->profile=0;	
+            $data->profile=0;
         }else{
             $data->profile=$request->profile;
-        }  
+        }
 
         if(empty($request->support)){
-            $data->support=0;	
+            $data->support=0;
         }else{
             $data->support=$request->support;
-        }    
+        }
 
         if(empty($request->promo)){
-            $data->promo=0;	
+            $data->promo=0;
         }else{
             $data->promo=$request->promo;
-        }     
+        }
 
         if(empty($request->message)){
-            $data->message=0;	
+            $data->message=0;
         }else{
             $data->message=$request->message;
-        }     
+        }
 
         if(empty($request->deposit)){
-            $data->deposit=0;	
+            $data->deposit=0;
         }else{
             $data->deposit=$request->deposit;
-        }     
+        }
 
         if(empty($request->settlement)){
-            $data->settlement=0;	
+            $data->settlement=0;
         }else{
             $data->settlement=$request->settlement;
-        }     
+        }
 
         if(empty($request->transfer)){
-            $data->transfer=0;	
+            $data->transfer=0;
         }else{
             $data->transfer=$request->transfer;
-        }     
+        }
 
         if(empty($request->request_money)){
-            $data->request_money=0;	
+            $data->request_money=0;
         }else{
             $data->request_money=$request->request_money;
-        }               
-        
+        }
+
         if(empty($request->donation)){
-            $data->donation=0;	
+            $data->donation=0;
         }else{
             $data->donation=$request->donation;
-        }          
-        
+        }
+
         if(empty($request->single_charge)){
-            $data->single_charge=0;	
+            $data->single_charge=0;
         }else{
             $data->single_charge=$request->single_charge;
-        }          
-        
+        }
+
         if(empty($request->subscription)){
-            $data->subscription=0;	
+            $data->subscription=0;
         }else{
             $data->subscription=$request->subscription;
-        }          
-        
+        }
+
         if(empty($request->merchant)){
-            $data->merchant=0;	
+            $data->merchant=0;
         }else{
             $data->merchant=$request->merchant;
-        }          
-        
+        }
+
         if(empty($request->invoice)){
-            $data->invoice=0;	
+            $data->invoice=0;
         }else{
             $data->invoice=$request->invoice;
-        }          
-        
+        }
+
         if(empty($request->charges)){
-            $data->charges=0;	
+            $data->charges=0;
         }else{
             $data->charges=$request->charges;
-        }     
+        }
 
         if(empty($request->store)){
-            $data->store=0;	
+            $data->store=0;
         }else{
             $data->store=$request->store;
-        }   
+        }
 
         if(empty($request->blog)){
-            $data->blog=0;	
+            $data->blog=0;
         }else{
             $data->blog=$request->blog;
-        }         
-        
+        }
+
         if(empty($request->bill)){
-            $data->bill=0;	
+            $data->bill=0;
         }else{
             $data->bill=$request->bill;
-        }         
-        
+        }
+
         if(empty($request->vcard)){
-            $data->vcard=0;	
+            $data->vcard=0;
         }else{
             $data->vcard=$request->vcard;
-        }                  
+        }
 
         $res=$data->save();
         if ($res) {
@@ -621,5 +681,98 @@ class CheckController extends Controller
         session()->flash('message', 'Just Logged Out!');
         return redirect('/admin');
     }
+
+
+
+    public function deactivate_terminal(request $request)
+    {
+
+        Terminal::where('serial_no', $request->serial_no)->update([
+            'transfer_status' => 0
+        ]);
+        return back()->with('success', 'Terminal deactivated  Successfully');
+    }
+
+    public function activate_terminal(request $request)
+    {
+
+        Terminal::where('serial_no', $request->serial_no)->update([
+            'transfer_status' => 1
+        ]);
+        return back()->with('success', 'Terminal activated  Successfully');
+    }
+
+
+    public function delete_terminal(request $request)
+    {
+
+        Terminal::where('serial_no', $request->serial_no)->delete();
+        return back()->with('alert', 'Terminal deleted  Successfully');
+    }
+
+
+    
+
+
+    public function add_terminal(request $request)
+    {
+
+        $check = Terminal::where('serial_no', $request->serial_no)
+        ->first()->serial_no ?? null;
+
+        if ($check == $request->serial_no) {
+
+            return back()->with('alert', 'Terminal  Already Exist');
+
+        }
+
+        $terminal = new Terminal();
+        $terminal->serial_no = $request->serial_no;
+        $terminal->user_id = $request->user_id;
+        $terminal->v_account_no = $request->v_account_no;
+        $terminal->description = $request->description;
+        $terminal->save();
+
+        return back()->with('success', 'Terminal Successfully Created');
+
         
+    }
+
+    
+
+    public function add_vaccount(Request $request)
+    {
+
+        $check = VirtualAccount::where('v_account_no', $request->v_account_no)
+            ->first()->serial_no ?? null;
+
+        if ($check == $request->v_account_no) {
+
+            return back()->with('alert', 'Account  Already Exist');
+
+        }
+
+        $terminal = new VirtualAccount();
+        $terminal->v_account_no = $request->v_account_no;
+        $terminal->	v_account_name = $request->	v_account_name;
+        $terminal->v_bank_name = $request->v_bank_name;
+        $terminal->serial_no = $request->serial_no;
+        $terminal->user_id = $request->user_id;
+        $terminal->save();
+
+        return back()->with('success', 'Account Successfully Created');
+    }
+
+    
+
+    public function delete_v_account(request $request)
+    {
+
+        VirtualAccount::where('v_account_no', $request->v_account_no)->delete();
+        return back()->with('alert', 'Account deleted  Successfully');
+    }
+
+
+    
+
 }

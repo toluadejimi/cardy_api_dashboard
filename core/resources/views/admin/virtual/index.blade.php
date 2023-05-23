@@ -2,7 +2,7 @@
 @extends('master')
 
 @section('content')
-@php
+{{-- @php
   $upd=App\Models\Virtual::all();
   foreach($upd as $trx){
     $data = array("id"=>$trx->card_hash);
@@ -23,7 +23,7 @@
         $trx->save();
     }
   }
-@endphp
+@endphp --}}
 <!-- Page content -->
 <div class="container-fluid mt--6">
   <div class="content-wrapper">
@@ -53,7 +53,7 @@
             @foreach($card as $k=>$val)
               <tr>
                 <td>{{++$k}}.</td>
-                <td><a href="{{url('admin/manage-user')}}/{{$val->user['id']}}">{{$val->user['business_name']}}</a></td>
+                {{-- <td><a href="{{url('admin/manage-user')}}/{{$val->user['id']}}">{{$val->user['business_name']}}</a></td> --}}
                 <td>{{$val->name_on_card}}</td>
                 <td>{{$val->card_pan}}</td>
                 <td>{{$val->cvv}}</td>

@@ -17,7 +17,7 @@ class CheckStatus
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::guard('user')->user()->email_verify == 1 && Auth::guard('user')->user()->status == 0)
+        if(Auth::guard('user')->user()->status == 0)
         {
             return $next($request);
         }else{

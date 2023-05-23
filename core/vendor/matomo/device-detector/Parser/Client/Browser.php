@@ -12,9 +12,11 @@ declare(strict_types=1);
 
 namespace DeviceDetector\Parser\Client;
 
+use DeviceDetector\Cache\CacheInterface;
 use DeviceDetector\ClientHints;
 use DeviceDetector\Parser\Client\Browser\Engine;
 use DeviceDetector\Parser\Client\Hints\BrowserHints;
+use DeviceDetector\Yaml\ParserInterface as YamlParser;
 
 /**
  * Class Browser
@@ -267,6 +269,7 @@ class Browser extends AbstractClientParser
         'I4' => 'IceCat',
         'ID' => 'IceDragon',
         'IV' => 'Isivioo',
+        'I8' => 'IVVI Browser',
         'IW' => 'Iceweasel',
         'IN' => 'Inspect Browser',
         'IE' => 'Internet Explorer',
@@ -344,6 +347,7 @@ class Browser extends AbstractClientParser
         'NO' => 'Nokia OSS Browser',
         'NV' => 'Nokia Ovi Browser',
         'NX' => 'Nox Browser',
+        'N1' => 'NOMone VR Browser',
         'NE' => 'NetSurf',
         'NF' => 'NetFront',
         'NL' => 'NetFront Life',
@@ -387,6 +391,7 @@ class Browser extends AbstractClientParser
         'PM' => 'Pale Moon',
         'PY' => 'Polypane',
         'PP' => 'Oppo Browser',
+        'P6' => 'Opus Browser',
         'PR' => 'Palm Pre',
         'PU' => 'Puffin',
         '2P' => 'Puffin Web Browser',
@@ -430,6 +435,7 @@ class Browser extends AbstractClientParser
         'SO' => 'Sogou Mobile Browser',
         'RF' => 'SOTI Surf',
         '2S' => 'Soul Browser',
+        'T0' => 'Soundy Browser',
         'SF' => 'Safari',
         'PV' => 'Safari Technology Preview',
         'S5' => 'Safe Exam Browser',
@@ -516,9 +522,11 @@ class Browser extends AbstractClientParser
         'WE' => 'WebPositive',
         'WF' => 'Waterfox',
         'WB' => 'Wave Browser',
+        'WA' => 'Wavebox',
         'WH' => 'Whale Browser',
         'WO' => 'wOSBrowser',
         'WT' => 'WeTab Browser',
+        'WL' => 'Wolvic',
         'YG' => 'YAGI',
         'YJ' => 'Yahoo! Japan Browser',
         'YA' => 'Yandex Browser',
@@ -579,14 +587,14 @@ class Browser extends AbstractClientParser
             'XO', 'U0', 'B0', 'VA', 'X0', 'NX', 'O5', 'R1', 'I1',
             'HO', 'A5', 'X1', '18', 'B5', 'B6', 'TC', 'A6', '2X',
             'F4', 'YG', 'WR', 'NA', 'DM', '1M', 'A7', 'XN', 'XT',
-            'XB', 'W1', 'HT', 'B8', 'F5', 'B9',
+            'XB', 'W1', 'HT', 'B8', 'F5', 'B9', 'WA', 'T0',
         ],
         'Firefox'            => [
             'AX', 'BI', 'BF', 'BH', 'BN', 'C0', 'CU', 'EI', 'F1',
             'FB', 'FE', 'FF', 'FM', 'FR', 'FY', 'GZ', 'I4', 'IF',
             'IW', 'LH', 'LY', 'MB', 'MN', 'MO', 'MY', 'OA', 'OS',
             'PI', 'PX', 'QA', 'QM', 'S5', 'SX', 'TF', 'TO', 'WF',
-            'ZV', 'FP', 'AD',
+            'ZV', 'FP', 'AD', 'WL',
         ],
         'Internet Explorer'  => ['BZ', 'CZ', 'IE', 'IM', 'PS'],
         'Konqueror'          => ['KO'],
@@ -617,7 +625,7 @@ class Browser extends AbstractClientParser
         'O4', 'XO', 'U0', 'B0', 'VA', 'X0', 'A5', 'X1', '18',
         'B5', 'B6', 'TC', 'A6', '2X', 'F4', 'YG', 'WR', 'NA',
         'DM', '1M', 'A7', 'XN', 'XT', 'XB', 'W1', 'HT', 'B7',
-        'B9',
+        'B9', 'T0', 'I8',
     ];
 
     /**
@@ -661,6 +669,17 @@ class Browser extends AbstractClientParser
     {
         parent::setUserAgent($ua);
         $this->browserHints->setUserAgent($ua);
+    }
+
+    /**
+     * Sets the Cache class
+     *
+     * @param CacheInterface $cache
+     */
+    public function setCache(CacheInterface $cache): void
+    {
+        parent::setCache($cache);
+        $this->browserHints->setCache($cache);
     }
 
     /**
@@ -731,6 +750,17 @@ class Browser extends AbstractClientParser
     }
 
     /**
+     * Sets the YamlParser class
+     *
+     * @param YamlParser $yamlParser
+     */
+    public function setYamlParser(YamlParser $yamlParser): void
+    {
+        parent::setYamlParser($yamlParser);
+        $this->browserHints->setYamlParser($this->getYamlParser());
+    }
+
+    /**
      * @inheritdoc
      */
     public function parse(): ?array
@@ -748,7 +778,7 @@ class Browser extends AbstractClientParser
 
             // If version from client hints report 2022 or 2022.04, then is the Iridium browser
             // https://iridiumbrowser.de/news/2022/05/16/version-2022-04-released
-            if ('2022' === $version || '2022.04' === $version) {
+            if ('2021.12' === $version || '2022' === $version || '2022.04' === $version) {
                 $name          = 'Iridium';
                 $short         = 'I1';
                 $engine        = $browserFromUserAgent['engine'];
