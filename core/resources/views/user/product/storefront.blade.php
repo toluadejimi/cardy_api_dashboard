@@ -12,16 +12,16 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.shipping')==url()->current()) active @endif" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="fadse"><i class="fad fa-street-view"></i> Shipping Regions & Rate</a>
-                        </li>                        
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.product')==url()->current()) active @endif" id="tabs-icons-text-3-tab" data-toggle="tab" href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3" aria-selected="fadse"><i class="fad fa-shopping-bag"></i> Products</a>
-                        </li>                        
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.list')==url()->current()) active @endif" id="tabs-icons-text-4-tab" data-toggle="tab" href="#tabs-icons-text-4" role="tab" aria-controls="tabs-icons-text-4" aria-selected="fadse"><i class="fad fa-shopping-cart"></i> Client Orders</a>
-                        </li>                         
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.your-list')==url()->current()) active @endif" id="tabs-icons-text-5-tab" data-toggle="tab" href="#tabs-icons-text-5" role="tab" aria-controls="tabs-icons-text-5" aria-selected="fadse"><i class="fad fa-shopping-cart"></i> Your Orders</a>
-                        </li>   
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -30,12 +30,12 @@
             <div class="tab-pane fade @if(route('user.storefront')==url()->current())show active @endif" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
                 <div class="row align-items-center py-4">
                     <div class="col-lg-6 col-5 text-left">
-                        <a data-toggle="modal" data-target="#new-store" href="" class="btn btn-sm btn-neutral"><i class="fad fa-plus"></i> {{__('New Storefront')}}</a>                 
+                        <a data-toggle="modal" data-target="#new-store" href="" class="btn btn-sm btn-neutral"><i class="fad fa-plus"></i> {{__('New Storefront')}}</a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="row">  
+                        <div class="row">
                             @if(count($store)>0)
                                 @foreach($store as $k=>$val)
                                     <div class="col-md-4">
@@ -45,7 +45,7 @@
                                             <div class="row mb-2">
                                             <div class="col-4">
                                                 <p class="text-sm text-dark mb-2"><a class="btn-icon-clipboard" data-clipboard-text="{{route('store.link', ['id' => $val->store_url])}}" title="Copy">{{__('COPY LINK')}} <i class="fad fa-link text-xs"></i></a></p>
-                                            </div>  
+                                            </div>
                                             <div class="col-8 text-right">
                                                 <a class="mr-0 text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="fadse">
                                                 <i class="fad fa-chevron-circle-down"></i>
@@ -78,7 +78,7 @@
                                             </div>
                                         </div>
                                         </div>
-                                    </div>    
+                                    </div>
                                 @endforeach
                             @else
                                 <div class="col-md-12 mb-5">
@@ -91,13 +91,13 @@
                                     </div>
                                 </div>
                             @endif
-                        </div> 
+                        </div>
                         <div class="row">
                         <div class="col-md-12">
                         {{ $store->links('pagination::bootstrap-4') }}
                         </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 @foreach($store as $k=>$val)
                     <div class="modal fade" id="delete{{$val->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
@@ -144,7 +144,7 @@
                                     <div class="col-lg-12">
                                         <textarea type="text" name="store_desc" class="form-control" required>{{$val->store_desc}}</textarea>
                                     </div>
-                                </div>   
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-lg-12">{{__('Category')}}</label>
                                     <div class="col-lg-12">
@@ -180,8 +180,8 @@
                                             <option @if($val->category=="Toys & Games")selected @endif>Toys & Games</option>
                                             <option @if($val->category=="Womens Fashion")selected @endif>Womens Fashion</option>
                                         </select>
-                                    </div>       
-                                </div>  
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-lg-12">{{__('Shipping Status')}}</label>
                                     <div class="col-lg-12">
@@ -189,8 +189,8 @@
                                             <option value='0' @if($val->shipping_status==0) selected @endif>{{__('Disabled')}}</option>
                                             <option value='1' @if($val->shipping_status==1) selected @endif>{{__('Active')}}</option>
                                         </select>
-                                    </div>                                            
-                                </div>    
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-lg-12">{{__('Delivery Note')}}</label>
                                     <div class="col-lg-12">
@@ -200,7 +200,7 @@
                                             <option value='2' @if($val->note_status==2) selected @endif>{{__('Optional')}}</option>
                                         </select>
                                     </div>
-                                </div>                            
+                                </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-neutral btn-block">{{__('Edit Store')}}</button>
                                 </div>
@@ -233,27 +233,27 @@
                                 <div class="col-lg-12">
                                     <textarea type="text" name="store_desc" class="form-control" required></textarea>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-12">{{__('Shipping Status')}}</label>
                                 <div class="col-lg-12">
                                     <select class="form-control custom-select" name="shipping_status" required>
-                                        
+
                                         <option value='1'>{{__('Active')}}</option>
                                         <option value='0'>{{__('Disabled')}}</option>
                                     </select>
-                                </div>                                            
-                            </div>    
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-12">{{__('Delivery Note')}}</label>
                                 <div class="col-lg-12">
                                     <select class="form-control custom-select" name="note_status" required>
                                         <option value='1'>{{__('Required')}}</option>
-                                        <option value='0'>{{__('Disabled')}}</option>                                      
+                                        <option value='0'>{{__('Disabled')}}</option>
                                         <option value='2'>{{__('Optional')}}</option>
                                     </select>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-12">{{__('Category')}}</label>
                                 <div class="col-lg-12">
@@ -289,8 +289,8 @@
                                         <option>Toys & Games</option>
                                         <option>Womens Fashion</option>
                                     </select>
-                                </div>       
-                            </div>                                
+                                </div>
+                            </div>
                             <div class="text-right">
                                 <button type="submit" class="btn btn-neutral btn-block">{{__('Create Store')}}</button>
                             </div>
@@ -298,12 +298,12 @@
                         </div>
                         </div>
                     </div>
-                </div>   
-            </div>            
+                </div>
+            </div>
             <div class="tab-pane fade @if(route('user.shipping')==url()->current())show active @endif" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
                 <div class="row align-items-center py-4">
                     <div class="col-lg-8 col-8 text-left">
-                        <a data-toggle="modal" data-target="#new-shipping" href="" class="btn btn-sm btn-neutral"><i class="fad fa-plus"></i> {{__('New Add Shipping Fee')}}</a>    
+                        <a data-toggle="modal" data-target="#new-shipping" href="" class="btn btn-sm btn-neutral"><i class="fad fa-plus"></i> {{__('New Add Shipping Fee')}}</a>
                     </div>
                 </div>
                 <div class="card">
@@ -317,7 +317,7 @@
                             <th>{{__('Amount')}}</th>
                             </tr>
                         </thead>
-                        <tbody>  
+                        <tbody>
                             @foreach($shipping as $k=>$val)
                             <tr>
                                 <td>{{++$k}}.</td>
@@ -331,7 +331,7 @@
                                             <a class="dropdown-item" data-toggle="modal" data-target="#deleteship{{$val->id}}" href=""><i class="fad fa-trash"></i>{{__('Delete')}}</a>
                                         </div>
                                     </div>
-                                </td> 
+                                </td>
                                 <td>{{$val->region}}</td>
                                 <td>{{$currency->name.' '.$val->amount}}</td>
                             </tr>
@@ -392,7 +392,7 @@
                                         </span>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-neutral btn-block">{{__('Edit Shipping Fee')}}</button>
                                 </div>
@@ -432,7 +432,7 @@
                                     </span>
                                     </div>
                                 </div>
-                            </div>                                
+                            </div>
                             <div class="text-right">
                                 <button type="submit" class="btn btn-neutral btn-block">{{__('Create Shipping Fee')}}</button>
                             </div>
@@ -440,15 +440,15 @@
                         </div>
                         </div>
                     </div>
-                </div>  
+                </div>
 
             </div>
             <div class="tab-pane fade @if(route('user.product')==url()->current())show active @endif" id="tabs-icons-text-3" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
                 <div class="row align-items-center py-4">
                     <div class="col-12">
-                        <a data-toggle="modal" data-target="#category" href="" class="btn btn-sm btn-neutral"><i class="fad fa-filter"></i> {{__('Category')}}</a> 
-                        <a data-toggle="modal" data-target="#new-product" href="" class="btn btn-sm btn-neutral"><i class="fad fa-plus"></i> {{__('Create Product')}}</a> 
-                        <a data-toggle="modal" data-target="#statistic" href="" class="btn btn-sm btn-neutral"><i class="fad fa-sync"></i> {{__('Statistics')}}</a> 
+                        <a data-toggle="modal" data-target="#category" href="" class="btn btn-sm btn-neutral"><i class="fad fa-filter"></i> {{__('Category')}}</a>
+                        <a data-toggle="modal" data-target="#new-product" href="" class="btn btn-sm btn-neutral"><i class="fad fa-plus"></i> {{__('Create Product')}}</a>
+                        <a data-toggle="modal" data-target="#statistic" href="" class="btn btn-sm btn-neutral"><i class="fad fa-sync"></i> {{__('Statistics')}}</a>
                     </div>
                 </div>
                 <div class="modal fade" id="category" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
@@ -468,7 +468,7 @@
                                     <div class="col-lg-12">
                                     <input type="text" name="name" class="form-control" placeholder="Name of Category" required>
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-neutral btn-block">{{__('Create Category')}}</button>
                                 </div>
@@ -499,12 +499,12 @@
                                         </div>
                                     </div>
                                     @endif
-                                </ul>                   
+                                </ul>
                             </form>
                         </div>
                         </div>
                     </div>
-                </div>    
+                </div>
                 <div class="modal fade" id="new-product" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -522,7 +522,7 @@
                                 <div class="col-lg-12">
                                 <input type="text" name="name" class="form-control" placeholder="The name of your product" required>
                                 </div>
-                            </div>              
+                            </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-12">{{__('Category')}}</label>
                                 <div class="col-lg-12">
@@ -532,8 +532,8 @@
                                     <option value="{{$val->id}}">{{$val->name}}</option>
                                     @endforeach
                                 </select>
-                                </div>       
-                            </div>       
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-12">{{__('Amount')}}</label>
                                 <div class="col-lg-12">
@@ -544,23 +544,23 @@
                                     <input type="number" step="any" name="amount" maxlength="10" class="form-control" required>
                                 </div>
                                 </div>
-                            </div>  
+                            </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-12">{{__('Quantity')}}</label>
                                 <div class="col-lg-12">
                                     <input type="number" name="quantity" class="form-control" value="1" required>
                                 </div>
-                            </div>  
+                            </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-12">{{__('Shipping Status')}}</label>
                                 <div class="col-lg-12">
                                     <select class="form-control custom-select" name="shipping_status" required>
-                                        
+
                                         <option value='1'>{{__('Active')}}</option>
                                         <option value='0'>{{__('Disabled')}}</option>
                                     </select>
-                                </div>                                            
-                            </div>   
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <div class="col-lg-12">
                                     <div class="custom-file text-center">
@@ -569,7 +569,7 @@
                                         <span class="form-text text-xs">Recommended Image Size is 399x399</span>
                                     </div>
                                 </div>
-                            </div>             
+                            </div>
                             <div class="text-right">
                                 <button type="submit" class="btn btn-neutral btn-block">{{__('Create Product')}}</button>
                             </div>
@@ -577,7 +577,7 @@
                         </div>
                         </div>
                     </div>
-                </div>                
+                </div>
                 <div class="modal fade" id="statistic" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -611,23 +611,23 @@
                             </div>
                         </div>
                     </div>
-                </div> 
-                <div class="row">  
+                </div>
+                <div class="row">
                     <div class="col-md-12">
-                        <div class="row">  
+                        <div class="row">
                             @if(count($product)>0)
                                 @foreach($product as $k=>$val)
                                     <div class="col-md-4">
                                         <div class="card">
-                                            <img class="card-img-top" 
+                                            <img class="card-img-top"
                                             @if($val->new==0)
                                                 src="{{url('/')}}/asset/images/product-placeholder.jpg"
                                             @else
                                                 @php
                                                     $image=App\Models\Productimage::whereproduct_id($val->id)->first();
                                                 @endphp
-                                                src="{{url('/')}}/asset/profile/{{$image['image']}}"
-                                            @endif 
+                                                
+                                            @endif
                                             alt="Image placeholder">
                                             <!-- Card body -->
                                             <div class="card-body">
@@ -644,7 +644,7 @@
                                                         <a class="dropdown-item" href="{{route('orders', ['id' => $val->id])}}"><i class="fad fa-sync"></i>{{__('Orders')}}</a>
                                                         <a class="dropdown-item" data-toggle="modal" data-target="#delete{{$val->id}}" href="#"><i class="fad fa-trash-alt"></i>{{__('Delete')}}</a>
                                                     </div>
-                                                    </div>                        
+                                                    </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-12">
@@ -695,15 +695,15 @@
                         </div>
                     </div>
                 </div>
-            </div> 
-            <div class="tab-pane fade @if(route('user.list')==url()->current())show active @endif" id="tabs-icons-text-4" role="tabpanel" aria-labelledby="tabs-icons-text-4-tab">      
+            </div>
+            <div class="tab-pane fade @if(route('user.list')==url()->current())show active @endif" id="tabs-icons-text-4" role="tabpanel" aria-labelledby="tabs-icons-text-4-tab">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card-header">
                             <h5 class="h3 mb-0">{{__('Client Orders')}}</h5>
                         </div>
-                        <div class="row">  
-                        @if(count($orders)>0)  
+                        <div class="row">
+                        @if(count($orders)>0)
                         @foreach($orders as $k=>$val)
                             <div class="col-md-6">
                             <div class="card bg-white">
@@ -727,7 +727,7 @@
                                             <p class="text-sm text-dark mb-0">{{__('Email')}}: {{$val->email}}</p>
                                             <p class="text-sm text-dark mb-0">{{__('Phone')}}: {{$val->phone}}</p>
                                         @endif
-                                        <p class="text-sm text-dark mb-0">{{__('Quantity')}}: {{$val->quantity}}</p> 
+                                        <p class="text-sm text-dark mb-0">{{__('Quantity')}}: {{$val->quantity}}</p>
                                         <p class="text-sm text-dark mb-0">{{__('Country')}}: {{$val->country}}</p>
                                         <p class="text-sm text-dark mb-0">{{__('State')}}: {{$val->state}}</p>
                                         <p class="text-sm text-dark mb-0">{{__('Town/City')}}: {{$val->town}}</p>
@@ -738,12 +738,12 @@
                                             @if(!empty($val->note))
                                                 <p class="text-sm text-dark mb-0">Note: {{$val->note}}</p>
                                             @endif
-                                        @endif                                        
+                                        @endif
                                         @if($val->store_id==null)
                                             <p class="text-sm text-dark mb-0">Type: Single Purchase</p>
                                         @elseif($val->store_id!=null)
                                             <p class="text-sm text-dark mb-0">Type: Store Purchase</p>
-                                        @endif     
+                                        @endif
                                         <p class="text-sm text-dark mb-0">{{__('Amount')}}: {{$currency->symbol}}{{number_format($val->amount, 2, '.', '')}}</p>
                                         <p class="text-sm text-dark mb-0">{{__('Total')}}: {{$currency->symbol.number_format($val->amount*$val->quantity+$val->shipping_fee, 2, '.', '')}}</p>
                                         <p class="text-sm text-dark mb-0">{{__('Created')}}: {{date("Y/m/d h:i:A", strtotime($val->created_at))}}</p>
@@ -752,7 +752,7 @@
                                 </div>
                                 </div>
                             </div>
-                            </div> 
+                            </div>
                         @endforeach
                         @else
                         <div class="col-md-12 mb-5">
@@ -765,18 +765,18 @@
                             </div>
                         </div>
                         @endif
-                        </div> 
+                        </div>
                     </div>
                 </div>
-            </div>             
-            <div class="tab-pane fade @if(route('user.your-list')==url()->current())show active @endif" id="tabs-icons-text-5" role="tabpanel" aria-labelledby="tabs-icons-text-5-tab">      
+            </div>
+            <div class="tab-pane fade @if(route('user.your-list')==url()->current())show active @endif" id="tabs-icons-text-5" role="tabpanel" aria-labelledby="tabs-icons-text-5-tab">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card-header">
                             <h5 class="h3 mb-0">{{__('Your Orders')}}</h5>
                         </div>
-                        <div class="row">  
-                        @if(count($yourorders)>0)  
+                        <div class="row">
+                        @if(count($yourorders)>0)
                         @foreach($yourorders as $k=>$val)
                             <div class="col-md-6">
                             <div class="card bg-white">
@@ -791,7 +791,7 @@
                                 <div class="row">
                                 <div class="col">
                                         <p class="text-sm text-dark mb-0">{{__('Product')}}: {{$val->product->name}}</p>
-                                        <p class="text-sm text-dark mb-0">{{__('Quantity')}}: {{$val->quantity}}</p> 
+                                        <p class="text-sm text-dark mb-0">{{__('Quantity')}}: {{$val->quantity}}</p>
                                         <p class="text-sm text-dark mb-0">{{__('Country')}}: {{$val->country}}</p>
                                         <p class="text-sm text-dark mb-0">{{__('State')}}: {{$val->state}}</p>
                                         <p class="text-sm text-dark mb-0">{{__('Town/City')}}: {{$val->town}}</p>
@@ -802,12 +802,12 @@
                                             @if(!empty($val->note))
                                                 <p class="text-sm text-dark mb-0">Note: {{$val->note}}</p>
                                             @endif
-                                        @endif                                        
+                                        @endif
                                         @if($val->store_id==null)
                                             <p class="text-sm text-dark mb-0">Type: Single Purchase</p>
                                         @elseif($val->store_id!=null)
                                             <p class="text-sm text-dark mb-0">Type: Store Purchase</p>
-                                        @endif      
+                                        @endif
                                         <p class="text-sm text-dark mb-0">{{__('Amount')}}: {{$currency->symbol}}{{number_format($val->amount, 2, '.', '')}}</p>
                                         <p class="text-sm text-dark mb-0">{{__('Total')}}: {{$currency->symbol.number_format($val->amount*$val->quantity+$val->shipping_fee, 2, '.', '')}}</p>
                                         <p class="text-sm text-dark mb-0">{{__('Created')}}: {{date("Y/m/d h:i:A", strtotime($val->created_at))}}</p>
@@ -815,7 +815,7 @@
                                     </div>
                                 </div>
                             </div>
-                            </div> 
+                            </div>
                         @endforeach
                         @else
                         <div class="col-md-12 mb-5">
@@ -828,9 +828,9 @@
                             </div>
                         </div>
                         @endif
-                        </div> 
+                        </div>
                     </div>
                 </div>
-            </div>       
-        </div>       
+            </div>
+        </div>
   @stop
