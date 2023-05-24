@@ -22,7 +22,9 @@
                                 <div class="col">
                                     <pre class="">
                                         <code>
-                                    &lt;form method="POST" action="https://web.enkpay.com/pay?amount={{ amount }}&key={{ your_public_key }}" &gt;
+                                    &lt;form method="POST" action="https://web.enkpay.com/pay?amount=amount&key=your_public_key" &gt;
+                                    &lt;input type="submit" value="submit" /&gt;
+
                                         &lt;input type="submit" value="submit" /&gt;
                                     &lt;/form&gt;
                                         </code>
