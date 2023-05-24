@@ -161,6 +161,12 @@ class RegisterController extends Controller
                 return back()->with('alert', $e->getMessage());
             }
         }else{
+
+
+            $public_key = random_int(10000000, 99999999);
+            $secret_key = random_int(10000000, 99999999);
+
+
             $user = new User();
             $user->image = 'person.png';
             $user->first_name = $request->first_name;
@@ -177,8 +183,13 @@ class RegisterController extends Controller
             $user->ip_address = user_ip();
             $user->password = Hash::make($request->password);
             $user->last_login=Carbon::now();
+            $user->business_email = $request->email;
+            $user->public_key= $public_key;
+            $user->secret_key = $secret_key;
             $user->business_email= $request->email;
             $user->save();
+
+
             $check=User::wherebusiness_name($request->business_name)->first();
             $com = new Compliance;
             $com->user_id=$check->id;
@@ -186,7 +197,7 @@ class RegisterController extends Controller
         }
         if ($set->email_verification == 1) {
 
-            
+
             $text = "Before you can start accepting payments, you need to confirm your email address. Your email verification code is ".$user->verification_code;
             send_email($user->email, $user->business_name, 'Hello '.$request->business_name, $text);
             send_email($user->email, $user->business_name, 'Welcome to '.$set->site_name, $set->welcome_message);

@@ -16,25 +16,13 @@
                         </div>
                         <div class="align-item-sm-center flex-sm-nowrap text-left">
                             <p class="text-xs mb-1">
-                            Receiving money on your website is now easy with simple integeration at a fee of {{$set->merchant_charge}}% per transaction.    
-                            {{__('This document will introduce you to all the basic information you need to better understand our technologies. To start receiving payment on your website, or you need to do is copy the html form code below to your website page')}}</p>
+                            Receiving money on your website is now easy with simple integeration at a fee of {{$set->merchant_charge}}% per transaction. <br>   
+                            {{__('To start intergrating to our web pay all you need to pass is the amount and your public key as a paramenter to the url attached')}}</p>
                             <div class="row">
                                 <div class="col">
                                     <pre class="">
                                         <code>
-                                    &lt;form method="POST" action="{{url('/')}}/ext_transfer" &gt;
-                                        &lt;input type="hidden" name="merchant_key" value="MERCHANT KEY" /&gt;
-                                        &lt;input type="hidden" name="public_key" value="PUBLIC KEY" /&gt;
-                                        &lt;input type="hidden" name="callback_url" value="mydomain.com/success.html" /&gt;
-                                        &lt;input type="hidden" name="tx_ref" value="REF_123456" /&gt;
-                                        &lt;input type="hidden" name="amount" value="10000" /&gt;
-                                        &lt;input type="hidden" name="email" value="user@test.com" /&gt;
-                                        &lt;input type="hidden" name="first_name" value="Finn" /&gt;
-                                        &lt;input type="hidden" name="last_name" value="Marshal" /&gt;
-                                        &lt;input type="hidden" name="title" value="Payment For Item" /&gt;
-                                        &lt;input type="hidden" name="description" value="Payment For Item" /&gt;
-                                        &lt;input type="hidden" name="quantity" value="10" /&gt;
-                                        &lt;input type="hidden" name="currency" value="{{$currency->name}}" /&gt;
+                                    &lt;form method="POST" action="https://web.enkpay.com/pay?amount={{ amount }}&key={{ your_public_key }}" &gt;
                                         &lt;input type="submit" value="submit" /&gt;
                                     &lt;/form&gt;
                                         </code>
