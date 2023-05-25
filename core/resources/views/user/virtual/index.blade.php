@@ -3,11 +3,11 @@
 
 @section('content')
 
-@php
+{{-- @php
   $upd=App\Models\Virtual::whereUser_id(Auth::guard('user')->user()->id)->orderBy('id', 'DESC')->get();
   foreach($upd as $trx){
     $data = array("id"=>$trx->card_hash);
-    $check = new Laravel\Flutterwave\VirtualCard();
+    //$check = new Laravel\Flutterwave\VirtualCard();
     $getCard = $check->getCard($data);
     $result = $getCard;
     $amo=str_replace( ',', '', $result['data']['amount']);
@@ -24,7 +24,7 @@
         $trx->save();
     }
   }
-@endphp
+@endphp --}}
 <!-- Page content -->
 <div class="container-fluid mt--6">
   <div class="content-wrapper">
@@ -53,13 +53,13 @@
                       <div class="row">
                           <div class="col-6">
                             <input type="text" name="first_name" class="form-control" placeholder="First Name">
-                          </div>      
+                          </div>
                           <div class="col-6">
                             <input type="text" name="last_name" class="form-control" placeholder="Last Name">
                           </div>
                       </div>
                     </div>
-                  </div> 
+                  </div>
                   <div class="form-group row">
                     <label class="col-form-label col-lg-12">{{__('Amount')}}</label>
                     <div class="col-lg-12">
@@ -76,17 +76,17 @@
                   <div class="form-group row">
                       <div class="col-lg-12">
                           <select class="form-control select" name="bg" required>
-                            <option value="">{{__('Select Card Style')}}</option> 
-                            <option value="bg-newlife">{{__('New Life')}}</option>                             
-                            <option value="bg-morpheusden">{{__('Morpheus Den')}}</option>                             
-                            <option value="bg-sharpblues">{{__('Sharp Blue')}}</option>                             
-                            <option value="bg-fruitblend">{{__('Fruit Blend')}}</option>                             
-                            <option value="bg-deepblue">{{__('Deep Blue')}}</option>                             
-                            <option value="bg-fabledsunset">{{__('Fabled Sunset')}}</option>                             
-                            <option value="bg-white">{{__('White')}}</option>                             
+                            <option value="">{{__('Select Card Style')}}</option>
+                            <option value="bg-newlife">{{__('New Life')}}</option>
+                            <option value="bg-morpheusden">{{__('Morpheus Den')}}</option>
+                            <option value="bg-sharpblues">{{__('Sharp Blue')}}</option>
+                            <option value="bg-fruitblend">{{__('Fruit Blend')}}</option>
+                            <option value="bg-deepblue">{{__('Deep Blue')}}</option>
+                            <option value="bg-fabledsunset">{{__('Fabled Sunset')}}</option>
+                            <option value="bg-white">{{__('White')}}</option>
                           </select>
                       </div>
-                  </div>                                                  
+                  </div>
                   <div class="text-right">
                     <button type="submit" class="btn btn-neutral btn-block my-4">{{__('Create Card')}} <span id="resulttransfer6"></span></button>
                   </div>
@@ -96,9 +96,9 @@
           </div>
         </div>
       </div>
-    </div>  
+    </div>
     <div class="row">
-    @if(count($card)>0)  
+    @if(count($card)>0)
       @foreach($card as $k=>$val)
         <div class="col-lg-4">
           <div class="card {{$val->bg}}">
@@ -125,7 +125,7 @@
                       @endif
                   </div>
                 </div>
-              </div>             
+              </div>
               <div class="my-4">
                 <span class="h6 surtitle @if($val->bg=='bg-white' || $val->bg==null)text-gray @else text-white @endif mb-2">
                 {{$val->first_name}} {{$val->last_name}}- {{$val->card_type}}
@@ -134,7 +134,7 @@
                   <div>{{$val->card_pan}}</div>
                 </div>
               </div>
-              <div class="row">               
+              <div class="row">
                 <div class="col">
                   <span class="h6 surtitle @if($val->bg=='bg-white' || $val->bg==null)text-gray @else text-white @endif">Expiry date</span>
                   <span class="d-block h3 @if($val->bg=='bg-white' || $val->bg==null)text-primary @else text-white @endif">{{$val->expiration}}</span>
@@ -142,12 +142,12 @@
                 <div class="col">
                   <span class="h6 surtitle @if($val->bg=='bg-white' || $val->bg==null)text-gray @else text-white @endif">CVV</span>
                   <span class="d-block h3 @if($val->bg=='bg-white' || $val->bg==null)text-primary @else text-white @endif">{{$val->cvv}}</span>
-                </div>                 
-              </div>              
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      @endforeach 
+      @endforeach
     @else
       <div class="col-md-12 mb-5">
         <div class="text-center mt-8">
@@ -158,7 +158,7 @@
           <p class="text-dark text-sm card-text">We couldn't find any virtual card to this account</p>
         </div>
       </div>
-    @endif  
+    @endif
     </div>
     @foreach($card as $k=>$val)
       <div class="modal fade" id="modal-formwithdraw{{$val->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
@@ -189,7 +189,7 @@
                             </div>
                             <p class="form-text text-xs">Charge is {{$set->virtual_charge}}% +  {{$currency->symbol.$set->virtual_chargep}}.</p>
                         </div>
-                    </div>                 
+                    </div>
                     <div class="text-right">
                         <button type="submit" class="btn btn-neutral btn-block my-4">{{__('Withdraw Funds')}} <span id="resulttransfer4{{$val->id}}"></span></button>
                     </div>
@@ -199,7 +199,7 @@
             </div>
             </div>
         </div>
-      </div> 
+      </div>
       <div class="modal fade" id="modal-formfund{{$val->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -228,7 +228,7 @@
                             </div>
                             <p class="form-text text-xs">Charge is {{$set->virtual_charge}}% +  {{$currency->symbol.$set->virtual_chargep}}.</p>
                         </div>
-                    </div>                 
+                    </div>
                     <div class="text-right">
                         <button type="submit" class="btn btn-neutral btn-block my-4">{{__('Pay')}} <span id="resulttransfer5{{$val->id}}"></span></button>
                     </div>
@@ -238,7 +238,7 @@
             </div>
             </div>
         </div>
-      </div>      
+      </div>
       <div class="modal fade" id="modal-more{{$val->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -256,7 +256,7 @@
               </div>
             </div>
         </div>
-      </div> 
+      </div>
     @endforeach
 
 @stop
