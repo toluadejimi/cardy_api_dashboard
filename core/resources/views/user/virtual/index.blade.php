@@ -65,7 +65,7 @@
                     <div class="col-lg-12">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">{{$currency->symbol}}</span>
+                                <span class="input-group-text">USD</span>
                             </div>
                             <input type="number" name="amount" id="createamount" class="form-control" min="{{$set->vc_min}}" max="{{$set->vc_max}}" onkeyup="createcharge()" required>
                             <input type="hidden" value="{{$set->virtual_createcharge}}" id="chargecreate">
