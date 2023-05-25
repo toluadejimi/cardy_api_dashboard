@@ -106,7 +106,7 @@
             <div class="card-body">
               <div class="row justify-content-between align-items-center">
                 <div class="col">
-                  <span class="@if($val->bg=='bg-white' || $val->bg==null)text-primary @else text-white @endif">{{$currency->symbol.number_format($val->amount, 2, '.', '')}}</span> @if($val->status==0) <span class="badge badge-pill badge-danger">Terminated</span> @elseif($val->status==1) <span class="badge badge-pill badge-success">Active</span> @elseif($val->status==2) <span class="badge badge-pill badge-danger">Blocked</span>@endif
+                  <span class="@if($val->bg=='bg-white' || $val->bg==null)text-primary @else text-white @endif">USD {{number_format($val->amount, 2, '.', '')}}</span> @if($val->status==0) <span class="badge badge-pill badge-danger">Terminated</span> @elseif($val->status==1) <span class="badge badge-pill badge-success">Active</span> @elseif($val->status==2) <span class="badge badge-pill badge-danger">Blocked</span>@endif
                 </div>
                 <div class="col-auto">
                   <a class="mr-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
