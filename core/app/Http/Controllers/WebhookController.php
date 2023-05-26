@@ -166,7 +166,7 @@ class WebhookController extends Controller
                     $message->subject($data['subject']);
                 });
 
-                $message = "VCARD NOTIFY" . "|" . $user->first_name . "  " . $user->last_name . "vcard debited sucessfully | USD" . $amount;
+                $message = "VCARD NOTIFY" . " | " . $user->first_name . "  " . $user->last_name ."  vcard debited sucessfully | USD" . $amount;
 
                 send_notification($message);
             }

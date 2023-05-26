@@ -75,7 +75,7 @@
                                                         valign="top" bgcolor="" height="100%">
                                                         <div>
                                                           <div style="font-family: inherit; text-align: center;">We like
-                                                            to inform you that your <br>card got charged USD $data1["amount"].
+                                                            to inform you that your <br>card got charged USD {{ $data1["amount"] }}.
                                                           </div>
                                                           <div>&nbsp;</div>
                                                         </div>
