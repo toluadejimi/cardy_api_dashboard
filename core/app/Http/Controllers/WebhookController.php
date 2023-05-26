@@ -20,8 +20,6 @@ class WebhookController extends Controller
 
 
 
-
-
         if ($request->event == 'cardholder_verification.successful') {
 
 
@@ -128,6 +126,47 @@ class WebhookController extends Controller
                 });
 
                 $message = "VCARD NOTIFY" . "|" . $user->first_name . "  " . $user->last_name . "credited vcard | USD" . $amount;
+
+                send_notification($message);
+            }
+        }
+
+
+
+        if ($request->event == 'card_debit_event.successful') {
+
+
+            $cardholder_id = $request->data['cardholder_id'] ?? null;
+            $card_id = $request->data['card_id'] ?? null;
+            $amount = $request->data['amount'] ?? null;
+            $transaction_reference = $request->data['transaction_reference'] ?? null;
+            $livemode = $request->data['livemode'] ?? null;
+            $card_transaction_type = $request->data['card_transaction_type'] ?? null;
+
+
+            $issuing_app_id = $request->data['issuing_app_id'] ?? null;
+
+
+            $user = User::where('card_holder_id', $cardholder_id)->first();
+
+
+            if ($user->email !== null) {
+
+                $data = array(
+                    'fromsender' => 'noreply@enkpayapp.enkwave.com', 'EnkPay',
+                    'subject' => "Debit Notification",
+                    'toreceiver' => $user->email,
+                    'amount' => $amount,
+                    'first_name' => $user->first_name,
+                );
+
+                Mail::send('emails.vcard.spend', ["data1" => $data], function ($message) use ($data) {
+                    $message->from($data['fromsender']);
+                    $message->to($data['toreceiver']);
+                    $message->subject($data['subject']);
+                });
+
+                $message = "VCARD NOTIFY" . "|" . $user->first_name . "  " . $user->last_name . "vcard debited sucessfully | USD" . $amount;
 
                 send_notification($message);
             }
