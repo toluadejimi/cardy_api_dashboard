@@ -153,7 +153,7 @@ class WebhookController extends Controller
             if ($user->email !== null) {
 
                 $data = array(
-                    'fromsender' => 'noreply@enkpayapp.enkwave.com', 'EnkPay',
+                    'fromsender' => 'noreply@enkpay.com', 'EnkPay',
                     'subject' => "Debit Notification",
                     'toreceiver' => $user->email,
                     'amount' => $amount,
