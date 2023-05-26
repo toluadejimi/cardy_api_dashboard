@@ -103,7 +103,7 @@
                       </div>
                   </div>
                   <div class="text-right">
-                    <button type="submit" class="btn btn-neutral btn-block my-4">{{__('Create USD Card')}} <span id="resulttransfer6"></span></button>
+                    <button type="submit" class="btn btn-neutral btn-block my-4">{{__('Create USD Card')}} <span id="resulttransfer0"></span></button>
                   </div>
                 </form>
               </div>
@@ -132,7 +132,7 @@
                     <a data-toggle="modal" data-target="#modal-more{{$val->id}}" href="" class="dropdown-item"><i class="fad fa-credit-card"></i>{{__('Card Details')}}</a>
                       @if($val->status==1)
                         <a data-toggle="modal" data-target="#modal-formfund{{$val->id}}" href="" class="dropdown-item"><i class="fad fa-money-bill-wave-alt"></i>{{__('Fund Card')}}</a>
-                        <a data-toggle="modal" data-target="#modal-formwithdraw{{$val->id}}" href="" class="dropdown-item"><i class="fad fa-arrow-circle-down"></i>{{__('Withdraw Money')}}</a>
+                        <a data-toggle="modal" data-target="#modal-formwithdraw" href="" class="dropdown-item"><i class="fad fa-arrow-circle-down"></i>{{__('Withdraw Money')}}</a>
                         <a href="{{route('terminate.virtual', ['id'=>$val->id])}}" class="dropdown-item"><i class="fad fa-ban"></i>{{__('Terminate')}}</a>
                         <a href="{{route('block.virtual', ['id'=>$val->id])}}" class="dropdown-item"><i class="fad fa-sad-tear text-danger"></i>{{__('Freeze')}}</a>
                       @elseif($val->status==2)
@@ -142,11 +142,11 @@
                 </div>
               </div>
               <div class="my-4">
-                <span class="h6 surtitle @if($val->bg=='bg-white' || $val->bg==null)text-gray @else text-white @endif mb-2">
+                <span class="h6 surtitle @if($val->bg=='bg-white' || $val->bg==null)text-gray @else text-white @endif mb-3">
                 {{$val->name_on_card}} - {{$val->card_type}}
                 </span>
                 <div class="card-serial-number h1 @if($val->bg=='bg-white' || $val->bg==null)text-primary @else text-white @endif">
-                  <div>{{$val->card_pan}}</div>
+                  <div>{{chunk_split($val->masked_card, 4, ' ')}}</div>
                 </div>
               </div>
               <div class="row">
@@ -175,8 +175,10 @@
       </div>
     @endif
     </div>
-    @foreach($card as $k=>$val)
-      <div class="modal fade" id="modal-formwithdraw{{$val->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+
+
+
+    <div class="modal fade" id="modal-formwithdraw" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered" role="document">
             <div class="modal-content">
             <div class="modal-body p-0">
@@ -190,23 +192,22 @@
                 <div class="card-body">
                     <form method="post" action="{{route('withdraw.virtual')}}">
                     @csrf
-                    <input type="hidden" name="id" value="{{$val->card_hash}}">
                     <div class="form-group row">
                         <label class="col-form-label col-lg-12">{{__('Amount')}}</label>
                         <div class="col-lg-12">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">{{$currency->symbol}}</span>
+                                    <span class="input-group-text">USD</span>
                                 </div>
-                                <input type="number" step="any" name="amount" id="amounttransfer4{{$val->id}}" class="form-control" max="{{$val->amount}}" required>
-                                <input type="hidden" value="{{$set->virtual_charge}}" id="vtransfer3{{$val->id}}">
-                                <input type="hidden" value="{{$set->virtual_chargep}}" id="vtransferx{{$val->id}}">
+                                <input type="number" step="any" name="amount" id="w_amount" class="form-control" min="10" max="10000" onkeyup="removeusd()" required>
+                                <input type="hidden" value="{{$set->w_rate}}" id="w_rate">
+
                             </div>
-                            <p class="form-text text-xs">Charge is {{$set->virtual_charge}}% +  {{$currency->symbol.$set->virtual_chargep}}.</p>
+                            <p class="form-text text-xs">Min Amount - USD 10 | Max Amount - 10,0000.</p>
                         </div>
                     </div>
                     <div class="text-right">
-                        <button type="submit" class="btn btn-neutral btn-block my-4">{{__('Withdraw Funds')}} <span id="resulttransfer4{{$val->id}}"></span></button>
+                        <button type="submit" class="btn btn-neutral btn-block my-4">{{__('You get')}} <span id="resulttransfer9"></span></button>
                     </div>
                     </form>
                 </div>
@@ -221,32 +222,48 @@
             <div class="modal-body p-0">
                 <div class="card bg-white border-0 mb-0">
                 <div class="card-header">
-                    <h3 class="mb-0 font-weight-bolder">{{__('Add Funds to USD Virtual Card')}}</h3>
+                    <h3 class="mb-0 font-weight-bolder">{{__('Add Funds to USD Virtual Card')}} | Rate - NGN {{ $set->ngn_rate }} </h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
+
+                    <p class="form-text text-xs"><br> $1 maintenance  fee per active card. <br> 1% transaction fee, min of USD 1 and max of USD 5
+                        <br> Maximum cash a card can hold is USD {{(number_format($set->vc_max))}}.<br>
+                     </p>
+
+
                 </div>
                 <div class="card-body">
                     <form method="post" action="{{route('fund.virtual')}}">
                     @csrf
                     <input type="hidden" name="id" value="{{$val->card_hash}}">
                     <div class="form-group row">
-                        <label class="col-form-label col-lg-12">{{__('Amount')}}</label>
-                        <div class="col-lg-12">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">{{$currency->symbol}}</span>
-                                </div>
-                                <input type="number" step="any" name="amount" id="amounttransfer5{{$val->id}}" class="form-control" max="{{$set->vc_max-$val->amount}}" required>
-                                <input type="hidden" value="{{$set->virtual_charge}}" id="vtransfer3{{$val->id}}">
-                                <input type="hidden" value="{{$set->virtual_chargep}}" id="vtransferx{{$val->id}}">
+        
+                    <label class="col-form-label col-lg-12">{{__('Amount to fund (NGN)')}}</label>
+                    <div class="col-lg-12">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">NGN</span>
                             </div>
-                            <p class="form-text text-xs">Charge is {{$set->virtual_charge}}% +  {{$currency->symbol.$set->virtual_chargep}}.</p>
+                            <input type="number" name="amount" id="createamount" class="form-control" min="{{$set->vc_min}}" max="{{$set->vc_max}}" onkeyup="createcharge()" required>
+                            <input type="hidden" value="{{$set->virtual_createcharge}}" id="chargecreate">
+                            <input type="hidden" value="{{$set->virtual_createchargep}}" id="chargecreatex">
+
+                            <input type="hidden" value="{{$set->ngn_rate}}" id="ngnrate">
+                            
+
                         </div>
                     </div>
+                  </div>
+
+                            <p class="form-text text-xs">Min amount - NGN {{$set->vc_min}} | Max amount - NGN {{$set->vc_max}}</p>
+                  
                     <div class="text-right">
-                        <button type="submit" class="btn btn-neutral btn-block my-4">{{__('Pay')}} <span id="resulttransfer5{{$val->id}}"></span></button>
+                        <button type="submit" class="btn btn-neutral btn-block my-4">{{__('You get')}} <span id="resulttransfer6"></span></button>
                     </div>
+
+            
+
                     </form>
                 </div>
                 </div>
@@ -272,6 +289,5 @@
             </div>
         </div>
       </div>
-    @endforeach
 
 @stop

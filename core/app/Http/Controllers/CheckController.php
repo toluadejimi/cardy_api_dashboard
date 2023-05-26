@@ -270,7 +270,7 @@ class CheckController extends Controller
     public function Newtransaction()
     {
         $data['title'] = 'New Transaction';
-        $data['users'] = User::where('is_active', "1")->orderBy('first_name', 'ASC')->get();
+        $data['users'] = User::select('*')->orderBy('first_name', 'ASC')->get();
         $data['ref_trans_id'] = "ENK-" . random_int(000000, 9999999);
 
         return view('admin.all-transactions.new-transaction', $data);
