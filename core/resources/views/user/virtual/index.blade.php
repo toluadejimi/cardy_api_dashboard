@@ -39,11 +39,22 @@
           <div class="modal-body p-0">
             <div class="card bg-white border-0 mb-0">
               <div class="card-header">
-                <h3 class="mb-0 font-weight-bolder">{{__('New Virtual Card')}}</h3>
+                <h3 class="mb-0 font-weight-bolder">{{__('New Virtual Card')}} | Rate - NGN {{ $set->ngn_rate }} </h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"><i class="fad fa-times"></i></span>
                 </button>
-                <p class="form-text text-xs">Card creation charge is {{$set->virtual_createcharge}}% +  {{$currency->symbol.$set->virtual_createchargep}} of amount entitled to card. Maximum cash a card can hold is {{$currency->name.number_format($set->vc_max)}}.</p>
+                <p class="form-text text-xs">Card creation charge is  USD  {{$set->virtual_createcharge}}<br>1% transaction fee, min of USD 1 and max of USD 5 <br> $1 maintenance  fee per active card.
+                    <br> Maximum cash a card can hold is USD {{(number_format($set->vc_max))}}.<br>
+                 </p>
+
+
+                 
+
+
+
+
+
+
               </div>
               <div class="card-body">
                 <form method="post" action="{{route('create.virtual')}}">
@@ -51,28 +62,32 @@
                   <div class="form-group row">
                     <div class="col-lg-12">
                       <div class="row">
-                          <div class="col-6">
-                            <input type="text" name="first_name" class="form-control" placeholder="First Name">
+                          <div class="col-12">
+                            <input type="text" name="first_name" class="form-control" placeholder="Give your card a name">
                           </div>
-                          <div class="col-6">
+                          {{-- <div class="col-6">
                             <input type="text" name="last_name" class="form-control" placeholder="Last Name">
-                          </div>
+                          </div> --}}
                       </div>
                     </div>
                   </div>
-                  <div class="form-group row">
-                    <label class="col-form-label col-lg-12">{{__('Amount')}}</label>
+                  {{-- <div class="form-group row">
+                    <label class="col-form-label col-lg-12">{{__('Amount to fund (NGN)')}}</label>
                     <div class="col-lg-12">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">USD</span>
+                                <span class="input-group-text">NGN</span>
                             </div>
                             <input type="number" name="amount" id="createamount" class="form-control" min="{{$set->vc_min}}" max="{{$set->vc_max}}" onkeyup="createcharge()" required>
                             <input type="hidden" value="{{$set->virtual_createcharge}}" id="chargecreate">
                             <input type="hidden" value="{{$set->virtual_createchargep}}" id="chargecreatex">
+
+                            <input type="hidden" value="{{$set->ngn_rate}}" id="ngnrate">
+                            
+
                         </div>
                     </div>
-                  </div>
+                  </div> --}}
                   <div class="form-group row">
                       <div class="col-lg-12">
                           <select class="form-control select" name="bg" required>
@@ -88,7 +103,7 @@
                       </div>
                   </div>
                   <div class="text-right">
-                    <button type="submit" class="btn btn-neutral btn-block my-4">{{__('Create Card')}} <span id="resulttransfer6"></span></button>
+                    <button type="submit" class="btn btn-neutral btn-block my-4">{{__('Create USD Card')}} <span id="resulttransfer6"></span></button>
                   </div>
                 </form>
               </div>
@@ -128,7 +143,7 @@
               </div>
               <div class="my-4">
                 <span class="h6 surtitle @if($val->bg=='bg-white' || $val->bg==null)text-gray @else text-white @endif mb-2">
-                {{$val->first_name}} {{$val->last_name}}- {{$val->card_type}}
+                {{$val->name_on_card}} - {{$val->card_type}}
                 </span>
                 <div class="card-serial-number h1 @if($val->bg=='bg-white' || $val->bg==null)text-primary @else text-white @endif">
                   <div>{{$val->card_pan}}</div>
@@ -155,7 +170,7 @@
             <img src="{{url('/')}}/asset/images/empty.svg">
           </div>
           <h3 class="text-dark">No Virtual Card</h3>
-          <p class="text-dark text-sm card-text">We couldn't find any virtual card to this account</p>
+          <p class="text-dark text-sm card-text">We couldn t find any virtual card to this account</p>
         </div>
       </div>
     @endif
@@ -206,7 +221,7 @@
             <div class="modal-body p-0">
                 <div class="card bg-white border-0 mb-0">
                 <div class="card-header">
-                    <h3 class="mb-0 font-weight-bolder">{{__('Add Funds to Virtual Card')}}</h3>
+                    <h3 class="mb-0 font-weight-bolder">{{__('Add Funds to USD Virtual Card')}}</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

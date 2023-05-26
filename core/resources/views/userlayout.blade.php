@@ -640,17 +640,34 @@ $("#seeAnotherField").change(check);
   "use strict";
   function createcharge(){
     var amount = $("#createamount").val();
-    var charge = $("#chargecreate").val();
+    var cardfee = $("#chargecreate").val();
     var charge1 = $("#chargecreatex").val();
-    var survix =  parseFloat(amount)+parseFloat(charge1)+(parseFloat(amount)*parseFloat(charge)/100);
-    var cur = '{{$currency->name}}';
-    if(isNaN(survix) || survix<0){
-      survix =0;
+    var ngnrate = $("#ngnrate").val();
+
+
+    var cfeengn = parseFloat(cardfee)*parseFloat(ngnrate);
+    var diffamount = parseFloat(amount) - parseFloat(cfeengn);
+
+    var finalamountngn = parseFloat(diffamount)/parseFloat(ngnrate);
+
+
+
+    //var survix =  parseFloat(amount)+parseFloat(charge1)+(parseFloat(amount)*parseFloat(charge)/100);
+
+
+    var cur = 'USD';
+    if(isNaN(finalamountngn) || finalamountngn<0){
+        finalamountngn =0;
     }
-    var ddd = cur+' '+survix.toFixed(2);
+    var ddd = cur+' '+finalamountngn.toFixed(2);
     $("#resulttransfer6").text(ddd);
   }
   </script>
+
+
+
+
+
 
 <script type="text/javascript">
   "use strict";

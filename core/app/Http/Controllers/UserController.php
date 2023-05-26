@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\VCard;
+                use App\Models\VirtualAccount;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
@@ -52,6 +54,7 @@ use App\Models\Countrysupported;
 use App\Models\Country;
 use App\Models\Productcategory;
 use App\Models\Storefront;
+use App\Models\VirtualCard;
 use App\Models\Storefrontproducts;
 use App\Models\Shipping;
 use App\Models\Cart;
@@ -63,7 +66,6 @@ use Redirect;
 use App\Lib\CoinPaymentHosted;
 use Laravel\Flutterwave\Card;
 use Laravel\Flutterwave\Bill;
-use Laravel\Flutterwave\VirtualCard;
 use Omnipay\Omnipay;
 
 
@@ -547,7 +549,70 @@ class UserController extends Controller
     //Virtual Cards
         public function virtualcard(){
             $data['title']='Virtual Cards';
-            $data['card']=$upd=Virtual::whereUser_id(Auth::guard('user')->user()->id)->orderBy('id', 'DESC')->get();
+            $data['card']=$upd=VCard::whereUser_id(Auth::guard('user')->user()->id)->orderBy('id', 'DESC')->get();
+            $key =Settings::first()->b_key;
+            $chk = VCard::where('user_id', Auth::id())->first()->masked_card ?? null;
+            $card_id = VCard::where('user_id', Auth::id())->first()->card_id ?? null;
+
+
+            if($chk == null){
+
+                $curl = curl_init();
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => "https://issuecards-api-bridgecard-co.relay.evervault.com/v1/issuing/sandbox/cards/get_card_details?card_id=$card_id",
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'GET',
+                    CURLOPT_HTTPHEADER => array(
+                      "token: Bearer $key"
+                    ),
+                  ));
+
+
+                    $var = curl_exec($curl);
+                    curl_close($curl);
+
+                    $var = json_decode($var);
+                    $status = $var->status ?? null;
+
+                    if($status == 'success'){
+
+                        VCard::where('user_id', Auth::id())->update([
+
+                            'masked_card' => $var->data->card_number,
+                            'cvv' => $var->data->cvv,
+                            'expiration' => $var->data->expiry_month."/".$var->data->expiry_year,
+                            'cvv' => $var->data->cvv,
+                            'card_type' => $var->data->brand,
+                            'address' => $var->data->billing_address->billing_address1,
+                            'city' => $var->data->billing_address->billing_city,
+                            'state' => $var->data->billing_address->state,
+                            'zip_code' => $var->data->billing_address->billing_zip_code,
+                            'name_on_card' => $var->data->card_name,
+                            'amount' => $var->data->balance,
+
+                        ]);
+
+                        return back()->with('alert', 'Could not fetch card at the moment');
+
+                    }
+
+                  
+
+
+
+
+
+            }
+
+
+
+
+
             return view('user.virtual.index', $data);
         }
 
@@ -555,66 +620,80 @@ class UserController extends Controller
         {
             $set=Settings::first();
             $user=User::find(Auth::user()->id);
-            $vcard=Virtual::wherecard_hash($request->id)->first();
-            $set=Settings::first();
-            $chargex=$request->amount*$set->virtual_charge/100+($set->virtual_chargep);
-            if($user->balance>($request->amount+$chargex)){
-                $currency=Currency::whereStatus(1)->first();
-                $trx='VC-'.str_random(6);
-                $curl = curl_init();
-                curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.flutterwave.com/v3/virtual-cards/".$vcard->card_hash."/fund",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS =>"{\n    \"debit_currency\": \"$currency->name\",\n    \"amount\": $request->amount\n,\n    \"debit_currency\": $set->debit_currency\n}",
-                CURLOPT_HTTPHEADER => array(
-                    "Content-Type: application/json",
-                    "Authorization: Bearer ".env('SECRET_KEY')
-                ),
-                ));
-                $response = curl_exec($curl);
-                curl_close($curl);
-                $result = json_decode($response, true);
-                if (array_key_exists('data', $result) && ($result['status'] === 'success')) {
 
-                    //Credit Card creation Charge
-                    $charge['user_id']=$user->id;
-                    $charge['ref_id']=$trx;
-                    $charge['amount']=$request->amount*$set->virtual_charge/100+($set->virtual_chargep);
-                    $charge['log']='Virtual Card funding charge #';
-                    Charges::create($charge);
-                    $his['user_id']=$user->id;
-                    $his['amount']=$request->amount+($request->amount*$set->virtual_charge/100+($set->virtual_chargep));
-                    $his['ref']=$trx;
-                    $his['main']=0;
-                    $his['type']=2;
-                    History::create($his);
+            if(Auth::user()->main_wallet < $request->amount){
+                return back()->with('alert', 'Account balance is insufficient, Fund your wallet');
+            }
 
-                    $sav['user_id']=$user->id;
-                    $sav['virtual_id']=$vcard->id;
-                    $sav['amount']=$request->amount;
-                    $sav['description']='Virtual Card Funding';
-                    $sav['trx']=$trx;
-                    $sav['type']=1;
-                    Virtualtransactions::create($sav);
 
-                    //Debit User
-                    $user->balance=$user->balance-$request->amount-($request->amount*$set->virtual_charge/100+($set->virtual_chargep));
-                    $user->save();
-                    $vcard->amount=$vcard->amount+$request->amount;
-                    $vcard->save();
-                    return redirect()->route('transactions.virtual', ['id'=>$vcard->id])->with('success', $result['message']);
+
+
+            //fund card
+            $key =Settings::first();
+            $upd=VCard::whereUser_id(Auth::guard('user')->user()->id)->orderBy('id', 'DESC')->get();
+            $get_card_id = VCard::select('*')->where('user_id', Auth::id())->first()->card_id;
+            $card_fee_ngn =  $key->ngn_rate * $key->virtual_createcharge;
+            $amount_in_usd = $request->amount / $key->ngn_rate - $key->virtual_createcharge;
+
+            $curl = curl_init();
+            $data = [
+
+                    "card_id" => $get_card_id,
+                    "amount" => $amount_in_usd,
+                    "transaction_reference" => random_int(1000000, 9999999),
+                    "currency" => "USD"
+         
+            ];
+            $post_data = json_encode($data);
+
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://issuecards.api.bridgecard.co/v1/issuing/sandbox/cards/fund_card',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'PATCH',
+            CURLOPT_POSTFIELDS =>$post_data,
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                "token: Bearer $key"
+            ),
+            ));
+
+            $var = curl_exec($curl);
+            curl_close($curl);
+            $var = json_decode($var);
+            $status = $var->status ?? null;
+            $message = $var->message ?? null;
+
+            if($status == 'success'){
+
+                $total_debit =  $request->amount + $card_fee_ngn ;
+
+                $balance = Auth::user()->main_walllet  - $total_debit;
+
+
+                User::where('id', Auth::id())->decrement('main_wallet', $total_debit);
+                $trasnaction = new Transactions();
+                $trasnaction->user_id = Auth::id();
+                $trasnaction->transaction_type = "CardFunding";
+                $trasnaction->amount = $total_debit;
+                $trasnaction->note = "USD CARD FUNDING | USD $amount_in_usd ";
+                $trasnaction->fee = 0;
+                $trasnaction->e_charges = 0;
+                $trasnaction->balance = $balance;
+                $trasnaction->status = 1;
+                $trasnaction->save();
+
+
+
+            
                 }else{
                     return back()->with('alert', $result['message']);
                 }
-            }else{
-                return back()->with('alert', 'Account balance is insufficient');
-            }
+       
         }
 
         public function withdrawVirtual(Request $request)
@@ -684,81 +763,94 @@ class UserController extends Controller
 
         public function createVirtual(Request $request)
         {
-            $set=Settings::first();
             $user=User::find(Auth::user()->id);
-            if($user->balance>($request->amount+($request->amount*$set->virtual_createcharge/100+($set->virtual_createchargep)))){
-                $currency=Currency::whereStatus(1)->first();
-                $trx='VC-'.str_random(6);
-                $ds=route('use.virtual');
-                $curl = curl_init();
-                curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.flutterwave.com/v3/virtual-cards",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS =>"{\n    \"currency\": \"$currency->name\",\n    \"amount\": $request->amount,\n    \"billing_name\": \"$request->first_name $request->last_name\",\n   \"callback_url\": \"$ds/\"\n,\n    \"debit_currency\": $set->debit_currency\n}",
-                CURLOPT_HTTPHEADER => array(
-                    "Content-Type: application/json",
-                    "Authorization: Bearer ".env('SECRET_KEY')
-                ),
-                ));
-                $response = curl_exec($curl);
-                curl_close($curl);
-                $result = json_decode($response, true);
-                if (array_key_exists('data', $result) && ($result['status'] === 'success')) {
+            $key =Settings::first();
+            $bkey =env('BKEY');
+            $card_fee_ngn =  $key->ngn_rate * $key->virtual_createcharge;
 
-                    //Credit Card creation Charge
-                    $charge['user_id']=$user->id;
-                    $charge['ref_id']=$trx;
-                    $charge['amount']=$request->amount*$set->virtual_createcharge/100+($set->virtual_createchargep);
-                    $charge['log']='Virtual Card creation charge #';
-                    Charges::create($charge);
-                    //History
-                    $his['user_id']=$user->id;
-                    $his['amount']=$request->amount+($request->amount*$set->virtual_createcharge/100+($set->virtual_createchargep));
-                    $his['ref']=$trx;
-                    $his['main']=1;
-                    $his['type']=2;
-                    History::create($his);
+            // if(Auth::user()->main_wallet < $card_fee_ngn){
+            //     return back()->with('alert', 'Account balance is insufficient, Fund your wallet');
+            // }
 
-                    //Debit User
-                    $user->balance=$user->balance-$request->amount-($request->amount*$set->virtual_createcharge/100+($set->virtual_createchargep));
-                    $user->save();
+            $chk_card = VCard::where('user_id', $user->id)->first()->user_id ?? null;
 
-                    //Save Card
-                    $sav['user_id']=$user->id;
-                    $sav['first_name']=$request->first_name;
-                    $sav['last_name']=$request->last_name;
-                    $sav['account_id']=$result['data']['account_id'];
-                    $sav['card_hash']=$result['data']['id'];
-                    $sav['card_pan']=$result['data']['card_pan'];
-                    $sav['masked_card']=$result['data']['masked_pan'];
-                    $sav['cvv']=$result['data']['cvv'];
-                    $sav['expiration']=$result['data']['expiration'];
-                    $sav['card_type']=$result['data']['card_type'];
-                    $sav['name_on_card']=$result['data']['name_on_card'];
-                    $sav['callback']=route('use.virtual');
-                    $sav['ref_id']=$trx;
-                    $sav['secret']=$trx;
-                    $sav['city']=$result['data']['city'];
-                    $sav['state']=$result['data']['state'];
-                    $sav['zip_code']=$result['data']['zip_code'];
-                    $sav['address']=$result['data']['address_1'];
-                    $sav['amount']=$request->amount;
-                    $sav['bg']=$request->bg;
-                    $sav['charge']=$request->amount*$set->virtual_createcharge/100+($set->virtual_createchargep);
-                    Virtual::create($sav);
-                    return back()->with('success', 'Virtual card was successfully created');
-                }else{
-                    return back()->with('alert', $result['message']);
-                }
+            // if($chk_card == Auth::id()){
+            //     return back()->with('alert', 'You already have a usd card');
+            // }
+
+            //create card
+
+
+            $curl = curl_init();
+            $data = array(
+            "cardholder_id" => Auth::user()->card_holder_id,
+            "card_type" => "virtual",
+            "card_brand" => "Visa",
+            "card_currency" => "USD",
+            "meta_data" => array(
+            "user_id" => Auth::id()
+                    ),
+            );
+            $post_data = json_encode($data);
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://issuecards.api.bridgecard.co/v1/issuing/sandbox/cards/create_card',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => 0,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS =>$post_data,
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                "token: Bearer $bkey"
+            ),
+            ));
+            $var = curl_exec($curl);
+            curl_close($curl);
+
+            $var = json_decode($var);
+            $status = $var->status ?? null;
+
+
+            if($status == "success"){
+
+                //save card
+                $vcard = new VCard();
+                $vcard->user_id = Auth::id();
+                $vcard->first_name = $request->first_name;
+                $vcard->last_name =$request->last_name;
+                $vcard->bg =$request->bg;
+                $vcard->card_id = $var->data->card_id;
+                $vcard->currency = $var->data->currency;
+                $vcard->save();
+
+                $balance = Auth::user()->main_walllet  - $card_fee_ngn;
+
+                User::where('id', Auth::id())->decrement('main_wallet', $card_fee_ngn);
+                $trasnaction = new Transactions();
+                $trasnaction->user_id = Auth::id();
+                $trasnaction->transaction_type = "CardCreation";
+                $trasnaction->amount = $card_fee_ngn;
+                $trasnaction->note = "USD Creation Fee | USD $key->virtual_createcharge ";
+                $trasnaction->fee = 0;
+                $trasnaction->e_charges = 0;
+                $trasnaction->balance = $balance;
+                $trasnaction->status = 1;
+                $trasnaction->save();
+
+                $message = "good";
+                send_notification($message);
+                return back()->with('success', 'Your card has successfully created');
+
             }else{
-                return back()->with('alert', 'Account balance is insufficient');
-            }
+                    return back()->with('alert', 'Card creation not available at the moment try again later');
+
+                }
+
+              
+           
         }
 
         public function useVirtual(Request $request)
@@ -799,10 +891,10 @@ class UserController extends Controller
 
         public function transactionsVirtual($id){
             $data['title']='Transaction History';
-            $val=Virtual::whereid($id)->first();
+            $val=VCard::whereid($id)->first();
             $curl = curl_init();
             curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.flutterwave.com/v3/virtual-cards/".$val->card_hash."/transactions?from=".date('Y-m-d', strtotime($val['created_at']))."&to=".Carbon::tomorrow()->format('Y-m-d')."&index=1&size=100",
+            CURLOPT_URL => "https://issuecards.api.bridgecard.co/v1/issuing/sandbox/cards/get_card_transactions?card_id=$val->card_id&page=100",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -812,7 +904,7 @@ class UserController extends Controller
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
                 "Content-Type: application/json",
-                "Authorization: Bearer ".env('SECRET_KEY')
+                "token: Bearer ".env('BKEY')
             ),
             ));
             $response = curl_exec($curl);
@@ -2902,7 +2994,7 @@ class UserController extends Controller
         public function fund()
         {
             $data['title']='Fund account';
-            $data['adminbank']=Adminbank::whereId(1)->first();
+            $data['account']=VirtualAccount::whereUserId(Auth::id())->first();
             $data['gateways']=Gateway::whereStatus(1)->orderBy('id', 'DESC')->get();
             return view('user.fund.index', $data);
         }

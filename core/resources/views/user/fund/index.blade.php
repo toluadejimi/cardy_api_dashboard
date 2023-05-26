@@ -14,6 +14,10 @@
         </div>
       </div>
     </div>
+
+
+
+
     <div class="container mt--8 pb-5 mb-0">
       <div class="row justify-content-center">
         <div class="col-lg-10 col-md-7">
@@ -54,119 +58,46 @@
               </div>
               <hr>
               @endif
+
+
+
+
               @if($adminbank->status==1)
-                <div class="card-header" id="headingTwo">
-                  <div class="text-left collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="fadse" aria-controls="collapseTwo">
+                <div class="card-header mt-5" id="headingTwo">
+                  <div class="text-center collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="active" aria-controls="collapseTwo">
                     <h4 class="mb-0 font-weight-bolder">Bank Transfer</h4>
-                    <p class="mb-0">Fund your wallet by sending funds our bank account</p>
+                    <p class="mb-0">Fund your wallet by pay by transfer</p>
                   </div>
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                   <div class="card-body text-center">
-                    <h4 class="mb-0 text-primary">{{$adminbank->bank_name}}</h4>
-                    <h1 class="mb-1 text-muted font-weight-bolder">{{$adminbank->acct_no}}</h1>
-                    <h4 class="mb-2 text-muted">{{$adminbank->name}}</h4>
+                    <h4 class="mb-2 text-primary">{{$account->v_bank_name}}</h4>
+                    <h1 class="mb-2 instafeed-defaultfont-weight-bolder">{{$account->v_account_no}}</h1>
+                    <h4 class="mb-5 ">{{$account->v_account_name}}</h4>
+                    <p class="mb-2 text-muted ">Money sent to this bank account will automatically top up your ENKPAY Wallet.<br> Receive your salary or money from any bank account locally directly into your ENKPAY Wallet</p>
+
                     <form method="post" action="{{route('bank_transfersubmit')}}">
                       @csrf
                       <div class="form-group row">
                         <div class="col-lg-8 offset-lg-2">
                           <div class="input-group">
                             <span class="input-group-prepend">
-                              <span class="input-group-text">{{$currency->symbol}}</span>
+                              {{-- <span class="input-group-text">{{$currency->symbol}}</span> --}}
                             </span>
-                            <input type="number" step="any" name="amount" max-length="10" class="form-control" required>
+                            {{-- <input type="number" step="any" name="amount" max-length="10" class="form-control" required> --}}
                           </div>
                         </div>
                       </div>
                       <div class="text-center">
-                        <button type="submit" class="btn btn-neutral btn-block">I'hv Sent Money</button>
+                        {{-- <button type="submit" class="btn btn-neutral btn-block">I'hv Sent Money</button> --}}
                       </div>
                     </form>
                   </div>
                 </div>
               @endif
-              <hr>
-              {{-- <div class="card-header" id="headingThree">
-                  <div class="text-left collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="fadse" aria-controls="collapseThree">
-                    <h4 class="mb-0 font-weight-bolder">Crypto Currency</h4>
-                  </div>
-              </div>
-              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                <div class="card-body">
-                  <form method="post" action="{{ route('crypto')}}">
-                    @csrf
-                    <div class="form-group row">
-                      <div class="col-lg-12">
-                        <div class="input-group">
-                          <span class="input-group-prepend">
-                            <span class="input-group-text">{{$currency->symbol}}</span>
-                          </span>
-                          <input type="number" step="any" name="amount" max-length="10" class="form-control" required>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <div class="col-lg-12">
-                        <select class="form-control select" name="crypto" data-dropdown-css-class="bg-primary" data-fouc required>
-                          @if($btc->status==1)
-                            <option value='505'>Bitcoin</option>
-                          @endif
-                          @if($eth->status==1)
-                            <option value='506'>Ethereum</option>
-                          @endif
-                        </select>
-                      </div>
-                    </div>
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-neutral btn-block">{{__('Pay')}}</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-<hr>
-              --}}
 
-              <div class="card-header" id="headingFour">
-                  <div class="text-left collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="fadse" aria-controls="collapseFour">
-                    <h4 class="mb-0 font-weight-bolder">Instant Fuding</h4>
-                    <p class="mb-0">Fund your wallet by using flutterwave. Extra Charges may apply</p>
 
-                  </div>
-              </div>
-              <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                <div class="card-body">
-                  <form method="post" action="{{ route('others')}}">
-                    @csrf
-                    <div class="form-group row">
-                      <div class="col-lg-12">
-                        <div class="input-group">
-                          <span class="input-group-prepend">
-                            <span class="input-group-text">{{$currency->symbol}}</span>
-                          </span>
-                          <input type="number" step="any" name="amount" max-length="10" class="form-control" required>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <div class="col-lg-12">
-                        <select class="form-control select" name="others" required>
-                          @if($paypal->status==1)<option value='101'>Paypal</option>@endif
-                          @if($paystack->status==1)<option value='107'>Paystack</option>@endif
-                          @if($flutter->status==1)<option value='108'>Flutter</option>@endif
-                        </select>
-                      </div>
-                    </div>
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-neutral btn-block">{{__('Pay')}}</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-  </div>
+
 
 
 

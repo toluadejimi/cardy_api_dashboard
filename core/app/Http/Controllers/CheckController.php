@@ -472,7 +472,7 @@ class CheckController extends Controller
                 $trasnaction->title = "Refund";
                 $trasnaction->note = $request->note;
                 $trasnaction->fee = 0;
-                $trasnaction->amount = $$request->amount;
+                $trasnaction->amount = $request->amount;
                 $trasnaction->enkPay_Cashout_profit = 0;
                 $trasnaction->balance = $updated_credit;
                 $trasnaction->serial_no = $serial_no;

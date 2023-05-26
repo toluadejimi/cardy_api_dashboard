@@ -7,7 +7,7 @@
   <div class="content-wrapper">
     <div class="card">
       <div class="card-header header-elements-inline">
-        <h3 class="mb-0 font-weight-bolder">{{__('Transaction History')}}</h3>
+        <h3 class="mb-0 font-weight-bolder">{{__('Card Transaction History')}}</h3>
       </div>
       <div class="table-responsive py-4">
         <table class="table table-flush" id="datatable-buttons">
