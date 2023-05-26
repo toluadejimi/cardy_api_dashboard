@@ -21,29 +21,25 @@
             </tr>
           </thead>
           <tbody>  
-          @php 
+          {{-- @php 
           $item=array();
-          $item=json_decode($log, true); 
-          @endphp
-            @foreach($item['data'] as $k=>$val)
+          $item=json_decode($data, true); 
+          @endphp --}}
+            @foreach($data as $k=>$val)
               <tr>
                 <td>{{++$k}}.</td>
                 <td>
-                @if($val['product']=='Card Issuance Fee')
-                {{$currency->symbol.number_format($val['amount']*$set->virtual_createcharge+$set->virtual_createchargep, 2, '.', '')}}
-                @else
-                {{$currency->symbol.number_format($val['amount'], 2, '.', '')}}
-                @endif
+                USD {{number_format($val->amount, 2, '.', '')}}
                 </td>
-                <td>{{$val['gateway_reference_details']}}</td>
+                <td>{{$val->description}}</td>
                 <td>
-                @if($val['indicator']=='C')
+                @if($val->card_transaction_type=='CREDIT')
                   <span class="badge badge-pill badge-primary">{{__('Credit')}}</span>
-                @elseif($val['indicator']=='D')
-                  <span class="badge badge-pill badge-primary">{{__('Debit')}}</span>                        
+                @elseif($val->card_transaction_type =='DEBIT')
+                  <span class="badge badge-pill badge-danger">{{__('Debit')}}</span>                        
                 @endif
                 </td>
-                <td>{{date("Y/m/d h:i:A", strtotime($val['created_at']))}}</td>
+                <td>{{date("Y/m/d h:i:A", strtotime($val->transaction_date))}}</td>
               </tr>
             @endforeach
           </tbody>
