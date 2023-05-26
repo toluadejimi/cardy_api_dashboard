@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Exttransfer;
 use App\Models\Merchant;
 use App\Models\User;
+use App\Http\Controllers\WebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,13 @@ use App\Models\User;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+
+
+Route::post('webhook', [WebhookController::class, 'webhook']);
+
+
+
 Route::get('verify-payment/{txref}/{secretkey}', function ($txref, $secretkey) {
     $ref=Exttransfer::wheretx_ref($txref)->count();
     if($ref==0){
