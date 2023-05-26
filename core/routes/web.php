@@ -20,6 +20,7 @@ use App\Http\Controllers\DepositController;
 use App\Http\Controllers\Localization;
 use App\Http\Controllers\User\ForgotPasswordController;
 use App\Http\Controllers\User\ResetPasswordController;
+use App\Http\Controllers\WebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,12 @@ use App\Http\Controllers\User\ResetPasswordController;
 |
 */
 
+
+
+
+
+
+Route::post('webhook', [WebhookController::class, 'webhook']);
 
 
 //Fund account IPN
