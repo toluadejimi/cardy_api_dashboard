@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\VCard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -195,12 +196,13 @@ class WebhookController extends Controller
 
 
                 $data = array(
-                    'fromsender' => 'noreply@enkpayapp.enkwave.com', 'EnkPay',
+                    'fromsender' => 'noreply@enkpay.com', 'EnkPay',
                     'subject' => "Decline Notification",
                     'toreceiver' => $user->email,
                     'amount' => $amount,
                     'first_name' => $user->first_name,
-                    'reason' => $decline_reason
+                    'reason' => $decline_reason,
+                    'vendor' => $description,
                 );
 
                 Mail::send('emails.vcard.decline', ["data1" => $data], function ($message) use ($data) {
@@ -209,7 +211,7 @@ class WebhookController extends Controller
                     $message->subject($data['subject']);
                 });
 
-                $message = "VCARD ERROR" . "|" . $user->first_name . "  " . $user->last_name . " vcard  declined |" . $decline_reason;
+                $message = "VCARD ERROR" . "|" . $user->first_name . "  " . $user->last_name . " vcard  declined  | " . $decline_reason;
 
                 send_notification($message);
             }
@@ -239,7 +241,7 @@ class WebhookController extends Controller
 
 
                 $data = array(
-                    'fromsender' => 'noreply@enkpayapp.enkwave.com', 'EnkPay',
+                    'fromsender' => 'noreply@enkpay.com', 'EnkPay',
                     'subject' => "Reversal Notification",
                     'toreceiver' => $user->email,
                     'amount' => $amount,
@@ -283,11 +285,12 @@ class WebhookController extends Controller
 
 
                 $data = array(
-                    'fromsender' => 'noreply@enkpayapp.enkwave.com', 'EnkPay',
+                    'fromsender' => 'noreply@enkpay.com', 'EnkPay',
                     'subject' => "OTP Notification",
                     'toreceiver' => $user->email,
                     'amount' => $amount,
                     'first_name' => $user->first_name,
+                    'vendor' => $merchant_name,
                     'otp' => $otp
                 );
 
@@ -325,8 +328,8 @@ class WebhookController extends Controller
 
 
                 $data = array(
-                    'fromsender' => 'noreply@enkpayapp.enkwave.com', 'EnkPay',
-                    'subject' => "Card Maintenance  Notification",
+                    'fromsender' => 'noreply@enkpay.com', 'EnkPay',
+                    'subject' => "Card Maintenance Notification",
                     'toreceiver' => $user->email,
                     'amount' => $amount,
                     'first_name' => $user->first_name,
@@ -361,11 +364,14 @@ class WebhookController extends Controller
             $user = User::where('card_holder_id', $cardholder_id)->first();
 
 
+            VCard::where('user_id', $user->id)->update(['status' =>2]);
+
+
             if ($user->email !== null) {
 
 
                 $data = array(
-                    'fromsender' => 'noreply@enkpayapp.enkwave.com', 'EnkPay',
+                    'fromsender' => 'noreply@enkpay.com', 'EnkPay',
                     'subject' => "Card Blocked  Notification",
                     'toreceiver' => $user->email,
                     'reason' => $block_reason,
