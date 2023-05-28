@@ -54,8 +54,9 @@
               <tr>
                 <td>{{++$k}}.</td>
                 {{-- <td><a href="{{url('admin/manage-user')}}/{{$val->user['id']}}">{{$val->user['business_name']}}</a></td> --}}
-                <td>{{$val->name_on_card}}</td>
-                <td>{{$val->card_pan}}</td>
+                <td>{{$val->user->first_name ?? "name"}} {{$val->user->last_name ?? "name"}}</td>
+                <td>{{$val->first_name}}</td>
+                <td>{{chunk_split($val->masked_card, 4, ' ')}}</td>
                 <td>{{$val->cvv}}</td>
                 <td>{{$val->expiration}}</td>
                 <td>{{$val->card_type}}</td>
@@ -69,7 +70,7 @@
                             <i class="fas fa-ellipsis-v"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            <a href="{{route('transactions.vcard', ['id'=>$val->card_hash])}}" class="dropdown-item">{{__('Transactions')}}</a>
+                            {{-- <a href="{{route('transactions.vcard', ['id'=>$val->card_hash])}}" class="dropdown-item">{{__('Transactions')}}</a> --}}
                         </div>
                     </div>
                 </td> 

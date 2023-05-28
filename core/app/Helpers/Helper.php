@@ -1058,53 +1058,54 @@ if (!function_exists('get_pool')) {
 
 }
 
-if (!function_exists('errand_id')) {
 
-    function errand_id()
+
+
+if (!function_exists('get_banks')) {
+
+    function get_banks()
     {
+
+
+        $errand_key = errand_api_key();
 
         try {
 
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://api.errandpay.com/epagentauth/api/v1/login',
+                CURLOPT_URL => 'https://api.errandpay.com/epagentservice/api/v1/ApiGetBanks',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
                 CURLOPT_TIMEOUT => 0,
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => '{
-          "loginToken": "info@enkwave.com",
-          "password": "Tolulope2580@"
-        }',
+                CURLOPT_CUSTOMREQUEST => 'GET',
                 CURLOPT_HTTPHEADER => array(
-                    'Content-Type: application/json',
+                    "Authorization: Bearer $errand_key",
                 ),
             ));
 
             $var = curl_exec($curl);
-            curl_close($curl);
 
+            curl_close($curl);
             $var = json_decode($var);
 
-            $response1 = $var->data->id ?? null;
+            $result = $var->data ?? null;
 
-            $respose2 = 'ERA 001 Please try again later';
-            $response3 = $var->error->message ?? null;
+            $status = $var->code ?? null;
 
-            if ($var->code == 200) {
-                return $response1;
+            if ($status == 200) {
+
+                return $var->data;
 
             }
 
-            if ($var->code == 400) {
-                return $response3;
-            }
 
-            return $respose2;
+            return "Network Error";
+
+
 
         } catch (\Exception$th) {
             return $th->getMessage();
@@ -1112,39 +1113,7 @@ if (!function_exists('errand_id')) {
 
     }
 
-    if (!function_exists('send_notification')) {
-
-        function send_notification($message)
-        {
-    
-            $curl = curl_init();
-    
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://api.telegram.org/bot6140179825:AAGfAmHK6JQTLegsdpnaklnhBZ4qA1m2c64/sendMessage?chat_id=1316552414',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array(
-                    'chat_id' => "1316552414",
-                    'text' => $message,
-    
-                ),
-                CURLOPT_HTTPHEADER => array(
-                ),
-            ));
-    
-            $var = curl_exec($curl);
-            curl_close($curl);
-    
-            $var = json_decode($var);
-    
-        }
-    
-    }
-
 }
+
+
 

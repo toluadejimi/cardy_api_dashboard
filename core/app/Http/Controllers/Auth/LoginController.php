@@ -82,9 +82,7 @@ class LoginController extends Controller
 	        $user->ip_address=$ip_address;
             $user->save();
 
-      
-
-            return view('user.dashboard');
+            return redirect('user/dashboard');
 
             
         } else {

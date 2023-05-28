@@ -36,6 +36,9 @@ use App\Http\Controllers\User\ResetPasswordController;
 
 
 
+//verify email
+Route::post('verify-email', [UserController::class, 'verify_email']);
+
 
 
 
@@ -271,6 +274,11 @@ Route::group(['prefix' => 'user', ], function () {
                             Route::get('transfer', [UserController::class, 'ownbank'])->name('user.transfer');
                             Route::get('mobilemoney', [UserController::class, 'mobilemoney'])->name('user.mobilemoney');
                             Route::post('transfer', [UserController::class, 'submitownbank'])->name('submit.transfer');
+                            Route::post('enkpay-transfer-submit', [UserController::class, 'enkpay_transfer'])->name('user.enkpay-transfer');
+                            Route::get('enkpay-transfer', [UserController::class, 'enkpay_transfer_view'])->name('user.enkpay-transfer');
+
+
+                            
                             Route::post('local_preview', [UserController::class, 'submitlocalpreview'])->name('submit.localpreview');
                             Route::get('local_preview', [UserController::class, 'localpreview'])->name('user.localpreview');
                             Route::get('send_money/{id}', [UserController::class, 'Sendpay'])->name('send.pay');

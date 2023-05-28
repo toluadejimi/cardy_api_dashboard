@@ -5,6 +5,38 @@
   <div class="content-wrapper">
     <div class="row">
       <div class="col-lg-8">
+        @if($set->notify == 1 && Auth::user()->status == 0)
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Alert!</strong> {{ $set->verify_message }}. <a class="text-white" href="/user/profile">Click here to verify</a>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @endif
+
+            @if($set->notify == 1 && Auth::user()->is_email_verified == 0)
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Alert!</strong> {{ Auth::user()->email }} {{ $set->email_message }},verify your Email
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @endif
+
+
+            @if($set->notify == 1 && Auth::user()->status == 2)
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Today Rate:<strong> {{$set->rate_message }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @endif
+
+
+
+
+
         <div class="row">
           <div class="col-lg-12">
             <div class="card">

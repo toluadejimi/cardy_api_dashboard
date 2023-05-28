@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -109,6 +110,48 @@ class UserController extends Controller
         return back()->with('success', 'Successfully Added to Cart.');
     }
 
+
+    public function  verify_email(Request $request){
+
+
+        $time = Carbon::now()->addMinutes(1);
+
+
+        $get_code = random_int(1000000, 9999999);
+
+        User::where('email',$request->email)->update(['verification_code' => $get_code]);
+
+
+        $code = User::where('email',$request->email)->first()->verification_code;
+
+
+
+
+
+        
+        $data = array(
+            'fromsender' => 'noreply@enkpay.com', 'EnkPay',
+            'subject' => "Email Verification",
+            'toreceiver' => $request->email,
+            'code' => $code,
+        );
+
+        Mail::send('emails.email-verify', ["data1" => $data], function ($message) use ($data) {
+            $message->from($data['fromsender']);
+            $message->to($data['toreceiver']);
+            $message->subject($data['subject']);
+        });
+
+
+        return back()->with('success', 'Email sent successfully');
+
+
+
+
+
+
+    }
+   
     public function cart()
     {
         $data['cart'] = Cart::where('uniqueid', Session::get('uniqueid'))->get();
@@ -269,30 +312,7 @@ class UserController extends Controller
     {
         $id = Auth::guard('user')->user()->id;
         $set = Settings::first();
-        if ($set->stripe_connect == 1) {
-            if (Auth::guard('user')->user()->stripe_id != null) {
-                $gate = Gateway::find(103);
-                $stripe = new StripeClient($gate->val2);
-                try {
-                    $charge = $stripe->accounts->delete(
-                        Auth::guard('user')->user()->stripe_id,
-                        []
-                    );
-                } catch (\Stripe\Exception\RateLimitException $e) {
-                    return back()->with('alert', $e->getMessage());
-                } catch (\Stripe\Exception\InvalidRequestException $e) {
-                    return back()->with('alert', $e->getMessage());
-                } catch (\Stripe\Exception\AuthenticationException $e) {
-                    return back()->with('alert', $e->getMessage());
-                } catch (\Stripe\Exception\ApiConnectionException $e) {
-                    return back()->with('alert', $e->getMessage());
-                } catch (\Stripe\Exception\ApiErrorException $e) {
-                    return back()->with('alert', $e->getMessage());
-                } catch (Exception $e) {
-                    return back()->with('alert', $e->getMessage());
-                }
-            }
-        }
+        
         $user = User::whereId($id)->delete();
         $transfer = Transfer::where('Receiver_id', $id)->orWhere('Temp', Auth::guard('user')->user()->email)->delete();
         $bank_transfer = Banktransfer::whereUser_id($id)->delete();
@@ -305,7 +325,6 @@ class UserController extends Controller
         $product = Product::whereUser_id($id)->delete();
         $orders = Order::whereUser_id($id)->delete();
         $invoices = Invoice::whereUser_id($id)->delete();
-        $charges = Charges::whereUser_id($id)->delete();
         $donations = Donations::whereUser_id($id)->delete();
         $paymentlink = Paymentlink::whereUser_id($id)->delete();
         $plans = Plans::whereUser_id($id)->delete();
@@ -321,7 +340,6 @@ class UserController extends Controller
         $store = Storefront::whereUser_id($id)->delete();
         $ship = Shipping::whereUser_id($id)->delete();
         $pro = Productcategory::whereUser_id($id)->delete();
-        $trans = Transactions::where('Receiver_id', $id)->orWhere('Sender_id', $id)->delete();
         Auth::guard('user')->logout();
         session()->flash('message', 'Just Logged Out!');
         return redirect()->route('login')->with('success', 'Account was successfully deleted');
@@ -548,6 +566,16 @@ class UserController extends Controller
     //Virtual Cards
     public function virtualcard()
     {
+
+
+        if(Auth::user()->status == 0){
+
+            return redirect('/user/profile')->with('alert', 'Please verify your account');
+
+        }
+
+
+
         $data['title'] = 'Virtual Cards';
         $data['card'] = $upd = VCard::whereUser_id(Auth::guard('user')->user()->id)->orderBy('id', 'DESC')->get();
         $key = Settings::first()->b_key;
@@ -3752,6 +3780,7 @@ class UserController extends Controller
     {
         $data['title'] = "Send Money";
         $data['adminbank'] = Adminbank::whereId(1)->first();
+        $data['get_banks'] = get_banks();
         $data['transfer'] = Transfer::wheresender_id(Auth::guard('user')->user()->id)->wheretype(1)->orwhere('receiver_id', Auth::guard('user')->user()->id)->where('type', '=', 1)->orderby('id', 'desc')->paginate(6);
         $data['received'] = Transfer::where('Temp', Auth::guard('user')->user()->email)->wheretype(1)->latest()->get();
         $data['sent'] = Transfer::whereStatus(1)->whereSender_id(Auth::guard('user')->user()->id)->wheretype(1)->sum('amount');
@@ -3760,6 +3789,29 @@ class UserController extends Controller
         $data['total'] = Transfer::wheresender_id(Auth::guard('user')->user()->id)->wheretype(1)->sum('amount');
         return view('user.transfer.index', $data);
     }
+
+
+    public function enkpay_transfer_view()
+    {
+        $data['title'] = "ENKPAY Transfer";
+        $data['adminbank'] = Adminbank::whereId(1)->first();
+        $data['transfer'] = Transfer::wheresender_id(Auth::guard('user')->user()->id)->wheretype(1)->orwhere('receiver_id', Auth::guard('user')->user()->id)->where('type', '=', 1)->orderby('id', 'desc')->paginate(6);
+        $data['received'] = Transfer::where('Temp', Auth::guard('user')->user()->email)->wheretype(1)->latest()->get();
+        $data['sent'] = Transfer::whereStatus(1)->whereSender_id(Auth::guard('user')->user()->id)->wheretype(1)->sum('amount');
+        $data['pending'] = Transfer::whereStatus(0)->wheresender_id(Auth::guard('user')->user()->id)->wheretype(1)->sum('amount');
+        $data['rebursed'] = Transfer::whereStatus(2)->wheresender_id(Auth::guard('user')->user()->id)->wheretype(1)->sum('amount');
+        $data['total'] = Transfer::wheresender_id(Auth::guard('user')->user()->id)->wheretype(1)->sum('amount');
+        return view('user.transfer.enkpay-transfer', $data);
+    }
+
+
+
+
+
+
+
+
+
 
     public function mobilemoney()
     {
@@ -5225,7 +5277,7 @@ class UserController extends Controller
             $data['status'] = 1;
         }
         Bank::create($data);
-        return redirect()->route('user.bank')->with('success', 'Bank account was successfully added.');
+        return redirect()->route('user.dashboard')->with('success', 'Bank account was successfully added.');
         // }
     }
     //End of bank functions

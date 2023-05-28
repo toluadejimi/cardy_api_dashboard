@@ -636,7 +636,9 @@
                                         </div>
                                     </div> 
                                 </div>
-                                <p>Virtual Card Creation Charge</p>
+
+
+                                {{-- <p>Virtual Card Creation Charge</p>
                                 <div class="form-group row">   
                                     <label class="col-form-label col-lg-3">{{__('Percent')}}<span class="text-danger">*</span></label>
                                     <div class="col-lg-3">
@@ -656,10 +658,13 @@
                                             <input type="number" step="any" name="virtual_createchargep" value="{{$set->virtual_createchargep}}" class="form-control" required>
                                         </div>
                                     </div>  
-                                </div> 
-                                <p>Virtual Card Charge</p>
+                                </div>  --}}
+
+
+
+                                <p>Virtual Card</p>
                                 <div class="form-group row">                                     
-                                    <label class="col-form-label col-lg-3">{{__('Percent')}}<span class="text-danger">*</span></label>
+                                    <label class="col-form-label col-lg-3">{{__('Creation Fee (USD)')}}<span class="text-danger">*</span></label>
                                     <div class="col-lg-3">
                                         <div class="input-group">
                                             <input type="number" step="any" name="virtual_charge" value="{{$set->virtual_charge}}" class="form-control" required>
@@ -668,13 +673,13 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <label class="col-form-label col-lg-3">{{__('Fiat')}}<span class="text-danger">*</span></label>
+                                    <label class="col-form-label col-lg-3">{{__('ENKPAY USD/NGN RATE')}}<span class="text-danger">*</span></label>
                                     <div class="col-lg-3">
                                         <div class="input-group">
                                             <span class="input-group-prepend">
                                                 <span class="input-group-text">{{$currency->symbol}}</span>
                                             </span>
-                                            <input type="number" step="any" name="virtual_chargep" value="{{$set->virtual_chargep}}" class="form-control" required>
+                                            <input type="number" step="any" name="ngn_rate" value="{{$set->ngn_rate}}" class="form-control" required>
                                         </div>
                                     </div>  
                                 </div> 

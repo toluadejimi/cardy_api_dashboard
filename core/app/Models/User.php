@@ -63,6 +63,17 @@ class User extends Authenticatable
         return $this->hasMany('App\Model\Transactions', 'user_id');
     }
 
+    public function v_card()
+    {
+        return $this->hasMany('App\Model\VCard', 'user_id');
+    }
+
+
+    public function country()
+    {
+        return $this->hasMany('App\Model\Country', 'id');
+    }
+
 
     // public function terminal()
     // {

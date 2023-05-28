@@ -5,7 +5,7 @@
   <div class="content-wrapper">
     <div class="row align-items-center py-4">
       <div class="col-lg-6 col-7">
-        <h6 class="h2 d-inline-block mb-0">{{__('Inter Bank Transfer')}}</h6>
+        <h6 class="h2 d-inline-block mb-0">{{__('Transfer Money')}}</h6>
       </div>
       <div class="col-lg-6 col-5 text-right">
         <a data-toggle="modal" data-target="#modal-formx" href="" class="btn btn-sm btn-neutral"><i class="fad fa-plus"></i> {{__('Send Money')}}</a> 
@@ -17,7 +17,7 @@
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h3 class="mb-0 h4 font-weight-bolder">{{__('Transfer money to other banks')}}</h3>
+                <h3 class="mb-0 h4 font-weight-bolder">{{__('Transfer money')}}</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -27,49 +27,22 @@
                   @csrf
                   <div class="form-group row">
                     <div class="col-lg-12">
-
-
-                      <div class="col-lg-12 mt-3 mb-3">
-
-                        <select class="form-control select mb-3"  name="code" id="bankcode" required>
-                            <option value="">{{__('Select Bank')}}</option>
-                              @foreach($get_banks as $val)
-                                <option value="{{$val->code}} {{ $val->bankName }}">{{ $val->bankName }}</option>
-                              @endforeach
-                        </select>
-
-
-                        <input type="number" name="account_no" class="form-control" id="accountno" placeholder="Enter Account NO" required> 
-
-                        <div class="form-group row">
-                          <label class="col-form-label col-lg-12">{{__('Amount to send (NGN)')}}</label>
-                          <div class="col-lg-12">
-                            <div class="input-group">
-                              <span class="input-group-prepend">
-                                <span class="input-group-text">{{$currency->symbol}}</span>
-                              </span>
-                              <input type="number" step="any" class="form-control" name="amount" id="amounttransfer" min="{{$set->min_transfer}}"  onkeyup="transfercharge()" required>
-                             
-      
-                              <input type="hidden" value="{{$set->transfer_charge}}" id="chargetransfer">
-                            </div>
-
-                            <span class="form-text text-xs">Transfer charge is {{$set->transfer_charge}}</span>
-                          </div>
-                        </div> 
-
-
-
-                      </div>
-
-
-
-                     
-
-
+                        <input type="email" name="email" class="form-control" placeholder="Email address" required>
+                        <span class="form-text text-xs">Transfer charge is {{$set->transfer_charge}}% + {{$currency->symbol.$set->transfer_chargep}} per transaction, If user is not a member of {{$set->site_name}}, registration will be required to claim money. Money will be refunded within 5 days if user does not claim money.</span>
                     </div>
                   </div>
-                                  
+                  <div class="form-group row">
+                    <label class="col-form-label col-lg-12">{{__('Amount')}}</label>
+                    <div class="col-lg-12">
+                      <div class="input-group">
+                        <span class="input-group-prepend">
+                          <span class="input-group-text">{{$currency->symbol}}</span>
+                        </span>
+                        <input type="number" step="any" class="form-control" name="amount" id="amounttransfer" min="{{$set->min_transfer}}"  onkeyup="transfercharge()" required>
+                        <input type="hidden" value="{{$set->transfer_charge}}" id="chargetransfer">
+                      </div>
+                    </div>
+                  </div>                   
                   <div class="text-right">
                     <button type="submit" class="btn btn-neutral btn-block" form="modal-details">{{__('Transfer Money')}} <span id="resulttransfer"></span></button>
                   </div>         

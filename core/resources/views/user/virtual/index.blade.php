@@ -128,15 +128,15 @@
                     <i class="fad fa-chevron-circle-down @if($val->bg=='bg-white' || $val->bg==null)text-dark @else text-white @endif"></i>
                   </a>
                   <div class="dropdown-menu dropdown-menu-left">
-                    <a href="{{route('transactions.virtual', ['id'=>$val->id])}}" class="dropdown-item"><i class="fad fa-sync"></i>{{__('Transactions')}}</a>
-                    <a data-toggle="modal" data-target="#modal-more{{$val->id}}" href="" class="dropdown-item"><i class="fad fa-credit-card"></i>{{__('Card Details')}}</a>
+                    <a href="{{route('transactions.virtual', ['id'=>$val->id ?? null])}}" class="dropdown-item"><i class="fad fa-sync"></i>{{__('Transactions')}}</a>
+                    <a data-toggle="modal" data-target="#modal-more{{$val->id ?? null}}" href="" class="dropdown-item"><i class="fad fa-credit-card"></i>{{__('Card Details')}}</a>
                       @if($val->status==1)
-                        <a data-toggle="modal" data-target="#modal-formfund{{$val->id}}" href="" class="dropdown-item"><i class="fad fa-money-bill-wave-alt"></i>{{__('Fund Card')}}</a>
+                        <a data-toggle="modal" data-target="#modal-formfund{{$val->id ?? null}}" href="" class="dropdown-item"><i class="fad fa-money-bill-wave-alt"></i>{{__('Fund Card')}}</a>
                         <a data-toggle="modal" data-target="#modal-formwithdraw" href="" class="dropdown-item"><i class="fad fa-arrow-circle-down"></i>{{__('Withdraw Money')}}</a>
-                        <a href="{{route('terminate.virtual', ['id'=>$val->id])}}" class="dropdown-item"><i class="fad fa-ban"></i>{{__('Terminate')}}</a>
-                        <a href="{{route('block.virtual', ['id'=>$val->id])}}" class="dropdown-item"><i class="fad fa-sad-tear text-danger"></i>{{__('Freeze')}}</a>
+                        <a href="{{route('terminate.virtual', ['id'=>$val->id ?? null])}}" class="dropdown-item"><i class="fad fa-ban"></i>{{__('Terminate')}}</a>
+                        <a href="{{route('block.virtual', ['id'=>$val->id ?? null])}}" class="dropdown-item"><i class="fad fa-sad-tear text-danger"></i>{{__('Freeze')}}</a>
                       @elseif($val->status==2)
-                        <a href="{{route('unblock.virtual', ['id'=>$val->id])}}" class="dropdown-item"><i class="fad fa-smile text-success"></i>{{__('Unfreeze')}}</a>
+                        <a href="{{route('unblock.virtual', ['id'=>$val->id ?? null])}}" class="dropdown-item"><i class="fad fa-smile text-success"></i>{{__('Unfreeze')}}</a>
                       @endif
                   </div>
                 </div>
@@ -216,7 +216,7 @@
             </div>
         </div>
       </div>
-      <div class="modal fade" id="modal-formfund{{$val->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+      <div class="modal fade" id="modal-formfund{{$val->id ?? null}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered" role="document">
             <div class="modal-content">
             <div class="modal-body p-0">
@@ -236,7 +236,7 @@
                 <div class="card-body">
                     <form method="post" action="{{route('fund.virtual')}}">
                     @csrf
-                    <input type="hidden" name="id" value="{{$val->card_hash}}">
+                    <input type="hidden" name="id" value="{{$val->card_hash ?? null}}">
                     <div class="form-group row">
         
                     <label class="col-form-label col-lg-12">{{__('Amount to fund (NGN)')}}</label>
@@ -271,7 +271,7 @@
             </div>
         </div>
       </div>
-      <div class="modal fade" id="modal-more{{$val->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+      <div class="modal fade" id="modal-more{{$val->id ?? null}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -281,10 +281,10 @@
                 </button>
               </div>
               <div class="modal-body">
-                <p>State: {{$val->state}}</p>
-                <p>City: {{$val->city}}</p>
-                <p>Zip Code: {{$val->zip_code}}</p>
-                <p>Address: {{$val->address}}</p>
+                <p>State: {{$val->state ?? null}}</p>
+                <p>City: {{$val->city ?? null}}</p>
+                <p>Zip Code: {{$val->zip_code ?? null}}</p>
+                <p>Address: {{$val->address ?? null}}</p>
               </div>
             </div>
         </div>

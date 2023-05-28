@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
@@ -23,6 +24,7 @@ class SettingController extends Controller
     {
         $data['title']='General settings';
         $data['val']=Admin::first();
+        $data['set']=Setting::first();
         return view('admin.settings.index', $data);
     }     
     
@@ -234,7 +236,7 @@ class SettingController extends Controller
         $data->bill_charge=$request->bill_charge;
         $data->bill_chargep=$request->bill_chargep;
         $data->virtual_createcharge=$request->virtual_createcharge;
-        $data->virtual_createchargep=$request->virtual_createchargep;
+        $data->ngn_rate=$request->ngn_rate;
         $data->virtual_charge=$request->virtual_charge;
         $data->virtual_chargep=$request->virtual_chargep;
         $data->vc_min=$request->vc_min;

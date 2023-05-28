@@ -55,6 +55,21 @@
 
 
 
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                            <div>
+                                <h3 class="mb-2">{{__('Issuing USD Balance')}}</h3>
+                                <ul class="list list-unstyled mb-0">
+                                    <li><span class="text-default text-sm"> USD {{number_format($issuing_wallet, 2)}}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
 
 
 
@@ -173,6 +188,19 @@
                     </div>
                 </div>
 
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                            <div>
+                                <h3 class="mb-2">{{__('V Card Rate')}}</h3>
+                                <ul class="list list-unstyled mb-0">
+                                    <li><span class="text-default text-sm"><strong>{{$b_rate}}</strong>/<strong>{{$set->ngn_rate}}</strong></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 

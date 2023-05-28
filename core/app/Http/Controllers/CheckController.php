@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Terminal;
 use App\Models\TerminalPayment;
+use App\Models\VCard;
 use App\Models\VirtualAccount;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -34,6 +35,7 @@ use App\Models\Faq;
 use App\Models\Page;
 use App\Models\Contact;
 use App\Models\Ticket;
+use App\Models\Setting;
 use App\Models\Reply;
 use App\Models\Review;
 use App\Models\Product;
@@ -81,7 +83,7 @@ class CheckController extends Controller
     public function vcard()
     {
         $data['title'] = 'Virtual Cards';
-        $data['card'] = Virtual::orderBy('created_at', 'DESC')->get();
+        $data['card'] = VCard::orderBy('created_at', 'DESC')->get();
         return view('admin.virtual.index', $data);
     }
 
@@ -163,7 +165,6 @@ class CheckController extends Controller
         $product = Product::whereUser_id($id)->delete();
         $orders = Order::whereUser_id($id)->delete();
         $invoices = Invoice::whereUser_id($id)->delete();
-        $charges = Charges::whereUser_id($id)->delete();
         $donations = Donations::whereUser_id($id)->delete();
         $paymentlink = Paymentlink::whereUser_id($id)->delete();
         $plans = Plans::whereUser_id($id)->delete();
@@ -197,6 +198,7 @@ class CheckController extends Controller
 
         $data['title'] = 'Dashboard';
         $data['pool'] = get_pool();
+        $data['set'] = Setting::where('id', 1)->first();
         $data['received'] = Charges::sum('amount');
         $data['twallet'] = User::all()->sum('main_wallet');
         $pp2 = str_replace(',', '', $data['pool']);
@@ -234,6 +236,13 @@ class CheckController extends Controller
         $data['agent'] = User::whereType(1)->count();
         $data['customer'] = User::whereType(2)->count();
         $data['business'] = User::whereType(3)->count();
+
+        $data['issuing_wallet'] = get_issuing_bal();
+        $data['b_rate'] = b_rate();
+
+
+       
+
 
 
         return view('admin.dashboard.index', $data);

@@ -66,10 +66,36 @@
                             </a>
                         </li>
                     </ul>
-                    <h6 class="navbar-heading p-0 text-muted">{{__('Your Business')}}</h6>
+                    <h6 class="navbar-heading p-0 text-muted">{{__('Menu')}}</h6>
                     <ul class="navbar-nav mb-3">
                         @if($set->transfer==1)
+
                         <li class="nav-item">
+                            <a class="nav-link @if(route('user.transfer')==url()->current()) active @endif"
+                                href="#transfer" data-toggle="collapse" role="button" aria-expanded="fadse"
+                                aria-controls="transfer">
+                                <!--For modern browsers-->
+                                <i class="fad fa-money-bill-wave-alt"></i>
+                                <span class="nav-link-text">{{__('Transfer')}}</span>
+                            </a>
+                            <div class="collapse @if(route('user.transfer')==url()->current() || route('user.enkpay-transfer')==url()->current()) show @endif"
+                                id="transfer">
+                                <ul class="nav nav-sm flex-column">
+                                    <li
+                                        class="nav-item @if(route('user.transfer')==url()->current()) active @endif text-default">
+                                        <a href="{{route('user.transfer')}}" class="nav-link">{{__('Bank Transfer')}}</a>
+                                    </li>
+                                    <li
+                                        class="nav-item @if(route('user.enkpay-transfer')==url()->current()) active @endif text-default">
+                                        <a href="{{route('user.enkpay-transfer')}}" class="nav-link">{{__('ENKPAY Transfer')}}</a>
+                                    </li>
+                
+                                </ul>
+                            </div>
+                        </li>
+
+
+                        {{-- <li class="nav-item">
                             <a class="nav-link @if(route('user.transfer')==url()->current()) active @endif"
                                 href="{{route('user.transfer')}}">
                                 <i class="fad fa-random"></i>
@@ -81,8 +107,18 @@
                                     @endif
                                 </span>
                             </a>
-                        </li>
+                        </li> --}}
                         @endif
+
+
+
+
+
+
+
+
+
+
                         <li class="nav-item">
                             <a class="nav-link @if(route('user.fund')==url()->current()) active @endif"
                                 href="{{route('user.fund')}}">
@@ -116,7 +152,7 @@
                                 href="#bill" data-toggle="collapse" role="button" aria-expanded="fadse"
                                 aria-controls="bill">
                                 <!--For modern browsers-->
-                                <i class="fad fa-money-bill-wave-alt"></i>
+                                <i class="fad fa-random"></i>
                                 <span class="nav-link-text">{{__('Bill Payment')}}</span>
                             </a>
                             <div class="collapse @if(route('user.airtime')==url()->current() || route('user.data.bundle')==url()->current() || route('user.tv.cable')==url()->current() || route('user.electricity')==url()->current()) show @endif"
@@ -145,7 +181,9 @@
                         </li>
                         @endif
                         @endif
-                        <!--
+
+
+            @if($currency->name=='NGN')
             <li class="nav-item">
               <a class="nav-link @if(route('user.btc')==url()->current() || route('user.eth')==url()->current()) active @endif" href="#crypto" data-toggle="collapse" role="button" aria-expanded="fadse" aria-controls="crypto">
                 <i class="fad fa-sync"></i>
@@ -166,7 +204,8 @@
                 </ul>
               </div>
             </li>
-            -->
+            @endif
+       
                         <li class="nav-item">
                             <a class="nav-link @if(route('user.ticket')==url()->current() || route('open.ticket')==url()->current()) active @endif"
                                 href="{{route('user.ticket')}}">
@@ -174,13 +213,13 @@
                                 <span class="nav-link-text">{{__('Disputes')}}</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link @if(route('user.sub')==url()->current() || route('user.sub')==url()->current()) active @endif"
                                 href="{{route('user.sub')}}">
                                 <i class="fad fa-user"></i>
                                 <span class="nav-link-text">{{__('Subscribers')}}</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link @if(route('user.transactions')==url()->current()) active @endif"
                                 href="{{route('user.transactions')}}">
@@ -188,27 +227,27 @@
                                 <span class="nav-link-text">{{__('Transactions')}}</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link @if(route('user.withdraw')==url()->current()) active @endif"
                                 href="{{route('user.withdraw')}}">
                                 <i class="fad fa-arrow-circle-down"></i>
                                 <span class="nav-link-text">{{__('Payout')}}</span>
                             </a>
-                        </li>
-                        <li class="nav-item">
+                        </li> --}}
+                        {{-- <li class="nav-item">
                             <a class="nav-link @if(route('user.charges')==url()->current()) active @endif"
                                 href="{{route('user.charges')}}">
                                 <i class="fad fa-comments-alt"></i>
                                 <span class="nav-link-text">{{__('Charges')}}</span>
                             </a>
-                        </li>
-                        <li class="nav-item">
+                        </li> --}}
+                        {{-- <li class="nav-item">
                             <a class="nav-link @if(route('user.subaccounts')==url()->current()) active @endif"
                                 href="{{route('user.subaccounts')}}">
                                 <i class="fad fa-user-friends"></i>
                                 <span class="nav-link-text">{{__('Sub Accounts')}}</span>
                             </a>
-                        </li>
+                        </li> --}}
                         @if($stripe->status==1)
                         <li class="nav-item">
                             <a class="nav-link @if(route('user.chargeback')==url()->current()) active @endif"
@@ -335,6 +374,8 @@
                             <span aria-hidden="true" class="text-dark">×</span>
                         </button>
                     </form>
+
+
 
                     <ul class="navbar-nav align-items-center ml-md-auto">
                         <li class="nav-item d-xl-none">
