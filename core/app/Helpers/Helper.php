@@ -1222,7 +1222,7 @@ if (!function_exists('get_banks')) {
                 return $var->data->issuing_balance_USD/100;
             }
 
-            return "Network Issue"
+            return "Network Issue";
 
         }
 
