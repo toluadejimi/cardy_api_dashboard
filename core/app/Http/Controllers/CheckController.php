@@ -223,7 +223,7 @@ class CheckController extends Controller
 
         $data['money_out_today'] = Transactions::whereDate('created_at', Carbon::today())
         ->sum('debit');
-    
+
 
         $data['doc'] = Transactions::whereStatus(1)->wheretype(2)->sum('charge');
         $data['in'] = Transactions::all()->sum('credit');
@@ -238,10 +238,10 @@ class CheckController extends Controller
         $data['business'] = User::whereType(3)->count();
 
         $data['issuing_wallet'] = get_issuing_bal();
-        $data['b_rate'] = b_rate();
+        $data['b_rate'] = 0;
 
 
-       
+
 
 
 
