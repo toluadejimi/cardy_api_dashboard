@@ -1150,46 +1150,6 @@ if (!function_exists('get_banks')) {
 
 
 
-
-
-    if (!function_exists('get_issuing_bal')) {
-
-        function get_issuing_bal()
-        {
-
-            $key = env('BKEY');
-            $curl = curl_init();
-
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://issuecards.api.bridgecard.co/v1/issuing/sandbox/cards/get_issuing_wallet_balance',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'GET',
-                CURLOPT_HTTPHEADER => array(
-                    "token: Bearer $key"
-                ),
-            ));
-
-            $var = curl_exec($curl);
-            curl_close($curl);
-            $var = json_decode($var);
-
-            $status = $var->status;
-
-            if($status == 'success'){
-                return $var->data->issuing_balance_USD/100;
-            }
-
-            return "Network Issue"
-
-        }
-
-    }
-
     if (!function_exists('get_issuing_bal')) {
 
         function get_issuing_bal()
