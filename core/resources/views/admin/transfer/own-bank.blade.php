@@ -30,7 +30,9 @@
                                         <th>Sender Account</th>
                                         <th>Sender Bank</th>
                                         <th>Receiver Name</th>
+                                        <th>Receiver Bank</th>
                                         <th>Receiver Account</th>
+                                        <th>Note</th>
                                         <th>Status</th>
                                         <th>Date</th>
                                         <th>Time</th>
@@ -55,7 +57,10 @@
                                         <td>{{$item->sender_account_no}}</td>
                                         <td>{{$item->sender_bank}}</td>
                                         <td>{{$item->receiver_name}}</td>
+                                        <td>{{$item->receiver_bank}}</td>
                                         <td>{{$item->receiver_account_no}}</td>
+                                        <td>{{$item->note}}</td>
+
     
                                         @if($item->status == "1")
                                         <td><span class="badge rounded-pill bg-success text-white ">Successful</span></td>
