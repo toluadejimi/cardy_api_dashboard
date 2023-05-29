@@ -37,7 +37,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($transactions as $k=>$item)
+                                    @foreach($transfer as $k=>$item)
                                     <tr>
                                         <td>{{++$k}}.</td>
                                         <td>{{$item->ref_trans_id}}</td>
