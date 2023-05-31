@@ -203,8 +203,9 @@ class RegisterController extends Controller
 
          
 
-                $text = "Your email verification code is ".$user->verification_code;
-                send_email($user->email, $user->first_name, 'Hello '.$request->business_name, $text);
+                $subject = "OTP VERIFICATION CODE";
+                $text = "Your email verification code is "."<h2>".$user->verification_code."</h2>";
+                send_email($user->email,  $user->first_name, $subject, $text);
                 send_email($user->email, $user->first_name, 'Welcome to '.$set->site_name, $set->welcome_message);
             
     

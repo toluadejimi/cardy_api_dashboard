@@ -286,8 +286,8 @@
           	<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
           		<tr>
           			<td class="logo" style="text-align: center;">
-			            <h1><a href="#">{!!$website!!}</a></h1>
-			          </td>
+                        <img src="{!!$logo!!}" alt="" style="width: 150px; max-width: 600px; height: auto; margin: auto; display: block;">
+                    </td>
           		</tr>
           	</table>
           </td>
@@ -298,14 +298,13 @@
 						<tr>
 							<td style="padding: 0 2.5em; text-align: center; padding-bottom: 3em;">
 								<div class="text">
-									<h2>{!!$subject!!}</h2>
+									<h3>{!!$subject!!}</h3>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td style="text-align: center;">
 								<div class="text-author">
-									<img src="{!!$logo!!}" alt="" style="width: 100px; max-width: 600px; height: auto; margin: auto; display: block;">
 									<span class="position">{!!$content!!}</span>
 								</div>
 							</td>
@@ -324,8 +323,8 @@
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                       <td style="text-align: left; padding-right: 10px;">
-                      	<h3 class="heading">Talk to us</h3>
-                      	<p><a href="{{$details}}">Chat with us</a></p>
+                      	<h3 class="heading">Contact us</h3>
+                      	<p><a href="{{$details}}">Chat with us on whatsapp</a></p>
                       </td>
                     </tr>
                   </table>
