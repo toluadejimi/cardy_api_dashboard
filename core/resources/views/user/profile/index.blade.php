@@ -113,11 +113,16 @@
                                 placeholder="Postal Code" value="10001">
                             </div>
 
+
+                            <input type="text" name="counrty" value="Nigeria" hidden class="form-control" required >
+
+
+
                             <div class="col-lg-4 mt-3">
-                              <select class="form-control select" disabled name="country" required>
+                              <select class="form-control select" disabled   name="country" required>
                                 <option value="">{{__('Select Country')}}</option>
                                 @foreach($country as $val)
-                                <option value="{{$val->country_id}}" @if($val->country_id==$user->country) selected
+                                <option value="{{$val->country_id==$user->country}}" @if($val->country_id==$user->country) selected
                                   @endif>{{$val->real['nicename']}}</option>
                                 @endforeach
                               </select>

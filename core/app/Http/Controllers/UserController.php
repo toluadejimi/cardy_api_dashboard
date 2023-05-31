@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setting;
 use App\Models\VCard;
+use App\Models\VfdBank;
 use App\Models\VirtualAccount;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -111,7 +113,8 @@ class UserController extends Controller
     }
 
 
-    public function  verify_email(Request $request){
+    public function  verify_email(Request $request)
+    {
 
 
         $time = Carbon::now()->addMinutes(1);
@@ -119,16 +122,15 @@ class UserController extends Controller
 
         $get_code = random_int(1000000, 9999999);
 
-        User::where('email',$request->email)->update(['verification_code' => $get_code]);
+        User::where('email', $request->email)->update(['verification_code' => $get_code]);
 
-
-        $code = User::where('email',$request->email)->first()->verification_code;
-
-
+        $code = User::where('email', $request->email)->first()->verification_code;
 
 
 
-        
+
+
+
         $data = array(
             'fromsender' => 'noreply@enkpay.com', 'EnkPay',
             'subject' => "Email Verification",
@@ -144,14 +146,8 @@ class UserController extends Controller
 
 
         return back()->with('success', 'Email sent successfully');
-
-
-
-
-
-
     }
-   
+
     public function cart()
     {
         $data['cart'] = Cart::where('uniqueid', Session::get('uniqueid'))->get();
@@ -312,7 +308,7 @@ class UserController extends Controller
     {
         $id = Auth::guard('user')->user()->id;
         $set = Settings::first();
-        
+
         $user = User::whereId($id)->delete();
         $transfer = Transfer::where('Receiver_id', $id)->orWhere('Temp', Auth::guard('user')->user()->email)->delete();
         $bank_transfer = Banktransfer::whereUser_id($id)->delete();
@@ -568,10 +564,9 @@ class UserController extends Controller
     {
 
 
-        if(Auth::user()->status == 0){
+        if (Auth::user()->status == 0) {
 
             return redirect('/user/profile')->with('alert', 'Please verify your account');
-
         }
 
 
@@ -611,10 +606,10 @@ class UserController extends Controller
             $status = $var->status ?? null;
             $balance = $var->data->balance ?? null;
 
-         
 
 
-           
+
+
 
             VCard::where('user_id', Auth::id())->update([
 
@@ -658,43 +653,43 @@ class UserController extends Controller
 
         // if ($card_id == $user_id) {
 
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://issuecards-api-bridgecard-co.relay.evervault.com/v1/issuing/sandbox/cards/get_card_details?card_id=$card_id",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'GET',
-                CURLOPT_HTTPHEADER => array(
-                    "token: Bearer $key"
-                ),
-            ));
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://issuecards-api-bridgecard-co.relay.evervault.com/v1/issuing/sandbox/cards/get_card_details?card_id=$card_id",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                "token: Bearer $key"
+            ),
+        ));
 
 
-            $var = curl_exec($curl);
-            curl_close($curl);
+        $var = curl_exec($curl);
+        curl_close($curl);
 
-            $var = json_decode($var);
-            $status = $var->status ?? null;
-            $balance = $var->data->balance ?? null;
-
-
-
-           $update =  VCard::where('user_id', Auth::id())->update([
-
-                'amount' => $balance,
-
-            ]);
-
-            $data['balance'] = $balance;
+        $var = json_decode($var);
+        $status = $var->status ?? null;
+        $balance = $var->data->balance ?? null;
 
 
 
+        $update =  VCard::where('user_id', Auth::id())->update([
 
-            
+            'amount' => $balance,
+
+        ]);
+
+        $data['balance'] = $balance;
+
+
+
+
+
 
         // }
 
@@ -702,7 +697,7 @@ class UserController extends Controller
         // dd($var->data->balance);
 
 
-        
+
 
 
 
@@ -3122,9 +3117,51 @@ class UserController extends Controller
     public function fund()
     {
         $data['title'] = 'Fund account';
-        $data['account'] = VirtualAccount::whereUserId(Auth::id())->first();
-        $data['gateways'] = Gateway::whereStatus(1)->orderBy('id', 'DESC')->get();
-        return view('user.fund.index', $data);
+
+        $vb = VirtualAccount::whereUserId(Auth::id())->first() ?? null;
+
+        $usr = User::where('id', Auth::id())->first();
+
+        if($usr->status == 0){
+
+            return back()->with('alert', 'Please Verify your account');
+        }
+
+        if($vb == null ){
+
+
+            $first_name = Auth::user()->first_name;
+            $last_name = Auth::user()->last_name;
+            $user_id = Auth::id();
+            $b_name =  Auth::user()->b_name;
+            $phone = Auth::user()->phone;
+            $bvn = Auth::user()->bvn; 
+            $b_phone = Auth::user()->b_name;
+            $pnum = preg_replace('/^./', '', $phone);
+            $cphone= $pnum;
+
+            $create_v = create_vfd_account($first_name, $last_name, $user_id, $b_name, $cphone, $bvn, $b_phone );
+
+
+            if($create_v  == 200){
+
+                $data['account'] = VirtualAccount::whereUserId(Auth::id())->first() ?? null;
+                $data['gateways'] = Gateway::whereStatus(1)->orderBy('id', 'DESC')->get();
+                return view('user.fund.index', $data);
+
+            }
+
+            return back()->with('alert', 'Funding service not available at the moment');
+        }else{
+
+            $data['account'] = VirtualAccount::whereUserId(Auth::id())->first() ?? null;
+            $data['gateways'] = Gateway::whereStatus(1)->orderBy('id', 'DESC')->get();
+            return view('user.fund.index', $data);
+
+        }
+
+
+       
     }
 
     public function bank_transfer()
@@ -4910,29 +4947,142 @@ class UserController extends Controller
     }
     public function account(Request $request)
     {
-        $user = User::findOrFail(Auth::guard('user')->user()->id);
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->business_name = $request->business_name;
-        $user->phone = $request->phone;
-        $user->country = $request->country;
-        $user->support_email = $request->support_email;
-        $user->save();
-        $audit['user_id'] = Auth::guard('user')->user()->id;
-        $audit['trx'] = str_random(16);
-        $audit['log'] = 'Updated account details';
-        Audit::create($audit);
-        if ($user->email != $request->email) {
-            $check = User::whereEmail($request->email)->get();
-            if (count($check) < 1) {
-                $user->email_verify = 0;
-                $user->email = $request->email;
-                $user->save();
-            } else {
-                return back()->with('alert', 'Email already in use.');
-            }
+
+
+     
+
+        if ($request->file('identification_image')) {
+
+            $file = $request->file('identification_image');
+            $filename = date('YmdHi') . $file->getClientOriginalName();
+            $file->move(public_path('/upload/verify'), $filename);
+
+            $mono_file_url = url('') . "/public/upload/verify/$filename";
         }
-        return back()->with('success', 'Profile Updated Successfully.');
+
+
+
+
+
+        User::where('id', Auth::user()->id)
+            ->update([
+                'identification_type' => $request->identification_type,
+                'identification_number' => $request->identification_number,
+                'bvn' => $request->bvn,
+            ]);
+
+
+
+        $databody = array(
+
+            "first_name" => Auth::user()->first_name,
+            "last_name" => Auth::user()->last_name,
+
+            "address" => array(
+                "address" => $request->address_line_1,
+                "city" => $request->city,
+                "state" => $request->state,
+                "country" => "Nigeria",
+                "postal_code" => $request->postal_code,
+                "house_no" => $request->hos_no,
+            ),
+
+
+            "phone" => $request->phone,
+            "email_address" => Auth::user()->email,
+
+            "identity" => array(
+                "id_type" => $request->identification_type,
+                "id_no" => $request->identification_number,
+                "id_image" => $mono_file_url,
+                "bvn" => $request->bvn,
+
+            ),
+
+            "meta_data" => array(
+                "user_id" => Auth::id(),
+            ),
+
+
+        );
+
+      
+
+        $body = json_encode($databody);
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://issuecards.api.bridgecard.co/v1/issuing/sandbox/cardholder/register_cardholder_synchronously',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $body,
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                'token: Bearer at_test_95ae2dab9f812f40fe9f62e5a243152dd6cbfce653f9a93e9f70436cb4da061e1bf480d07e2e774aa4fc1522bd278dc905a126a23a516db224cffccdc27c6711450fd80908458c6a3cdaae36f427ccc4956f2505c5c79331807a8af85dfbcf4b79e806ba62a7704320b3c8e3eb144a57bd506b0e7631eebead4e34afeda39591df4f4d2ee4dcac9a766e3bd1c81723be84a4ad786e23578b1a20d2c0b8f56a59628d7077e289a465b4d1a6abfb97f32417a99fd367380f385e2aed647f53344e278b83e38f342db515b1dae7d6eb847f6c198a774ff0e11fc3c80f2e9671e7c775788e8425159629562071999892232f91a80a76c63552c23a19ad11c6e9c34f'
+            ),
+        ));
+
+        $var = curl_exec($curl);
+        curl_close($curl);
+        $var = json_decode($var);
+
+        $message = $var->message ?? null;
+        $status = $var->status ?? null;
+
+        // $id = $var[0]->id;
+        if ($status == "success") {
+
+            User::where('id', Auth::user()->id)
+                ->update([
+                    'address_line1' => $request->address_line1,
+                    'city' => $request->city,
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'phone' => $request->phone,
+                    'identification_type' => $request->identification_type,
+                    'identification_number' => $request->identification_number,
+                    'identification_image' => $mono_file_url,
+                    'state' => $request->state,
+                    'lga' => $request->lga,
+                    'bvn' => $request->bvn,
+                    'card_holder_id' => $var->data->cardholder_id,
+                    'is_kyc_verified' => 1,
+                    'is_identification_verified' => 1,
+                    'status' => 2,
+
+
+                ]);
+
+                $first_name = Auth::user()->first_name;
+                $last_name = Auth::user()->last_name;
+                $user_id = Auth::id();
+                $b_name =  Auth::user()->b_name;
+                $phone = Auth::user()->phone;
+                $bvn = Auth::user()->bvn; 
+                $b_phone = Auth::user()->b_name;
+                $pnum = preg_replace('/^./', '', $phone);
+                $cphone= $pnum;
+
+                $create_v = create_vfd_account($first_name, $last_name, $user_id, $b_name, $cphone, $bvn, $b_phone );
+
+                if( $create_v == 200){
+                    return redirect('user/dashboard')->with('success', 'Your account has been verified.');
+                }
+
+                $message = "Pending Account Creation for |"  . $first_name. " ".  $last_name;
+
+                return back()->with('alert', "Your verification is pending");
+
+
+        }
+
+        return back()->with('alert', "$message");
+
     }
 
     public function submitcompliance(Request $request)
@@ -5121,9 +5271,18 @@ class UserController extends Controller
     public function nobank()
     {
         $data['title'] = 'Add Default Bank Account';
-        $data['bnk'] = Banksupported::wherecountry_id(Auth::guard('user')->user()->country)->get();
-        return view('user.bank.nobank', $data);
+        $data['bnk'] = VfdBank::select('bankName')->get();
+        return view('user.bank.emailverify', $data);
     }
+
+
+    // public function nobank()
+    // {
+    //     $data['title'] = 'Add Default Bank Account';
+    //     $data['bnk'] = VfdBank::select('bankName')->get();
+    //     return view('user.bank.nobank', $data);
+    // }
+
 
 
 
@@ -5223,49 +5382,7 @@ class UserController extends Controller
     public function Createbank(Request $request)
     {
         $set = Settings::first();
-        // if($set->stripe_connect==1){
-        //     $gate = Gateway::find(103);
-        //     $stripe = new StripeClient($gate->val2);
-        //     try {
-        //         $country=Country::whereid(Auth::guard('user')->user()->country)->first();
-        //         $currency=Currency::whereStatus(1)->first();
-        //         $charge=$stripe->accounts->update(Auth::guard('user')->user()->stripe_id,[
-        //                 'external_account' => [
-        //                 'object' => 'bank_account',
-        //                 'country' => $country->iso,
-        //                 'currency' => $currency->name,
-        //                 'account_holder_name' => $request->acct_name,
-        //                 'account_holder_type' => $request->account_type,
-        //                 'routing_number' => $request->routing_number,
-        //                 'account_number' => $request->acct_no,
-        //             ],
-        //         ]);
-        //         $data['acct_no']=$request->acct_no;
-        //         $data['acct_name']=$request->acct_name;
-        //         $data['account_type']=$request->account_type;
-        //         $data['routing_number']=$request->routing_number;
-        //         $data['bank_id']=$request->bank;
-        //         $data['user_id']=Auth::guard('user')->user()->id;
-        //         $all = Bank::whereuser_id(Auth::guard('user')->user()->id)->wherestatus(1)->get();
-        //         if(count($all)<1){
-        //             $data['status']=1;
-        //         }
-        //         Bank::create($data);
-        //         return redirect()->route('user.bank')->with('success', 'Bank account was successfully added.');
-        //     } catch (\Stripe\Exception\RateLimitException $e) {
-        //         return back()->with('alert', $e->getMessage());
-        //     } catch (\Stripe\Exception\InvalidRequestException $e) {
-        //         return back()->with('alert', $e->getMessage());
-        //     } catch (\Stripe\Exception\AuthenticationException $e) {
-        //         return back()->with('alert', $e->getMessage());
-        //     } catch (\Stripe\Exception\ApiConnectionException $e) {
-        //         return back()->with('alert', $e->getMessage());
-        //     } catch (\Stripe\Exception\ApiErrorException $e) {
-        //         return back()->with('alert', $e->getMessage());
-        //     } catch (Exception $e) {
-        //         return back()->with('alert', $e->getMessage());
-        //     }
-        // }else{
+
         $data['acct_no'] = $request->acct_no;
         $data['acct_name'] = $request->acct_name;
         $data['account_type'] = $request->account_type;
@@ -5280,6 +5397,73 @@ class UserController extends Controller
         return redirect()->route('user.dashboard')->with('success', 'Bank account was successfully added.');
         // }
     }
+
+
+
+    public function VerifyEmail(Request $request)
+    {
+        $set = Settings::first();
+
+
+        $code = $request->code;
+
+        if ($code == null) {
+            return back()->with('alert', 'Code can not be empty');
+        }
+
+        if ($code == Auth::user()->verification_code) {
+
+            User::where('id', Auth::id())->update(['is_email_verified' => 1]);
+
+            return redirect()->route('user.dashboard')->with('success', 'Email Verified.');
+        }
+
+        return back()->with('alert', 'Your OTP Code is invalid');
+
+
+
+        // }
+    }
+
+
+    public function ResendCode(Request $request)
+    {
+
+
+        $otp = Auth::user()->verification_code;
+
+        $data = array(
+            'fromsender' => 'noreply@enkpay.com', 'EnkPay',
+            'subject' => "OTP EMAIL",
+            'toreceiver' => Auth::user()->email,
+            'remail' => Auth::user()->email,
+            'otp' => $otp,
+
+        );
+
+        Mail::send('emails.vcard.emailotp', ["data1" => $data], function ($message) use ($data) {
+            $message->from($data['fromsender']);
+            $message->to($data['toreceiver']);
+            $message->subject($data['subject']);
+        });
+
+
+        return redirect()->route('user.nobank')->with('success', 'Code sent successfully.');
+
+
+        // }
+    }
+
+
+
+
+
+
+
+
+
+
+
     //End of bank functions
 
     //Charges

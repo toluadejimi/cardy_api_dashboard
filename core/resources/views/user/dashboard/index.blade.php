@@ -70,7 +70,7 @@
                   <div class="col-lg-12">
                     <div class="input-group">
                       <div class="input-group-prepend">
-                        <span class="input-group-text text-xs text-uppercase">{{__('Public key')}}</span>
+                        <span class="input-group-text text-xs text-uppercase">{{__('Public Live key')}}</span>
                       </div>
                       <input type="text" name="public_key" class="form-control" placeholder="Public key" value="{{$user->public_key}}">
                       <div class="input-group-prepend bg-gray">
@@ -83,7 +83,7 @@
                   <div class="col-lg-12">
                     <div class="input-group">
                       <div class="input-group-prepend">
-                        <span class="input-group-text text-xs text-uppercase">{{__('Secret key')}}</span>
+                        <span class="input-group-text text-xs text-uppercase">{{__('Secret Live key')}}</span>
                       </div>
                       <input type="text" name="secret_key" class="form-control" placeholder="Secret key" value="{{$user->secret_key}}">
                       <div class="input-group-prepend bg-gray">
@@ -92,6 +92,33 @@
                     </div>
                   </div>
                 </div>
+                <hr>
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text text-xs text-uppercase">{{__('Public Test key')}}</span>
+                        </div>
+                        <input type="text" name="public_key" class="form-control" placeholder="Public key" value="{{$user->tpublic_key}}">
+                        <div class="input-group-prepend bg-gray">
+                          <span class="input-group-text btn-icon-clipboard" data-clipboard-text="{{$user->public_key}}" title="Copy"><i class="fad fa-clipboard"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-lg-12">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text text-xs text-uppercase">{{__('Secret Test key')}}</span>
+                        </div>
+                        <input type="text" name="secret_key" class="form-control" placeholder="Secret key" value="{{$user->tsecret_key}}">
+                        <div class="input-group-prepend bg-gray">
+                          <span class="input-group-text btn-icon-clipboard" data-clipboard-text="{{$user->secret_key}}" title="Copy"><i class="fad fa-clipboard"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>

@@ -9,8 +9,8 @@
             <h5 class="h3 mb-0">Attachements</h5>
           </div>
           <div class="card-body">
-            <div class="timeline timeline-one-side" data-timeline-content="axis" data-timeline-axis-style="dashed">
-              @foreach(json_decode($ticket->files) as $val)
+            {{-- <div class="timeline timeline-one-side" data-timeline-content="axis" data-timeline-axis-style="dashed">
+              @foreach(json_decode($ticket->files ?? "none") as $val)
                 <div class="timeline-block">
                   <span class="timeline-step badge-success">
                     <i class="fa fa-file"></i>
@@ -24,7 +24,7 @@
                   </div>
                 </div>
               @endforeach
-            </div>
+            </div> --}}
           </div>
         </div>
     <div class="card shadow">

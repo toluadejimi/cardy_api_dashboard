@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Mail;
 use Session;
 use Stripe\Stripe;
 use Stripe\StripeClient;
@@ -163,9 +164,13 @@ class RegisterController extends Controller
         }else{
 
 
-            $public_key = random_int(10000000, 99999999);
-            $secret_key = random_int(10000000, 99999999);
+            $public_key = random_int(100000000000, 99999999999999);
+            $secret_key = random_int(100000000000, 99999999999999);
 
+            $tpublic_key = random_int(100000000000, 9999999999999);
+            $tsecret_key = random_int(100000000000, 9999999999999);
+
+            $otp = random_int(1000, 9999);
 
             $user = new User();
             $user->image = 'person.png';
@@ -177,37 +182,65 @@ class RegisterController extends Controller
             $user->phone = $request->phone;
             $user->email = $request->email;
             $user->email_verify = $email_verify;
-            $user->verification_code = strtoupper(Str::random(6));
+            $user->verification_code = $otp;
             $user->email_time = Carbon::parse()->addMinutes(5);
             $user->balance = $set->balance_reg;
             $user->ip_address = user_ip();
             $user->password = Hash::make($request->password);
             $user->last_login=Carbon::now();
             $user->business_email = $request->email;
-            $user->public_key= $public_key;
-            $user->secret_key = $secret_key;
+            $user->public_key= "live-".$public_key;
+            $user->secret_key = "live-".$secret_key;
+            $user->tpublic_key= "test-".$tpublic_key;
+            $user->tsecret_key = "test-".$tsecret_key;
             $user->business_email= $request->email;
             $user->save();
-
 
             $check=User::wherebusiness_name($request->business_name)->first();
             $com = new Compliance;
             $com->user_id=$check->id;
             $com->save();
-        }
-        if ($set->email_verification == 1) {
+
+         
+
+                $text = "Before you can start accepting payments, you need to confirm your email address. Your email verification code is ".$user->verification_code;
+                send_email($user->email, $user->first_name, 'Hello '.$request->business_name, $text);
+                send_email($user->email, $user->first_name, 'Welcome to '.$set->site_name, $set->welcome_message);
+            
+    
+
+            // $data = array(
+            //     'fromsender' => 'noreply@enkpay.com', 'EnkPay',
+            //     'subject' => "OTP EMAIL",
+            //     'toreceiver' => $request->email,
+            //     'remail' => $request->email,
+            //     'first_name' => $request->first_name,
+            //     'otp' => $otp,
+
+            // );
+
+            // Mail::send('emails.vcard.emailotp', ["data1" => $data], function ($message) use ($data) {
+            //     $message->from($data['fromsender']);
+            //     $message->to($data['toreceiver']);
+            //     $message->subject($data['subject']);
+            // });
+
+            $message = "NEW USER | " . $request->first_name . "  " . $request->last_name . "| Signed up on ENKPAY WEB ";
+
+            send_notification($message);
 
 
-            $text = "Before you can start accepting payments, you need to confirm your email address. Your email verification code is ".$user->verification_code;
-            send_email($user->email, $user->business_name, 'Hello '.$request->business_name, $text);
-            send_email($user->email, $user->business_name, 'Welcome to '.$set->site_name, $set->welcome_message);
+
+
+
         }
+
 
         if (Auth::guard('user')->attempt([
             'email' => $request->email,
             'password' => $request->password,
         ])) {
-            return redirect()->route('user.dashboard');
+            return redirect()->route('user.nobank');
         }
     }
     /**

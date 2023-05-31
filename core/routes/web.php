@@ -39,6 +39,9 @@ use App\Http\Controllers\User\ResetPasswordController;
 //verify email
 Route::post('verify-email', [UserController::class, 'verify_email']);
 
+Route::post('verify_bank', [UserController::class, 'Verifybank'])->name('verify.bank');
+
+
 
 
 
@@ -136,15 +139,14 @@ Route::group(['prefix' => 'user', ], function () {
             Route::post('compliance', [UserController::class, 'submitcompliance'])->name('submit.compliance');
             Route::post('country', [UserController::class, 'submitcountry'])->name('submit.country');
             Route::middleware(['Ban', 'Country'])->group(function () {
-                Route::middleware(['Banks'])->group(function () {
-                    Route::middleware(['Kyc'])->group(function () {
+                Route::middleware([])->group(function () {
+                    Route::middleware([])->group(function () {
                         Route::post('card', [UserController::class, 'card'])->name('card');
                         Route::get('stripe_card/{id}', [UserController::class, 'stripecard'])->name('stripe.card');
                         Route::post('flutter', [UserController::class, 'newflutter'])->name('flutter');
                         Route::post('search', [UserController::class, 'search'])->name('search');
                         Route::post('crypto', [UserController::class, 'crypto'])->name('crypto');
                         Route::post('others', [UserController::class, 'others'])->name('others');
-                        Route::get('others', [UserController::class, 'dashboard'])->name('others');
                         Route::get('dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
                         Route::get('single-charge', [UserController::class, 'transactions'])->name('user.transactionssc');
                         Route::get('donation', [UserController::class, 'transactions'])->name('user.transactionsd');
@@ -166,7 +168,6 @@ Route::group(['prefix' => 'user', ], function () {
                         Route::post('generate-api', [UserController::class, 'generateapi'])->name('generateapi');
                         Route::post('kyc', [UserController::class, 'kyc']);
                         Route::post('account', [UserController::class, 'account']);
-                        Route::post('social', [UserController::class, 'social'])->name('user.social');
                         Route::post('avatar', [UserController::class, 'avatar']);
                         Route::post('delaccount', [UserController::class, 'delaccount'])->name('delaccount');
                         Route::get('deposit-verify/{id}', [UserController::class, 'userDataUpdate'])->name('deposit.verify');
@@ -274,7 +275,7 @@ Route::group(['prefix' => 'user', ], function () {
                             Route::get('transfer', [UserController::class, 'ownbank'])->name('user.transfer');
                             Route::get('mobilemoney', [UserController::class, 'mobilemoney'])->name('user.mobilemoney');
                             Route::post('transfer', [UserController::class, 'submitownbank'])->name('submit.transfer');
-                            Route::post('enkpay-transfer-submit', [UserController::class, 'enkpay_transfer'])->name('user.enkpay-transfer');
+                            Route::post('enkpay-transfer-submit', [UserController::class, 'enkpay_transfer'])->name('user.enkpay-transfer-submit');
                             Route::get('enkpay-transfer', [UserController::class, 'enkpay_transfer_view'])->name('user.enkpay-transfer');
 
 
@@ -342,8 +343,15 @@ Route::group(['prefix' => 'user', ], function () {
                     });
                 });
                 Route::post('add_bank', [UserController::class, 'Createbank'])->name('add.bank');
-                Route::post('verify_bank', [UserController::class, 'Verifybank'])->name('verify.bank');
+
+                Route::get('/resend-code', [UserController::class, 'ResendCode']);
+
+
+                Route::post('verify_email', [UserController::class, 'VerifyEmail'])->name('verify.email');
+
                 Route::get('no-bank', [UserController::class, 'nobank'])->name('user.nobank');
+                // Route::get('email-verify', [UserController::class, 'emailverfiy'])->name('user.emailverify');
+
 
             });
         });
@@ -453,7 +461,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     Route::post('/createbrand', [WebController::class, 'CreateBrand']);
     Route::post('brand/update', [WebController::class, 'UpdateBrand'])->name('brand.update');
-    Route::get('brand/edit/{id}', [WebController::class, 'EditBrand'])->name('brand.edit');
+    // Route::get('brand/edit/{id}', [WebController::class, 'EditBrand'])->name('brand.edit');
     Route::get('brand/delete/{id}', [WebController::class, 'DestroyBrand'])->name('brand.delete');
     Route::get('brand', [WebController::class, 'brand'])->name('admin.brand');
     Route::get('/unbrand/{id}', [WebController::class, 'unbrand'])->name('brand.unpublish');
@@ -560,7 +568,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::post('promo', [CheckController::class, 'Sendpromo'])->name('user.promo.send');
     Route::get('message/delete/{id}', [CheckController::class, 'Destroymessage'])->name('message.delete');
     Route::get('ticket', [CheckController::class, 'Ticket'])->name('admin.ticket');
-    Route::get('ticket/delete/{id}', [CheckController::class, 'Destroyticket'])->name('ticket.delete');
+    Route::get('ticket/delete/{id}', [CheckController::class, 'Destroyticket'])->name('ticket.admin.delete');
     Route::get('close-ticket/{id}', [CheckController::class, 'Closeticket'])->name('ticket.close');
     Route::get('manage-ticket/{id}', [CheckController::class, 'Manageticket'])->name('ticket.manage');
     Route::post('reply-ticket', [CheckController::class, 'Replyticket'])->name('ticket.reply');

@@ -70,7 +70,7 @@
                             <label class="col-form-label col-lg-2">{{__('Select a file')}} <span class="text-danger">*</span></label>
                             <div class="col-lg-10">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFileLang" name="image[]" multiple required>
+                                    <input type="file" class="custom-file-input" id="customFileLang" name="image[]" multiple >
                                     <label class="custom-file-label" for="customFileLang">{{__('Choose Media')}}</label>
                                 </div> 
                             </div>
