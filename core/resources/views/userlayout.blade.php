@@ -28,6 +28,9 @@
     <link rel="stylesheet" href="{{url('/')}}/asset/css/sweetalert.css" type="text/css">
     <link rel="stylesheet" href="{{url('/')}}/asset/dashboard/vendor/select2/dist/css/select2.min.css">
     <link href="{{url('/')}}/asset/fonts/fontawesome/css/all.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
+    
     @yield('css')
 </head>
 <!-- header begin-->
@@ -678,6 +681,27 @@ $("#seeAnotherField").change(check);
 
 
 
+<script language="JavaScript">
+    Webcam.set({
+        width: 200,
+        height: 200,
+        image_format: 'jpeg',
+        jpeg_quality: 50
+    });
+    
+    Webcam.attach( '#my_camera' );
+    "use strict";
+    function take_snapshot() {
+        Webcam.snap( function(data_uri) {
+            $(".image-tag").val(data_uri);
+            document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+        } );
+    }
+</script>
+
+
+
+
 
 
 
@@ -926,3 +950,4 @@ $("#ngntousdamount").text(ddd);
   $("#biller").change(databundle);
   databundle();
 </script>
+

@@ -4951,14 +4951,32 @@ class UserController extends Controller
 
      $key = env('BKEY');
 
-        if ($request->file('identification_image')) {
+        // if ($request->file('identification_image')) {
 
-            $file = $request->file('identification_image');
-            $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('/upload/verify'), $filename);
+        //     $file = $request->file('identification_image');
+        //     $filename = date('YmdHi') . $file->getClientOriginalName();
+        //     $file->move(public_path('/upload/verify'), $filename);
 
-            $mono_file_url = url('') . "/public/upload/verify/$filename";
-        }
+        //     $mono_file_url = url('') . "/public/upload/verify/$filename";
+        // }
+
+
+        $img = $request->image;
+        $folderPath = "/upload/verify";
+        
+        $image_parts = explode(";base64,", $img);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        
+        $image_base64 = base64_decode($image_parts[1]);
+        $fileName = uniqid() . '.png';
+        
+        $file = $folderPath . $fileName;
+        // Storage::put($file, $image_base64);
+
+
+        $mono_file_url = url('') . "/public/upload/verify/$fileName";
+        
 
 
 
@@ -4969,6 +4987,9 @@ class UserController extends Controller
                 'identification_type' => $request->identification_type,
                 'identification_number' => $request->identification_number,
                 'bvn' => $request->bvn,
+                'identification_image' => $mono_file_url,
+
+
             ]);
 
 
@@ -4992,9 +5013,8 @@ class UserController extends Controller
             "email_address" => Auth::user()->email,
 
             "identity" => array(
-                "id_type" => $request->identification_type,
-                "id_no" => $request->identification_number,
-                "id_image" => $mono_file_url,
+                "id_type" => "NIGERIAN_BVN_VERIFICATION",
+                "selfie_image" => $mono_file_url,
                 "bvn" => $request->bvn,
 
             ),

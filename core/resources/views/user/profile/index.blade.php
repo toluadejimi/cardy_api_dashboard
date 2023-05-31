@@ -143,7 +143,7 @@
                           <div class="row">
 
 
-                            <div class="col-lg-12 mt-3">
+                            {{-- <div class="col-lg-12 mt-3">
                               <select class="form-control select" name="identification_type" required>
                                 <option value="">{{__('Select Type')}}</option>
                                 <option value="NIGERIAN_NIN">NIN</option>
@@ -153,29 +153,36 @@
                               </select>
                               <span class="form-text text-xs">{{__('Identification must be a vaild ID.')}}</span>
 
-                            </div>
+                            </div> --}}
 
 
 
-
+{{-- 
                             <div class="col-6 mt-3">
                               <input type="text" name="identification_number" class="form-control" required
                                 placeholder="ID Number" value="{{$user->identification_number}}">
                               <span class="form-text text-xs">{{__('Enter ID no on card.')}}</span>
+                            </div> --}}
+
+
+                            <div class="col-md-6">
+                                <div id="my_camera"></div>
+                                <br/>
+                                <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onClick="take_snapshot()">
+                                <input type="hidden" name="image" class="image-tag">
                             </div>
 
 
-                            <div class="col-6 mt-3">
-                              <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFileLang" required
-                                  name="identification_image" accept="image/*" required>
-                                <label class="custom-file-label" for="customFileLang">{{__('Choose File')}}</label>
-                                <span class="form-text text-xs">{{__('Upload a clear front picture of valid
-                                  ID')}}</span>
-
-                              </div>
-
+                            <div class="col-md-6">
+                                <div id="results">Your captured image will appear here...</div>
                             </div>
+                          
+                            <span class="form-text text-xs">{{__('Take a clear picture of your face')}}</span>
+
+                            
+                            
+                            <hr>
+
 
                             <div class="col-12 mt-3">
                               <input type="number" name="bvn" class="form-control" required placeholder="BVN"
