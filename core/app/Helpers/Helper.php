@@ -38,7 +38,7 @@ function send_email($to, $name, $subject, $message)
     $from = env('MAIL_USERNAME');
     $site = $set->site_name;
     $phone = $set->phone;
-    $details = $set->site_desc;
+    $details = $set->whatsapp_contact;
     $email = env('MAIL_USERNAME');
     $logo = url('/') . '/asset/' . $mlogo->image_link;
     $data = array('name' => $name, 'subject' => $subject, 'content' => $message, 'website' => $set->site_name, 'phone' => $phone, 'details' => $details, 'email' => $email, 'logo' => $logo);

@@ -203,7 +203,7 @@ class RegisterController extends Controller
 
          
 
-                $text = "Before you can start accepting payments, you need to confirm your email address. Your email verification code is ".$user->verification_code;
+                $text = "Your email verification code is ".$user->verification_code;
                 send_email($user->email, $user->first_name, 'Hello '.$request->business_name, $text);
                 send_email($user->email, $user->first_name, 'Welcome to '.$set->site_name, $set->welcome_message);
             

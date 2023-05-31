@@ -324,8 +324,8 @@
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                       <td style="text-align: left; padding-right: 10px;">
-                      	<h3 class="heading">About us</h3>
-                      	<p>{!!$details!!}.</p>
+                      	<h3 class="heading">Talk to us</h3>
+                      	<p><a href="{{$details}}">Chat with us</a></p>
                       </td>
                     </tr>
                   </table>
