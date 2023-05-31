@@ -238,7 +238,7 @@ class CheckController extends Controller
         $data['business'] = User::whereType(3)->count();
 
         $data['issuing_wallet'] = get_issuing_bal();
-        $data['b_rate'] = 0;
+        $data['b_rate'] = get_rate();
 
 
 

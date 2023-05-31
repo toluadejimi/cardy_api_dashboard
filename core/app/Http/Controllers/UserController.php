@@ -573,7 +573,7 @@ class UserController extends Controller
 
         $data['title'] = 'Virtual Cards';
         $data['card'] = $upd = VCard::whereUser_id(Auth::guard('user')->user()->id)->orderBy('id', 'DESC')->get();
-        $key = Settings::first()->b_key;
+        $key = env('BKEY');
         $chk = VCard::where('user_id', Auth::id())->first()->masked_card ?? null;
         $card_id = VCard::where('user_id', Auth::id())->first()->card_id ?? null;
 
@@ -585,7 +585,7 @@ class UserController extends Controller
 
             $curl = curl_init();
             curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://issuecards-api-bridgecard-co.relay.evervault.com/v1/issuing/sandbox/cards/get_card_details?card_id=$card_id",
+                CURLOPT_URL => "https://issuecards-api-bridgecard-co.relay.evervault.com/v1/issuing/cards/get_card_details?card_id=$card_id",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -655,7 +655,7 @@ class UserController extends Controller
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://issuecards-api-bridgecard-co.relay.evervault.com/v1/issuing/sandbox/cards/get_card_details?card_id=$card_id",
+            CURLOPT_URL => "https://issuecards-api-bridgecard-co.relay.evervault.com/v1/issuing/cards/get_card_details?card_id=$card_id",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -732,7 +732,7 @@ class UserController extends Controller
         $post_data = json_encode($data);
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://issuecards.api.bridgecard.co/v1/issuing/sandbox/cards/fund_card',
+            CURLOPT_URL => 'https://issuecards.api.bridgecard.co/v1/issuing/cards/fund_card',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -800,7 +800,7 @@ class UserController extends Controller
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://issuecards.api.bridgecard.co/v1/issuing/sandbox/cards/freeze_card?card_id=$card->card_id",
+            CURLOPT_URL => "https://issuecards.api.bridgecard.co/v1/issuing/cards/freeze_card?card_id=$card->card_id",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -843,7 +843,7 @@ class UserController extends Controller
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://issuecards.api.bridgecard.co/v1/issuing/sandbox/cards/unfreeze_card?card_id=$card->card_id",
+            CURLOPT_URL => "https://issuecards.api.bridgecard.co/v1/issuing/cards/unfreeze_card?card_id=$card->card_id",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -898,7 +898,7 @@ class UserController extends Controller
         $post_data = json_encode($data);
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://issuecards.api.bridgecard.co/v1/issuing/sandbox/cards/unload_card',
+            CURLOPT_URL => 'https://issuecards.api.bridgecard.co/v1/issuing/cards/unload_card',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -969,7 +969,7 @@ class UserController extends Controller
         );
         $post_data = json_encode($data);
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://issuecards.api.bridgecard.co/v1/issuing/sandbox/cards/create_card',
+            CURLOPT_URL => 'https://issuecards.api.bridgecard.co/v1/issuing/cards/create_card',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -1065,7 +1065,7 @@ class UserController extends Controller
         $val = VCard::whereid($id)->first();
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://issuecards.api.bridgecard.co/v1/issuing/sandbox/cards/get_card_transactions?card_id=$val->card_id",
+            CURLOPT_URL => "https://issuecards.api.bridgecard.co/v1/issuing/cards/get_card_transactions?card_id=$val->card_id",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -5012,7 +5012,7 @@ class UserController extends Controller
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://issuecards.api.bridgecard.co/v1/issuing/sandbox/cardholder/register_cardholder_synchronously',
+            CURLOPT_URL => 'https://issuecards.api.bridgecard.co/v1/issuing/cardholder/register_cardholder_synchronously',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,

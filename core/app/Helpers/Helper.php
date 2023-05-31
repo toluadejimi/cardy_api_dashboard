@@ -1346,7 +1346,7 @@ if (!function_exists('get_banks')) {
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://issuecards.api.bridgecard.co/v1/issuing/sandbox/cards/get_issuing_wallet_balance',
+                CURLOPT_URL => 'https://issuecards.api.bridgecard.co/v1/issuing/cards/get_issuing_wallet_balance',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -1367,6 +1367,42 @@ if (!function_exists('get_banks')) {
 
             if ($status == 'success') {
                 return $var->data->issuing_balance_USD / 100;
+            }
+
+            return "Network Issue";
+        }
+    }
+
+    if (!function_exists('get_rate')) {
+
+        function get_rate()
+        {
+
+            $key = env('BKEY');
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://issuecards.api.bridgecard.co/v1/issuing/cards/fx-rate',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_HTTPHEADER => array(
+                    "token: Bearer $key"
+                ),
+            ));
+
+            $var = curl_exec($curl);
+            curl_close($curl);
+            $var = json_decode($var);
+
+            $status = $var->status;
+
+            if ($status == 'success') {
+                return $var->data->{'NGN-USD'}/ 100;
             }
 
             return "Network Issue";
