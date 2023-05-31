@@ -4949,7 +4949,7 @@ class UserController extends Controller
     {
 
 
-     
+     $key = env('BKEY');
 
         if ($request->file('identification_image')) {
 
@@ -5023,7 +5023,7 @@ class UserController extends Controller
             CURLOPT_POSTFIELDS => $body,
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/json',
-                'token: Bearer at_test_95ae2dab9f812f40fe9f62e5a243152dd6cbfce653f9a93e9f70436cb4da061e1bf480d07e2e774aa4fc1522bd278dc905a126a23a516db224cffccdc27c6711450fd80908458c6a3cdaae36f427ccc4956f2505c5c79331807a8af85dfbcf4b79e806ba62a7704320b3c8e3eb144a57bd506b0e7631eebead4e34afeda39591df4f4d2ee4dcac9a766e3bd1c81723be84a4ad786e23578b1a20d2c0b8f56a59628d7077e289a465b4d1a6abfb97f32417a99fd367380f385e2aed647f53344e278b83e38f342db515b1dae7d6eb847f6c198a774ff0e11fc3c80f2e9671e7c775788e8425159629562071999892232f91a80a76c63552c23a19ad11c6e9c34f'
+                "token: Bearer $key"
             ),
         ));
 
