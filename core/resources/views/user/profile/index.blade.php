@@ -91,11 +91,11 @@
                         <div class="col-lg-9">
                           <div class="row">
 
-                            <div class="col-2">
+                            <div class="col-3">
                               <input type="text" name="hos_no" class="form-control" required placeholder="NO"
                                 value="{{$user->hos_no}}">
                             </div>
-                            <div class="col-6">
+                            <div class="col-9">
                               <input type="text" name="address_line_1" class="form-control" required
                                 placeholder="Street" value="{{$user->address_line_1}}">
                             </div>
