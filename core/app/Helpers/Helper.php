@@ -41,7 +41,8 @@ function send_email($to, $name, $subject, $message)
     $details = $set->whatsapp_contact;
     $email = env('MAIL_USERNAME');
     $logo = url('/') . '/asset/' . $mlogo->image_link;
-    $data = array('name' => $name, 'subject' => $subject, 'content' => $message, 'website' => $set->site_name, 'phone' => $phone, 'details' => $details, 'email' => $email, 'logo' => $logo);
+    $adv = url('/') . '/asset/' . $mlogo->adv;
+    $data = array('adv'=> $adv, 'name' => $name, 'subject' => $subject, 'content' => $message, 'website' => $set->site_name, 'phone' => $phone, 'details' => $details, 'email' => $email, 'logo' => $logo);
     Mail::send(['html' => 'emails/mail'], $data, function ($message) use ($name, $to, $subject, $from, $site) {
         $message->to($to, $name);
         $message->subject($subject);
