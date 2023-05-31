@@ -325,7 +325,7 @@
                       <td style="text-align: left; padding-right: 10px;">
                       	<h3 class="heading">Contact us</h3>
                       	<p><a href="{{$details}}">Chat with us on whatsapp</a></p>
-                        <img src="{!!$adv!!}" alt="" style="width: 450px; max-width: 600px; height: auto; margin: right; display: block;">
+                        <img src="{!!$adv!!}" alt="" style="width: 350px; max-width: 600px; height: auto; margin: right; display: block;">
 
                       </td>
                     </tr>
