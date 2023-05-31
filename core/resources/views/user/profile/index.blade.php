@@ -99,7 +99,7 @@
                               <input type="text" name="address_line_1" class="form-control" required
                                 placeholder="Street" value="{{$user->address_line_1}}">
                             </div>
-                            <div class="col-4">
+                            <div class="col-4 mt-3">
                               <input type="text" name="city" class="form-control" required placeholder="City"
                                 value="{{$user->city}}">
                             </div>
