@@ -26,7 +26,7 @@
 
             @if($set->notify == 1 && Auth::user()->status == 2)
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                Today Rate:<strong> {{$set->rate_message }}</strong>
+                Today Rate:<strong> NGN/USD - {{$set->ngn_rate }}</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
