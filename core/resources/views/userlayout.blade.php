@@ -681,23 +681,7 @@ $("#seeAnotherField").change(check);
 
 
 
-<script language="JavaScript">
-    Webcam.set({
-        width: 200,
-        height: 200,
-        image_format: 'jpeg',
-        jpeg_quality: 50
-    });
-    
-    Webcam.attach( '#my_camera' );
-    "use strict";
-    function take_snapshot() {
-        Webcam.snap( function(data_uri) {
-            $(".image-tag").val(data_uri);
-            document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
-        } );
-    }
-</script>
+
 
 
 
