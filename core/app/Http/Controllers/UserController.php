@@ -4961,16 +4961,28 @@ class UserController extends Controller
         // }
 
 
-        $img = $request->image;
-        $folderPath = "asset/images/verify";
-
-        $image_parts = explode(";base64,", $img);
-        $image_type_aux = explode("image/", $image_parts[0]);
-        $fileName = uniqid() . '.png';
-                // Storage::put($file, $image_base64);
+        // $img = $request->image;
+        // $folderPath = "asset/images/verify";
 
 
-        $file_url = url('') . "/asset/images/verify/$fileName";
+        // $request->file('image');
+        // $image_parts = explode(";base64,", $img);
+        // $image_type_aux = explode("image/", $image_parts[0]);
+        // $fileName = uniqid() . '.png';
+
+
+        // $file->move(public_path('/upload/verify'), $fileName);
+
+
+          if ($request->file('image')) {
+
+            $file = $request->file('identification_image');
+            $fileName = date('YmdHi') . $file->getClientOriginalName();
+            $file->move(public_path('asset/upload/verify'), $fileName);
+            $file_url = url('') . "/asset/upload/verify/$fileName";
+        }
+
+
 
 
 
