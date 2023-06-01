@@ -4974,18 +4974,11 @@ class UserController extends Controller
         // $file->move(public_path('/upload/verify'), $fileName);
 
 
-          if ($request->file('image')) {
-
+            $request->file('image');
             $file = $request->file('identification_image');
             $fileName = date('YmdHi') . $file->getClientOriginalName();
             $file->move(public_path('asset/upload/verify'), $fileName);
             $file_url = url('') . "/asset/upload/verify/$fileName";
-        }
-
-
-
-
-
 
 
 
