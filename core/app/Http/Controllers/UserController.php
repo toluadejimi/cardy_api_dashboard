@@ -4967,6 +4967,7 @@ class UserController extends Controller
         // $file->move(public_path('/upload/verify'), $fileName);
 
 
+        dd($request->all());
         if ($request->hasFile('image')) {
 
             $file = $request->file('image');
