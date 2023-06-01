@@ -4957,10 +4957,7 @@ class UserController extends Controller
             $location = 'asset/images/' . $filename;
             Image::make($image)->save($location);
             $file_url = url('') . "/asset/images/$filename";
-        }else {
-    dd('Request Has No File');
-    }
-
+        }
 
 
 
@@ -5036,7 +5033,6 @@ class UserController extends Controller
         $var = json_decode($var);
         $message = $var->message ?? null;
         $status = $var->status ?? null;
-        dd($databody, $var);
         // $id = $var[0]->id;
         if ($status == "success") {
 
