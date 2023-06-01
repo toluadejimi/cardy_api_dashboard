@@ -988,7 +988,7 @@ class UserController extends Controller
 
         $var = json_decode($var);
         $status = $var->status ?? null;
-
+        $message = $var->message ?? null;
 
         if ($status == "success") {
 
@@ -1016,10 +1016,11 @@ class UserController extends Controller
             $trasnaction->status = 1;
             $trasnaction->save();
 
-            $message = "good";
+            $message = "A card was created just now";
             send_notification($message);
             return back()->with('success', 'Your card has successfully created');
         } else {
+            send_notification($message);
             return back()->with('alert', 'Card creation not available at the moment try again later');
         }
     }
