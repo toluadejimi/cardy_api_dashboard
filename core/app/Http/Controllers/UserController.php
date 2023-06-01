@@ -988,7 +988,7 @@ class UserController extends Controller
 
         $var = json_decode($var);
         $status = $var->status ?? null;
-        $message = $var->message ?? null;
+        $message = "VCard Error | ".  $var->message ?? null;
 
         if ($status == "success") {
 
