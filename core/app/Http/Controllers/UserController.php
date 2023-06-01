@@ -4954,7 +4954,7 @@ class UserController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = 'image_'.time().'.'.$image->extension();
-            $location = 'asset/images' . $filename;
+            $location = 'asset/images/' . $filename;
             Image::make($image)->save($location);
             $file_url = url('') . "/asset/images/$filename";
         }else {
