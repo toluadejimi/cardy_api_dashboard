@@ -30,7 +30,7 @@ if($amo<$trx->amount){
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-5">
 
-                    @if($vc->status==0 ?? null)
+                    @if($vc == null)
                     <a data-toggle="modal" data-target="#modal-formx" href="" class="btn btn-sm btn-neutral"><i
                             class="fa fa-plus"></i> {{__('Create Card')}}</a>
                     @else

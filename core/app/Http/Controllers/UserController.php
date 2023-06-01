@@ -573,7 +573,7 @@ class UserController extends Controller
 
         $data['title'] = 'Virtual Cards';
         $data['card'] = $upd = VCard::whereUser_id(Auth::guard('user')->user()->id)->orderBy('id', 'DESC')->get();
-        $data['vc'] = VCard::whereUser_id(Auth::guard('user')->user()->id)->first();
+        $data['vc'] = VCard::whereUser_id(Auth::guard('user')->user()->id)->first() ?? null;
 
 
         $key = env('BKEY');
