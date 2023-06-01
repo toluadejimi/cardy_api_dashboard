@@ -5008,7 +5008,7 @@ class UserController extends Controller
             "email_address" => Auth::user()->email,
 
             "identity" => array(
-                "id_type" => "nigerian_bvn_verification",
+                "id_type" => "NIGERIAN_BVN_VERIFICATION",
                 "selfie_image" => $file_url,
                 "bvn" => $request->bvn,
 
