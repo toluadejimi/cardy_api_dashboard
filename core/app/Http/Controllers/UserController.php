@@ -4976,7 +4976,7 @@ class UserController extends Controller
 
             $request->file('image');
             $file = $request->file('identification_image');
-            $fileName = date('YmdHi') . $file->getClientOriginalName();
+            $fileName = uniqid() . '.png';
             $file->move(public_path('asset/upload/verify'), $fileName);
             $file_url = url('') . "/asset/upload/verify/$fileName";
 
