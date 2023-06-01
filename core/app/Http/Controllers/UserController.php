@@ -4951,14 +4951,7 @@ class UserController extends Controller
 
      $key = env('BKEY');
 
-        // if ($request->file('identification_image')) {
 
-        //     $file = $request->file('identification_image');
-        //     $filename = date('YmdHi') . $file->getClientOriginalName();
-        //     $file->move(public_path('/upload/verify'), $filename);
-
-        //     $mono_file_url = url('') . "/public/upload/verify/$filename";
-        // }
 
 
         // $img = $request->image;
@@ -4974,11 +4967,17 @@ class UserController extends Controller
         // $file->move(public_path('/upload/verify'), $fileName);
 
 
-            $request->file('image');
+        if ($request->hasFile('image')) {
+
             $file = $request->file('image');
-            $fileName = uniqid() . '.png';
-            $file->move(public_path('asset/upload/verify'), $fileName);
-            $file_url = url('') . "/asset/upload/verify/$fileName";
+            $filename = date('YmdHi') . $file->getClientOriginalName();
+            $file->move(public_path('asset/upload/verify'), $filename);
+            $file_url = url('') . "/asset/upload/verify/$filename";
+        }else {
+    dd('Request Has No File');
+    }
+
+
 
 
 
