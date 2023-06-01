@@ -4971,8 +4971,8 @@ class UserController extends Controller
 
             $file = $request->file('image');
             $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('asset/upload/verify'), $filename);
-            $file_url = url('') . "/asset/upload/verify/$filename";
+            $file->move(public_path('asset/images/verify'), $filename);
+            $file_url = url('') . "asset/images/verify/$filename";
         }else {
     dd('Request Has No File');
     }
