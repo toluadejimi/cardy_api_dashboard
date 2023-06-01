@@ -165,20 +165,43 @@
                             </div> --}}
 
 
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div id="my_camera"></div>
                                 <br/>
-                                <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onClick="take_snapshot()">
+                                <input type=file class="btn btn-primary btn-sm" value="choose picture" onClick="take_snapshot()">
                                 <input type="hidden" name="image" class="image-tag">
+                            </div> --}}
+
+                            <div class="col-md-6">
+
+                            <div class="form-group">
+                                <div class="custom-file">
+                                  <input type="file" class="custom-file-input" id="customFileLang" name="image" accept="image/*"
+                                    required>
+                                  <label class="custom-file-label" for="customFileLang">{{__('Choose Picture')}}</label>
+                                </div>
+                             </div>
+
                             </div>
 
 
                             <div class="col-md-6">
+
+                                <div class="form-group">
+                                   
+                                    <img src="https://i.ytimg.com/vi/SeriHm824hA/maxresdefault.jpg"  style="width: 250px; max-width: 600px; height: auto; margin: right; display: block;">
+                                      
+                                 </div>
+    
+                                </div>
+
+
+                            {{-- <div class="col-md-6">
                                 <div id="results">Your captured image will appear here...</div>
-                            </div>
+                            </div> --}}
 
 
-                            <script language="JavaScript">
+                            {{-- <script language="JavaScript">
                                 Webcam.set({
                                     width: 200,
                                     height: 200,
@@ -194,9 +217,9 @@
                                         document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
                                     } );
                                 }
-                            </script>
+                            </script> --}}
                           
-                            <span class="form-text text-xs">{{__('Take a clear picture of your face')}}</span>
+                            <span class="form-text text-xs text-center">{{__('Choose  a clear picture of your face to avoild disapproval')}}</span>
 
                             
                             
