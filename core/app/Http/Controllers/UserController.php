@@ -1088,7 +1088,7 @@ class UserController extends Controller
         $var = json_decode($var);
 
 
-        $data = $var->data->transactions;
+        $data = $var->data->transactions ?? null;
 
 
         // $data['log']=$response
