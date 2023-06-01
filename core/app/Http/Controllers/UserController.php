@@ -1090,64 +1090,17 @@ class UserController extends Controller
 
         $data = $var->data->transactions ?? null;
 
+        if($data == null ){
+
+            return back()->with('alert', 'No Transaction on card yet');
+        }
+
 
         // $data['log']=$response
 
 
         return view('user.virtual.log', compact('data', 'title'));
     }
-
-    public function terminateVirtual($id)
-    {
-        $user = User::find(Auth::user()->id);
-        $vcard = Virtual::whereid($id)->first();
-        $set = Settings::first();
-        $currency = Currency::whereStatus(1)->first();
-        $trx = str_random(8);
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.flutterwave.com/v3/virtual-cards/" . $vcard->card_hash . "/terminate",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "PUT",
-            CURLOPT_HTTPHEADER => array(
-                "Content-Type: application/json",
-                "Authorization: Bearer " . env('SECRET_KEY')
-            ),
-        ));
-        $response = curl_exec($curl);
-        curl_close($curl);
-        $result = json_decode($response, true);
-        if (array_key_exists('data', $result) && ($result['status'] === 'success')) {
-            //Debit User
-            $user->balance = $user->balance + $vcard->amount;
-            $user->save();
-            $vcard->amount = 0;
-            $vcard->status = 0;
-            $vcard->save();
-            $audit['user_id'] = Auth::guard('user')->user()->id;
-            $audit['trx'] = str_random(16);
-            $audit['log'] = 'Terminated Virtual Card #' . $vcard->ref_id;
-            Audit::create($audit);
-            $plans = Virtual::whereid($id)->delete();
-            return back()->with('success', $result['message']);
-        } else {
-            return back()->with('alert', $result['message']);
-        }
-    }
-
-
-
-
-
-
-
-
-
 
 
 
