@@ -3135,7 +3135,7 @@ class UserController extends Controller
             $user_id = Auth::id();
             $b_name =  Auth::user()->b_name;
             $phone = Auth::user()->phone;
-            $bvn = Auth::user()->bvn; 
+            $bvn = Auth::user()->bvn;
             $b_phone = Auth::user()->b_name;
             $pnum = preg_replace('/^./', '', $phone);
             $cphone= $pnum;
@@ -3161,7 +3161,7 @@ class UserController extends Controller
         }
 
 
-       
+
     }
 
     public function bank_transfer()
@@ -4962,16 +4962,16 @@ class UserController extends Controller
 
 
         $img = $request->image;
-        $folderPath = "/upload/verify";
-        
+        $folderPath = "asset/images/verify";
+
         $image_parts = explode(";base64,", $img);
         $image_type_aux = explode("image/", $image_parts[0]);
         $fileName = uniqid() . '.png';
                 // Storage::put($file, $image_base64);
 
 
-        $mono_file_url = url('') . "/public/upload/verify/$fileName";
-        
+        $file_url = url('') . "/asset/images/verify/$fileName";
+
 
 
 
@@ -4982,7 +4982,7 @@ class UserController extends Controller
                 'identification_type' => $request->identification_type,
                 'identification_number' => $request->identification_number,
                 'bvn' => $request->bvn,
-                'identification_image' => $mono_file_url,
+                'identification_image' => $file_url,
 
 
             ]);
@@ -5008,8 +5008,8 @@ class UserController extends Controller
             "email_address" => Auth::user()->email,
 
             "identity" => array(
-                "id_type" => "NIGERIAN_BVN_VERIFICATION",
-                "selfie_image" => $mono_file_url,
+                "id_type" => "nigerian_bvn_verification",
+                "selfie_image" => $file_url,
                 "bvn" => $request->bvn,
 
             ),
@@ -5021,7 +5021,7 @@ class UserController extends Controller
 
         );
 
-      
+
 
         $body = json_encode($databody);
 
@@ -5043,12 +5043,12 @@ class UserController extends Controller
         ));
 
         $var = curl_exec($curl);
+
         curl_close($curl);
         $var = json_decode($var);
-
         $message = $var->message ?? null;
         $status = $var->status ?? null;
-
+        dd($databody, $body, $var);
         // $id = $var[0]->id;
         if ($status == "success") {
 
@@ -5061,7 +5061,7 @@ class UserController extends Controller
                     'phone' => $request->phone,
                     'identification_type' => $request->identification_type,
                     'identification_number' => $request->identification_number,
-                    'identification_image' => $mono_file_url,
+                    'identification_image' => $file_url,
                     'state' => $request->state,
                     'lga' => $request->lga,
                     'bvn' => $request->bvn,
@@ -5078,7 +5078,7 @@ class UserController extends Controller
                 $user_id = Auth::id();
                 $b_name =  Auth::user()->b_name;
                 $phone = Auth::user()->phone;
-                $bvn = Auth::user()->bvn; 
+                $bvn = Auth::user()->bvn;
                 $b_phone = Auth::user()->b_name;
                 $pnum = preg_replace('/^./', '', $phone);
                 $cphone= $pnum;
