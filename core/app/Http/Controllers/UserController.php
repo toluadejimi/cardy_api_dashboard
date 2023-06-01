@@ -4951,27 +4951,11 @@ class UserController extends Controller
 
      $key = env('BKEY');
 
-
-
-
-        // $img = $request->image;
-        // $folderPath = "asset/images/verify";
-
-
-        // $request->file('image');
-        // $image_parts = explode(";base64,", $img);
-        // $image_type_aux = explode("image/", $image_parts[0]);
-        // $fileName = uniqid() . '.png';
-
-
-        // $file->move(public_path('/upload/verify'), $fileName);
-
-
         if ($request->hasFile('image')) {
-
-            $file = $request->file('image');
-            $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('asset/images/verify'), $filename);
+            $image = $request->file('image');
+            $filename = 'image_'.time().'.'.$image->extension();
+            $location = 'asset/images/verify' . $filename;
+            Image::make($image)->save($location);
             $file_url = url('') . "asset/images/verify/$filename";
         }else {
     dd('Request Has No File');
