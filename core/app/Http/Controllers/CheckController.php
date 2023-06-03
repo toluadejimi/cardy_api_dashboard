@@ -847,7 +847,7 @@ class CheckController extends Controller
         if (empty($request->is_bvn_verified)) {
             $data->is_bvn_verified = 0;
         } else {
-            $data->is_bvn_verified = $request->is_bvn_verified;
+            $data->is_bvn_verified = 1;
         }
 
         if (empty($request->is_identification_verified)) {

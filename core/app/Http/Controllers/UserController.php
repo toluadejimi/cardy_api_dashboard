@@ -884,10 +884,13 @@ class UserController extends Controller
 
     public function withdrawVirtual(Request $request)
     {
+
         $set = Settings::first();
         $key = env('BKEY');
         $card = VCard::where('user_id', Auth::id())->first();
         $amt_in_naira = $set->w_rate * $request->amount;
+
+
 
         $curl = curl_init();
         $data = [
@@ -924,6 +927,22 @@ class UserController extends Controller
         $status = $var->status ?? null;
 
         if ($status == 'success') {
+            User::where('id', Auth::id())->increment('main_wallet', $amt_in_naira);
+
+            $balance = User::where('id', Auth::id())->first()->main_wallet;
+
+            //update Transaction
+            $trasnaction = new Transactions();
+            $trasnaction->user_id = Auth::id();
+            $trasnaction->transaction_type = "CardWithdraw";
+            $trasnaction->amount = $amt_in_naira;
+            $trasnaction->note = "Card Liquidation | NGN ". number_format($amt_in_naira, 2);
+            $trasnaction->fee = 0;
+            $trasnaction->e_charges = 0;
+            $trasnaction->balance = $balance;
+            $trasnaction->status = 1;
+            $trasnaction->save();
+
         }
 
         $mymessage = "VCARD ERROR " . "|" . $message;
