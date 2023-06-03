@@ -947,9 +947,9 @@ class UserController extends Controller
         $bkey = env('BKEY');
         $card_fee_ngn =  $key->ngn_rate * $key->virtual_createcharge;
 
-        // if(Auth::user()->main_wallet < $card_fee_ngn){
-        //     return back()->with('alert', 'Account balance is insufficient, Fund your wallet');
-        // }
+        if(Auth::user()->main_wallet < $card_fee_ngn){
+            return back()->with('alert', 'Account balance is insufficient, Fund your wallet');
+        }
 
         $chk_card = VCard::where('user_id', $user->id)->first()->user_id ?? null;
 
@@ -1008,6 +1008,8 @@ class UserController extends Controller
             $balance = Auth::user()->main_walllet  - $card_fee_ngn;
 
             User::where('id', Auth::id())->decrement('main_wallet', $card_fee_ngn);
+
+
             $trasnaction = new Transactions();
             $trasnaction->user_id = Auth::id();
             $trasnaction->transaction_type = "CardCreation";
