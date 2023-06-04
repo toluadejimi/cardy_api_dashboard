@@ -193,6 +193,7 @@ class RegisterController extends Controller
             $user->secret_key = "live-".$secret_key;
             $user->tpublic_key= "test-".$tpublic_key;
             $user->tsecret_key = "test-".$tsecret_key;
+            $user->business_id = random_int(100000, 999999);
             $user->business_email= $request->email;
             $user->save();
 
@@ -201,14 +202,14 @@ class RegisterController extends Controller
             $com->user_id=$check->id;
             $com->save();
 
-         
+
 
                 $subject = "OTP VERIFICATION CODE";
                 $text = "Your email verification code is "."<h2>".$user->verification_code."</h2>";
                 send_email($user->email,  $user->first_name, $subject, $text);
                 send_email($user->email, $user->first_name, 'Welcome to '.$set->site_name, $set->welcome_message);
-            
-    
+
+
 
             // $data = array(
             //     'fromsender' => 'noreply@enkpay.com', 'EnkPay',

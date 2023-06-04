@@ -1300,6 +1300,7 @@ if (!function_exists('get_banks')) {
                     $status = $var->code ?? null;
                     $acct_no = $var->data->accountNumber ?? null;
                     $acct_name = $var->data->accountName ?? null;
+                    $error = $var->error->message ?? null;
 
                     $bank = "VFD MICROFINANCE BANK";
 
@@ -1321,7 +1322,7 @@ if (!function_exists('get_banks')) {
                     }
 
 
-                    $message = "Error from Virtual account creation | $name";
+                    $message = "Error from Virtual account creation | $name | $error";
                     send_notification($message);
 
                     return 500;
