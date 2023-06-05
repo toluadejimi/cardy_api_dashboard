@@ -20,23 +20,23 @@
               <th>{{__('Created')}}</th>
             </tr>
           </thead>
-          <tbody>  
-          {{-- @php 
+          <tbody>
+          {{-- @php
           $item=array();
-          $item=json_decode($data, true); 
+          $item=json_decode($data, true);
           @endphp --}}
             @foreach($data as $k=>$val)
               <tr>
                 <td>{{++$k}}.</td>
                 <td>
-                USD {{number_format($val->amount, 2, '.', '')}}
+                USD {{number_format($val->amount/100, 2, '.', '')}}
                 </td>
                 <td>{{$val->description}}</td>
                 <td>
                 @if($val->card_transaction_type=='CREDIT')
                   <span class="badge badge-pill badge-primary">{{__('Credit')}}</span>
                 @elseif($val->card_transaction_type =='DEBIT')
-                  <span class="badge badge-pill badge-danger">{{__('Debit')}}</span>                        
+                  <span class="badge badge-pill badge-danger">{{__('Debit')}}</span>
                 @endif
                 </td>
                 <td>{{date("Y/m/d h:i:A", strtotime($val->transaction_date))}}</td>
