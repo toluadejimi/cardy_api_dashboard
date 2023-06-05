@@ -1245,9 +1245,10 @@ if (!function_exists('get_banks')) {
             if ($cv == null) {
 
 
-                $set = Setting::select('*')->first();
-                if ($set->bank == 'vfd') {
+                // $set = Setting::select('*')->first();
+                // if ($set->bank == 'vfd') {
 
+                    //create VFD
                     $errand_key = errand_api_key();
                     $errand_user_id = errand_id();
 
@@ -1311,6 +1312,7 @@ if (!function_exists('get_banks')) {
                         $create->v_account_name = $acct_name;
                         $create->v_bank_name = $bank;
                         $create->user_id = $user_id;
+                        $create->fee = "NGN 15";
                         $create->save();
 
                         $user = User::find(Auth::id());
@@ -1318,18 +1320,89 @@ if (!function_exists('get_banks')) {
                         $user->v_account_name = $acct_name;
                         $user->save();
 
-                        return 200;
+                        // return 200;
+                    }else{
+
+                        $message = "Error from Virtual account creation | $name | $error";
+                        send_notification($message);
+
                     }
 
 
-                    $message = "Error from Virtual account creation | $name | $error";
-                    send_notification($message);
+                    //create providus
 
-                    return 500;
+                    $client_id = env('CLIENTID');
+                    $hashkey = env('HASHKEY');
+
+                    $curl = curl_init();
+                    $data = array(
+
+                        "customerBvn" => $bvn,
+                        "phoneNumber" => "234" . $phone,
+                        "customerName" => $name,
+
+                    );
+
+                    $databody = json_encode($data);
+
+                    curl_setopt_array($curl, array(
+                        CURLOPT_URL => 'https://vps.providusbank.com/vas/api/PiPCreateReservedAccountNumber',
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'POST',
+                        CURLOPT_POSTFIELDS => $databody,
+                        CURLOPT_HTTPHEADER => array(
+                            'Content-Type: application/json',
+                            'Accept: application/json',
+                            "Client-Id: $client_id",
+                            "X-Auth-Signature: $hashkey",
+                        ),
+                    ));
+
+                    $var = curl_exec($curl);
+                    curl_close($curl);
+                    $var = json_decode($var);
+
+
+                    $status = $var->responseCode ?? null;
+                    $acct_no = $var->account_number ?? null;
+                    $acct_name = $var->account_name ?? null;
+
+                    $error = $var->error->message ?? null;
+
+                    $bank = "PROVIDUS BANK";
+
+
+                    if ($status == 00) {
+
+                        $create = new VirtualAccount();
+                        $create->v_account_no = $acct_no;
+                        $create->v_account_name = $acct_name;
+                        $create->v_bank_name = $bank;
+                        $create->user_id = $user_id;
+                        $create->fee = "1%";
+                        $create->save();
+
+                        return 200;
+
+                    }else{
+                        $message = "Error from Virtual account creation | $name | $error";
+                        send_notification($message);
+
+                        return 500;
+                    }
+
+
                 }
 
 
-            } return 200;
+            // }
+
+            return 200;
 
 
         }
