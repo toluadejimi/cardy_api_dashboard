@@ -616,7 +616,7 @@ class UserController extends Controller
 
             VCard::where('user_id', Auth::id())->update([
 
-                'amount' => $balance,
+                'amount' => $balance/100,
 
             ]);
 
@@ -677,7 +677,7 @@ class UserController extends Controller
 
         $var = json_decode($var);
         $status = $var->status ?? null;
-        $balance = $var->data->balance ?? null;
+        $balance = $var->data->balance/100 ?? null;
 
 
 
@@ -714,14 +714,20 @@ class UserController extends Controller
         $user = User::find(Auth::user()->id);
         $key = env('BKEY');
 
-        if (Auth::user()->main_wallet < $request->amount) {
+        $amount_to_charge = $request->amount + $set->ngn_rate;
+
+
+        if (Auth::user()->main_wallet < $amount_to_charge ) {
             return back()->with('alert', 'Account balance is insufficient, Fund your wallet');
         }
 
 
+        User::where('id', Auth::id())->decrement('main_wallet', $amount_to_charge );
+
+
         //fund card
         $get_card_id = VCard::select('*')->where('user_id', Auth::id())->first()->card_id;
-        $amount_in_usd = $request->amount / $set->ngn_rate;
+        $amount_in_usd = $request->amount / $set->ngn_rate * 100;
 
         $curl = curl_init();
         $data = [
@@ -760,22 +766,19 @@ class UserController extends Controller
         if ($status == 'success') {
 
 
-            $balance = Auth::user()->main_walllet  - $request->amount;
-
+            $balance = Auth::user()->main_walllet;
 
             Vcard::where('card_id', $get_card_id)->update([
 
-                'amount' => $amount_in_usd,
+                'amount' => $amount_in_usd / 100,
             ]);
 
-
-            User::where('id', Auth::id())->decrement('main_wallet', $request->amount);
             $trasnaction = new Transactions();
             $trasnaction->user_id = Auth::id();
             $trasnaction->e_ref = $ref;
             $trasnaction->transaction_type = "CardFunding";
-            $trasnaction->amount = $request->amount;
-            $trasnaction->note = "USD CARD FUNDING | USD $amount_in_usd ";
+            $trasnaction->amount = $amount_to_charge;
+            $trasnaction->note = "USD CARD FUNDING | USD ".$amount_in_usd /100;
             $trasnaction->fee = 0;
             $trasnaction->e_charges = 0;
             $trasnaction->balance = $balance;
@@ -785,6 +788,7 @@ class UserController extends Controller
             return back()->with('success', 'Your card has been funded successfully');
         } else {
 
+               User::where('id', Auth::id())->increment('main_wallet', $amount_to_charge );
 
             send_notification($message);
             return back()->with('alert', 'Service not availabe at the moment, Please try again later');
@@ -896,7 +900,7 @@ class UserController extends Controller
         $data = [
 
             "card_id" => $card->card_id,
-            "amount" => $request->amount,
+            "amount" => $request->amount * 100,
             "transaction_reference" => random_int(1000000, 9999999),
             "currency" => "USD"
 
