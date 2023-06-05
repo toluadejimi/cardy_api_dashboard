@@ -766,7 +766,7 @@ class UserController extends Controller
         if ($status == 'success') {
 
 
-            $balance = Auth::user()->main_walllet;
+            $balance = Auth::user()->main_wallet;
 
             Vcard::where('card_id', $get_card_id)->update([
 
@@ -1028,7 +1028,7 @@ class UserController extends Controller
             $vcard->currency = $var->data->currency;
             $vcard->save();
 
-            $balance = Auth::user()->main_walllet  - $card_fee_ngn;
+            $balance = Auth::user()->main_wallet  - $card_fee_ngn;
 
             User::where('id', Auth::id())->decrement('main_wallet', $card_fee_ngn);
 
