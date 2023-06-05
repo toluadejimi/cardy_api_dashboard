@@ -63,66 +63,26 @@
 
 
               @if($adminbank->status==1)
-              @foreach ($account as $val)
+
                 <div class="card-header mt-5" id="headingTwo">
                   <div class="text-center collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="active" aria-controls="collapseTwo">
                     <h4 class="mb-0 font-weight-bolder">Bank Transfer</h4>
                     <p class="mb-0">Fund your wallet by pay by transfer</p>
+
                   </div>
                 </div>
+                @foreach($account as $val)
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                   <div class="card-body text-center">
                     <h4 class="mb-2 text-primary">{{$val->v_bank_name}}</h4>
                     <h1 class="mb-2 instafeed-defaultfont-weight-bolder">{{$val->v_account_no}}</h1>
                     <h4 class="mb-5 ">{{$val->v_account_name}}</h4>
                     <p class="mb-2 text-muted ">Money sent to this bank account will automatically top up your ENKPAY Wallet.<br> Receive your salary or money from any bank account locally directly into your ENKPAY Wallet</p>
-
-                    <form method="post" action="{{route('bank_transfersubmit')}}">
-                      @csrf
-                      <div class="form-group row">
-                        <div class="col-lg-8 offset-lg-2">
-                          <div class="input-group">
-                            <span class="input-group-prepend">
-                              {{-- <span class="input-group-text">{{$currency->symbol}}</span> --}}
-                            </span>
-                            {{-- <input type="number" step="any" name="amount" max-length="10" class="form-control" required> --}}
-                          </div>
-                        </div>
-                      </div>
-                      <div class="text-center">
-                        {{-- <button type="submit" class="btn btn-neutral btn-block">I'hv Sent Money</button> --}}
-                      </div>
-                    </form>
-                  </div>
-
-                  <hr>
-
-                  <div class="card-body text-center">
-                    <h4 class="mb-2 text-primary">{{$val->v_bank_name}}</h4>
-                    <h1 class="mb-2 instafeed-defaultfont-weight-bolder">{{$val->v_account_no}}</h1>
-                    <h4 class="mb-5 ">{{$val->v_account_name}}</h4>
-                    <p class="mb-2 text-muted ">Money sent to this bank account will automatically top up your ENKPAY Wallet.<br> Receive your salary or money from any bank account locally directly into your ENKPAY Wallet</p>
-
-                    <form method="post" action="{{route('bank_transfersubmit')}}">
-                      @csrf
-                      <div class="form-group row">
-                        <div class="col-lg-8 offset-lg-2">
-                          <div class="input-group">
-                            <span class="input-group-prepend">
-                              {{-- <span class="input-group-text">{{$currency->symbol}}</span> --}}
-                            </span>
-                            {{-- <input type="number" step="any" name="amount" max-length="10" class="form-control" required> --}}
-                          </div>
-                        </div>
-                      </div>
-                      <div class="text-center">
-                        {{-- <button type="submit" class="btn btn-neutral btn-block">I'hv Sent Money</button> --}}
-                      </div>
-                    </form>
-                  </div>
+                    <br>{{$val->fee}} Transaction fee applies</div>
 
                 </div>
-            @endforeach
+                @endforeach
+
             @endif
 
 

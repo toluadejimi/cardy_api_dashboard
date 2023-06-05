@@ -3124,6 +3124,8 @@ class UserController extends Controller
             if($create_v  == 200){
 
                 $data['account'] = VirtualAccount::whereUserId(Auth::id())->first() ?? null;
+
+
                 $data['gateways'] = Gateway::whereStatus(1)->orderBy('id', 'DESC')->get();
                 return view('user.fund.index', $data);
 
@@ -3132,8 +3134,7 @@ class UserController extends Controller
             return back()->with('alert', 'Funding service not available at the moment');
         }else{
 
-            $data['account'] = VirtualAccount::whereUserId(Auth::id())->first() ?? null;
-            $data['gateways'] = Gateway::whereStatus(1)->orderBy('id', 'DESC')->get();
+            $data['account'] = VirtualAccount::whereUserId(Auth::id())->get() ?? null;
             return view('user.fund.index', $data);
 
         }
