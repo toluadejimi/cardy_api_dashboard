@@ -12,6 +12,12 @@
                         <li class="nav-item">
                             <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.transactions')==url()->current()) active @endif" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="fad fa-link"></i> All Transactions</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.senderlog')==url()->current()) active @endif" id="tabs-icons-text-6-tab" data-toggle="tab" href="#tabs-icons-text-6" role="tab" aria-controls="tabs-icons-text-6" aria-selected="false"><i class="fad fa-laptop"></i> Website Checkout</a>
+                        </li> 
+
+
                         <li class="nav-item">
                             <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.transactionsd')==url()->current()) active @endif" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false"><i class="fad fa-gift"></i> Donation</a>
                         </li>
@@ -24,9 +30,7 @@
                         <li class="nav-item">
                             <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.banktransfer')==url()->current()) active @endif" id="tabs-icons-text-5-tab" data-toggle="tab" href="#tabs-icons-text-5" role="tab" aria-controls="tabs-icons-text-5" aria-selected="false"><i class="fad fa-share"></i> Bank Transfer Deposit</a>
                         </li>                     
-                        <li class="nav-item">
-                            <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.senderlog')==url()->current()) active @endif" id="tabs-icons-text-6-tab" data-toggle="tab" href="#tabs-icons-text-6" role="tab" aria-controls="tabs-icons-text-6" aria-selected="false"><i class="fad fa-laptop"></i> Website Checkout</a>
-                        </li>                        
+                                               
                         <li class="nav-item">
                             <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.mysub')==url()->current()) active @endif" id="tabs-icons-text-7-tab" data-toggle="tab" href="#tabs-icons-text-7" role="tab" aria-controls="tabs-icons-text-7" aria-selected="false"><i class="fad fa-user"></i> Your Subscriptions</a>
                         </li>        
@@ -63,7 +67,7 @@
                                 <td>{{number_format($val->debit, 2)}}</td>
                                 <td>{{number_format($val->credit, 2)}}</td>
                                 <td>{{number_format($val->balance, 2)}}</td>
-                                <td>{{$val->type}}</td>
+                                <td>{{$val->transaction_type}}</td>
                                 <td>{{$val->sender_name ?? " No  Details" }}</td>
                                 <td>{{$val->sender_bank ?? " No  Details"}}</td>
                                 <td>{{$val->sender_account_no ?? " No Details"}}</td>
@@ -219,39 +223,40 @@
                 <div class="card">
                     <div class="table-responsive py-4">
                         <table class="table table-flush" id="datatable-buttons5">
-                        <thead>
-                            <tr>
-                            <th>{{__('S / N')}}</th>
-                            <th>{{__('Reference ID')}}</th>
-                            <th>{{__('Name')}}</th>
-                            <th>{{__('From')}}</th>
-                            <th>{{__('Type')}}</th>
-                            <th>{{__('Status')}}</th>
-                            <th>{{__('Amount')}}</th>
-                            <th class="text-center">{{__('Charge')}}</th>
-                            <th>{{__('Created')}}</th>
-                            <th>{{__('updated')}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>  
-                            @foreach($ext as $k=>$val)
-                            @php
-                                $fff=App\Models\Merchant::wheremerchant_key($val->merchant_key)->first();
-                            @endphp
-                            <tr>
-                                <td>{{++$k}}.</td>
-                                <td>{{$val->reference}}</td>
-                                <td>{{$fff->name}}</td>
-                                <td>@if($val->user_id!=null) {{$val->sender->first_name.' '.$val->sender->last_name}} [{{$val->sender->email}}] @else {{$val->first_name.' '.$val->last_name}} [{{$val->email}}] @endif</td>
-                                <td>@if($val->sender_id==$user->id) Debit @else Credit @endif</td>
-                                <td>@if($val->status==0) <span class="badge badge-pill badge-danger"><i class="fad fa-ban"></i> failed - {{$val->payment_type}}</span> @elseif($val->status==1) <span class="badge badge-pill badge-success"><i class="fad fa-check"></i> paid - {{$val->payment_type}}</span> @elseif($val->status==2) refunded @endif</td>
-                                <td>@if($val->sender_id==$user->id) {{$currency->symbol.number_format($val->amount+$val->charge, 2, '.', '')}} @else {{$currency->symbol.number_format($val->amount, 2, '.', '')}} @endif</td>
-                                <td class="text-center">@if($val->sender_id==$user->id || $val->charge==null) - @else {{$currency->symbol.number_format($val->charge, 2, '.', '')}} @endif</td>
-                                <td>{{date("Y/m/d h:i:A", strtotime($val->created_at))}}</td>
-                                <td>{{date("Y/m/d h:i:A", strtotime($val->updated_at))}}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
+                            <thead>
+                                <tr>
+                                <th>{{__('S / N')}}</th>
+                                <th>{{__('Reference ID')}}</th>
+                                <th>{{__('Debit')}}</th>
+                                <th>{{__('Credit')}}</th>
+                                <th>{{__('Balance')}}</th>
+                                <th>{{__('Type')}}</th>
+                                <th>{{__('Sender Name')}}</th>
+                                <th>{{__('Sender Bank')}}</th>
+                                <th>{{__('Sender Account No')}}</th>
+                                <th>{{__('Status')}}</th>
+                                <th>{{__('Note')}}</th>
+                                <th>{{__('Date Time')}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>  
+                                @foreach($web_pay as $k=>$val)
+                                <tr>
+                                    <td>{{++$k}}.</td>
+                                    <td>{{$val->ref_trans_id}}</td>
+                                    <td>{{number_format($val->debit, 2)}}</td>
+                                    <td>{{number_format($val->credit, 2)}}</td>
+                                    <td>{{number_format($val->balance, 2)}}</td>
+                                    <td>{{$val->transaction_type}}</td>
+                                    <td>{{$val->sender_name ?? " No  Details" }}</td>
+                                    <td>{{$val->sender_bank ?? " No  Details"}}</td>
+                                    <td>{{$val->sender_account_no ?? " No Details"}}</td>
+                                    <td>@if($val->status==2) <span class="badge badge-pill badge-danger"><i class="fad fa-ban"></i>Failed</span> @elseif($val->status==1) <span class="badge badge-pill badge-success"><i class="fad fa-check"></i>Successful @elseif($val->status==4) Refunded @endif</td>
+                                    <td>{{$val->note}}</td>
+                                    <td>{{date("Y/m/d h:i:A", strtotime($val->created_at))}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
