@@ -722,6 +722,7 @@ class UserController extends Controller
         }
 
 
+        $balance = Auth::user()->wallet - $amount_to_charge;
         User::where('id', Auth::id())->decrement('main_wallet', $amount_to_charge );
 
 
@@ -761,12 +762,10 @@ class UserController extends Controller
         $var = json_decode($var);
         $status = $var->status ?? null;
         $ref = $var->data->transaction_reference ?? null;
-        $message = "Error from Virtual Card Fund" . "|" . $var->message ?? null;
+        $message = "Error from Virtual Card Funding" . "|" . $var->message ?? null;
 
         if ($status == 'success') {
 
-
-            $balance = Auth::user()->main_wallet;
 
             Vcard::where('card_id', $get_card_id)->update([
 
@@ -5692,7 +5691,11 @@ class UserController extends Controller
     {
         $data['title'] = 'Transactions';
         $user = Auth::guard('user')->user()->id;
-        $data['single'] = Transactions::latest()->whereuser_id($user)->get();
+        $data['all'] = Transactions::latest()->whereuser_id($user)->get();
+        $data['web_pay'] = Transactions::latest()->whereuser_id($user)->get();
+        $data['bank_transfer'] = Transactions::latest()->whereuser_id($user)->get();
+        $data['wallet_fund'] = Transactions::latest()->whereuser_id($user)->get();
+        $data['bill_payment'] = Transactions::latest()->whereuser_id($user)->get();
 
         $data['donation'] = Transactions::wheresender_id($user)->wheretype(2)->orWhere('receiver_id', $user)->where('type', 2)->latest()->get();
         $data['invoice'] = Transactions::wheresender_id($user)->wheretype(3)->orWhere('receiver_id', $user)->where('type', 3)->latest()->get();
