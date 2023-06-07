@@ -5692,7 +5692,7 @@ class UserController extends Controller
         $data['title'] = 'Transactions';
         $user = Auth::guard('user')->user()->id;
         $data['all'] = Transactions::latest()->whereuser_id($user)->get();
-        $data['web_pay'] = Transactions::latest()->whereuser_id($user)->where('type', 'WEBPAY FUNDING')->get();
+        $data['web_pay'] = Transactions::latest()->whereuser_id($user)->where('transaction_type', 'VirtualFundWallet')->get();
         $data['bank_transfer'] = Transactions::latest()->whereuser_id($user)->get();
         $data['wallet_fund'] = Transactions::latest()->whereuser_id($user)->get();
         $data['bill_payment'] = Transactions::latest()->whereuser_id($user)->get();
