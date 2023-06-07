@@ -43,7 +43,8 @@
                             <tr>
                             <th>{{__('S / N')}}</th>
                             <th>{{__('Reference ID')}}</th>
-                            <th>{{__('Amount')}}</th>
+                            <th>{{__('Debit')}}</th>
+                            <th>{{__('Credit')}}</th>
                             <th>{{__('Balance')}}</th>
                             <th>{{__('Type')}}</th>
                             <th>{{__('Sender Name')}}</th>
@@ -59,7 +60,8 @@
                             <tr>
                                 <td>{{++$k}}.</td>
                                 <td>{{$val->ref_trans_id}}</td>
-                                <td>{{number_format($val->amount, 2)}}</td>
+                                <td>{{number_format($val->debit, 2)}}</td>
+                                <td>{{number_format($val->credit, 2)}}</td>
                                 <td>{{number_format($val->balance, 2)}}</td>
                                 <td>{{$val->type}}</td>
                                 <td>{{$val->sender_name ?? " No  Details" }}</td>
