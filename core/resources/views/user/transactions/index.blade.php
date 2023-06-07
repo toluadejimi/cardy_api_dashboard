@@ -44,6 +44,7 @@
                             <th>{{__('S / N')}}</th>
                             <th>{{__('Reference ID')}}</th>
                             <th>{{__('Amount')}}</th>
+                            <th>{{__('Balance')}}</th>
                             <th>{{__('Type')}}</th>
                             <th>{{__('Sender Name')}}</th>
                             <th>{{__('Sender Bank')}}</th>
