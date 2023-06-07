@@ -67,7 +67,7 @@
                                 <td>{{number_format($val->debit, 2)}}</td>
                                 <td>{{number_format($val->credit, 2)}}</td>
                                 <td>{{number_format($val->balance, 2)}}</td>
-                                <td>{{$val->transaction_type}}</td>
+                                <td>{{$val->title}}</td>
                                 <td>{{$val->sender_name ?? " No  Details" }}</td>
                                 <td>{{$val->sender_bank ?? " No  Details"}}</td>
                                 <td>{{$val->sender_account_no ?? " No Details"}}</td>
@@ -247,7 +247,7 @@
                                     <td>{{number_format($val->debit, 2)}}</td>
                                     <td>{{number_format($val->credit, 2)}}</td>
                                     <td>{{number_format($val->balance, 2)}}</td>
-                                    <td>{{$val->transaction_type}}</td>
+                                    <td>{{$val->title}}</td>
                                     <td>{{$val->sender_name ?? " No  Details" }}</td>
                                     <td>{{$val->sender_bank ?? " No  Details"}}</td>
                                     <td>{{$val->sender_account_no ?? " No Details"}}</td>
