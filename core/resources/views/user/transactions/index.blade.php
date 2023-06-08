@@ -15,7 +15,7 @@
 
                         <li class="nav-item">
                             <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.senderlog')==url()->current()) active @endif" id="tabs-icons-text-6-tab" data-toggle="tab" href="#tabs-icons-text-6" role="tab" aria-controls="tabs-icons-text-6" aria-selected="false"><i class="fad fa-laptop"></i> Website Checkout</a>
-                        </li> 
+                        </li>
 
 
                         <li class="nav-item">
@@ -23,17 +23,17 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.invoicelog')==url()->current()) active @endif" id="tabs-icons-text-3-tab" data-toggle="tab" href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fad fa-envelope"></i> Invoice</a>
-                        </li>        
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.depositlog')==url()->current()) active @endif" id="tabs-icons-text-4-tab" data-toggle="tab" href="#tabs-icons-text-4" role="tab" aria-controls="tabs-icons-text-4" aria-selected="false"><i class="fad fa-arrow-up"></i> Deposit</a>
-                        </li>                
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.banktransfer')==url()->current()) active @endif" id="tabs-icons-text-5-tab" data-toggle="tab" href="#tabs-icons-text-5" role="tab" aria-controls="tabs-icons-text-5" aria-selected="false"><i class="fad fa-share"></i> Bank Transfer Deposit</a>
-                        </li>                     
-                                               
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.mysub')==url()->current()) active @endif" id="tabs-icons-text-7-tab" data-toggle="tab" href="#tabs-icons-text-7" role="tab" aria-controls="tabs-icons-text-7" aria-selected="false"><i class="fad fa-user"></i> Your Subscriptions</a>
-                        </li>        
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -47,6 +47,7 @@
                             <tr>
                             <th>{{__('S / N')}}</th>
                             <th>{{__('Reference ID')}}</th>
+                           <th>{{__('Session ID')}}</th>
                             <th>{{__('Debit')}}</th>
                             <th>{{__('Credit')}}</th>
                             <th>{{__('Balance')}}</th>
@@ -59,11 +60,12 @@
                             <th>{{__('Date Time')}}</th>
                             </tr>
                         </thead>
-                        <tbody>  
+                        <tbody>
                             @foreach($all as $k=>$val)
                             <tr>
                                 <td>{{++$k}}.</td>
                                 <td>{{$val->ref_trans_id}}</td>
+                                <td>{{$val->e_ref}}</td>
                                 <td>{{number_format($val->debit, 2)}}</td>
                                 <td>{{number_format($val->credit, 2)}}</td>
                                 <td>{{number_format($val->balance, 2)}}</td>
@@ -80,7 +82,7 @@
                         </table>
                     </div>
                 </div>
-            </div>           
+            </div>
             <div class="tab-pane fade @if(route('user.transactionsd')==url()->current())show active @endif" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
                 <div class="card">
                     <div class="table-responsive py-4">
@@ -99,7 +101,7 @@
                                 <th>{{__('updated')}}</th>
                                 </tr>
                             </thead>
-                            <tbody>  
+                            <tbody>
                                 @foreach($donation as $k=>$val)
                                 <tr>
                                     <td>{{++$k}}.</td>
@@ -117,8 +119,8 @@
                             </tbody>
                         </table>
                         </div>
-                    </div>            
-                </div>            
+                    </div>
+                </div>
             <div class="tab-pane fade @if(route('user.invoicelog')==url()->current())show active @endif" id="tabs-icons-text-3" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
                 <div class="card">
                     <div class="table-responsive py-4">
@@ -137,7 +139,7 @@
                                 <th>{{__('updated')}}</th>
                                 </tr>
                             </thead>
-                            <tbody>  
+                            <tbody>
                                 @foreach($invoice as $k=>$val)
                                 <tr>
                                     <td>{{++$k}}.</td>
@@ -155,8 +157,8 @@
                             </tbody>
                             </table>
                         </div>
-                    </div>            
-                </div>            
+                    </div>
+                </div>
             <div class="tab-pane fade @if(route('user.depositlog')==url()->current())show active @endif" id="tabs-icons-text-4" role="tabpanel" aria-labelledby="tabs-icons-text-4-tab">
                 <div class="card">
                     <div class="table-responsive py-4">
@@ -172,7 +174,7 @@
                             <th>{{__('Updated')}}</th>
                             </tr>
                         </thead>
-                        <tbody>  
+                        <tbody>
                             @foreach($deposits as $k=>$val)
                             <tr>
                                 <td>{{++$k}}.</td>
@@ -188,7 +190,7 @@
                         </table>
                     </div>
                     </div>
-            </div>            
+            </div>
             <div class="tab-pane fade @if(route('user.banktransfer')==url()->current())show active @endif" id="tabs-icons-text-5" role="tabpanel" aria-labelledby="tabs-icons-text-5-tab">
                 <div class="card">
                     <div class="table-responsive py-4">
@@ -203,7 +205,7 @@
                                 <th>{{__('Updated')}}</th>
                             </tr>
                             </thead>
-                            <tbody>  
+                            <tbody>
                             @foreach($bank_transfer as $k=>$val)
                             <tr>
                                 <td>{{++$k}}.</td>
@@ -218,7 +220,7 @@
                         </table>
                     </div>
                 </div>
-            </div>            
+            </div>
             <div class="tab-pane fade @if(route('user.senderlog')==url()->current())show active @endif" id="tabs-icons-text-6" role="tabpanel" aria-labelledby="tabs-icons-text-6-tab">
                 <div class="card">
                     <div class="table-responsive py-4">
@@ -239,7 +241,7 @@
                                 <th>{{__('Date Time')}}</th>
                                 </tr>
                             </thead>
-                            <tbody>  
+                            <tbody>
                                 @foreach($web_pay as $k=>$val)
                                 <tr>
                                     <td>{{++$k}}.</td>
@@ -260,7 +262,7 @@
                         </table>
                     </div>
                 </div>
-            </div>            
+            </div>
             <div class="tab-pane fade @if(route('user.mysub')==url()->current())show active @endif" id="tabs-icons-text-7" role="tabpanel" aria-labelledby="tabs-icons-text-7-tab">
                 <div class="card">
                     <div class="table-responsive py-4">
@@ -277,7 +279,7 @@
                                 <th>{{__('Created')}}</th>
                                 </tr>
                             </thead>
-                            <tbody>  
+                            <tbody>
                                 @foreach($sub as $k=>$val)
                                 <tr>
                                     <td>{{++$k}}.</td>
