@@ -728,7 +728,7 @@ class UserController extends Controller
 
         //fund card
         $get_card_id = VCard::select('*')->where('user_id', Auth::id())->first()->card_id;
-        $amount_in_usd = $request->amount / $set->ngn_rate;
+        $amount_in_usd = $request->amount / $set->ngn_rate * 10;
 
         $curl = curl_init();
         $data = [
@@ -760,7 +760,6 @@ class UserController extends Controller
         $var = curl_exec($curl);
         curl_close($curl);
         $var = json_decode($var);
-        dd($var, $data);
         $status = $var->status ?? null;
         $ref = $var->data->transaction_reference ?? null;
         $message = "Error from Virtual Card Funding" . "|" . $var->message ?? null;
