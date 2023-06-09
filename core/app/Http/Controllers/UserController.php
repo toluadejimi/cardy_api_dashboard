@@ -768,7 +768,6 @@ class UserController extends Controller
         $var = curl_exec($curl);
         curl_close($curl);
         $var = json_decode($var);
-        dd($var, $data);
         $status = $var->status ?? null;
         $ref = $var->data->transaction_reference ?? null;
         $message = "Error from Virtual Card Funding" . "|" . $var->message ?? null;
