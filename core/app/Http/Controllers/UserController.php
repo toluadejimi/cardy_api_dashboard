@@ -728,7 +728,7 @@ class UserController extends Controller
 
         //fund card
         $get_card_id = VCard::select('*')->where('user_id', Auth::id())->first()->card_id;
-        $amount_in_usd = $request->amount / $set->ngn_rate * 100;
+        $amount_in_usd = $request->amount / $set->ngn_rate;
 
         $curl = curl_init();
         $data = [
