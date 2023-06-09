@@ -793,8 +793,6 @@ class UserController extends Controller
             return back()->with('success', 'Your card has been funded successfully');
         } else {
 
-               User::where('id', Auth::id())->increment('main_wallet', $amount_to_charge );
-
             send_notification($message);
             return back()->with('alert', 'Service not availabe at the moment, Please try again later');
         }
