@@ -578,9 +578,17 @@ class UserController extends Controller
 
         $key = env('BKEY');
         $chk = VCard::where('user_id', Auth::id())->first()->masked_card ?? null;
+        $chk2 = VCard::where('user_id', Auth::id())->first()->user_id ?? null;
         $card_id = VCard::where('user_id', Auth::id())->first()->card_id ?? null;
 
         $user_id = VCard::where('user_id', Auth::id())->first()->user_id ?? null;
+
+
+        if($chk2 == Auth::id()){
+
+            return back()->with('alert', 'You can only own one USD card');
+
+        }
 
 
 
