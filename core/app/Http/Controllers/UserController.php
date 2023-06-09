@@ -725,8 +725,11 @@ class UserController extends Controller
         }
 
 
+        $e_ref = random_int(1000000, 9999999);
        
 
+
+        $ref = "CAD-".random_int(1000000, 9999999);
 
         //fund card
         $get_card_id = VCard::select('*')->where('user_id', Auth::id())->first()->card_id;
@@ -737,7 +740,7 @@ class UserController extends Controller
 
             "card_id" => $get_card_id,
             "amount" => $amount_in_usd,
-            "transaction_reference" => random_int(1000000, 9999999),
+            "transaction_reference" => $e_ref,
             "currency" => "USD"
 
         ];
@@ -781,7 +784,10 @@ class UserController extends Controller
             $trasnaction = new Transactions();
             $trasnaction->user_id = Auth::id();
             $trasnaction->e_ref = $ref;
+            $trasnaction->ref_trans_id = $e_ref;
             $trasnaction->transaction_type = "CardFunding";
+            $trasnaction->title = "USD Card Funding";
+            $trasnaction->type = "CardFunding";
             $trasnaction->amount = $amount_to_charge;
             $trasnaction->note = "USD CARD FUNDING | USD ".$amount_in_usd /100;
             $trasnaction->fee = 0;
