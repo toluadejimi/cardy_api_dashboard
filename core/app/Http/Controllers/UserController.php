@@ -584,12 +584,7 @@ class UserController extends Controller
         $user_id = VCard::where('user_id', Auth::id())->first()->user_id ?? null;
 
 
-        if($chk2 == Auth::id()){
-
-            return back()->with('alert', 'You can only own one USD card');
-
-        }
-
+   
 
 
         if ($chk == null) {
