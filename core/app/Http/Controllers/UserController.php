@@ -730,8 +730,7 @@ class UserController extends Controller
         }
 
 
-        $balance = Auth::user()->wallet - $amount_to_charge;
-        User::where('id', Auth::id())->decrement('main_wallet', $amount_to_charge );
+       
 
 
         //fund card
@@ -779,6 +778,10 @@ class UserController extends Controller
 
                 'amount' => $amount_in_usd / 100,
             ]);
+
+
+            $balance = Auth::user()->wallet - $amount_to_charge;
+            User::where('id', Auth::id())->decrement('main_wallet', $amount_to_charge );
 
             $trasnaction = new Transactions();
             $trasnaction->user_id = Auth::id();
