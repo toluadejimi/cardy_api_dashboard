@@ -902,6 +902,8 @@ class UserController extends Controller
         $key = env('BKEY');
         $card = VCard::where('user_id', Auth::id())->first();
         $amt_in_naira = $set->w_rate * $request->amount;
+        $amount_in_usd = round($request->amount / $set->w_rate) * 100;
+
 
 
 
@@ -909,7 +911,7 @@ class UserController extends Controller
         $data = [
 
             "card_id" => $card->card_id,
-            "amount" => $request->amount * 100,
+            "amount" => $amount_in_usd,
             "transaction_reference" => random_int(1000000, 9999999),
             "currency" => "USD"
 

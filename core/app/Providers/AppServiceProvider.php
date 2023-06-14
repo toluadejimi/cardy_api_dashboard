@@ -74,10 +74,10 @@ class AppServiceProvider extends ServiceProvider
 
             if($set->next_settlement<Carbon::now()){
                 $dt = Carbon::now();
-                $dt->add($set->duration.' '.$set->period); 
+                $dt->add($set->duration.' '.$set->period);
                 $set->next_settlement=$dt;
-                $set->save();  
-            }            
+                $set->save();
+            }
             //Update settlement date of pending settlement
             $pcheck=Withdraw::wherestatus(0)->where('next_settlement', '<', $set->next_settlement)->get();
             foreach($pcheck as $xcheck){
@@ -106,7 +106,7 @@ class AppServiceProvider extends ServiceProvider
                     $cast="person.png";
                 }else{
                     $cast=$user->image;
-                }         
+                }
                 $p_transfer=Transfer::where('Temp', Auth::guard('user')->user()->email)->where('status',0)->get();
                 $p_request=Requests::where('email', Auth::guard('user')->user()->email)->wherestatus(0)->get();
                 $xhistory=History::whereuser_id(Auth::guard('user')->user()->id)->wheretype(1)->where('amount','!=',null)->get();
@@ -127,14 +127,14 @@ class AppServiceProvider extends ServiceProvider
                             }
                         }
                         $dt = Carbon::now();
-                        $dt->add('1 day'); 
+                        $dt->add('1 day');
                         $set->stripe_chargebacks=$dt;
-                        $set->save();  
+                        $set->save();
                     }
                 }
 
                 //Check for pending coinpayment transactions
-                    $depo=Deposits::whereStatus(0)->whereuser_id(Auth::guard('user')->user()->id)->where('txn_id', '!=', 'null')->get();  
+                    $depo=Deposits::whereStatus(0)->whereuser_id(Auth::guard('user')->user()->id)->where('txn_id', '!=', 'null')->get();
                     foreach($depo as $val){
                         if($val->gateway_id==505){
                             $method = Gateway::find(505);
@@ -149,7 +149,7 @@ class AppServiceProvider extends ServiceProvider
                                 $user->balance=$user->balance + $val->amount - $val->charge;
                                 $user->update();
                                 $val->status = 1;
-                                $val->update();            
+                                $val->update();
                             }elseif($status<0){
                                 $val->status = 2;
                                 $val->update();
@@ -167,14 +167,14 @@ class AppServiceProvider extends ServiceProvider
                                 $user->balance=$user->balance + $val->amount - $val->charge;
                                 $user->update();
                                 $val->status = 1;
-                                $val->update();            
+                                $val->update();
                             }elseif($status<0){
                                 $val->status = 2;
                                 $val->update();
                             }
                         }
-                    } 
-                //   
+                    }
+                //
                 $view->with('p_transfer', $p_transfer);
                 $view->with('p_request', $p_request);
                 $view->with('user', $user);
@@ -188,24 +188,24 @@ class AppServiceProvider extends ServiceProvider
                 //sub_check();
             }
             */
-			
+
             //Failed Transfer Claim
             foreach($transfer as $val){
                 $set=Settings::first();
                 $date1=Carbon::now();
                 $date2=Carbon::parse($val->created_at);
                 $check=$date1->diffInDays($date2);
-                if($check==5 || $check>5){
-                    $sender=User::whereid($val->sender_id)->first();
-                    $sender->balance=$val->amount+$sender->balance;
-                    $sender->save();
-                    $val->status=2;
-                    $val->save();
-                    if($set->email_notify==1){
-                        send_transferrefund($sender->ref_id);
-                    } 
-                }
-            }  
+                // if($check==5 || $check>5){
+                //     $sender=User::whereid($val->sender_id)->first();
+                //     $sender->balance=$val->amount+$sender->balance;
+                //     $sender->save();
+                //     $val->status=2;
+                //     $val->save();
+                //     if($set->email_notify==1){
+                //         send_transferrefund($sender->ref_id);
+                //     }
+                // }
+            }
             //Subscription Management
                 foreach($sub as $val){
                     $user=User::find($val->user_id);
@@ -214,14 +214,14 @@ class AppServiceProvider extends ServiceProvider
                     $set=Settings::first();
                     if($user->balance>$val->amount || $user->balance==$val->amount){
                         $user->balance=$user->balance-$val->amount;
-                        $user->save();        
+                        $user->save();
                         $receiver->balance=$receiver->balance+(($val->amount)-($val->amount*$set->subscription_charge/100));
                         $receiver->save();
                         //Audit log
                         $audit['user_id']=$user->id;
                         $audit['trx']=str_random(16);
                         $audit['log']='Payment for subscription #'.$link->ref_id.' - '.$link->name.' was successful';
-                        Audit::create($audit);                
+                        Audit::create($audit);
                         $audit['user_id']=$receiver->id;
                         $audit['trx']=str_random(16);
                         $audit['log']='Received payment for subscription #'.$link->ref_id.' - '.$link->name.' was successful';
@@ -236,20 +236,20 @@ class AppServiceProvider extends ServiceProvider
                         $change=Subscribers::whereuser_id($user->id)->whereplan_id($val->plan_id)->first();
                         $change->charge=$val->amount*$set->subscription_charge/100;
                         $dt = Carbon::create($change->expiring_date);
-                        $dt->add($change->plan['intervals']);   
+                        $dt->add($change->plan['intervals']);
                         $change->expiring_date=$dt;
                         $change->times=$change->times-1;
-                        $change->save(); 
+                        $change->save();
                         //Notify users
                         if($set->email_notify==1){
                             new_subscription($link->ref_id, 'account', $change->ref_id);
-                        } 
+                        }
                     }else{
                         //Notify users
                         if($set->email_notify==1 && $val->notify==1){
                             $ffg=Subscribers::whereuser_id($user->id)->whereplan_id($val->plan_id)->first();
                             insufficient_balance($link->ref_id, 'account', $ffg->ref_id);
-                        } 
+                        }
                     }
                 }
             //
@@ -290,7 +290,7 @@ class AppServiceProvider extends ServiceProvider
         $data['branch'] = Branch::all();
         $data['xfaq']=Faq::first();
 
-        
+
         view::share($data);
     }
 }
