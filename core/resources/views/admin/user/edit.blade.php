@@ -4,7 +4,7 @@
 <div class="container-fluid mt--6">
     <div class="content-wrapper">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="mb-0">{{__('Update Account Information')}}</h3>
@@ -43,24 +43,23 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-2">{{__('Type')}}</label>
-                                <select class="form-control col-lg-2" name="type"
-                                        id="exampleFormControlSelect2">
+                                <select class="form-control col-lg-2" name="type" id="exampleFormControlSelect2">
 
-                                        <option value="{{$client->type}}">
-                                            @if ($client->type == 1)
-                                            Agent
-                                            @elseif($client->type == 2)
-                                            Customer
-                                            @else
-                                            Business
-                                            @endif
-                                        </option>
-                                        <option value="1">Agent</option>
-                                        <option value="2">Customer</option>
-                                        <option value="3">Business</option>
+                                    <option value="{{$client->type}}">
+                                        @if ($client->type == 1)
+                                        Agent
+                                        @elseif($client->type == 2)
+                                        Customer
+                                        @else
+                                        Business
+                                        @endif
+                                    </option>
+                                    <option value="1">Agent</option>
+                                    <option value="2">Customer</option>
+                                    <option value="3">Business</option>
 
 
-                                    </select>
+                                </select>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-2">{{__('Mobile')}}</label>
@@ -162,7 +161,7 @@
                 </div>
 
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="mb-0">{{__('Compliance')}}</h3>
@@ -221,14 +220,51 @@
                         @endif
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-body text-center">
-                        <div class="card-img-actions d-inline-block mb-3">
-                            <img class="img-fluid rounded-circle" src="{{url('/')}}/asset/profile/{{$client->image}}"
-                                width="120" height="120" alt="">
+
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <div class="card-img-actions d-inline-block mb-3">
+                                    <img class="img-fluid rounded-circle"
+                                        src="https://enkpayapp.enkwave.com/public/upload/identification_image/{{$client->identification_image}}" width="120" height="120"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <div class="card-img-actions d-inline-block mb-3">
+                                    <img class="img-fluid rounded-circle"
+                                    src="https://enkpayapp.enkwave.com/public/upload/selfie/{{$client->image}}" width="120" height="120"
+                                    alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <div class="card-img-actions d-inline-block mb-3">
+                                    <img class="img-fluid rounded-circle"
+                                    src="https://enkpayapp.enkwave.com/public/upload/utilitybill/{{$client->utility_bill}}" width="120" height="120"
+                                        alt="">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+
+
+                </div>
+
 
 
 
@@ -450,8 +486,8 @@
                             <div class="form-group">
                                 <div class="col-lg-12">
                                     <div class="input-group">
-                                        <input type="number" required name="v_account_no"
-                                            placeholder="Enter Account No" class="form-control">
+                                        <input type="number" required name="v_account_no" placeholder="Enter Account No"
+                                            class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -473,8 +509,8 @@
                             <div class="form-group">
                                 <div class="col-lg-12">
                                     <div class="input-group">
-                                        <input type="text"  placeholder="Enter Bank Name" name="v_bank_name"
-                                            required class="form-control">
+                                        <input type="text" placeholder="Enter Bank Name" name="v_bank_name" required
+                                            class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -482,8 +518,8 @@
                             <div class="form-group">
                                 <div class="col-lg-12">
                                     <div class="input-group">
-                                        <input type="number"  placeholder="Enter Serial No" name="serial_no"
-                                            required class="form-control">
+                                        <input type="number" placeholder="Enter Serial No" name="serial_no" required
+                                            class="form-control">
                                     </div>
                                 </div>
                             </div>
