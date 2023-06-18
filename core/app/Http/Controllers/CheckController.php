@@ -704,6 +704,8 @@ class CheckController extends Controller
             $com->save();
         }
         $data['client'] = $user = User::find($id);
+
+        dd($data['client']);
         $data['title'] = $user->business_name;
         $data['deposit'] = Deposits::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
 
