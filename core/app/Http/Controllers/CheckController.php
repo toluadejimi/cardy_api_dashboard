@@ -705,7 +705,6 @@ class CheckController extends Controller
         }
         $data['client'] = $user = User::find($id);
 
-        dd($data['client']);
         $data['title'] = $user->business_name;
         $data['deposit'] = Deposits::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
 
