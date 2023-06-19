@@ -64,6 +64,7 @@ use App\Models\Storefrontproducts;
 use App\Models\Shipping;
 use App\Models\Subaccounts;
 use App\Models\Cart;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use Stripe\Stripe;
 use Stripe\Token;
@@ -233,10 +234,10 @@ class CheckController extends Controller
         $data['do'] = Transactions::whereStatus(1)->wheretype(2)->sum('amount');
 
         $data['money_in_today'] = Transactions::whereDate('created_at', Carbon::today())
-        ->sum('credit');
+            ->sum('credit');
 
         $data['money_out_today'] = Transactions::whereDate('created_at', Carbon::today())
-        ->sum('debit');
+            ->sum('debit');
 
 
         $data['doc'] = Transactions::whereStatus(1)->wheretype(2)->sum('charge');
@@ -423,7 +424,6 @@ class CheckController extends Controller
                 if ($total_paid == 25000) {
 
                     $total_paid = Terminal::where('serial_no', $serial_no)->update(['p_type' => 2]);
-
                 }
 
 
@@ -582,6 +582,9 @@ class CheckController extends Controller
         //     return back()->with('alert', 'username already taken');
         // }
     }
+
+
+
 
 
     public function Ticket()
@@ -1122,5 +1125,34 @@ class CheckController extends Controller
 
         VirtualAccount::where('v_account_no', $request->v_account_no)->delete();
         return back()->with('alert', 'Account deleted  Successfully');
+    }
+
+
+    public function reverse_transaction(request $request)
+    {
+
+        $trx = Transaction::where('ref_trans_id', $request->ref)->first();
+        User::where('id', $trx->user_id)->increment('main_wallet', $trx->debit);
+        Transaction::where('ref_trans_id', $request->ref)->update('status', 1);
+        $user_b = User::where('id', $trx->user_id)->first('main_wallet');
+        $balance = $user_b + $trx->debit;
+
+        $trasnaction = new Transaction();
+        $trasnaction->user_id = $trx->user_id;
+        $trasnaction->ref_trans_id = $trx->ref_trans_id;
+        $trasnaction->e_ref = $trx->e_ref;
+        $trasnaction->transaction_type = "Reversal";
+        $trasnaction->debit = 0;
+        $trasnaction->amount = $trx->debit;
+        $trasnaction->serial_no = 0;
+        $trasnaction->title = "Reversal";
+        $trasnaction->note = "Revasal | $trx->receiver_name | $trx->receiver_account_no";
+        $trasnaction->fee = 0;
+        $trasnaction->balance = $balance;
+        $trasnaction->main_type = "Revasal";
+        $trasnaction->status = 3;
+        $trasnaction->save();
+
+        return back()->with('success', 'Reversal  Successfully Done');
     }
 }

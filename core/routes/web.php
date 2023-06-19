@@ -396,6 +396,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     Route::post('delete/accountno/{v_account_no}', [CheckController::class, 'delete_v_account'])->name('delete.v_account');
 
+    Route::post('update/transaction/{ref_trans_id}', [CheckController::class, 'reverse_transaction'])->name('reverse.transaction');
+
+
 
     Route::post('add/vaccount}', [CheckController::class, 'add_vaccount'])->name('add.vaccount');
 

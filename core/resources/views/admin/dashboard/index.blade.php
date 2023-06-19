@@ -387,14 +387,18 @@
                                         @if($item->status == "1")
                                         <td><span class="badge rounded-pill bg-success text-white ">Successful</span></td>
                                         @elseif($item->status == "2")
-                                        <td><span class="badge rounded-pill bg-warning">Pending</span></td>
+                                        <td><span class="badge rounded-pill bg-warning text-white">Pending</span></td>
                                         @elseif($item->status == "3")
-                                        <td><span class="badge rounded-pill bg-warning">Reversed</span></td>
+                                        <td><span class="badge rounded-pill bg-warning text-white">Reversed</span></td>
                                         @elseif($item->status == "0")
-                                        <td><span class="badge rounded-pill bg-warning">Pending</span></td>
+                                        <td><span class="badge rounded-pill bg-warning text-white">Pending</span></td>
                                         @else
-                                        <td><span class="badge rounded-pill bg-danger">Declined</span></td>
+                                        <td><span class="badge rounded-pill bg-danger text-white">Declined</span></td>
                                         @endif
+
+                                    
+
+
                                         <td>{{date('F d, Y', strtotime($item->created_at))}}</td>
                                         <td>{{date('h:i:s A', strtotime($item->created_at))}}</td>
     
