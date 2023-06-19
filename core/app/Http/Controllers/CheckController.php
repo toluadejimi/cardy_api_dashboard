@@ -633,9 +633,44 @@ class CheckController extends Controller
         $set = Settings::first();
         $user = User::all();
         foreach ($user as $val) {
-            $x = User::select('*')->where('device_id',$val->device_id)->first();
-            
-            dd($x);
+            $x = User::select('*')->where('device_id', $val->device_id)->first();
+
+            if ($x != NULL) {
+                foreach ($user as $val) {
+                    $registrationIds = $val->device_id;
+
+                    #prep the bundle
+                    $msg = array( 
+                        "title" => $request->subject,
+                        "body" => $request->message,
+                        "icon" => "ic_notification",
+                        "click_action" => "OPEN_CHAT_ACTIVITY",
+                    );
+                    $fields = array(
+                        'to'            => $registrationIds,
+                        'notification'  => $msg
+                    );
+                    $SERVER_API_KEY = env('FCM_SERVER_KEY');
+
+                    $headers = [
+                        'Authorization: key=' . $SERVER_API_KEY,
+                        'Content-Type: application/json',
+                    ];
+
+                    #Send Reponse To FireBase Server
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+                    curl_setopt($ch, CURLOPT_POST, true);
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+
+                    $result = curl_exec($ch);
+                    echo "<pre>";print_r($result);exit;
+                    curl_close($ch);
+                }
+            }
         }
 
 
@@ -647,13 +682,13 @@ class CheckController extends Controller
 
         //         dd($x);
 
-                
+
 
         //     }
         // }
         // $notification_data = User::select('device_id')->get() ?? null;
 
-      
+
 
         //     if($notification_data != NULL){
         //         foreach ($notification_data as $notification_data_row) {
@@ -1245,7 +1280,7 @@ class CheckController extends Controller
         $device_id = User::where('id', $request->user_id)->first()->device_id ?? null;
 
         $terminal_out_inst_amount = Terminal::where('user_id', $request->user_id)->where('p_type', 2)->first()->amount ?? null;
-        
+
         $terminal_amount = Terminal::where('user_id', $request->user_id)->where('p_type', 0)->first()->amount ?? null;
         $p_type = Terminal::where('user_id', $request->user_id)->first()->p_type ?? null;
 
@@ -1253,39 +1288,35 @@ class CheckController extends Controller
         $terminal_lease_inst_amount = Terminal::where('user_id', $request->user_id)->where('p_type', 3)->first()->amount ?? null;
 
 
-        if($main_wallet < $request->amount ){
+        if ($main_wallet < $request->amount) {
             return back()->with('alert', "User does not have sufficient funds");
         }
 
 
-        if($terminal_out_inst_amount == 60000 && $p_type == 2 ){
+        if ($terminal_out_inst_amount == 60000 && $p_type == 2) {
             return back()->with('alert', "User has completed outrignt installment payment");
         }
 
 
-        if($terminal_lease_inst_amount == 25000 && $p_type == 3 ){
+        if ($terminal_lease_inst_amount == 25000 && $p_type == 3) {
             return back()->with('alert', "User has completed lease installment payment");
         }
 
 
 
 
-        if($terminal_amount == 50000 && $p_type == 1 ){
+        if ($terminal_amount == 50000 && $p_type == 1) {
 
             return back()->with('success', "User has just completed full outright payment");
-
-
         }
 
 
 
-        if($terminal_amount == 25000 && $p_type == 0 ){
+        if ($terminal_amount == 25000 && $p_type == 0) {
 
             Terminal::where('user_id', $request->user_id)->update('p_type', 3);
 
             return back()->with('success', "User has just completed lease payment");
-
-
         }
 
 
@@ -1302,7 +1333,7 @@ class CheckController extends Controller
 
         $trasnaction = new Transaction();
         $trasnaction->user_id = $request->user_id;
-        $trasnaction->ref_trans_id = "ENK-".random_int(000000,999999);
+        $trasnaction->ref_trans_id = "ENK-" . random_int(000000, 999999);
         $trasnaction->transaction_type = "TerminalPayment";
         $trasnaction->debit = $request->amount;
         $trasnaction->amount = $request->amount;
@@ -1316,7 +1347,7 @@ class CheckController extends Controller
         $trasnaction->save();
 
 
-      
+
 
         //send Notification
         if ($device_id != null) {
@@ -1327,7 +1358,7 @@ class CheckController extends Controller
 
                 "notification" => [
                     "title" => "Terminal Payment",
-                    "body" => "NGN".number_format($request->amount, 2). " debit for Terminal Payment",
+                    "body" => "NGN" . number_format($request->amount, 2) . " debit for Terminal Payment",
                     "icon" => "ic_notification",
                     "click_action" => "OPEN_CHAT_ACTIVITY",
 
@@ -1369,14 +1400,4 @@ class CheckController extends Controller
 
         return back()->with('success', 'Terminal Payment  Successfully Paid');
     }
-
-
-
-
-
-
-
-
-
-
 }
