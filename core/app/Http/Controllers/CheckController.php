@@ -618,7 +618,7 @@ class CheckController extends Controller
 
     public function Sendpromo(Request $request)
     {
-        $set = Settings::first();
+        // $set = Settings::first();
         // $user = User::all();
 
 
@@ -630,19 +630,30 @@ class CheckController extends Controller
         //     }
         // }
 
+        $set = Settings::first();
+        $user = User::all();
 
-        $user = User::select('device_id')->get();
+
+
         foreach ($user as $val) {
-            $x  = $val['device_id'];
-            if ($x != null) {
+            $x = User::whereEmail($val->email)->first();
+            
+            dd($x);
+        }
 
 
-                dd($x);
+        // $user = User::select('device_id')->get();
+        // foreach ($user as $val) {
+        //     $x  = $val['device_id'];
+        //     if ($x != null) {
+
+
+        //         dd($x);
 
                 
 
-            }
-        }
+        //     }
+        // }
         // $notification_data = User::select('device_id')->get() ?? null;
 
       
