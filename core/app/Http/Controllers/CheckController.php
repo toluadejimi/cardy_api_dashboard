@@ -639,17 +639,27 @@ class CheckController extends Controller
                 foreach ($user as $val) {
                     $registrationIds = $val->device_id;
 
-                    #prep the bundle
-                    $msg = array( 
-                        "title" => $request->subject,
-                        "body" => $request->message,
-                        "icon" => "ic_notification",
-                        "click_action" => "OPEN_CHAT_ACTIVITY",
-                    );
-                    $fields = array(
-                        'to'            => $registrationIds,
-                        'notification'  => $msg
-                    );
+                    $data = [
+
+                        "registration_ids" => array($registrationIds),
+
+                        "notification" => [
+                            "title" => $request->subject,
+                            "body" => $request->message,
+                            "icon" => "ic_notification",
+                            "click_action" => "OPEN_CHAT_ACTIVITY",
+                        ],
+
+                        "data" => [
+                            "sender_name" => "Grettings",
+                            "sender_bank" => $request->message,
+                            "amount" => 0,
+                        ],
+
+                    ];
+
+                    $dataString = json_encode($data);
+
                     $SERVER_API_KEY = env('FCM_SERVER_KEY');
 
                     $headers = [
@@ -657,18 +667,22 @@ class CheckController extends Controller
                         'Content-Type: application/json',
                     ];
 
-                    #Send Reponse To FireBase Server
+
                     $ch = curl_init();
+
                     curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
                     curl_setopt($ch, CURLOPT_POST, true);
                     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
 
-                    $result = curl_exec($ch);
-                    dd($result);
+                    $get_response = curl_exec($ch);
+
+
+                    dd($get_response, $dataString, $headers);
                     curl_close($ch);
+
                 }
             }
         }
