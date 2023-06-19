@@ -4,6 +4,62 @@
 <div class="container-fluid mt--6">
     <div class="content-wrapper">
         <div class="row">
+
+
+            <div class="col-md-4">
+
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                            <div>
+                                <h3 class="mb-2">Total In</h3>
+                                <ul class="list list-unstyled mb-0">
+                                    <h2><span
+                                            class="text-default text-sm">{{$currency->symbol.number_format($moneyin)}}</span>
+                                    </h2>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="col-md-4">
+
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                            <div>
+                                <h3 class="mb-2">Total In</h3>
+                                <ul class="list list-unstyled mb-0">
+                                    <h2><span
+                                            class="text-default text-sm">{{$currency->symbol.number_format($moneyout)}}</span>
+                                    </h2>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
             <div class="col-lg-12">
                 <div class="card-body">
                     <a href="{{route('new.transaction')}}" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i> {{__('New Transaction')}}</a>

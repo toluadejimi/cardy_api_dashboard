@@ -91,6 +91,9 @@ class CheckController extends Controller
     {
         $data['title'] = 'Transactions';
         $data['transactions'] = Transactions::latest()->get();
+        $data['moneyin'] = Transactions::select('credit')->sum('credit');
+        $data['moneyout'] = Transactions::select('debit')->sum('debit');
+
         return view('admin.all-transactions.index', $data);
     }
 
