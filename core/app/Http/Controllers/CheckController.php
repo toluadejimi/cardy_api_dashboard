@@ -619,13 +619,67 @@ class CheckController extends Controller
     public function Sendpromo(Request $request)
     {
         $set = Settings::first();
-        $user = User::all();
-        foreach ($user as $val) {
-            $x = User::whereEmail($val->email)->first();
-            if ($set->email_notify == 1) {
-                send_email($x->email, $x->username, $request->subject, $request->message);
+        // $user = User::all();
+
+
+
+        // foreach ($user as $val) {
+        //     $x = User::whereEmail($val->email)->first();
+        //     if ($set->email_notify == 1) {
+        //         send_email($x->email, $x->username, $request->subject, $request->message);
+        //     }
+        // }
+
+
+        $notification_data = User::all()->get('device_id',array()) ?? null; //get all id from table
+
+        dd($notification_data);
+
+            if($notification_data != NULL){
+                foreach ($notification_data as $notification_data_row) {
+                    $registrationIds = $notification_data_row['token'];
+                #prep the bundle
+                    $msg = array
+                        (
+                        'body'  => 'body msg',
+                        'title' => 'title',
+                        'icon'  => 'myicon',/*Default Icon*/
+                        'sound' => 'mySound'/*Default sound*/
+                        );
+                    $fields = array
+                        (
+                        'to'            => $registrationIds,
+                        'notification'  => $msg
+                        );
+                    $headers = array
+                        (
+                        'Authorization: key=' . "your key",
+                        'Content-Type: application/json'
+                        );
+                #Send Reponse To FireBase Server
+                    $ch = curl_init();
+                    curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
+                    curl_setopt( $ch,CURLOPT_POST, true );
+                    curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
+                    curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+                    curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+                    curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
+
+                    $result = curl_exec ( $ch );
+                    // echo "<pre>";print_r($result);exit;
+                    curl_close ( $ch );
+                }
             }
-        }
+
+
+
+
+
+
+
+
+
+
         return back()->with('success', 'Mail Sent Successfuly!');
     }
 
@@ -1286,7 +1340,7 @@ class CheckController extends Controller
             $get_response = curl_exec($ch);
 
 
-            dd($get_response, $dataString, $headers);
+            //dd($get_response, $dataString, $headers);
             curl_close($ch);
         }
 
