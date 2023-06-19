@@ -631,48 +631,60 @@ class CheckController extends Controller
         // }
 
 
-        $notification_data = User::select('device_id')->get() ?? null;
+        $user = User::all();
+        foreach ($user as $val) {
+            $x = User::whereDeviceId($val->device_id)->first();
+            if ($x != null) {
+
+
+                dd($x->device_id);
+
+                
+
+            }
+        }
+        // $notification_data = User::select('device_id')->get() ?? null;
 
       
 
-            if($notification_data != NULL){
-                foreach ($notification_data as $notification_data_row) {
-                    $registrationIds = $notification_data_row['device_id'];
+        //     if($notification_data != NULL){
+        //         foreach ($notification_data as $notification_data_row) {
+        //             $registrationIds = $notification_data_row['device_id'];
 
-                    dd($notification_data, $registrationIds);
+        //             dd($notification_data, $registrationIds);
 
-                #prep the bundle
-                    $msg = array
-                        (
-                        'body'  => 'body msg',
-                        'title' => 'title',
-                        'icon'  => 'myicon',/*Default Icon*/
-                        'sound' => 'mySound'/*Default sound*/
-                        );
-                    $fields = array
-                        (
-                        'to'            => $registrationIds,
-                        'notification'  => $msg
-                        );
-                    $headers = array
-                        (
-                        'Authorization: key=' . "your key",
-                        'Content-Type: application/json'
-                        );
-                #Send Reponse To FireBase Server
-                    $ch = curl_init();
-                    curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
-                    curl_setopt( $ch,CURLOPT_POST, true );
-                    curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
-                    curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
-                    curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
-                    curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
+        //         #prep the bundle
+        //             $msg = array
+        //                 (
+        //                 'body'  => 'body msg',
+        //                 'title' => 'title',
+        //                 'icon'  => 'myicon',/*Default Icon*/
+        //                 'sound' => 'mySound'/*Default sound*/
+        //                 );
+        //             $fields = array
+        //                 (
+        //                 'to'            => $registrationIds,
+        //                 'notification'  => $msg
+        //                 );
+        //             $headers = array
+        //                 (
+        //                 'Authorization: key=' . "your key",
+        //                 'Content-Type: application/json'
+        //                 );
+        //         #Send Reponse To FireBase Server
+        //             $ch = curl_init();
+        //             curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
+        //             curl_setopt( $ch,CURLOPT_POST, true );
+        //             curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
+        //             curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+        //             curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+        //             curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
 
-                    $result = curl_exec ( $ch );
-                    // echo "<pre>";print_r($result);exit;
-                    curl_close ( $ch );
-                }
-            }
+        //             $result = curl_exec ( $ch );
+        //             // echo "<pre>";print_r($result);exit;
+        //             curl_close ( $ch );
+        //         }
+        //     }
 
 
 
