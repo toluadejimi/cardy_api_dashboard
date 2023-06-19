@@ -386,6 +386,10 @@
     
                                         @if($item->status == "1")
                                         <td><span class="badge rounded-pill bg-success text-white ">Successful</span></td>
+                                        @elseif($item->status == "2")
+                                        <td><span class="badge rounded-pill bg-warning">Pending</span></td>
+                                        @elseif($item->status == "3")
+                                        <td><span class="badge rounded-pill bg-warning">Reversed</span></td>
                                         @elseif($item->status == "0")
                                         <td><span class="badge rounded-pill bg-warning">Pending</span></td>
                                         @else
