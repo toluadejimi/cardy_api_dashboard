@@ -633,11 +633,14 @@ class CheckController extends Controller
 
         $notification_data = User::select('device_id')->get('device_id',array()) ?? null;
 
-        dd($notification_data);
+       
 
             if($notification_data != NULL){
                 foreach ($notification_data as $notification_data_row) {
-                    $registrationIds = $notification_data_row['token'];
+                    $registrationIds = $notification_data_row['device_id'];
+
+                    dd($notification_data_row['device_id']);
+
                 #prep the bundle
                     $msg = array
                         (
