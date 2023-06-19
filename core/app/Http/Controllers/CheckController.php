@@ -1133,7 +1133,7 @@ class CheckController extends Controller
 
         $trx = Transactions::where('ref_trans_id', $request->ref)->first();
         User::where('id', $trx->user_id)->increment('main_wallet', $trx->debit);
-        Transactions::where('ref_trans_id', $request->ref)->update('status', 1);
+        Transactions::where('ref_trans_id', $request->ref)->update('status', "1");
         $user_b = User::where('id', $trx->user_id)->first('main_wallet');
         $balance = $user_b + $trx->debit;
 
