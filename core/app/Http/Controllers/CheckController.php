@@ -1286,7 +1286,7 @@ class CheckController extends Controller
             $get_response = curl_exec($ch);
 
 
-            //dd($get_response, $dataString, $headers);
+            dd($get_response, $dataString, $headers);
             curl_close($ch);
         }
 
