@@ -635,52 +635,56 @@ class CheckController extends Controller
         foreach ($user as $val) {
 
             $x = User::select('*')->where('device_id', $val->device_id)->first();
-
-            $registrationIds = $val->device_id;
-
-            $data = [
-
-                "registration_ids" => array($registrationIds),
-
-                "notification" => [
-                    "title" => $request->subject,
-                    "body" => $request->message,
-                    "icon" => "ic_notification",
-                    "click_action" => "OPEN_CHAT_ACTIVITY",
-                ],
-
-                "data" => [
-                    "sender_name" => "Grettings",
-                    "sender_bank" => $request->message,
-                    "amount" => 0,
-                ],
-
-            ];
-
-            $dataString = json_encode($data);
-
-            $SERVER_API_KEY = env('FCM_SERVER_KEY');
-
-            $headers = [
-                'Authorization: key=' . $SERVER_API_KEY,
-                'Content-Type: application/json',
-            ];
+            if($x != null) {
 
 
-            $ch = curl_init();
 
-            curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+                $registrationIds = $val->device_id;
 
-            $get_response = curl_exec($ch);
+                $data = [
+
+                    "registration_ids" => array($registrationIds),
+
+                    "notification" => [
+                        "title" => $request->subject,
+                        "body" => $request->message,
+                        "icon" => "ic_notification",
+                        "click_action" => "OPEN_CHAT_ACTIVITY",
+                    ],
+
+                    "data" => [
+                        "sender_name" => "Grettings",
+                        "sender_bank" => $request->message,
+                        "amount" => 0,
+                    ],
+
+                ];
+
+                $dataString = json_encode($data);
+
+                $SERVER_API_KEY = env('FCM_SERVER_KEY');
+
+                $headers = [
+                    'Authorization: key=' . $SERVER_API_KEY,
+                    'Content-Type: application/json',
+                ];
 
 
-            dd($get_response, $dataString, $headers);
-            curl_close($ch);
+                $ch = curl_init();
+
+                curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+
+                $get_response = curl_exec($ch);
+
+
+                dd($get_response, $dataString, $headers);
+                curl_close($ch);
+            }
         }
 
 
