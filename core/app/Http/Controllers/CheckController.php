@@ -1167,13 +1167,13 @@ class CheckController extends Controller
         $main_wallet = User::where('id', $request->user_id)->first()->main_wallet ?? null;
         $device_id = User::where('id', $request->user_id)->first()->device_id ?? null;
 
-        $terminal_out_inst_amount = Terminal::where('user_id', $request->user_id)->where('p_type', 2)->first()->amount;
+        $terminal_out_inst_amount = Terminal::where('user_id', $request->user_id)->where('p_type', 2)->first()->amount ?? null;
         
-        $terminal_amount = Terminal::where('user_id', $request->user_id)->where('p_type', 0)->first()->amount;
-        $p_type = Terminal::where('user_id', $request->user_id)->first()->p_type;
+        $terminal_amount = Terminal::where('user_id', $request->user_id)->where('p_type', 0)->first()->amount ?? null;
+        $p_type = Terminal::where('user_id', $request->user_id)->first()->p_type ?? null;
 
 
-        $terminal_lease_inst_amount = Terminal::where('user_id', $request->user_id)->where('p_type', 3)->first()->amount;
+        $terminal_lease_inst_amount = Terminal::where('user_id', $request->user_id)->where('p_type', 3)->first()->amount ?? null;
 
 
         if($main_wallet < $request->amount ){
