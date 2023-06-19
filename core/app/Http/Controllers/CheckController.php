@@ -631,14 +631,14 @@ class CheckController extends Controller
         // }
 
         $set = Settings::first();
-        $users = User::all();
+        $users = User::where('status', 2)->get();
        
 
         foreach($users as $val){
 
             $id = $val->device_id;
 
-            $re = array_filter($id,'strlen');
+            $re = array_filter($id);
 
             dd($re);
         }
