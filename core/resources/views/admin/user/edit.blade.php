@@ -423,6 +423,60 @@
             </div>
         </div>
 
+        <div class="card">
+            <div class="card-body">
+                <div class="card-header">
+                    <h3 class="mb-0">{{__('Terminal Payment')}}</h3>
+                </div>
+
+
+                <div class="card-header">
+                    <h3 class="mb-0">{{__('Add Payment')}}</h3>
+                </div>
+
+                <div class="col-lg-12 flex-lg-nowrap">
+
+                    <form action="{{route('terminal.payment')}}" method="post">
+                        @csrf
+
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <div class="input-group">
+                                        <input type="number" required name="serial_no"
+                                            placeholder="Enter Terminla Serial No" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="text" hidden name="user_id" value="{{ $client->id }}">
+
+
+
+
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <div class="input-group">
+                                        <input type="text" name="amount" placeholder="Enter Amount "
+                                            class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                         
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success btn-sm mt-3">{{__('Add Payment')}}</button>
+                            </div>
+
+                        </div>
+
+                </div>
+                </form>
+            </div>
+        </div>
+
+
 
 
 

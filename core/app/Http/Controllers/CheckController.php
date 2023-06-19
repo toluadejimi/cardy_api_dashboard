@@ -1156,4 +1156,148 @@ class CheckController extends Controller
 
         return back()->with('success', 'Reversal  Successfully Done');
     }
+
+
+
+    public function terminal_payment(request $request)
+    {
+
+        $main_wallet = User::where('id', $request->user_id)->first()->main_wallet ?? null;
+        $device_id = User::where('id', $request->user_id)->first()->device_id ?? null;
+
+        $terminal_out_inst_amount = Terminal::where('user_id', $request->user_id)->where('p_type', 2)->first()->amount;
+        
+        $terminal_amount = Terminal::where('user_id', $request->user_id)->where('p_type', 0)->first()->amount;
+        $p_type = Terminal::where('user_id', $request->user_id)->first()->p_type;
+
+
+        $terminal_lease_inst_amount = Terminal::where('user_id', $request->user_id)->where('p_type', 3)->first()->amount;
+
+
+        if($main_wallet < $request->amount ){
+            return back()->with('alert', "User does not have sufficient funds");
+        }
+
+
+        if($terminal_out_inst_amount == 60000 && $p_type == 2 ){
+            return back()->with('alert', "User has completed outrignt installment payment");
+        }
+
+
+        if($terminal_lease_inst_amount == 25000 && $p_type == 3 ){
+            return back()->with('alert', "User has completed lease installment payment");
+        }
+
+
+
+
+        if($terminal_amount == 50000 && $p_type == 1 ){
+
+            return back()->with('success', "User has just completed full outright payment");
+
+
+        }
+
+
+
+        if($terminal_amount == 25000 && $p_type == 0 ){
+
+            Terminal::where('user_id', $request->user_id)->update('p_type', 3);
+
+            return back()->with('success', "User has just completed lease payment");
+
+
+        }
+
+
+
+        User::where('id', $request->user_id)->decrement('main_wallet', $request->amount);
+
+        $balance = $main_wallet - $request->amount;
+
+
+        Terminal::where('user_id', $request->user_id)->increment('amount', $request->amount);
+        Terminal::where('user_id', $request->user_id)->update('p_type', 2);
+
+
+
+        $trasnaction = new Transaction();
+        $trasnaction->user_id = $request->user_id;
+        $trasnaction->ref_trans_id = "ENK-".random_int(000000,999999);
+        $trasnaction->transaction_type = "TerminalPayment";
+        $trasnaction->debit = $request->amount;
+        $trasnaction->amount = $request->amount;
+        $trasnaction->serial_no = $request->serial_no;
+        $trasnaction->title = "Terminal Payment";
+        $trasnaction->note = "Installment Payment for terminal";
+        $trasnaction->fee = 0;
+        $trasnaction->balance = $balance;
+        $trasnaction->main_type = "TerminalPayment";
+        $trasnaction->status = 0;
+        $trasnaction->save();
+
+
+      
+
+        //send Notification
+        if ($device_id != null) {
+
+            $data = [
+
+                "registration_ids" => array($device_id),
+
+                "notification" => [
+                    "title" => "Terminal Payment",
+                    "body" => "NGN".number_format($request->amount, 2). " debit for Terminal Payment",
+                    "icon" => "ic_notification",
+                    "click_action" => "OPEN_CHAT_ACTIVITY",
+
+                ],
+
+                "data" => [
+                    "sender_name" => "Terminal Payment",
+                    "sender_bank" => "ENKPAY",
+                    "amount" => number_format($request->amount, 2)
+                ],
+
+            ];
+
+            $dataString = json_encode($data);
+
+            $SERVER_API_KEY = env('FCM_SERVER_KEY');
+
+            $headers = [
+                'Authorization: key=' . $SERVER_API_KEY,
+                'Content-Type: application/json',
+            ];
+
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+
+            $get_response = curl_exec($ch);
+
+
+            //dd($get_response, $dataString, $headers);
+            curl_close($ch);
+        }
+
+        return back()->with('success', 'Terminal Payment  Successfully Paid');
+    }
+
+
+
+
+
+
+
+
+
+
 }

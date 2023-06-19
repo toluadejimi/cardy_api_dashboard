@@ -386,7 +386,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     Route::get('user/destory/{id}', [CheckController::class, 'Destroyuser'])->name('user.destory');
 
-    Route::post('add/terminal}', [CheckController::class, 'add_terminal'])->name('add.terminal');
+    Route::post('add/terminal', [CheckController::class, 'add_terminal'])->name('add.terminal');
+
+    Route::post('terminal/payment', [CheckController::class, 'terminal_payment'])->name('terminal.payment');
+
+
+    
 
     Route::post('deactivate/terminal/{serial_no}', [CheckController::class, 'deactivate_terminal'])->name('deactivate.terminal');
     Route::post('activate/terminal/{serial_no}', [CheckController::class, 'activate_terminal'])->name('activate.terminal');
