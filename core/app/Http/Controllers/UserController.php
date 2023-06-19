@@ -584,7 +584,7 @@ class UserController extends Controller
         $user_id = VCard::where('user_id', Auth::id())->first()->user_id ?? null;
 
 
-   
+
 
 
         if ($chk == null) {
@@ -719,6 +719,8 @@ class UserController extends Controller
 
         $amount_to_charge = $request->amount + $set->ngn_rate;
 
+        $user_wallet = User::where('id', Auth::id())-first()->main_wallet;
+
 
         if (Auth::user()->main_wallet < $amount_to_charge ) {
             return back()->with('alert', 'Account balance is insufficient, Fund your wallet');
@@ -726,7 +728,7 @@ class UserController extends Controller
 
 
         $e_ref = random_int(1000000, 9999999);
-       
+
 
 
         $ref = "CAD-".random_int(1000000, 9999999);
@@ -778,13 +780,13 @@ class UserController extends Controller
             ]);
 
 
-            $balance = Auth::user()->wallet - $amount_to_charge;
+            $balance = $user_wallet - $amount_to_charge;
             User::where('id', Auth::id())->decrement('main_wallet', $amount_to_charge );
 
             $trasnaction = new Transactions();
             $trasnaction->user_id = Auth::id();
             $trasnaction->e_ref = $ref;
-            $trasnaction->ref_trans_id = $e_ref;
+            $trasnaction->ref_trans_id = $ref;
             $trasnaction->transaction_type = "CardFunding";
             $trasnaction->title = "USD Card Funding";
             $trasnaction->type = "CardFunding";
