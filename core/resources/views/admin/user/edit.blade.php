@@ -444,7 +444,7 @@
                                 <div class="col-lg-12">
                                     <div class="input-group">
                                         <input type="number" required name="serial_no"
-                                            placeholder="Enter Terminla Serial No" class="form-control">
+                                            value="{{$terminal_id}}"placeholder="Enter Terminla Serial No" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -457,7 +457,7 @@
                             <div class="form-group">
                                 <div class="col-lg-12">
                                     <div class="input-group">
-                                        <input type="text" name="amount" placeholder="Enter Amount "
+                                        <input type="number" name="amount" placeholder="Enter Amount "
                                             class="form-control">
                                     </div>
                                 </div>

@@ -726,6 +726,8 @@ class CheckController extends Controller
         $data['deposit'] = Deposits::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
 
         $data['terminal'] = Terminal::where('user_id', $user->id)->get();
+        $data['terminal_id'] = Terminal::where('user_id', $user->id)->serial_no();
+
         $data['v_account'] = VirtualAccount::where('user_id', $user->id)->get();
 
         $data['transactions'] = Transactions::latest()->where('user_id', $user->id)->get();
