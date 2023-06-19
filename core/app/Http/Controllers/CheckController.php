@@ -1131,13 +1131,13 @@ class CheckController extends Controller
     public function reverse_transaction(request $request)
     {
 
-        $trx = Transaction::where('ref_trans_id', $request->ref)->first();
+        $trx = Transactions::where('ref_trans_id', $request->ref)->first();
         User::where('id', $trx->user_id)->increment('main_wallet', $trx->debit);
-        Transaction::where('ref_trans_id', $request->ref)->update('status', 1);
+        Transactions::where('ref_trans_id', $request->ref)->update('status', 1);
         $user_b = User::where('id', $trx->user_id)->first('main_wallet');
         $balance = $user_b + $trx->debit;
 
-        $trasnaction = new Transaction();
+        $trasnaction = new Transactions();
         $trasnaction->user_id = $trx->user_id;
         $trasnaction->ref_trans_id = $trx->ref_trans_id;
         $trasnaction->e_ref = $trx->e_ref;
