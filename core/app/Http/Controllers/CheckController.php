@@ -1219,7 +1219,7 @@ class CheckController extends Controller
 
 
         Terminal::where('user_id', $request->user_id)->increment('amount', $request->amount);
-        Terminal::where('user_id', $request->user_id)->update('p_type', 2);
+        Terminal::where('user_id', $request->user_id)->update(['p_type' => 2]);
 
 
 
