@@ -35,10 +35,31 @@
                     <div class="card-body">
                         <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
                             <div>
-                                <h3 class="mb-2">Total In</h3>
+                                <h3 class="mb-2">Total Out</h3>
                                 <ul class="list list-unstyled mb-0">
                                     <h2><span
                                             class="text-default text-sm">{{$currency->symbol.number_format($moneyout)}}</span>
+                                    </h2>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="col-md-4">
+
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                            <div>
+                                <h3 class="mb-2">POS Transfer</h3>
+                                <ul class="list list-unstyled mb-0">
+                                    <h2><span
+                                            class="text-default text-sm">{{$currency->symbol.number_format($postransfer)}}</span>
                                     </h2>
                                 </ul>
                             </div>
