@@ -667,7 +667,7 @@ class CheckController extends Controller
                     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
 
                     $result = curl_exec($ch);
-                    echo "<pre>";print_r($result);exit;
+                    dd($result);
                     curl_close($ch);
                 }
             }
