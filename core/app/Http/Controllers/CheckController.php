@@ -632,11 +632,8 @@ class CheckController extends Controller
 
         $set = Settings::first();
         $user = User::all();
-
-
-
         foreach ($user as $val) {
-            $x = User::whereEmail($val->email)->first();
+            $x = User::select('*')->where('device_id',$val->device_id)->first();
             
             dd($x);
         }
