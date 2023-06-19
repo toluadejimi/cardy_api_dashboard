@@ -638,9 +638,7 @@ class CheckController extends Controller
 
             $id = $val->device_id;
 
-            $re = array_filter($id);
-
-            dd($re);
+            dd($id);
         }
 
 
