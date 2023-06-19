@@ -164,7 +164,8 @@
 
             <div class="col-lg-12">
                 <div class="card-body">
-                    <a href="{{route('new.transaction')}}" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i> {{__('New Transaction')}}</a>
+                    <a href="{{route('new.transaction')}}" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i>
+                        {{__('New Transaction')}}</a>
                 </div>
             </div>
         </div>
@@ -225,11 +226,16 @@
 
                                     @if($item->status == "1")
                                     <td><span class="badge rounded-pill bg-success text-white ">Successful</span></td>
+                                    @elseif($item->status == "2")
+                                    <td><span class="badge rounded-pill bg-warning text-white">Pending</span></td>
+                                    @elseif($item->status == "3")
+                                    <td><span class="badge rounded-pill bg-warning text-white">Reversed</span></td>
                                     @elseif($item->status == "0")
-                                    <td><span class="badge rounded-pill bg-warning">Pending</span></td>
+                                    <td><span class="badge rounded-pill bg-warning text-white">Pending</span></td>
                                     @else
-                                    <td><span class="badge rounded-pill bg-danger">Declined</span></td>
+                                    <td><span class="badge rounded-pill bg-danger text-white">Declined</span></td>
                                     @endif
+
                                     <td>{{date('F d, Y', strtotime($item->created_at))}}</td>
                                     <td>{{date('h:i:s A', strtotime($item->created_at))}}</td>
 
@@ -250,4 +256,4 @@
 
 
 
-@stop
+        @stop
