@@ -631,7 +631,7 @@ class CheckController extends Controller
         // }
 
 
-        $notification_data = User::all()->get('device_id',array()) ?? null; //get all id from table
+        $notification_data = User::select('device_id')->get('device_id',array()) ?? null;
 
         dd($notification_data);
 
