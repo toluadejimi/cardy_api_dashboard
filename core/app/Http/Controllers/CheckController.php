@@ -631,60 +631,77 @@ class CheckController extends Controller
         // }
 
         $set = Settings::first();
-        $user = User::all();
-        foreach ($user as $val) {
+        $users = User::all();
+       
 
-            $x = User::select('*')->where('device_id', $val->device_id)->first();
-            if($x != null) {
+        foreach($users as $val){
 
+            $id = $val->device_id;
 
+            $re = array_filter($id);
 
-                $registrationIds = $val->device_id;
-
-                $data = [
-
-                    "registration_ids" => array($registrationIds),
-
-                    "notification" => [
-                        "title" => $request->subject,
-                        "body" => $request->message,
-                        "icon" => "ic_notification",
-                        "click_action" => "OPEN_CHAT_ACTIVITY",
-                    ],
-
-                    "data" => [
-                        "sender_name" => "Grettings",
-                        "sender_bank" => $request->message,
-                        "amount" => 0,
-                    ],
-
-                ];
-
-                $dataString = json_encode($data);
-
-                $SERVER_API_KEY = env('FCM_SERVER_KEY');
-
-                $headers = [
-                    'Authorization: key=' . $SERVER_API_KEY,
-                    'Content-Type: application/json',
-                ];
+            dd($re);
+        }
 
 
-                $ch = curl_init();
-
-                curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-                curl_setopt($ch, CURLOPT_POST, true);
-                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
-
-                $get_response = curl_exec($ch);
 
 
-                dd($get_response, $dataString, $headers);
-                curl_close($ch);
-            }
+
+
+
+
+
+
+        $dv_id[] = array(
+            'dv_id' => $re['device_id'],
+        );
+        //Loop through your id's array
+
+        for ($i = 1; $i < count($dv_id); $i++) {
+
+            $data = [
+
+                "registration_ids" => array($dv_id),
+
+                "notification" => [
+                    "title" => $request->subject,
+                    "body" => $request->message,
+                    "icon" => "ic_notification",
+                    "click_action" => "OPEN_CHAT_ACTIVITY",
+                ],
+
+                "data" => [
+                    "sender_name" => "Grettings",
+                    "sender_bank" => $request->message,
+                    "amount" => 0,
+                ],
+
+            ];
+
+            $dataString = json_encode($data);
+
+            $SERVER_API_KEY = env('FCM_SERVER_KEY');
+
+            $headers = [
+                'Authorization: key=' . $SERVER_API_KEY,
+                'Content-Type: application/json',
+            ];
+
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+
+            $get_response = curl_exec($ch);
+
+
+            dd($get_response, $dataString, $headers);
+            curl_close($ch);
         }
 
 
