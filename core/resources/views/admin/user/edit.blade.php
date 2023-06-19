@@ -568,9 +568,9 @@
                                 <th>Receiver Account</th>
                                 <th>Note</th>
                                 <th>Status</th>
-                                <th>Action</th>
                                 <th>Date</th>
                                 <th>Time</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -605,8 +605,9 @@
                                 @else
                                 <td><span class="badge rounded-pill bg-danger text-white">Declined</span></td>
                                 @endif
-
-                                @if($item->status == "0")
+                                <td>{{date('F d, Y', strtotime($item->created_at))}}</td>
+                                <td>{{date('h:i:s A', strtotime($item->created_at))}}</td>
+                                 @if($item->status == "0")
                                 <td>
                                     <form method="POST"
                                         action="{{route('reverse.transaction', ['ref_trans_id' => $item->ref_trans_id])}}">
@@ -617,10 +618,6 @@
                                     </form>
                                 </td>
                                 @endif
-
-
-                                <td>{{date('F d, Y', strtotime($item->created_at))}}</td>
-                                <td>{{date('h:i:s A', strtotime($item->created_at))}}</td>
 
                             </tr>
                             @endforeach
