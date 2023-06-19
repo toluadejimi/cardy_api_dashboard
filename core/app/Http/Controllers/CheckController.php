@@ -633,11 +633,11 @@ class CheckController extends Controller
 
         $user = User::all();
         foreach ($user as $val) {
-            $x = User::whereDeviceId($val->device_id)->first();
+            $x  = $val->device_id;
             if ($x != null) {
 
 
-                dd($x->device_id);
+                dd($x);
 
                 
 
