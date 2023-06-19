@@ -629,16 +629,17 @@ class CheckController extends Controller
         //         send_email($x->email, $x->username, $request->subject, $request->message);
         //     }
         // }
+        $values = [];
+        $values = User::select('device_id')->get();
+        foreach ($values as $key => $value) {
+            $test[] = $value->device_id;
 
-        $set = Settings::first();
-        $users = User::all();
-    
-        $List = []; 
-        foreach($users as $Key=>$val){
-            $List[] = $val->device_id;
-            $var = array_filter($List);
+        }
+
+        $var = array_filter($test);
 
             $data = [
+
 
                 "registration_ids" => array($var),
 
@@ -681,12 +682,9 @@ class CheckController extends Controller
 
             dd($get_response, $dataString, $headers);
             curl_close($ch);
+      
 
 
-
-        }
-       
-       
 
 
         // $user = User::select('device_id')->get();

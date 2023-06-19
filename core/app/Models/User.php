@@ -27,6 +27,7 @@ class User extends Authenticatable
         'state',
         'serial_no',
         'v_account_no',
+        'device_id',
         'v_account_name',
         'v_bank_name',
         'c_account_number',
@@ -37,7 +38,7 @@ class User extends Authenticatable
         'password',
         'v_account_no',
     ];
-    
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -79,7 +80,16 @@ class User extends Authenticatable
     // {
     //     return $this->hasMany(Terminal::class, 'user_id');
     // }
-    
 
 
+
+
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @return array
+	 */
+	public function getFillable() {
+		return $this->fillable;
+	}
 }
