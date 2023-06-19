@@ -631,36 +631,16 @@ class CheckController extends Controller
         // }
 
         $set = Settings::first();
-        $users = User::where('status', 2)->get();
-       
-
+        $users = User::all();
+    
         $List = []; 
         foreach($users as $Key=>$val){
-            $List[] = $val->device_id; // your loop record was replacing in every loop. now will be captured in array.
-        }
-       
-       
-        dd($List);
-
-
-
-
-
-
-
-
-
-
-        $dv_id[] = array(
-            'dv_id' => $re['device_id'],
-        );
-        //Loop through your id's array
-
-        for ($i = 1; $i < count($dv_id); $i++) {
+            $List[] = $val->device_id;
+            $var = array_filter($List);
 
             $data = [
 
-                "registration_ids" => array($dv_id),
+                "registration_ids" => array($var),
 
                 "notification" => [
                     "title" => $request->subject,
@@ -701,7 +681,12 @@ class CheckController extends Controller
 
             dd($get_response, $dataString, $headers);
             curl_close($ch);
+
+
+
         }
+       
+       
 
 
         // $user = User::select('device_id')->get();
