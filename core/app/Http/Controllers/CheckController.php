@@ -94,6 +94,15 @@ class CheckController extends Controller
         $data['moneyin'] = Transactions::select('credit')->sum('credit');
         $data['moneyout'] = Transactions::select('debit')->where('status', 1)->sum('debit');
         $data['postransfer'] = Transactions::select('debit')->where('transaction_type', 'FundTransfer')->where('status', 1)->sum('debit');
+        $data['mobiletransfer'] = Transactions::select('debit')->where('transaction_type', 'BankTransfer')->where('status', 1)->sum('debit');
+        $data['purchase'] = Transactions::select('credit')->where('transaction_type', 'CashOut')->where('status', 1)->sum('credit');
+        $data['walletfund'] = Transactions::select('credit')->where('transaction_type', 'VirtualFundWallet')->where('status', 1)->sum('credit');
+        $data['webpay'] = Transactions::select('credit')->where('type', 'webpay')->where('status', 1)->sum('credit');
+        $data['vas'] = Transactions::select('debit')->where('type', 'vas')->where('status', 1)->sum('debit');
+
+
+
+
 
 
         return view('admin.all-transactions.index', $data);

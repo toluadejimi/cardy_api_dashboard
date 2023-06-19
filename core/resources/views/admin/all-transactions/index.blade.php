@@ -25,6 +25,37 @@
                 </div>
 
 
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                            <div>
+                                <h3 class="mb-2">Bank Transfer (Mobile App)</h3>
+                                <ul class="list list-unstyled mb-0">
+                                    <h2><span
+                                            class="text-default text-sm">{{$currency->symbol.number_format($mobiletransfer)}}</span>
+                                    </h2>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                            <div>
+                                <h3 class="mb-2">Web Payment</h3>
+                                <ul class="list list-unstyled mb-0">
+                                    <h2><span
+                                            class="text-default text-sm">{{$currency->symbol.number_format($webpay)}}</span>
+                                    </h2>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
 
@@ -47,6 +78,41 @@
                 </div>
 
 
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                            <div>
+                                <h3 class="mb-2">POS Purchase</h3>
+                                <ul class="list list-unstyled mb-0">
+                                    <h2><span
+                                            class="text-default text-sm">{{$currency->symbol.number_format($purchase)}}</span>
+                                    </h2>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                            <div>
+                                <h3 class="mb-2">Total VAS</h3>
+                                <ul class="list list-unstyled mb-0">
+                                    <h2><span
+                                            class="text-default text-sm">{{$currency->symbol.number_format($vas)}}</span>
+                                    </h2>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
             </div>
 
             <div class="col-md-4">
@@ -60,6 +126,21 @@
                                 <ul class="list list-unstyled mb-0">
                                     <h2><span
                                             class="text-default text-sm">{{$currency->symbol.number_format($postransfer)}}</span>
+                                    </h2>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                            <div>
+                                <h3 class="mb-2">Wallet Funding</h3>
+                                <ul class="list list-unstyled mb-0">
+                                    <h2><span
+                                            class="text-default text-sm">{{$currency->symbol.number_format($walletfund)}}</span>
                                     </h2>
                                 </ul>
                             </div>
