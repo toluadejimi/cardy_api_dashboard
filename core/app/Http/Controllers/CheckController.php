@@ -240,8 +240,8 @@ class CheckController extends Controller
 
 
         $data['doc'] = Transactions::whereStatus(1)->wheretype(2)->sum('charge');
-        $data['in'] = Transactions::all()->sum('credit');
-        $data['out'] = Transactions::all()->sum('debit');
+        $data['in'] = Transactions::select('credit')->where('status', 1)->sum('credit');
+        $data['out'] = Transactions::select('debit')->where('status', 1)->sum('debit');
         $data['or'] = Order::whereStatus(1)->sum('total');
         $data['transactions'] = Transactions::latest()->get();
         $data['tfee'] = Terminal::select('*')->sum('amount');
