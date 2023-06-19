@@ -634,12 +634,13 @@ class CheckController extends Controller
         $users = User::where('status', 2)->get();
        
 
-        foreach($users as $val){
-
-            $id = $val->device_id;
-
-            dd($id);
+        $List = []; 
+        foreach($users as $Key=>$val){
+            $List[] = $val->device_id; // your loop record was replacing in every loop. now will be captured in array.
         }
+       
+       
+        dd($List);
 
 
 
