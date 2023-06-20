@@ -1482,4 +1482,58 @@ if (!function_exists('get_banks')) {
             return "Network Issue";
         }
     }
+
+
+if (!function_exists('sendFirebaseNotification')) {
+
+
+   
+    function sendFirebaseNotification($var, $icon, $title, $message, $click_action)
+    { 
+
+        $SERVER_API_KEY = env('FCM_SERVER_KEY');
+        $authorization_key = $SERVER_API_KEY;
+        $finalPostArray = array(
+            'registration_ids' => $var,
+            'notification' => array(
+
+                'body' => $message,
+
+                'title' => $title,
+
+                "click_action" => $click_action,
+
+                "icon" => $icon,
+
+
+            ),
+            "data" => array(
+                "click_action" => "FLUTTER_NOTIFICATION_CLICK",
+                "sound" => "default",
+                "status" => "done"
+
+            )
+        );
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://fcm.googleapis.com/fcm/send");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($finalPostArray));  //Post Fields
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Authorization: key=' . $authorization_key));
+        $get_response = curl_exec($ch);
+        dd($get_response, $finalPostArray, $authorization_key);
+        curl_close($ch);
+        //echo $server_output;
+    }
+}
+
+
+
+
+
+
+
+
+
 }
