@@ -715,9 +715,11 @@
                                                 <option value="0">Vendor pay the charges</option>
                                                 <option value="1">Customer pay the charges</option>
                                             </select>
-                                            <span class="input-group-text text-muted">By default ENKPAY charge the customer</span>
 
                                         </div>
+
+                                        <span class="text-gray mb-3">By default ENKPAY charge the customer</span>
+
 
                                     </div>
 
