@@ -5107,13 +5107,25 @@ class UserController extends Controller
                 $pnum = preg_replace('/^./', '', $phone);
                 $cphone= $pnum;
 
-                $create_v = create_vfd_account($first_name, $last_name, $user_id, $b_name, $cphone, $bvn, $b_phone );
+                $create_v = create_p_account();
 
                 if( $create_v == 200){
                     return redirect('user/dashboard')->with('success', 'Your account has been verified.');
                 }
 
                 $message = "Pending Account Creation for |"  . $first_name. " ".  $last_name;
+
+
+                $check_business_name = Compliance::where('user_id', $id)->first()->first_name ?? null;
+                if ($check_business_name == null) {
+                    $get_temp_user = User::where('id', $id)->first();
+                    $com = new Compliance();
+                    $com->first_name = $get_temp_user->first_name;
+                    $com->last_name = $get_temp_user->last_name;
+                    $com->user_id = $get_temp_user->id;
+                    $com->state = $get_temp_user->state;
+                    $com->save();
+                }
 
                 return back()->with('alert', "Your verification is pending");
 

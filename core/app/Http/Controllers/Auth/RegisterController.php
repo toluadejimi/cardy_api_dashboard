@@ -197,11 +197,7 @@ class RegisterController extends Controller
             $user->business_email= $request->email;
             $user->save();
 
-            $check=User::wherebusiness_name($request->business_name)->first();
-            $com = new Compliance;
-            $com->user_id=$check->id;
-            $com->save();
-
+      
 
 
                 $subject = "OTP VERIFICATION CODE";

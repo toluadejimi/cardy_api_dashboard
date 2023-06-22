@@ -1143,9 +1143,8 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-lg-2">{{__('Business Name')}}</label>
                                     <div class="col-lg-10">
-                                        <input type="text" name="trading_name" @if($ver->status==1 ||
-                                        $user->business_level==3) disabled
-                                        @endif class="form-control" value="{{$ver->trading_name}}" required>
+                                        <input type="text" name="trading_name"
+                                        class="form-control" value="{{$ver->trading_name ?? "Trading Name"}}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
