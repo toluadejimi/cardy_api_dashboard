@@ -704,40 +704,59 @@
                                 <div class="row">
 
 
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
 
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text text-xs text-uppercase">{{__('Webhook Type')}}</span>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text text-xs text-uppercase">{{__('Charges')}}</span>
+                                            </div>
+                                            <select class="form-control select" name="charge" required>
+                                                <option value="0">{{__('Select')}}</option>
+                                                <option value="0">Vendor pay the charges</option>
+                                                <option value="1">Customer pay the charges</option>
+                                            </select>
+                                            <span class="input-group-text text-muted">By default ENKPAY charge the customer</span>
+
                                         </div>
-                                        <select class="form-control select" name="type" required>
-                                            <option value="">{{__('Select')}}</option>
-                                            <option value="wordpress">For Woo Commerce Website</option>
-                                            <option value="other">Other Website</option>
-                                        </select>
+
                                     </div>
 
+
+                                    <div class="col-lg-4">
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text text-xs text-uppercase">{{__('Webhook
+                                                    Type')}}</span>
+                                            </div>
+                                            <select class="form-control select" name="type" required>
+                                                <option value="">{{__('Select')}}</option>
+                                                <option value="wordpress">For Woo Commerce Website</option>
+                                                <option value="other">Other Website</option>
+                                            </select>
+                                        </div>
+
                                     </div>
 
 
 
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
 
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span
-                                                class="input-group-text text-xs text-uppercase">{{__('Webhook')}}</span>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span
+                                                    class="input-group-text text-xs text-uppercase">{{__('Webhook')}}</span>
+                                            </div>
+                                            <input type="text" name="url" class="form-control" value="{{ $key->url ?? "
+                                                Set your live webkook" }}" placeholder="Set your live webkook">
+                                            <div class="input-group-prepend bg-gray">
+                                                <span class="input-group-text btn-icon-clipboard"
+                                                    data-clipboard-text="{{$key->url ?? " No Webhook"}}" title="Copy"><i
+                                                        class="fad fa-clipboard"></i></span>
+                                            </div>
                                         </div>
-                                        <input type="text" name="url" class="form-control" value="{{ $key->url ?? "Set your live webkook" }}"
-                                            placeholder="Set your live webkook">
-                                        <div class="input-group-prepend bg-gray">
-                                            <span class="input-group-text btn-icon-clipboard"
-                                                data-clipboard-text="{{$key->url ?? " No Webhook"}}" title="Copy"><i
-                                                    class="fad fa-clipboard"></i></span>
-                                        </div>
+
                                     </div>
-
-                                </div>
 
 
                                 </div>

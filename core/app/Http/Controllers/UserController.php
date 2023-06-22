@@ -319,11 +319,11 @@ class UserController extends Controller
 
         if ($request->type == 'wordpress'){
 
-
             $url = $request->url."/wc-api/wc_gsama/";
 
             $u =Webkey::whereuser_id(Auth::guard('user')->user()->id)->update(['url' => $url]);
 
+            Webkey::whereuser_id(Auth::guard('user')->user()->id)->update(['charge_status' => $request->charge]);
 
             return back()->with('success', 'Webhook Url updated successfully');
 
@@ -332,6 +332,9 @@ class UserController extends Controller
 
         if ($request->type == 'other'){
             $u =Webkey::whereuser_id(Auth::guard('user')->user()->id)->update(['url' => $request->url]);
+
+            Webkey::whereuser_id(Auth::guard('user')->user()->id)->update(['charge_status' => $request->charge]);
+
 
             return back()->with('success', 'Webhook Url updated successfully');
 
