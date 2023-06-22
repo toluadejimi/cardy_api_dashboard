@@ -1436,10 +1436,6 @@ if (!function_exists('get_banks')) {
             }
 
 
-            $user_id = Auth::id();
-
-
-            $bvn = user_bvn() ?? null;
             $user_id = User::where('bvn', $bvn)->first()->id ?? null;
 
             $client = env('CLIENTID');

@@ -5078,6 +5078,8 @@ class UserController extends Controller
 
             User::where('id', Auth::user()->id)
                 ->update([
+
+                    
                     'address_line1' => $request->address_line1,
                     'city' => $request->city,
                     'first_name' => $request->first_name,
