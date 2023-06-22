@@ -711,9 +711,9 @@
                                                 <span class="input-group-text text-xs text-uppercase">{{__('Charges')}}</span>
                                             </div>
                                             <select class="form-control select" name="charge" required>
-                                                <option value="0">{{__('Select')}}</option>
-                                                <option value="0">Vendor pay the charges</option>
-                                                <option value="1">Customer pay the charges</option>
+                                                <option value="0">@if($key->charge_status==0){{ "Currently Charging Customer" }}@elseif($key->charge_status==1){{ "Currently Charging Vendor" }}@endif</option>
+                                                <option value="1">Vendor pay the charges</option>
+                                                <option value="0">Customer pay the charges</option>
                                             </select>
 
                                         </div>
@@ -731,7 +731,7 @@
                                                 <span class="input-group-text text-xs text-uppercase">{{__('Webhook
                                                     Type')}}</span>
                                             </div>
-                                            <select class="form-control select" name="type" required>
+                                            <select class="form-control select" name="type">
                                                 <option value="">{{__('Select')}}</option>
                                                 <option value="wordpress">For Woo Commerce Website</option>
                                                 <option value="other">Other Website</option>

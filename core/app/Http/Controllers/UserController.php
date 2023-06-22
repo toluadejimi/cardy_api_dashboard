@@ -342,6 +342,10 @@ class UserController extends Controller
         }
        
 
+
+        Webkey::whereuser_id(Auth::guard('user')->user()->id)->update(['charge_status' => $request->charge]);
+        return back()->with('success', 'updated successfully');
+
         
        
     }
