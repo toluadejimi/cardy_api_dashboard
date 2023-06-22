@@ -316,8 +316,27 @@ class UserController extends Controller
             return back()->with('alert', 'Webhook Url can not be empty');
         }
 
+
+        if ($request->type == 'wordpress'){
+
+            $url = $request->url."/wc-api/wc_gsama/";
+
+            Webkey::where('user_id', Auth::id())->update(['url' => $url]);
+
+        }else{
+
+            $url = $request->url;
+
+            Webkey::where('user_id', Auth::id())->update(['url' => $url]);
+
+
+        }
+
+       
+        return back()->with('success', 'Webhook Url updated successfully');
+
         
-        dd($request->all());
+       
     }
 
 
@@ -4841,8 +4860,8 @@ class UserController extends Controller
         $secret = $g->generateSecret();
         $set = Settings::first();
         $user = User::find(Auth::guard('user')->user()->id);
-        $data['key'] = Webkey::where('user_id', Auth::id())->first();
-        $data['compliance'] = Compliance::where('user_id', Auth::id())->first();
+        $data['key'] = Webkey::where('user_id', Auth::id())->first() ?? null;
+        $data['compliance'] = Compliance::where('user_id', Auth::id())->first()->status ?? null;
         $site = $set->site_name;
         $data['secret'] = $secret;
         $data['image'] = \Sonata\GoogleAuthenticator\GoogleQrUrl::generate($user->email, $secret, $site);
@@ -5202,7 +5221,7 @@ class UserController extends Controller
         $audit['trx'] = str_random(16);
         $audit['log'] = 'Updated compliance form';
         Audit::create($audit);
-        return redirect()->route('user.compliance')->with('success', 'We will get back to you.');
+        return redirect()->route('user.compliance')->with('success', 'We will get back to you soon.');
     }
 
     public function social(Request $request)

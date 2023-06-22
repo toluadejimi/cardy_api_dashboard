@@ -6,6 +6,7 @@ use App\Models\Terminal;
 use App\Models\TerminalPayment;
 use App\Models\VCard;
 use App\Models\VirtualAccount;
+use App\Models\Webkey;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
@@ -956,12 +957,21 @@ class CheckController extends Controller
         $user = User::find($com->user_id);
         if ($com->business_type == "Starter Business") {
             $user->business_level = 2;
+            $user->type = 3;
         } elseif ($com->business_type == "Registered Business") {
             $user->business_level = 3;
         }
         $com->status = 2;
         $user->save();
         $com->save();
+
+        $webkey = random_int(99999999, 00000000);
+        $wkey = new Webkey();
+        $wkey->key = $webkey;
+        $wkey->user_id = Auth::user()->id;
+        $wkey->save();
+
+
         if ($set['email_notify'] == 1) {
             send_email($user->email, $user->business_name, 'Compliance request:' . $user->business_name, "Compliance request was succefully approved, you can now use your account with out restrictions");
         }

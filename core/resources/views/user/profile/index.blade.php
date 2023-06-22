@@ -669,7 +669,7 @@
                 <div class="tab-pane fade @if(route('user.api')==url()->current())show active @endif"
                     id="tabs-icons-text-3" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
 
-                    @if($compliance == "0")
+                    @if($compliance == 1)
                     <div class="card">
                         <div class="card-body">
                             <h4 class="font-weight-bolder">{{__('API Documentation')}}</h4>
@@ -700,17 +700,46 @@
 
                             <form action="user/webhook-update" method="POST">
                                 @csrf
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text text-xs text-uppercase">{{__('Webhook')}}</span>
+
+                                <div class="row">
+
+
+                                    <div class="col-lg-6">
+
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text text-xs text-uppercase">{{__('Webhook Type')}}</span>
+                                        </div>
+                                        <select class="form-control select" name="type" required>
+                                            <option value="">{{__('Select')}}</option>
+                                            <option value="wordpress">For Woo Commerce Website</option>
+                                            <option value="other">Other Website</option>
+                                        </select>
                                     </div>
-                                    <input type="text" name="url" class="form-control"
-                                        placeholder="Set your live webkook">
-                                    <div class="input-group-prepend bg-gray">
-                                        <span class="input-group-text btn-icon-clipboard"
-                                            data-clipboard-text="{{$key->url ?? " No Webhook"}}" title="Copy"><i
-                                                class="fad fa-clipboard"></i></span>
+
                                     </div>
+
+
+
+                                    <div class="col-lg-6">
+
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span
+                                                class="input-group-text text-xs text-uppercase">{{__('Webhook')}}</span>
+                                        </div>
+                                        <input type="text" name="url" class="form-control" value="{{ $key->url ?? "Set your live webkook" }}"
+                                            placeholder="Set your live webkook">
+                                        <div class="input-group-prepend bg-gray">
+                                            <span class="input-group-text btn-icon-clipboard"
+                                                data-clipboard-text="{{$key->url ?? " No Webhook"}}" title="Copy"><i
+                                                    class="fad fa-clipboard"></i></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
                                 </div>
 
                                 <button type="submit" class="btn btn-sm btn-neutral mt-4"><i
@@ -724,7 +753,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="font-weight-bolder">{{__('API Documentation')}}</h4>
-                            <p class="text-gray mb-1">To generate a webkey you need to complete your Compliance.<br>Upon approval your key will appear here
+                            <p class="text-gray mb-1">To generate a webkey you need to complete your Compliance.<br>Upon
+                                approval your key will appear here
                             </p>
 
 
@@ -735,7 +765,9 @@
 
 
 
-                            {{-- <img src="https://t4.ftcdn.net/jpg/03/98/05/95/360_F_398059575_h3XJtdGMNhieUcDYwwkrSVt0PoVGAuai.jpg" class="img-thumbnail mt-4" width="200" height="200"> --}}
+                            {{-- <img
+                                src="https://t4.ftcdn.net/jpg/03/98/05/95/360_F_398059575_h3XJtdGMNhieUcDYwwkrSVt0PoVGAuai.jpg"
+                                class="img-thumbnail mt-4" width="200" height="200"> --}}
 
                             {{-- <div class="row mt-4">
 
@@ -743,24 +775,28 @@
 
 
                                 <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.compliance')==url()->current()) active @endif"
-                                    id="tabs-icons-text-6-tab" data-toggle="tab" href="https://play.google.com/store/apps/details?id=com.enk_pay_project.mobileapp" role="tab"
-                                    aria-controls="tabs-icons-text-6" aria-selected="fadse"><i class="fad fa-android" aria-hidden="true"></i>
+                                    id="tabs-icons-text-6-tab" data-toggle="tab"
+                                    href="https://play.google.com/store/apps/details?id=com.enk_pay_project.mobileapp"
+                                    role="tab" aria-controls="tabs-icons-text-6" aria-selected="fadse"><i
+                                        class="fad fa-android" aria-hidden="true"></i>
                                     Click to download Andriod App from Playstore</a>
-    
-    
-                                    <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.compliance')==url()->current()) active @endif"
-                                        id="tabs-icons-text-6-tab" data-toggle="tab" href="https://apps.apple.com/ng/app/enkpay/id6448091026" role="tab"
-                                        aria-controls="tabs-icons-text-6" aria-selected="fadse"><i class="fad fa-apple" aria-hidden="true"></i>
-                                        Click to download IOS App from APP Store</a>
-    
-    
-                                
-                            </div> --}}
-                          
 
-                            
+
+                                <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.compliance')==url()->current()) active @endif"
+                                    id="tabs-icons-text-6-tab" data-toggle="tab"
+                                    href="https://apps.apple.com/ng/app/enkpay/id6448091026" role="tab"
+                                    aria-controls="tabs-icons-text-6" aria-selected="fadse"><i class="fad fa-apple"
+                                        aria-hidden="true"></i>
+                                    Click to download IOS App from APP Store</a>
+
+
+
+                            </div> --}}
+
+
+
                         </div>
-                      
+
 
 
 
