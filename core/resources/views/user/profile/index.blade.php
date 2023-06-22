@@ -669,7 +669,7 @@
                 <div class="tab-pane fade @if(route('user.api')==url()->current())show active @endif"
                     id="tabs-icons-text-3" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
 
-                    @if($compliance == 1)
+                    @if($compliance == 2)
                     <div class="card">
                         <div class="card-body">
                             <h4 class="font-weight-bolder">{{__('API Documentation')}}</h4>
