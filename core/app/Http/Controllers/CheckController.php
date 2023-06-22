@@ -968,7 +968,7 @@ class CheckController extends Controller
         $webkey = random_int(00000000, 99999999);
         $wkey = new Webkey();
         $wkey->key = $webkey;
-        $wkey->user_id = Auth::user()->id;
+        $wkey->user_id = $com->user_id;
         $wkey->save();
 
 
