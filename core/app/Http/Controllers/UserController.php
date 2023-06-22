@@ -6,6 +6,7 @@ use App\Models\Setting;
 use App\Models\VCard;
 use App\Models\VfdBank;
 use App\Models\VirtualAccount;
+use App\Models\Webkey;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
@@ -167,6 +168,7 @@ class UserController extends Controller
         $set = Settings::first();
         $data['title'] = $set->site_name . ' Dashboard';
         $data['balance'] = User::where('id', Auth::id())->first()->main_wallet;
+        $data['all'] = Transactions::latest()->whereuser_id(Auth::id())->get();
         $data['revenue'] = History::whereuser_id(Auth::guard('user')->user()->id)->wheretype(1)->where('amount', '!=', null)->sum('amount');
         $data['t_payout'] = Withdraw::whereuser_id(Auth::guard('user')->user()->id)->wherestatus(1)->sum('amount');
         $data['n_payout'] = Withdraw::whereuser_id(Auth::guard('user')->user()->id)->wherestatus(0)->sum('amount');
@@ -4829,6 +4831,8 @@ class UserController extends Controller
         $secret = $g->generateSecret();
         $set = Settings::first();
         $user = User::find(Auth::guard('user')->user()->id);
+        $data['key'] = Webkey::where('user_id', Auth::id())->first();
+        $data['compliance'] = Compliance::where('user_id', Auth::id())->first();
         $site = $set->site_name;
         $data['secret'] = $secret;
         $data['image'] = \Sonata\GoogleAuthenticator\GoogleQrUrl::generate($user->email, $secret, $site);
