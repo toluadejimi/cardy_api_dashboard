@@ -5146,7 +5146,7 @@ class UserController extends Controller
         $com->reg_no = $request->reg_no;
         $com->email = $request->email;
         $com->website = $request->website;
-        $com->status = 2;
+        $com->status = 1;
         if ($request->hasFile('proof')) {
             $image = $request->file('proof');
             $filename = 'proof' . time() . '.' . $image->extension();
@@ -5218,7 +5218,7 @@ class UserController extends Controller
             $com->paddress = $filename;
         }
         $com->save();
-        
+
         $message = $request->first_name. " " .$request->first_name ."| has submitted a compliance";
         send_notification($message);
 
