@@ -1426,8 +1426,7 @@ if (!function_exists('get_banks')) {
             $b_phone = Auth::user()->b_name;
             $pnum = preg_replace('/^./', '', $phone);
             $cphone = $pnum;
-            $name = Auth::user()->business_name;
-
+            $business_name = Auth::user()->business_name;
 
 
             if ($business_name != null) {

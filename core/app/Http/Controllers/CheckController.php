@@ -972,6 +972,9 @@ class CheckController extends Controller
         $wkey->save();
 
 
+        
+
+
         if ($set['email_notify'] == 1) {
             send_email($user->email, $user->business_name, 'Compliance request:' . $user->business_name, "Compliance request was succefully approved, you can now use your account with out restrictions");
         }
