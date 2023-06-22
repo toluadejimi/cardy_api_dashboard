@@ -305,6 +305,22 @@ class UserController extends Controller
     }
     //End of Dashboard
 
+
+
+    //webhoook update
+
+    public function webhook_update(Request $request)
+    {
+        
+        if($request->url == null){
+            return back()->with('alert', 'Webhook Url can not be empty');
+        }
+
+        
+        dd($request->all());
+    }
+
+
     //Delete account
     public function delaccount(Request $request)
     {
@@ -3115,7 +3131,7 @@ class UserController extends Controller
     {
         $data['title'] = 'Fund account';
 
-        $vb = VirtualAccount::whereUserId(Auth::id())->first() ?? null;
+        $vb = VirtualAccount::whereUserId(Auth::id())->where('v_bank_name', 'PROVIDUS BANK')->first()  ?? null;
 
         $usr = User::where('id', Auth::id())->first();
 
@@ -3126,25 +3142,13 @@ class UserController extends Controller
 
         if($vb == null ){
 
+            $create_account = create_p_account();
+    
 
-            $first_name = Auth::user()->first_name;
-            $last_name = Auth::user()->last_name;
-            $user_id = Auth::id();
-            $b_name =  Auth::user()->b_name;
-            $phone = Auth::user()->phone;
-            $bvn = Auth::user()->bvn;
-            $b_phone = Auth::user()->b_name;
-            $pnum = preg_replace('/^./', '', $phone);
-            $cphone= $pnum;
-
-            $create_v = create_vfd_account($first_name, $last_name, $user_id, $b_name, $cphone, $bvn, $b_phone );
-
-
-            if($create_v  == 200){
+            if($create_account  == 200){
 
                 $data['account'] = VirtualAccount::whereUserId(Auth::id())->first() ?? null;
-
-
+                $data['charges'] = \App\Models\Charge::where('title', 'bwebpay')->first()->amount ?? null;
                 $data['gateways'] = Gateway::whereStatus(1)->orderBy('id', 'DESC')->get();
                 return view('user.fund.index', $data);
 
@@ -3154,6 +3158,12 @@ class UserController extends Controller
         }else{
 
             $data['account'] = VirtualAccount::whereUserId(Auth::id())->get() ?? null;
+            $usr = User::where('id', Auth::id())->first();
+
+            $data['charges'] = \App\Models\Charge::where('title', 'bwebpay')->first()->amount ?? null;
+
+
+
             return view('user.fund.index', $data);
 
         }

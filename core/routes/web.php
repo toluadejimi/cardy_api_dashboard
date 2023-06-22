@@ -128,6 +128,10 @@ Route::get('/forget', [UserController::class, 'forget'])->name('forget');
 Route::get('/r_pass', [UserController::class, 'r_pass'])->name('r_pass');
 Route::group(['prefix' => 'user', ], function () {
     // Route::get('blocked', [UserController::class, 'blocked'])->name('user.blocked');
+
+
+    Route::post('webhook-update', [UserController::class, 'webhook_update']);
+
     Route::get('authorization', [UserController::class, 'authCheck'])->name('user.authorization');
     Route::post('verification', [UserController::class, 'sendVcode'])->name('user.send-vcode');
     Route::post('smsVerify', [UserController::class, 'smsVerify'])->name('user.sms-verify');

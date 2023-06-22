@@ -42,12 +42,11 @@ function send_email($to, $name, $subject, $message)
     $email = env('MAIL_USERNAME');
     $logo = url('/') . '/asset/' . $mlogo->image_link;
     $adv = url('/') . '/asset/' . $mlogo->adv;
-    $data = array('adv'=> $adv, 'name' => $name, 'subject' => $subject, 'content' => $message, 'website' => $set->site_name, 'phone' => $phone, 'details' => $details, 'email' => $email, 'logo' => $logo);
+    $data = array('adv' => $adv, 'name' => $name, 'subject' => $subject, 'content' => $message, 'website' => $set->site_name, 'phone' => $phone, 'details' => $details, 'email' => $email, 'logo' => $logo);
     Mail::send(['html' => 'emails/mail'], $data, function ($message) use ($name, $to, $subject, $from, $site) {
         $message->to($to, $name);
         $message->subject($subject);
         $message->from($from, $site);
-
     });
 }
 
@@ -1230,181 +1229,283 @@ if (!function_exists('get_banks')) {
     }
 
 
-    if (!function_exists('create_vfd_account')) {
+    // if (!function_exists('create_vfd_account')) {
 
-        function create_vfd_account($first_name, $last_name, $user_id, $b_name, $cphone, $bvn, $b_phone)
+    //     function create_vfd_account($first_name, $last_name, $user_id, $b_name, $cphone, $bvn, $b_phone)
+    //     {
+
+
+    //         $cv =  VirtualAccount::where('user_id', Auth::id())->first() ?? null;
+
+    //         if($cv != null){
+    //             return 200;
+    //         }
+
+    //         if ($cv == null) {
+
+
+    //             // $set = Setting::select('*')->first();
+    //             // if ($set->bank == 'vfd') {
+
+    //                 //create VFD
+    //                 $errand_key = errand_api_key();
+    //                 $errand_user_id = errand_id();
+
+    //                 if ($b_name == null) {
+    //                     $name = $first_name . " " . $last_name;
+    //                 } else {
+    //                     $name = $b_name;
+    //                 }
+
+    //                 if ($b_phone == null) {
+    //                     $phone = $cphone;
+    //                 } else {
+    //                     $phone = $b_phone;
+    //                 }
+
+    //                 $curl = curl_init();
+    //                 $data = array(
+
+    //                     "userId" => $errand_user_id,
+    //                     "customerBvn" => $bvn,
+    //                     "phoneNumber" => "234" . $phone,
+    //                     "customerName" => $name,
+
+    //                 );
+
+    //                 $databody = json_encode($data);
+
+    //                 curl_setopt_array($curl, array(
+    //                     CURLOPT_URL => 'https://api.errandpay.com/epagentservice/api/v1/CreateVirtualAccount',
+    //                     CURLOPT_RETURNTRANSFER => true,
+    //                     CURLOPT_ENCODING => '',
+    //                     CURLOPT_MAXREDIRS => 10,
+    //                     CURLOPT_TIMEOUT => 0,
+    //                     CURLOPT_FOLLOWLOCATION => true,
+    //                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //                     CURLOPT_CUSTOMREQUEST => 'POST',
+    //                     CURLOPT_POSTFIELDS => $databody,
+    //                     CURLOPT_HTTPHEADER => array(
+    //                         'Content-Type: application/json',
+    //                         'Accept: application/json',
+    //                         "Authorization: Bearer $errand_key",
+    //                     ),
+    //                 ));
+
+    //                 $var = curl_exec($curl);
+    //                 curl_close($curl);
+    //                 $var = json_decode($var);
+
+
+    //                 $status = $var->code ?? null;
+    //                 $acct_no = $var->data->accountNumber ?? null;
+    //                 $acct_name = $var->data->accountName ?? null;
+    //                 $error = $var->error->message ?? null;
+
+    //                 $bank = "VFD MICROFINANCE BANK";
+
+    //                 if ($status == 200) {
+
+    //                     $create = new VirtualAccount();
+    //                     $create->v_account_no = $acct_no;
+    //                     $create->v_account_name = $acct_name;
+    //                     $create->v_bank_name = $bank;
+    //                     $create->user_id = $user_id;
+    //                     $create->fee = "NGN 15";
+    //                     $create->save();
+
+    //                     $user = User::find(Auth::id());
+    //                     $user->v_account_no = $acct_no;
+    //                     $user->v_account_name = $acct_name;
+    //                     $user->save();
+
+    //                     // return 200;
+    //                 }else{
+
+    //                     $message = "Error from Virtual account creation | $name | $error";
+    //                     send_notification($message);
+
+    //                 }
+
+
+    //                 //create providus
+
+    //                 $client_id = env('CLIENTID');
+    //                 $hashkey = env('HASHKEY');
+
+    //                 $curl = curl_init();
+    //                 $data = array(
+
+    //                     "customerBvn" => $bvn,
+    //                     "phoneNumber" => "234" . $phone,
+    //                     "customerName" => $name,
+
+    //                 );
+
+    //                 $databody = json_encode($data);
+
+    //                 curl_setopt_array($curl, array(
+    //                     CURLOPT_URL => 'https://vps.providusbank.com/vas/api/PiPCreateReservedAccountNumber',
+    //                     CURLOPT_RETURNTRANSFER => true,
+    //                     CURLOPT_ENCODING => '',
+    //                     CURLOPT_MAXREDIRS => 10,
+    //                     CURLOPT_TIMEOUT => 0,
+    //                     CURLOPT_FOLLOWLOCATION => true,
+    //                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //                     CURLOPT_CUSTOMREQUEST => 'POST',
+    //                     CURLOPT_POSTFIELDS => $databody,
+    //                     CURLOPT_HTTPHEADER => array(
+    //                         'Content-Type: application/json',
+    //                         'Accept: application/json',
+    //                         "Client-Id: $client_id",
+    //                         "X-Auth-Signature: $hashkey",
+    //                     ),
+    //                 ));
+
+    //                 $var = curl_exec($curl);
+    //                 curl_close($curl);
+    //                 $var = json_decode($var);
+
+
+    //                 $status = $var->responseCode ?? null;
+    //                 $acct_no = $var->account_number ?? null;
+    //                 $acct_name = $var->account_name ?? null;
+
+    //                 $error = $var->error->message ?? null;
+
+    //                 $bank = "PROVIDUS BANK";
+
+
+    //                 if ($status == 00) {
+
+    //                     $create = new VirtualAccount();
+    //                     $create->v_account_no = $acct_no;
+    //                     $create->v_account_name = $acct_name;
+    //                     $create->v_bank_name = $bank;
+    //                     $create->user_id = $user_id;
+    //                     $create->fee = "1%";
+    //                     $create->save();
+
+    //                     return 200;
+
+    //                 }else{
+    //                     $message = "Error from Virtual account creation | $name | $error";
+    //                     send_notification($message);
+
+    //                     return 500;
+    //                 }
+
+
+    //             }
+
+
+    //         // }
+
+    //         return 200;
+
+
+    //     }
+    // }
+
+
+
+
+    if (!function_exists('create_p_account')) {
+
+        function create_p_account()
         {
 
 
-            $cv =  VirtualAccount::where('user_id', Auth::id())->first() ?? null;
 
-            if($cv != null){
-                return 200;
+            $first_name = Auth::user()->first_name;
+            $last_name = Auth::user()->last_name;
+            $user_id = Auth::id();
+            $b_name =  Auth::user()->b_name;
+            $phone = Auth::user()->phone;
+            $bvn = Auth::user()->bvn;
+            $b_phone = Auth::user()->b_name;
+            $pnum = preg_replace('/^./', '', $phone);
+            $cphone = $pnum;
+            $name = Auth::user()->business_name;
+
+
+
+            if ($business_name != null) {
+                $name = $business_name;
+            } else {
+                $name = $first_name . " " . $last_name;
             }
 
-            if ($cv == null) {
+
+            $user_id = Auth::id();
 
 
-                // $set = Setting::select('*')->first();
-                // if ($set->bank == 'vfd') {
+            $bvn = user_bvn() ?? null;
+            $user_id = User::where('bvn', $bvn)->first()->id ?? null;
 
-                    //create VFD
-                    $errand_key = errand_api_key();
-                    $errand_user_id = errand_id();
+            $client = env('CLIENTID');
+            $xauth = env('HASHKEY');
 
-                    if ($b_name == null) {
-                        $name = $first_name . " " . $last_name;
-                    } else {
-                        $name = $b_name;
-                    }
-
-                    if ($b_phone == null) {
-                        $phone = $cphone;
-                    } else {
-                        $phone = $b_phone;
-                    }
-
-                    $curl = curl_init();
-                    $data = array(
-
-                        "userId" => $errand_user_id,
-                        "customerBvn" => $bvn,
-                        "phoneNumber" => "234" . $phone,
-                        "customerName" => $name,
-
-                    );
-
-                    $databody = json_encode($data);
-
-                    curl_setopt_array($curl, array(
-                        CURLOPT_URL => 'https://api.errandpay.com/epagentservice/api/v1/CreateVirtualAccount',
-                        CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_ENCODING => '',
-                        CURLOPT_MAXREDIRS => 10,
-                        CURLOPT_TIMEOUT => 0,
-                        CURLOPT_FOLLOWLOCATION => true,
-                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                        CURLOPT_CUSTOMREQUEST => 'POST',
-                        CURLOPT_POSTFIELDS => $databody,
-                        CURLOPT_HTTPHEADER => array(
-                            'Content-Type: application/json',
-                            'Accept: application/json',
-                            "Authorization: Bearer $errand_key",
-                        ),
-                    ));
-
-                    $var = curl_exec($curl);
-                    curl_close($curl);
-                    $var = json_decode($var);
+            $curl = curl_init();
+            $data = array(
+                "account_name" => $name,
+                "bvn" => $bvn,
+            );
 
 
-                    $status = $var->code ?? null;
-                    $acct_no = $var->data->accountNumber ?? null;
-                    $acct_name = $var->data->accountName ?? null;
-                    $error = $var->error->message ?? null;
 
-                    $bank = "VFD MICROFINANCE BANK";
+            $databody = json_encode($data);
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://vps.providusbank.com/vps/api/PiPCreateReservedAccountNumber',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => $databody,
+                CURLOPT_HTTPHEADER => array(
+                    'Content-Type: application/json',
+                    'Accept: application/json',
+                    "Client-Id: $client",
+                    "X-Auth-Signature: $xauth",
+                ),
+            ));
 
-                    if ($status == 200) {
+            $var = curl_exec($curl);
+            curl_close($curl);
+            $var = json_decode($var);
 
-                        $create = new VirtualAccount();
-                        $create->v_account_no = $acct_no;
-                        $create->v_account_name = $acct_name;
-                        $create->v_bank_name = $bank;
-                        $create->user_id = $user_id;
-                        $create->fee = "NGN 15";
-                        $create->save();
+            $status = $var->responseCode ?? null;
+            $p_acct_no = $var->account_number ?? null;
+            $p_acct_name = $var->account_name ?? null;
+            $error = $var->responseMessage ?? null;
 
-                        $user = User::find(Auth::id());
-                        $user->v_account_no = $acct_no;
-                        $user->v_account_name = $acct_name;
-                        $user->save();
+            $pbank = "PROVIDUS BANK";
 
-                        // return 200;
-                    }else{
+            if ($status == 00) {
 
-                        $message = "Error from Virtual account creation | $name | $error";
-                        send_notification($message);
+                $create = new VirtualAccount();
+                $create->v_account_no = $p_acct_no;
+                $create->v_account_name = $p_acct_name;
+                $create->v_bank_name = $pbank;
+                $create->user_id = Auth::id();
+                $create->save();
 
-                    }
-
-
-                    //create providus
-
-                    $client_id = env('CLIENTID');
-                    $hashkey = env('HASHKEY');
-
-                    $curl = curl_init();
-                    $data = array(
-
-                        "customerBvn" => $bvn,
-                        "phoneNumber" => "234" . $phone,
-                        "customerName" => $name,
-
-                    );
-
-                    $databody = json_encode($data);
-
-                    curl_setopt_array($curl, array(
-                        CURLOPT_URL => 'https://vps.providusbank.com/vas/api/PiPCreateReservedAccountNumber',
-                        CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_ENCODING => '',
-                        CURLOPT_MAXREDIRS => 10,
-                        CURLOPT_TIMEOUT => 0,
-                        CURLOPT_FOLLOWLOCATION => true,
-                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                        CURLOPT_CUSTOMREQUEST => 'POST',
-                        CURLOPT_POSTFIELDS => $databody,
-                        CURLOPT_HTTPHEADER => array(
-                            'Content-Type: application/json',
-                            'Accept: application/json',
-                            "Client-Id: $client_id",
-                            "X-Auth-Signature: $hashkey",
-                        ),
-                    ));
-
-                    $var = curl_exec($curl);
-                    curl_close($curl);
-                    $var = json_decode($var);
+                $message = "Providus Account Created | $name";
+                send_notification($message);
 
 
-                    $status = $var->responseCode ?? null;
-                    $acct_no = $var->account_number ?? null;
-                    $acct_name = $var->account_name ?? null;
-
-                    $error = $var->error->message ?? null;
-
-                    $bank = "PROVIDUS BANK";
+                return 200;
+            } else {
 
 
-                    if ($status == 00) {
+                $error = "Providus account Error | $name | $error";
+                send_notification($error);
 
-                        $create = new VirtualAccount();
-                        $create->v_account_no = $acct_no;
-                        $create->v_account_name = $acct_name;
-                        $create->v_bank_name = $bank;
-                        $create->user_id = $user_id;
-                        $create->fee = "1%";
-                        $create->save();
-
-                        return 200;
-
-                    }else{
-                        $message = "Error from Virtual account creation | $name | $error";
-                        send_notification($message);
-
-                        return 500;
-                    }
-
-
-                }
-
-
-            // }
-
-            return 200;
-
-
+                return 500;
+            }
         }
     }
 
@@ -1476,7 +1577,7 @@ if (!function_exists('get_banks')) {
             $status = $var->status;
 
             if ($status == 'success') {
-                return $var->data->{'NGN-USD'}/ 100;
+                return $var->data->{'NGN-USD'} / 100;
             }
 
             return "Network Issue";
@@ -1484,56 +1585,47 @@ if (!function_exists('get_banks')) {
     }
 
 
-if (!function_exists('sendFirebaseNotification')) {
+    if (!function_exists('sendFirebaseNotification')) {
 
 
-   
-    function sendFirebaseNotification($var, $icon, $title, $message, $click_action)
-    { 
 
-        $SERVER_API_KEY = env('FCM_SERVER_KEY');
-        $authorization_key = $SERVER_API_KEY;
-        $finalPostArray = array(
-            'registration_ids' => $var,
-            'notification' => array(
+        function sendFirebaseNotification($var, $icon, $title, $message, $click_action)
+        {
 
-                'body' => $message,
+            $SERVER_API_KEY = env('FCM_SERVER_KEY');
+            $authorization_key = $SERVER_API_KEY;
+            $finalPostArray = array(
+                'registration_ids' => $var,
+                'notification' => array(
 
-                'title' => $title,
+                    'body' => $message,
 
-                "click_action" => $click_action,
+                    'title' => $title,
 
-                "icon" => $icon,
+                    "click_action" => $click_action,
+
+                    "icon" => $icon,
 
 
-            ),
-            "data" => array(
-                "click_action" => "FLUTTER_NOTIFICATION_CLICK",
-                "sound" => "default",
-                "status" => "done"
+                ),
+                "data" => array(
+                    "click_action" => "FLUTTER_NOTIFICATION_CLICK",
+                    "sound" => "default",
+                    "status" => "done"
 
-            )
-        );
+                )
+            );
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://fcm.googleapis.com/fcm/send");
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($finalPostArray));  //Post Fields
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Authorization: key=' . $authorization_key));
-        $get_response = curl_exec($ch);
-        dd($get_response, $finalPostArray, $authorization_key);
-        curl_close($ch);
-        //echo $server_output;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, "https://fcm.googleapis.com/fcm/send");
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($finalPostArray));  //Post Fields
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Authorization: key=' . $authorization_key));
+            $get_response = curl_exec($ch);
+            dd($get_response, $finalPostArray, $authorization_key);
+            curl_close($ch);
+            //echo $server_output;
+        }
     }
-}
-
-
-
-
-
-
-
-
-
 }

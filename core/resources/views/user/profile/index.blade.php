@@ -26,20 +26,20 @@
                                 aria-controls="tabs-icons-text-3" aria-selected="fadse"><i class="fad fa-key"></i> API
                                 Keys</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.social')==url()->current()) active @endif"
                                 id="tabs-icons-text-4-tab" data-toggle="tab" href="#tabs-icons-text-4" role="tab"
                                 aria-controls="tabs-icons-text-4" aria-selected="fadse"><i
                                     class="fad fa-share-square"></i> Social
                                 Profile</a>
-                        </li>
-                        <li class="nav-item">
+                        </li> --}}
+                        {{-- <li class="nav-item">
                             <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.bank')==url()->current()) active @endif"
                                 id="tabs-icons-text-5-tab" data-toggle="tab" href="#tabs-icons-text-5" role="tab"
                                 aria-controls="tabs-icons-text-5" aria-selected="fadse"><i
                                     class="fad fa-university"></i> Bank
                                 Accounts</a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.compliance')==url()->current()) active @endif"
                                 id="tabs-icons-text-6-tab" data-toggle="tab" href="#tabs-icons-text-6" role="tab"
@@ -669,7 +669,7 @@
                 <div class="tab-pane fade @if(route('user.api')==url()->current())show active @endif"
                     id="tabs-icons-text-3" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
 
-                    @if($compliance == "2")
+                    @if($compliance == "0")
                     <div class="card">
                         <div class="card-body">
                             <h4 class="font-weight-bolder">{{__('API Documentation')}}</h4>
@@ -724,16 +724,39 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="font-weight-bolder">{{__('API Documentation')}}</h4>
-                            <p class="text-gray mb-1">To generate a webkey you need to complete your Compliance
-                                registration once its completed your webkey will appear here.
+                            <p class="text-gray mb-1">To generate a webkey you need to complete your Compliance.<br>Upon approval your key will appear here
                             </p>
 
-                            <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.compliance')==url()->current()) active @endif"
+
+                            <a class="mt-4 nav-link mb-sm-3 mb-md-0 @if(route('user.compliance')==url()->current()) active @endif"
                                 id="tabs-icons-text-6-tab" data-toggle="tab" href="#tabs-icons-text-6" role="tab"
                                 aria-controls="tabs-icons-text-6" aria-selected="fadse"><i class="fad fa-globe"></i>
-                                Complete your Compliance</a>
+                                Click here to complete Compliance</a>
 
 
+
+                            {{-- <img src="https://t4.ftcdn.net/jpg/03/98/05/95/360_F_398059575_h3XJtdGMNhieUcDYwwkrSVt0PoVGAuai.jpg" class="img-thumbnail mt-4" width="200" height="200"> --}}
+
+                            {{-- <div class="row mt-4">
+
+
+
+
+                                <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.compliance')==url()->current()) active @endif"
+                                    id="tabs-icons-text-6-tab" data-toggle="tab" href="https://play.google.com/store/apps/details?id=com.enk_pay_project.mobileapp" role="tab"
+                                    aria-controls="tabs-icons-text-6" aria-selected="fadse"><i class="fad fa-android" aria-hidden="true"></i>
+                                    Click to download Andriod App from Playstore</a>
+    
+    
+                                    <a class="nav-link mb-sm-3 mb-md-0 @if(route('user.compliance')==url()->current()) active @endif"
+                                        id="tabs-icons-text-6-tab" data-toggle="tab" href="https://apps.apple.com/ng/app/enkpay/id6448091026" role="tab"
+                                        aria-controls="tabs-icons-text-6" aria-selected="fadse"><i class="fad fa-apple" aria-hidden="true"></i>
+                                        Click to download IOS App from APP Store</a>
+    
+    
+                                
+                            </div> --}}
+                          
 
                             
                         </div>

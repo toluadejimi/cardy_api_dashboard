@@ -77,8 +77,11 @@
                     <h4 class="mb-2 text-primary">{{$val->v_bank_name}}</h4>
                     <h1 class="mb-2 instafeed-defaultfont-weight-bolder">{{$val->v_account_no}}</h1>
                     <h4 class="mb-5 ">{{$val->v_account_name}}</h4>
-                    <p class="mb-2 text-muted ">Money sent to this bank account will automatically top up your ENKPAY Wallet.<br> Receive your salary or money from any bank account locally directly into your ENKPAY Wallet</p>
-                    <br>{{$val->fee}} Transaction fee applies</div>
+                    <p class="mb-3 text-muted ">Money sent to this bank account will automatically top up your ENKPAY Wallet.<br> Receive your salary or money from any bank account locally directly into your ENKPAY Wallet</p>
+                    <br>{{$charges}}% Transaction fee applies. <br>NGN 50 stamp duty for funds above NGN 10,000</div>
+                </div>
+
+
 
                 </div>
                 @endforeach
