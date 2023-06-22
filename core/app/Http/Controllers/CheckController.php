@@ -972,7 +972,13 @@ class CheckController extends Controller
         $wkey->save();
 
 
-        
+        $webt = VirtualAccount::wwhere('user_id',$id)->first()->business_id ?? null;
+        if($webt == null){
+
+            $bid = User::where('id', $id)->first()->business_id;
+            VirtualAccount::where('user_id', $id)->update('business_id',$bid);
+
+        }
 
 
         if ($set['email_notify'] == 1) {
