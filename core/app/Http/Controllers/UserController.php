@@ -5105,7 +5105,6 @@ class UserController extends Controller
                 $bvn = Auth::user()->bvn;
                 $b_phone = Auth::user()->b_name;
                 $pnum = preg_replace('/^./', '', $phone);
-                $cphone= $pnum;
 
                 $create_v = create_p_account();
 
@@ -5116,9 +5115,9 @@ class UserController extends Controller
                 $message = "Pending Account Creation for |"  . $first_name. " ".  $last_name;
 
 
-                $check_business_name = Compliance::where('user_id', $id)->first()->first_name ?? null;
+                $check_business_name = Compliance::where('user_id', $user_id)->first()->first_name ?? null;
                 if ($check_business_name == null) {
-                    $get_temp_user = User::where('id', $id)->first();
+                    $get_temp_user = User::where('id', $user_id)->first();
                     $com = new Compliance();
                     $com->first_name = $get_temp_user->first_name;
                     $com->last_name = $get_temp_user->last_name;
