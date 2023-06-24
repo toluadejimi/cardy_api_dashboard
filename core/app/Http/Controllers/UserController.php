@@ -71,6 +71,8 @@ use App\Lib\CoinPaymentHosted;
 use Laravel\Flutterwave\Card;
 use Laravel\Flutterwave\Bill;
 use Omnipay\Omnipay;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 
 
@@ -311,7 +313,7 @@ class UserController extends Controller
 
     public function webhook_update(Request $request)
     {
-        
+
         if($request->url == null){
             return back()->with('alert', 'Webhook Url can not be empty');
         }
@@ -340,14 +342,14 @@ class UserController extends Controller
 
 
         }
-       
+
 
 
         Webkey::whereuser_id(Auth::guard('user')->user()->id)->update(['charge_status' => $request->charge]);
         return back()->with('success', 'updated successfully');
 
-        
-       
+
+
     }
 
 
@@ -3173,7 +3175,7 @@ class UserController extends Controller
         if($vb == null ){
 
             $create_account = create_p_account();
-    
+
 
             if($create_account  == 200){
 
@@ -4871,6 +4873,18 @@ class UserController extends Controller
         $secret = $g->generateSecret();
         $set = Settings::first();
         $user = User::find(Auth::guard('user')->user()->id);
+
+
+        $qr= Webkey::where('user_id', Auth::guard('user')->user()->id)->first()->qrlink ?? null;
+
+        if($qr == null){
+
+            $webkey = Webkey::where('user_id', Auth::id())->first()->key ?? null;
+            $qrlink = "https://web.enkpay.com/custom-pay?key=".$webkey;
+            Webkey::where('user_id', Auth::guard('user')->user()->id)->update(['qrlink' => $qrlink]);
+
+        }
+
         $data['key'] = Webkey::where('user_id', Auth::id())->first() ?? null;
         $data['compliance'] = Compliance::where('user_id', Auth::id())->first()->status ?? null;
         $site = $set->site_name;
@@ -4879,6 +4893,9 @@ class UserController extends Controller
         $data['bank'] = Bank::whereUser_id(Auth::guard('user')->user()->id)->orderBy('id', 'DESC')->paginate(4);
         return view('user.profile.index', $data);
     }
+
+
+
 
     public function no_kyc()
     {
@@ -5079,7 +5096,7 @@ class UserController extends Controller
             User::where('id', Auth::user()->id)
                 ->update([
 
-                    
+
                     'address_line1' => $request->address_line1,
                     'city' => $request->city,
                     'first_name' => $request->first_name,

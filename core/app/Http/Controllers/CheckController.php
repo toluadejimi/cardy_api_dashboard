@@ -969,14 +969,16 @@ class CheckController extends Controller
         $wkey = new Webkey();
         $wkey->key = $webkey;
         $wkey->user_id = $com->user_id;
+        $wkey->qrlink = "https://web.enkpay.com/custom-paykey=?".$webkey;
         $wkey->save();
 
 
-        $webt = VirtualAccount::wwhere('user_id',$id)->first()->business_id ?? null;
+
+        $webt = VirtualAccount::where('user_id',$com->user_id)->first()->business_id ?? null;
         if($webt == null){
 
-            $bid = User::where('id', $id)->first()->business_id;
-            VirtualAccount::where('user_id', $id)->update('business_id',$bid);
+            $bid = User::where('id', $com->user_id)->first()->business_id;
+            VirtualAccount::where('user_id', $com->user_id)->update(['business_id' => $bid]);
 
         }
 

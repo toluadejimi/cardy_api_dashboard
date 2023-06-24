@@ -704,7 +704,7 @@
                                 <div class="row">
 
 
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 mb-4">
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -718,13 +718,13 @@
 
                                         </div>
 
-                                        <span class="text-gray mb-3">By default ENKPAY charge the customer</span>
+                                        <span class="text-gray mb-4">By default ENKPAY charge the customer</span>
 
 
                                     </div>
 
 
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 mb-4">
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -767,8 +767,6 @@
                                         class="fad fa-file-alt"></i> {{__('Update Webhook')}}</button>
                         </div>
                         </form>
-
-
                     </div>
                     @else
                     <div class="card">
@@ -822,6 +820,29 @@
 
 
                     </div>
+                    @endif
+                    @if($key->qrlink != null)
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="font-weight-bolder">{{__('QR Payment')}}</h4>
+                            <p class="text-gray mb-1">Receive money with ENKPAY QR Code. <br>Let your customer scan and pay you with Qr Code</p>
+
+                           {{ QrCode::size(200)
+                            ->style('dot')
+                            ->eye('circle')
+                            ->color(0, 0, 255)
+                            ->margin(1)
+                            ->generate(
+                                $key->qrlink
+                            )  }}
+
+                        </div>
+                        </form>
+
+
+                    </div>
+                    @else
+
                     @endif
 
                 </div>
