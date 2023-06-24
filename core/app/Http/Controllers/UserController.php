@@ -619,6 +619,7 @@ class UserController extends Controller
 
 
 
+
         $data['title'] = 'Virtual Cards';
         $data['card'] = $upd = VCard::whereUser_id(Auth::guard('user')->user()->id)->orderBy('id', 'DESC')->get();
         $data['vc'] = VCard::whereUser_id(Auth::guard('user')->user()->id)->first() ?? null;
@@ -635,7 +636,7 @@ class UserController extends Controller
 
 
 
-        if ($chk == null) {
+        if ($chk != null) {
 
             $curl = curl_init();
             curl_setopt_array($curl, array(
@@ -693,67 +694,8 @@ class UserController extends Controller
                 ]);
 
                 return back()->with('success', 'Your Virtual Card has been created successfully');
-            } else {
-
-
-
-
-                //return back()->with('alert', 'Could not fetch card at the moment');
-
-
             }
         }
-
-
-        // if ($card_id == $user_id) {
-
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://issuecards-api-bridgecard-co.relay.evervault.com/v1/issuing/cards/get_card_details?card_id=$card_id",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                "token: Bearer $key"
-            ),
-        ));
-
-
-        $var = curl_exec($curl);
-        curl_close($curl);
-
-        $var = json_decode($var);
-        $status = $var->status ?? null;
-        $balance = $var->data->balance/100 ?? null;
-
-
-
-        $update =  VCard::where('user_id', Auth::id())->update([
-
-            'amount' => $balance,
-
-        ]);
-
-        $data['balance'] = $balance;
-
-
-
-
-
-
-        // }
-
-
-        // dd($var->data->balance);
-
-
-
-
-
 
 
         return view('user.virtual.index', $data);
