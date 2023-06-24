@@ -68,8 +68,6 @@ use Session;
 use Image;
 use Redirect;
 use App\Lib\CoinPaymentHosted;
-use Laravel\Flutterwave\Card;
-use Laravel\Flutterwave\Bill;
 use Omnipay\Omnipay;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 

@@ -6,7 +6,6 @@
   $upd=App\Models\Virtual::all();
   foreach($upd as $trx){
     $data = array("id"=>$trx->card_hash);
-    $check = new Laravel\Flutterwave\VirtualCard();
     $getCard = $check->getCard($data);
     $result = $getCard;
     $amo=str_replace( ',', '', $result['data']['amount']);
