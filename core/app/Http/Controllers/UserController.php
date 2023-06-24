@@ -4816,6 +4816,8 @@ class UserController extends Controller
 
 
         $qr= Webkey::where('user_id', Auth::guard('user')->user()->id)->first()->qrlink ?? null;
+        $webkey= Webkey::where('user_id', Auth::guard('user')->user()->id)->first()->key ?? null;
+
 
         if($qr == null){
 
