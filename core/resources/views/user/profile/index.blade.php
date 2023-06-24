@@ -821,7 +821,7 @@
 
                     </div>
                     @endif
-                    @if($key->qrlink != null)
+                    @if($qrlink != null)
                     <div class="card">
                         <div class="card-body">
                             <h4 class="font-weight-bolder">{{__('QR Payment')}}</h4>

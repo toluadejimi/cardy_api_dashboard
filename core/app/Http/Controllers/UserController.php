@@ -4819,11 +4819,12 @@ class UserController extends Controller
 
         if($qr == null){
 
-            $webkey = Webkey::where('user_id', Auth::id())->first()->key ?? null;
             $qrlink = "https://web.enkpay.com/custom-pay?key=".$webkey;
             Webkey::where('user_id', Auth::guard('user')->user()->id)->update(['qrlink' => $qrlink]);
 
         }
+
+        $data['qrlink']=Webkey::where('user_id', Auth::guard('user')->user()->id)->first()->qrlink ?? null;
 
         $data['key'] = Webkey::where('user_id', Auth::id())->first() ?? null;
         $data['compliance'] = Compliance::where('user_id', Auth::id())->first()->status ?? null;
