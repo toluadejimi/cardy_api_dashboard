@@ -1397,7 +1397,7 @@ class CheckController extends Controller
         $trasnaction->fee = 0;
         $trasnaction->balance = $balance;
         $trasnaction->main_type = "TerminalPayment";
-        $trasnaction->status = 0;
+        $trasnaction->status = 1;
         $trasnaction->save();
 
 
