@@ -4814,6 +4814,7 @@ class UserController extends Controller
         $set = Settings::first();
         $user = User::find(Auth::guard('user')->user()->id);
 
+        dd('hello');
 
 
         $ckcom = Compliance::where('user_id', Auth::guard('user')->user()->id)->first() ?? null;
