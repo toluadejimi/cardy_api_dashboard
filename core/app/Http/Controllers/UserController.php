@@ -4815,6 +4815,16 @@ class UserController extends Controller
         $user = User::find(Auth::guard('user')->user()->id);
 
 
+
+        $ckcom = Compliance::where('user_id', Auth::guard('user')->user()->id)->first() ?? null;
+        if($ckcom == null){
+        $com = new Compliance();
+        $com->first_name = $user->first_name;
+        $com->last_name = $user->last_name;
+        $com->save();
+        }
+
+
         $qr= Webkey::where('user_id', Auth::guard('user')->user()->id)->first()->qrlink ?? null;
         $webkey= Webkey::where('user_id', Auth::guard('user')->user()->id)->first()->key ?? null;
 
@@ -4825,6 +4835,10 @@ class UserController extends Controller
             Webkey::where('user_id', Auth::guard('user')->user()->id)->update(['qrlink' => $qrlink]);
 
         }
+
+
+
+
 
         $data['qrlink']=Webkey::where('user_id', Auth::guard('user')->user()->id)->first()->qrlink ?? null;
 
