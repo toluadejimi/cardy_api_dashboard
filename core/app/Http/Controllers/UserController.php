@@ -4818,6 +4818,7 @@ class UserController extends Controller
 
         if(empty($ckcom) || $ckcom == null){
         $com = new Compliance();
+        $com->user_id = Auth::guard('user')->user()->id;
         $com->first_name = $user->first_name;
         $com->last_name = $user->last_name;
         $com->save();
