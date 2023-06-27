@@ -4816,7 +4816,7 @@ class UserController extends Controller
 
         $ckcom = Compliance::where('user_id', Auth::guard('user')->user()->id)->first() ?? null;
 
-        if(isEmpty($ckcom) || $ckcom == null){
+        if(empty($ckcom) || $ckcom == null){
         $com = new Compliance();
         $com->first_name = $user->first_name;
         $com->last_name = $user->last_name;
