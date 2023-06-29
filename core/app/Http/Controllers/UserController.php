@@ -621,7 +621,7 @@ class UserController extends Controller
 
 
         $data['title'] = 'Virtual Cards';
-        $data['card'] = $upd = VCard::whereUser_id(Auth::guard('user')->user()->id)->orderBy('id', 'DESC')->get();
+        $data['card'] = VCard::whereUser_id(Auth::guard('user')->user()->id)->orderBy('id', 'DESC')->get() ?? null;
         $data['vc'] = VCard::whereUser_id(Auth::guard('user')->user()->id)->first() ?? null;
 
 
@@ -661,19 +661,11 @@ class UserController extends Controller
             $status = $var->status ?? null;
             $balance = $var->data->balance ?? null;
 
-
-
-
-
-
             VCard::where('user_id', Auth::id())->update([
 
                 'amount' => $balance/100,
 
             ]);
-
-
-
 
             if ($status == 'success') {
 
@@ -693,12 +685,17 @@ class UserController extends Controller
 
                 ]);
 
-                return back()->with('success', 'Your Virtual Card has been created successfully');
+                return view('user.virtual.index', $data);
             }
+
+            return view('user.virtual.index', $data);
+
+
         }
 
 
-        return view('user.virtual.index', $data);
+
+
     }
 
     public function fundVirtual(Request $request)
