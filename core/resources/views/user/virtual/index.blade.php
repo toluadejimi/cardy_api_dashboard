@@ -143,7 +143,7 @@ if($amo<$trx->amount){
                                 <div class="col">
                                     <span
                                         class="@if($val->bg=='bg-white' || $val->bg==null)text-primary @else text-white @endif">USD
-                                        {{number_format($balance, 2, '.', '')}}</span> @if($val->status==0) <span
+                                        {{number_format($val->balance, 2, '.', '')}}</span> @if($val->status==0) <span
                                         class="badge badge-pill badge-danger">Terminated</span> @elseif($val->status==1)
                                     <span class="badge badge-pill badge-success">Active</span> @elseif($val->status==2)
                                     <span class="badge badge-pill badge-danger">Blocked</span>@endif
