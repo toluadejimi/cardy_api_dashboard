@@ -636,7 +636,7 @@ class UserController extends Controller
         if($chk->user_id  ==  Auth::guard('user')->user()->id){
 
 
-            $card_id = $data['card']->card_id;
+            $card_id = $chk->card_id;
 
             $curl = curl_init();
             curl_setopt_array($curl, array(
