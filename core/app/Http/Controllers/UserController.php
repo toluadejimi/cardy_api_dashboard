@@ -633,10 +633,10 @@ class UserController extends Controller
         $user_id = VCard::where('user_id', Auth::id())->first()->user_id ?? null;
 
 
+        if($data['card']->user_id  ==  Auth::guard('user')->user()->id){
 
 
-
-        if ($chk != null) {
+            $card_id = $data['card']->card_id;
 
             $curl = curl_init();
             curl_setopt_array($curl, array(
@@ -669,7 +669,7 @@ class UserController extends Controller
 
             if ($status == 'success') {
 
-                VCard::where('user_id', Auth::id())->update([
+                VCard::where('user_id', Auth::guard('user')->user()->id)->update([
 
                     'masked_card' => $var->data->card_number,
                     'cvv' => $var->data->cvv,
@@ -681,17 +681,17 @@ class UserController extends Controller
                     'state' => $var->data->billing_address->state,
                     'zip_code' => $var->data->billing_address->billing_zip_code,
                     'name_on_card' => $var->data->card_name,
-                    'amount' => $var->data->balance,
+                    'amount' => $balance/100,
 
                 ]);
 
                 return view('user.virtual.index', $data);
             }
 
-            return view('user.virtual.index', $data);
 
 
-        }
+        } return view('user.virtual.index', $data);
+
 
 
 

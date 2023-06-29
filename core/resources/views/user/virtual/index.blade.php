@@ -34,12 +34,16 @@ if($amo<$trx->amount){
                             class="fa fa-plus"></i> {{__('Create Card')}}</a>
                     @else
 
+
+
                     @endif
 
 
 
                 </div>
             </div>
+
+            @if($vc->user_id == Auth::id())
             <div class="modal fade" id="modal-formx" tabindex="-1" role="dialog" aria-labelledby="modal-form"
                 aria-hidden="true">
                 <div class="modal-dialog modal- modal-dialog-centered" role="document">
@@ -143,7 +147,7 @@ if($amo<$trx->amount){
                                 <div class="col">
                                     <span
                                         class="@if($val->bg=='bg-white' || $val->bg==null)text-primary @else text-white @endif">USD
-                                        {{number_format($val->balance, 2, '.', '')}}</span> @if($val->status==0) <span
+                                        {{number_format($val->amount, 2, '.', '')}}</span> @if($val->status==0) <span
                                         class="badge badge-pill badge-danger">Terminated</span> @elseif($val->status==1)
                                     <span class="badge badge-pill badge-success">Active</span> @elseif($val->status==2)
                                     <span class="badge badge-pill badge-danger">Blocked</span>@endif
@@ -350,5 +354,16 @@ if($amo<$trx->amount){
                     </div>
                 </div>
             </div>
+            @else
+            <div class="col-md-12 mb-5">
+                <div class="text-center mt-8">
+                    <div class="mb-3">
+                        <img src="{{url('/')}}/asset/images/empty.svg">
+                    </div>
+                    <h3 class="text-dark">No Virtual Card</h3>
+                    <p class="text-dark text-sm card-text">We couldn t find any virtual card to this account</p>
+                </div>
+            </div>
+            @endif
 
             @stop
