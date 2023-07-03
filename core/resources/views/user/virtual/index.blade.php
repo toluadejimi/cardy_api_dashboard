@@ -43,7 +43,6 @@ if($amo<$trx->amount){
                 </div>
             </div>
 
-            @if($vc->user_id == Auth::id())
             <div class="modal fade" id="modal-formx" tabindex="-1" role="dialog" aria-labelledby="modal-form"
                 aria-hidden="true">
                 <div class="modal-dialog modal- modal-dialog-centered" role="document">
@@ -364,6 +363,5 @@ if($amo<$trx->amount){
                     <p class="text-dark text-sm card-text">We couldn t find any virtual card to this account</p>
                 </div>
             </div>
-            @endif
 
             @stop
