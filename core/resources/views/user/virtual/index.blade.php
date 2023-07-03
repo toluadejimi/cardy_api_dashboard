@@ -211,7 +211,7 @@ if($amo<$trx->amount){
                     </div>
                 </div>
                 @endforeach
-                @else
+                {{-- @else
                 <div class="col-md-12 mb-5">
                     <div class="text-center mt-8">
                         <div class="mb-3">
@@ -221,7 +221,7 @@ if($amo<$trx->amount){
                         <p class="text-dark text-sm card-text">We couldn t find any virtual card to this account</p>
                     </div>
                 </div>
-                @endif
+                @endif --}}
             </div>
 
 
@@ -363,5 +363,5 @@ if($amo<$trx->amount){
                     <p class="text-dark text-sm card-text">We couldn t find any virtual card to this account</p>
                 </div>
             </div>
-
+            @endif
             @stop
