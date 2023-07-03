@@ -632,6 +632,10 @@ class UserController extends Controller
 
         $user_id = VCard::where('user_id', Auth::id())->first()->user_id ?? null;
 
+        if($chk == null){
+            return view('user.virtual.index', $data);
+        }
+
 
         if($chk->user_id  ==  Auth::guard('user')->user()->id){
 
