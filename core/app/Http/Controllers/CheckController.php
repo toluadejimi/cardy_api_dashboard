@@ -257,7 +257,7 @@ class CheckController extends Controller
 
 
         $data['b_rate'] = get_rate();
-        $diff = Setting::where('id', 1)->first()->virtual_createcgargep ?? 0;
+        $diff = Setting::where('id', 1)->first()->virtual_createchargep ?? 0;
         $updaterate = $diff + get_rate() ?? 0;
         Setting::where('id', 1)->update(['ngn_rate' => $updaterate]);
 
