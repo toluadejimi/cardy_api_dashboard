@@ -116,7 +116,7 @@ class WebhookController extends Controller
                     'fromsender' => 'noreply@enkpayapp.enkwave.com', 'EnkPay',
                     'subject' => "Credit Notification",
                     'toreceiver' => $user->email,
-                    'amount' => $amount,
+                    'amount' => $amount/100,
                     'first_name' => $user->first_name,
                 );
 
@@ -157,7 +157,7 @@ class WebhookController extends Controller
                     'fromsender' => 'noreply@enkpay.com', 'EnkPay',
                     'subject' => "Debit Notification",
                     'toreceiver' => $user->email,
-                    'amount' => $amount,
+                    'amount' => $amount/100,
                     'first_name' => $user->first_name,
                 );
 
@@ -199,7 +199,7 @@ class WebhookController extends Controller
                     'fromsender' => 'noreply@enkpay.com', 'EnkPay',
                     'subject' => "Decline Notification",
                     'toreceiver' => $user->email,
-                    'amount' => $amount,
+                    'amount' => $amount/100,
                     'first_name' => $user->first_name,
                     'reason' => $decline_reason,
                     'vendor' => $description,
@@ -244,7 +244,7 @@ class WebhookController extends Controller
                     'fromsender' => 'noreply@enkpay.com', 'EnkPay',
                     'subject' => "Reversal Notification",
                     'toreceiver' => $user->email,
-                    'amount' => $amount,
+                    'amount' => $amount/100,
                     'first_name' => $user->first_name,
                 );
 
@@ -288,7 +288,7 @@ class WebhookController extends Controller
                     'fromsender' => 'noreply@enkpay.com', 'EnkPay',
                     'subject' => "OTP Notification",
                     'toreceiver' => $user->email,
-                    'amount' => $amount,
+                    'amount' => $amount/100,
                     'first_name' => $user->first_name,
                     'vendor' => $merchant_name,
                     'otp' => $otp
@@ -331,7 +331,7 @@ class WebhookController extends Controller
                     'fromsender' => 'noreply@enkpay.com', 'EnkPay',
                     'subject' => "Card Maintenance Notification",
                     'toreceiver' => $user->email,
-                    'amount' => $amount,
+                    'amount' => $amount/100,
                     'first_name' => $user->first_name,
                 );
 
