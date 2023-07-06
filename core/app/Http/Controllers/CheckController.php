@@ -254,11 +254,12 @@ class CheckController extends Controller
         $data['business'] = User::whereType(3)->count();
 
         $data['issuing_wallet'] = get_issuing_bal();
+
+
         $data['b_rate'] = get_rate();
-
-
-
-
+        $diff = Setting::where('id', 1)->first()->virtual_createcgargep ?? 0;
+        $updaterate = $diff + get_rate() ?? 0;
+        Setting::where('id', 1)->update(['ngn_rate' => $updaterate]);
 
 
         return view('admin.dashboard.index', $data);
