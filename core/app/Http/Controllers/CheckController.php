@@ -218,7 +218,7 @@ class CheckController extends Controller
         $data['received'] = Charges::sum('amount');
         $mainw = User::all()->sum('main_wallet');
         $bwall = User::all()->sum('bonus_wallet') ?? 0;
-        $data['twallet'] = $mainw + $mainw;
+        $data['twallet'] = $mainw + $bwall;
         $pp2 = str_replace(',', '', $data['pool']);
         $pp3 = (int)$pp2;
         $data['diff'] = $pp3 - $data['twallet'];
