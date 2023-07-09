@@ -253,7 +253,7 @@ class CheckController extends Controller
         $data['customer'] = User::whereType(2)->count();
         $data['business'] = User::whereType(3)->count();
         $data['issuing_wallet'] = get_issuing_bal();
-        $data['vtbalance'] = round(vt_balance());
+        $data['vtbalance'] = (int)vt_balance();
 
         $data['b_rate'] = get_rate();
         $diff = Setting::where('id', 1)->first()->virtual_createchargep ?? 0;
