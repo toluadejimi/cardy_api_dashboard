@@ -1535,14 +1535,15 @@ if (!function_exists('get_banks')) {
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => 'GET',
                 CURLOPT_HTTPHEADER => array(
-                    "api-key: $vtkey",
-                "'public-key: $pkey"
+                "api-key: $vtkey",
+                "public-key: $pkey"
                 ),
             ));
 
             $var = curl_exec($curl);
             curl_close($curl);
             $var = json_decode($var);
+
 
             $status = $var->code ?? null;
 
