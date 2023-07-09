@@ -209,7 +209,7 @@
 
 
 
-                
+
                 <div class="card">
                     <div class="card-body">
                         <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
@@ -327,7 +327,22 @@
                 </div>
 
 
-                
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                            <div>
+                                <h3 class="mb-2">{{__('VTU Balance')}}</h3>
+                                <ul class="list list-unstyled mb-0">
+                                    <li><span class="text-default text-sm">{{$currency->symbol.number_format($vtbalance)}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
             </div>
 
 
@@ -383,7 +398,7 @@
                                         <td>{{$item->sender_bank}}</td>
                                         <td>{{$item->receiver_name}}</td>
                                         <td>{{$item->receiver_account_no}}</td>
-    
+
                                         @if($item->status == "1")
                                         <td><span class="badge rounded-pill bg-success text-white ">Successful</span></td>
                                         @elseif($item->status == "2")
@@ -396,18 +411,18 @@
                                         <td><span class="badge rounded-pill bg-danger text-white">Declined</span></td>
                                         @endif
 
-                                    
+
 
 
                                         <td>{{date('F d, Y', strtotime($item->created_at))}}</td>
                                         <td>{{date('h:i:s A', strtotime($item->created_at))}}</td>
-    
+
                                     </tr>
                                     @endforeach
                                 </tbody>
-    
+
                                 {{-- {{ $transactions->onEachSide(5)->links() }} --}}
-    
+
                             </table>
                         </div>
                     </div>
