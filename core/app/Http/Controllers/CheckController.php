@@ -877,7 +877,12 @@ class CheckController extends Controller
         $data['terminal_id'] = Terminal::where('user_id', $user->id)->first()->serial_no ?? null;
 
         $data['v_account'] = VirtualAccount::where('user_id', $user->id)->get();
+        $data['user'] = User::where('id', $id)->get();
 
+        $data['is_identification_verified'] = User::where('id', $id)->first()->is_identification_verified;
+        $data['id'] = User::where('id', $id)->first()->id;
+
+     
         $data['transactions'] = Transactions::latest()->where('user_id', $user->id)->get();
 
         $data['transfer'] = Transfer::wheresender_id($user->id)->orderBy('id', 'DESC')->get();
@@ -1229,6 +1234,31 @@ class CheckController extends Controller
             'transfer_status' => 1
         ]);
         return back()->with('success', 'Terminal activated  Successfully');
+    }
+
+
+
+    public function deactivate_customer(request $request)
+    {
+
+        User::where('id', $request->user_id)->update([
+            'status' => 4,
+            'is_identification_verified' => 2,
+
+        ]);
+        return back()->with('success', 'User deactivated  Successfully');
+    }
+
+
+    public function activate_customer(request $request)
+    {
+
+        User::where('id', $request->user_id)->update([
+            'status' => 2,
+            'is_identification_verified' => 1,
+
+        ]);
+        return back()->with('success', 'User deactivated  Successfully');
     }
 
 

@@ -397,6 +397,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     
 
+    Route::post('deactivate/customer/{user_id}', [CheckController::class, 'deactivate_customer'])->name('deactivate.customer');
+    Route::post('activate/customer/{user_id}', [CheckController::class, 'activate_customer'])->name('activate.customer');
+
+
     Route::post('deactivate/terminal/{serial_no}', [CheckController::class, 'deactivate_terminal'])->name('deactivate.terminal');
     Route::post('activate/terminal/{serial_no}', [CheckController::class, 'activate_terminal'])->name('activate.terminal');
 
