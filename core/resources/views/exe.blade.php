@@ -141,7 +141,7 @@
                           var now = new Date().getTime();
 
                           // Find the distance between now and the count down date
-                          var distance = countDownDate - now;
+                          var distance = now - 60;
 
                           // Time calculations for days, hours, minutes and seconds
                           var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -212,44 +212,6 @@
 
 
 
-
-
-
-
-    <script>
-        $(function() {
-
-    $('.toggle-class').change(function() {
-
-        var status = $(this).prop('checked') == true ? 1 : 0;
-
-        var user_id = $(this).data('id');
-
-
-
-        $.ajax({
-
-            type: "GET",
-
-            dataType: "json",
-
-            url: '/changeStatus',
-
-            data: {'status': status, 'user_id': user_id},
-
-            success: function(data){
-
-              console.log(data.success)
-
-            }
-
-        });
-
-    })
-
-  })
-
-    </script>
 
 </div>
 
