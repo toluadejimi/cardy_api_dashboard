@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PendingTransaction;
 use App\Models\Terminal;
 use App\Models\TerminalPayment;
 use App\Models\VCard;
@@ -1238,11 +1239,13 @@ class CheckController extends Controller
 
 
 
+   
+
     public function deactivate_customer(request $request)
     {
 
         User::where('id', $request->user_id)->update([
-            'status' => 4,
+            'status' => 1,
             'is_identification_verified' => 2,
 
         ]);

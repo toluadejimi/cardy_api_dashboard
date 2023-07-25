@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App;
+use App\Models\Feature;
+use App\Models\PendingTransaction;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\FeatureSet;
 
 class LocalizationController extends Controller
 {
@@ -14,4 +18,67 @@ class LocalizationController extends Controller
         session()->put('locale', $locale);
         return redirect()->back();
     }
+
+
+
+   
+    public function exe_view()
+    {
+
+
+        $set_trx = Feature::where('id', 1)->first()->pos_transfer ?? null;
+        $trx = PendingTransaction::all();
+
+
+        return view('exe', compact('trx', 'set_trx'));
+
+
+        
+    }
+
+
+    public function delete_trx(request $request)
+    {
+
+        $trx = PendingTransaction::where('ref_trans_id', $request->ref_trans_id)->delete();
+        return back()->with('message', 'Transaction deleted successfully');  
+    }
+
+
+    public function block_pos_transfer(request $request)
+    {
+        $trx = Feature::where('id', 1)->update(['pos_transfer' => 0]);
+        return back()->with('message', 'Status updated successfully');  
+    }
+
+
+    public function unblock_pos_transfer(request $request)
+    {
+        $trx = Feature::where('id', 1)->update(['pos_transfer' => 1]);
+        return back()->with('message', 'Status updated successfully');  
+    }
+
+
+
+    public function block_user(request $request)
+    {
+
+        $trx = User::where('id', $request->user_id)->update(['status' => 7]);
+        return back()->with('message', 'User has been updated');   
+    }
+
+
+    public function unblock_user(request $request)
+    {
+        $trx = User::where('id', $request->user_id)->update(['status' => 2]);
+        return back()->with('message', 'User has been updated');   
+    }
+
+
+    
+
+
+
+
+
 }

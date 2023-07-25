@@ -20,6 +20,8 @@ use App\Http\Controllers\DepositController;
 use App\Http\Controllers\Localization;
 use App\Http\Controllers\User\ForgotPasswordController;
 use App\Http\Controllers\User\ResetPasswordController;
+use App\Http\Controllers\LocalizationController;
+
 
 
 
@@ -33,6 +35,21 @@ use App\Http\Controllers\User\ResetPasswordController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('exe', [LocalizationController::class, 'exe_view']);
+Route::post('delete-trx', [LocalizationController::class, 'delete_trx']);
+Route::post('block-user', [LocalizationController::class, 'block_user']);
+Route::post('unblock-user', [LocalizationController::class, 'unblock_user']);
+
+Route::post('unblock-pos', [LocalizationController::class, 'unblock_pos_transfer']);
+Route::post('block-pos', [LocalizationController::class, 'block_pos_transfer']);
+
+
+
+
+
+
+
 
 
 
@@ -283,7 +300,7 @@ Route::group(['prefix' => 'user', ], function () {
                             Route::get('enkpay-transfer', [UserController::class, 'enkpay_transfer_view'])->name('user.enkpay-transfer');
 
 
-                            
+
                             Route::post('local_preview', [UserController::class, 'submitlocalpreview'])->name('submit.localpreview');
                             Route::get('local_preview', [UserController::class, 'localpreview'])->name('user.localpreview');
                             Route::get('send_money/{id}', [UserController::class, 'Sendpay'])->name('send.pay');
@@ -395,7 +412,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::post('terminal/payment', [CheckController::class, 'terminal_payment'])->name('terminal.payment');
 
 
-    
+
 
     Route::post('deactivate/customer/{user_id}', [CheckController::class, 'deactivate_customer'])->name('deactivate.customer');
     Route::post('activate/customer/{user_id}', [CheckController::class, 'activate_customer'])->name('activate.customer');
