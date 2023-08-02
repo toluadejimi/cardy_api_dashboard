@@ -640,7 +640,7 @@
                                                                 </li>
                                                             </ul>
                                                         </li>
-                                                      
+
                                                         <li
                                                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1134">
                                                             <a href="contact"
@@ -1079,7 +1079,7 @@
                                             <div class="elementor-widget-container">
                                                 <div class="elementor-button-wrapper">
                                                     <a class="elementor-button elementor-button-link elementor-size-sm elementor-animation-grow"
-                                                        href="index.html#">
+                                                        href="register">
                                                         <span class="elementor-button-content-wrapper">
                                                             <span class="elementor-button-text">Get Started</span>
                                                         </span>
@@ -1087,7 +1087,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-2edcf280 elementor-invisible"
@@ -1111,7 +1111,7 @@
                                 </div>
                             </div>
                         </section>
-                       
+
                     </div>
                 </div>
             </div>
@@ -1241,7 +1241,7 @@
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div>
 
 
                 <div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-70324174 elementor-invisible"
@@ -1261,7 +1261,7 @@
                         </div>
                     </div>
                 </div>
-               
+
             </div>
         </section>
 
@@ -1421,7 +1421,7 @@
 
 
 
-            
+
         </div>
     </section>
 
@@ -2300,7 +2300,7 @@
                                                             <span class="elementor-icon-list-text">Pricing</span>
                                                         </a>
                                                     </li>
-                                                    
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -2341,7 +2341,7 @@
                                                             <span class="elementor-icon-list-text">Disclaimer</span>
                                                         </a>
                                                     </li>
-                                                   
+
                                                     <li class="elementor-icon-list-item">
                                                         <a href="/faq">
 

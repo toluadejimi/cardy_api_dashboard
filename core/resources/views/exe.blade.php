@@ -111,6 +111,8 @@
 
                 @foreach($trx as $user)
 
+            
+
                 <tr>
 
                     <td>{{ $user->ref_trans_id }}</td>
@@ -122,7 +124,7 @@
                      <td>{{date("h:i:A", strtotime($user->created_at))}}</td>
 
 
-                   
+
 
 
                     <td>
