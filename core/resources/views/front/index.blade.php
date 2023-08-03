@@ -698,7 +698,7 @@
                                                             <ul class="sub-menu elementor-nav-menu--dropdown">
                                                                 <li
                                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1138">
-                                                                    <a href="index.html%3Fp=1074.html"
+                                                                    <a href="/pricing"
                                                                         class="elementor-sub-item"
                                                                         tabindex="-1">Pricing</a>
                                                                 </li>
@@ -843,7 +843,7 @@
                                                             <ul class="sub-menu elementor-nav-menu--dropdown">
                                                                 <li
                                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1138">
-                                                                    <a href="index.html%3Fp=1074.html"
+                                                                    <a href="/pricing"
                                                                         class="elementor-sub-item">Pricing</a>
                                                                 </li>
                                                                 <li
@@ -925,7 +925,7 @@
                                                             <ul class="sub-menu elementor-nav-menu--dropdown">
                                                                 <li
                                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1138">
-                                                                    <a href="index.html%3Fp=1074.html"
+                                                                    <a href="/pricing"
                                                                         class="elementor-sub-item"
                                                                         tabindex="-1">Pricing</a>
                                                                 </li>
