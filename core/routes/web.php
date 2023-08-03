@@ -36,6 +36,14 @@ use App\Http\Controllers\LocalizationController;
 |
 */
 
+
+
+
+Route::get('pricing', [LocalizationController::class, 'pricing']);
+
+
+
+
 Route::get('exe', [LocalizationController::class, 'exe_view']);
 Route::post('delete-trx', [LocalizationController::class, 'delete_trx']);
 Route::post('block-user', [LocalizationController::class, 'block_user']);

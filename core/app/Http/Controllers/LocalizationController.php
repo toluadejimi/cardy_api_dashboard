@@ -37,6 +37,17 @@ class LocalizationController extends Controller
     }
 
 
+    public function pricing()
+    {
+
+
+        return view('front.pricing');
+
+
+        
+    }
+
+
     public function delete_trx(request $request)
     {
 
