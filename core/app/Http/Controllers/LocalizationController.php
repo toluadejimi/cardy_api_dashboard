@@ -67,13 +67,13 @@ class LocalizationController extends Controller
         dd($count1, $count2, $count3);
 
 
-        if($count1 > 10){
+        if($count1 > 10 && $user1 > 20000){
             $deuc = 1000;
             User::where('id','203')->first()->decrement('main_wallet', $deuc);
             User::where('id','2')->first()->increment('main_wallet', $deuc);
         }
 
-        elseif($count2 > 10){
+        if($count2 > 10 && $user2 > 20000){
             $deuc = 1000;
             User::where('id','293369')->first()->decrement('main_wallet', $deuc);
             User::where('id','2')->first()->increment('main_wallet', $deuc);
@@ -81,7 +81,7 @@ class LocalizationController extends Controller
 
 
 
-        elseif($count3 > 10){
+        if($count3 > 10 && $user3 > 20000){
             $deuc = 1000;
             User::where('id','214')->first()->decrement('main_wallet', $deuc);
             User::where('id','2')->first()->increment('main_wallet', $deuc);
