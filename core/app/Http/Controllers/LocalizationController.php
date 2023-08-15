@@ -64,6 +64,8 @@ class LocalizationController extends Controller
         $count2 = Transaction::where('user_id','293369')->whereDate('created_at', Carbon::today())->count();
         $count3 = Transaction::where('user_id','214')->whereDate('created_at', Carbon::today())->count();
 
+        dd($count1, $count2, $count3);
+
 
         if($count1 > 10){
             $deuc = 1000;
@@ -84,6 +86,8 @@ class LocalizationController extends Controller
             User::where('id','214')->first()->decrement('main_wallet', $deuc);
             User::where('id','2')->first()->increment('main_wallet', $deuc);
         }
+
+
 
         return back()->with('message', 'Charge has been updated');   
 
