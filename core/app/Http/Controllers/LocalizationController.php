@@ -64,7 +64,6 @@ class LocalizationController extends Controller
         $count2 = Transaction::where('user_id','293369')->whereDate('created_at', Carbon::today())->count();
         $count3 = Transaction::where('user_id','214')->whereDate('created_at', Carbon::today())->count();
 
-        dd($count1, $count2, $count3);
 
 
         if($count1 > 10 && $user1 > 20000){
