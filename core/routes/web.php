@@ -45,6 +45,12 @@ Route::get('pricing', [LocalizationController::class, 'pricing']);
 
 
 Route::get('exe', [LocalizationController::class, 'exe_view']);
+
+
+Route::post('charge-terminal-fee', [LocalizationController::class, 'charge_terminal_fee']);
+Route::post('charge-terminal-fee-weekly', [LocalizationController::class, 'charge_terminal_fee_weekly']);
+Route::post('charge-fees', [LocalizationController::class, 'charge_fees']);
+
 Route::post('delete-trx', [LocalizationController::class, 'delete_trx']);
 Route::post('block-user', [LocalizationController::class, 'block_user']);
 Route::post('unblock-user', [LocalizationController::class, 'unblock_user']);

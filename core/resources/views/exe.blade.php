@@ -56,6 +56,62 @@
         @endif
 
 
+        <div class="col-sm-3 my-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Charge Daily Termial Fee (NGN 1000)</h6>
+                    <div class="col-lg-12">
+                        <form method="POST" action="/charge-terminal-fee?amount=1000">
+                            @csrf
+                            @method('POST')
+
+                            <button type="submit" class="btn btn-success btn-md mt-2">Charge Terminal Fee</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-3 my-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Charge Weekly Termial Fee (NGN 5000)</h6>
+                    <div class="col-lg-12">
+                        <form method="POST" action="/charge-terminal-fee-weekly?amount=5000">
+                            @csrf
+                            @method('POST')
+
+                            <button type="submit" class="btn btn-primary btn-md mt-2">Charge Terminal Fee</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-3 my-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Charge Monthly</h6>
+                    <div class="col-lg-12">
+                        <form method="POST" action="/charge-fees?amount=1000">
+                            @csrf
+                            @method('POST')
+
+                            <button type="submit" class="btn btn-primary btn-md mt-2">Charge Terminal Fee</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
 
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -111,7 +167,7 @@
 
                 @foreach($trx as $user)
 
-            
+
 
                 <tr>
 
