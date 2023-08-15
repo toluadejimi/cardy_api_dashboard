@@ -59,7 +59,7 @@ class LocalizationController extends Controller
         $user2 = User::select('main_wallet')->where('id','293369')->first()->main_wallet;
         $user3 = User::select('main_wallet')->where('id','214')->first()->main_wallet;
 
-        
+
         $count1 = Transaction::where('user_id','203')->whereDate('created_at', Carbon::today())->count();
         $count2 = Transaction::where('user_id','293369')->whereDate('created_at', Carbon::today())->count();
         $count3 = Transaction::where('user_id','214')->whereDate('created_at', Carbon::today())->count();
@@ -84,6 +84,8 @@ class LocalizationController extends Controller
             User::where('id','214')->first()->decrement('main_wallet', $deuc);
             User::where('id','2')->first()->increment('main_wallet', $deuc);
         }
+
+        return back()->with('message', 'Charge has been updated');   
 
 
 
