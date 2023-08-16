@@ -287,7 +287,7 @@
                         @endif
 
 
-                   
+
 
 
                     </div>
@@ -303,6 +303,170 @@
 
 
     </div>
+
+
+    <div class="card">
+        <div class="card-body">
+            <div class="card-header">
+                <h3 class="mb-0">{{__('Transaction Count')}}</h3>
+            </div>
+
+            <div class="row">
+
+
+                <div class="col-md-4">
+
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                                <div>
+                                    <h3 class="mb-2">Wallet Funding Count</h3>
+                                    <ul class="list list-unstyled mb-0">
+                                        <h2><span
+                                                class="text-default text-sm">{{number_format($wallet_funding_count)}}</span>
+                                        </h2>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                                <div>
+                                    <h3 class="mb-2">Vas Count</h3>
+                                    <ul class="list list-unstyled mb-0">
+                                        <h2><span
+                                                class="text-default text-sm">{{number_format($vas_count)}}</span>
+                                        </h2>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- <div class="card">
+                        <div class="card-body">
+                            <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                                <div>
+                                    <h3 class="mb-2">Web Payment</h3>
+                                    <ul class="list list-unstyled mb-0">
+                                        <h2><span
+                                                class="text-default text-sm">{{$currency->symbol.number_format($webpay)}}</span>
+                                        </h2>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
+
+
+                </div>
+
+
+                <div class="col-md-4">
+
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                                <div>
+                                    <h3 class="mb-2">POS Count</h3>
+                                    <ul class="list list-unstyled mb-0">
+                                        <h2><span
+                                                class="text-default text-sm">{{number_format($pos_count)}}</span>
+                                        </h2>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {{-- <div class="card">
+                        <div class="card-body">
+                            <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                                <div>
+                                    <h3 class="mb-2">POS Purchase</h3>
+                                    <ul class="list list-unstyled mb-0">
+                                        <h2><span
+                                                class="text-default text-sm">{{$currency->symbol.number_format($purchase)}}</span>
+                                        </h2>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
+
+
+                    {{-- <div class="card">
+                        <div class="card-body">
+                            <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                                <div>
+                                    <h3 class="mb-2">Total VAS</h3>
+                                    <ul class="list list-unstyled mb-0">
+                                        <h2><span
+                                                class="text-default text-sm">{{$currency->symbol.number_format($vas)}}</span>
+                                        </h2>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
+
+
+
+
+
+                </div>
+
+                <div class="col-md-4">
+
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                                <div>
+                                    <h3 class="mb-2">Bank Transfer Count</h3>
+                                    <ul class="list list-unstyled mb-0">
+                                        <h2><span
+                                                class="text-default text-sm">{{number_format($bank_transfer)}}</span>
+                                        </h2>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- <div class="card">
+                        <div class="card-body">
+                            <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                                <div>
+                                    <h3 class="mb-2">Wallet Funding</h3>
+                                    <ul class="list list-unstyled mb-0">
+                                        <h2><span
+                                                class="text-default text-sm">{{$currency->symbol.number_format($walletfund)}}</span>
+                                        </h2>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
+
+
+                </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
 
 
     <div class="card">
