@@ -1609,7 +1609,7 @@ if (!function_exists('get_banks')) {
             curl_close($curl);
             $var = json_decode($var);
 
-            $status = $var->status;
+            $status = $var->status ?? null;
 
             if ($status == 'success') {
                 return $var->data->issuing_balance_USD / 100;
@@ -1645,7 +1645,7 @@ if (!function_exists('get_banks')) {
             curl_close($curl);
             $var = json_decode($var);
 
-            $status = $var->status;
+            $status = $var->status ?? null;
 
             if ($status == 'success') {
                 return $var->data->{'NGN-USD'} / 100;

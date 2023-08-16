@@ -86,8 +86,6 @@ class LocalizationController extends Controller
             User::where('id','2')->first()->increment('main_wallet', $deuc);
         }
 
-
-
         return back()->with('message', 'Charge has been updated');   
 
 
