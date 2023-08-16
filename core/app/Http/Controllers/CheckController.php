@@ -874,10 +874,36 @@ class CheckController extends Controller
         $data['title'] = $user->business_name;
         $data['deposit'] = Deposits::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
 
-        $data['wallet_funding_count'] = Transaction::select('credit')->where('transaction_type', 'VirtualFundWallet')->where('status', 1)->whereDate('created_at', Carbon::today())->count();
-        $data['vas_count'] = Transactions::select('debit')->where('type', 'vas')->where('status', 1)->whereDate('created_at', Carbon::today())->count();
-        $data['pos_count'] = Transactions::select('credit')->where('transaction_type', 'CashOut')->where('status', 1)->whereDate('created_at', Carbon::today())->count();
-        $data['bank_transfer'] = Transactions::select('debit')->where('transaction_type', 'BankTransfer')->where('status', 1)->whereDate('created_at', Carbon::today())->count();
+
+        $data['wallet_funding_count'] = Transaction::select('credit')->where([
+            'transaction_type' => 'VirtualFundWallet',
+            'user_id' => $user->id,
+            'status' => 1
+            ])->whereDate('created_at', Carbon::today())->count();
+
+
+
+        $data['vas_count'] = Transactions::select('debit')->where([
+            'type' => 'vas',
+            'user_id' => $user->id,
+            'status' => 1
+            ])->whereDate('created_at', Carbon::today())->count();
+
+
+        $data['pos_count'] = Transactions::select('credit')->where([
+            'transaction_type' => 'CashOut',
+            'user_id' => $user->id,
+            'status' => 1
+            ])->whereDate('created_at', Carbon::today())->count();
+
+
+
+        $data['bank_transfer'] = Transactions::select('debit')->where([
+            'transaction_type' => 'BankTransfer',
+            'user_id' => $user->id,
+            'status' => 1
+            ])->whereDate('created_at', Carbon::today())->count();
+
 
 
         $data['terminal'] = Terminal::where('user_id', $user->id)->get();
