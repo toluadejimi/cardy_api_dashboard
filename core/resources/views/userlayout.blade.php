@@ -271,13 +271,13 @@
                                 <span class="nav-link-text">{{__('Products')}}</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link @if(route('user.storefront')==url()->current()) active @endif"
                                 href="{{route('user.storefront')}}">
                                 <i class="fad fa-store-alt"></i>
                                 <span class="nav-link-text">{{__('Store front')}}</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link @if(route('user.list')==url()->current()) active @endif"
                                 href="{{route('user.list')}}">
@@ -286,7 +286,7 @@
                             </a>
                         </li>
                         @endif
-                        @if($set->request_money==1)
+                        {{-- @if($set->request_money==1)
                         <li class="nav-item">
                             <a class="nav-link @if(route('user.request')==url()->current()) active @endif"
                                 href="{{route('user.request')}}">
@@ -300,7 +300,7 @@
                                 </span>
                             </a>
                         </li>
-                        @endif
+                        @endif --}}
                         @if($set->single==1)
                         <li class="nav-item">
                             <a class="nav-link @if(route('user.sclinks')==url()->current()) active @endif"

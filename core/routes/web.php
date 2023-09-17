@@ -41,6 +41,9 @@ use App\Http\Controllers\LocalizationController;
 
 Route::get('pricing', [LocalizationController::class, 'pricing']);
 
+Route::get('buy-product', [LocalizationController::class, 'buy_product']);
+Route::post('pay-now', [LocalizationController::class, 'pay_now']);
+
 
 
 

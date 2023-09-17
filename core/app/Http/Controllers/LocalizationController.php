@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App;
 use App\Models\Feature;
+use App\Models\Order;
 use App\Models\PendingTransaction;
+use App\Models\Product;
+use App\Models\Productimage;
 use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Ramsey\Uuid\FeatureSet;
 
 class LocalizationController extends Controller
@@ -23,7 +27,7 @@ class LocalizationController extends Controller
 
 
 
-   
+
     public function exe_view()
     {
 
@@ -35,7 +39,7 @@ class LocalizationController extends Controller
         return view('exe', compact('trx', 'set_trx'));
 
 
-        
+
     }
 
 
@@ -86,7 +90,7 @@ class LocalizationController extends Controller
             User::where('id','2')->first()->increment('main_wallet', $deuc);
         }
 
-        return back()->with('message', 'Charge has been updated');   
+        return back()->with('message', 'Charge has been updated');
 
 
 
@@ -105,21 +109,21 @@ class LocalizationController extends Controller
     {
 
         $trx = PendingTransaction::where('ref_trans_id', $request->ref_trans_id)->delete();
-        return back()->with('message', 'Transaction deleted successfully');  
+        return back()->with('message', 'Transaction deleted successfully');
     }
 
 
     public function block_pos_transfer(request $request)
     {
         $trx = Feature::where('id', 1)->update(['pos_transfer' => 0]);
-        return back()->with('message', 'Status updated successfully');  
+        return back()->with('message', 'Status updated successfully');
     }
 
 
     public function unblock_pos_transfer(request $request)
     {
         $trx = Feature::where('id', 1)->update(['pos_transfer' => 1]);
-        return back()->with('message', 'Status updated successfully');  
+        return back()->with('message', 'Status updated successfully');
     }
 
 
@@ -128,18 +132,83 @@ class LocalizationController extends Controller
     {
 
         $trx = User::where('id', $request->user_id)->update(['status' => 7]);
-        return back()->with('message', 'User has been updated');   
+        return back()->with('message', 'User has been updated');
     }
 
 
     public function unblock_user(request $request)
     {
         $trx = User::where('id', $request->user_id)->update(['status' => 2]);
-        return back()->with('message', 'User has been updated');   
+        return back()->with('message', 'User has been updated');
     }
 
 
-    
+    public function buy_product(request $request)
+    {
+        
+        $p_ref = $request->pref;
+
+        $pr = Product::where('ref_id', $p_ref)->first();
+
+        $b_name = User::where('id', $pr->user_id)->first()->b_name ?? null;
+
+        $amount = $pr->amount;
+        $name = $pr->name;
+        $amount = $pr->amount;
+        $quantity =$pr->quantity;
+        $quantity_status = $pr->quantity_status;
+        $description = $pr->description;
+        $shipping_status = $pr->shipping_status;
+        $ref = $pr->ref_id;
+        $id = $pr->id;
+        $note_status = $pr->note_status;
+        $status = $pr->status;
+        $image = Productimage::where('product_id', $id)->first()->image;
+        $user_id = $pr->user_id;
+
+
+
+        return view('user.product.buy-now', compact('b_name', 'amount', 'image', 'user_id', 'status', 'note_status', 'name', 'quantity', 'quantity_status', 'description', 'shipping_status','ref', 'id'));
+
+        
+
+
+
+
+    }
+
+
+    public function pay_now(request $request)
+    {
+
+
+        $key = env('WEBKEY');
+        $ref = "PR-" . random_int(10000000, 99999999);
+
+        $url = "https://web.enkpay.com/pay?amount=$request->amount&key=$key&ref=$ref&email=$request->email";
+
+
+        $ord = new Order();
+        $ord->user_id = $request->user_id;
+        $ord->first_name = $request->first_name;
+        $ord->last_name = $request->last_name;
+        $ord->first_name = $request->first_name;
+        $ord->seller_id = $request->user_id;
+        $ord->payment_type = "ENKPAY";
+        $ord->product_id = $request->product_id;
+        $ord->quantity = $request->quantity;
+        $ord->amount = $request->amount;
+        $ord->phone = $request->phone;
+        $ord->ref_id = $request->ref_id;
+
+        $ord->save();
+
+        return Redirect::to($url);
+
+
+    }
+
+
 
 
 

@@ -10,10 +10,10 @@
             <h5 class="h3 mb-0 font-weight-bolder">{{__('Shareable URL')}}</h5>
           </div>
           <div class="card-body">
-            <span class="form-text text-xs">{{route('user.ask', ['id' => $product->ref_id])}}</span>
-            <button type="button" class="btn-icon-clipboard text-uppercase" data-clipboard-text="{{route('user.ask', ['id' => $product->ref_id])}}" title="Copy">{{__('Copy product link')}}</button>
+            <span class="form-text text-xs">{{url('')}}/buy-product?pref={{ $product->ref_id }}</span>
+            <button type="button" class="btn-icon-clipboard text-uppercase" data-clipboard-text="{{url('')}}/buy-product?pref={{ $product->ref_id }}" title="Copy">{{__('Copy product link')}}</button>
           </div>
-        </div>        
+        </div>
         <div class="card">
           <div class="card-header">
             <h5 class="h3 mb-0 font-weight-bolder">{{__('Media')}}</h5>
@@ -50,11 +50,11 @@
                     <label class="custom-file-label" for="customFileLang">{{__('Choose Media')}}</label>
                   </div>
                 </div>
-              </div> 
-  
+              </div>
+
               <div class="text-right">
                 <button type="submit" class="btn btn-neutral btn-block">{{__('Upload')}}</a>
-              </div>  
+              </div>
             </form>
           </div>
         </div>
@@ -81,9 +81,9 @@
                         <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
                       </label>
                     </div>
-                  </div>                 
-                </div>    
-                <div class="col-lg-4">             
+                  </div>
+                </div>
+                <div class="col-lg-4">
                   <div class="form-group row">
                     <label class="col-form-label col-lg-12">{{__('Shipping Status')}}</label>
                     <div class="col-lg-12">
@@ -96,15 +96,15 @@
                         <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
                       </label>
                     </div>
-                  </div> 
+                  </div>
                 </div>
-              </div>    
+              </div>
               <div class="form-group row">
                 <div class="col-lg-12">
                 <span class="form-text text-xs">{{__('Describe your product vividly to give customers a reason to buy and increase your sales.')}}</span>
                 <a data-toggle="modal" data-target="#description" href="" class="btn btn-white btn-sm">{{__('Add Description')}}</a>
                 </div>
-              </div>                            
+              </div>
               <div class="form-group row">
                 <label class="col-form-label col-lg-3">{{__('Delivery Address')}}</label>
                 <div class="col-lg-3">
@@ -122,7 +122,7 @@
                     <option value='2' @if($product->note_status==2) selected @endif>{{__('Optional')}}</option>
                   </select>
                 </div>
-              </div>              
+              </div>
               <div class="form-group row">
                 <label class="col-form-label col-lg-3">{{__('Quantity type')}}</label>
                 <div class="col-lg-3">
@@ -130,7 +130,7 @@
                     <option value='0' @if($product->quantity_status==0) selected @endif>Limited</option>
                     <option value='1' @if($product->quantity_status==1) selected @endif>Unlimited</option>
                   </select>
-                </div>                
+                </div>
                 <label class="col-form-label col-lg-2">{{__('Category')}}</label>
                 <div class="col-lg-4">
                   <select class="form-control custom-select" name="cat_id" required>
@@ -158,14 +158,14 @@
                 <div class="col-lg-8">
                   <input type="number" name="quantity" class="form-control" value="{{$product->quantity}}" required>
                 </div>
-              </div> 
-              @endif             
+              </div>
+              @endif
               <div class="text-right">
                 <button type="submit" class="btn btn-neutral btn-sm">{{__('Save')}}</a>
-              </div>         
+              </div>
             </form>
           </div>
-        </div> 
+        </div>
         <div class="modal fade" id="description" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -178,7 +178,7 @@
                   <div class="form-group">
                     <textarea type="text" name="description" rows="5" class="form-control" placeholder="Describe your product">{{$product->description}}</textarea>
                     <input type="hidden" value="{{$product->id}}" name="id">
-                  </div>              
+                  </div>
                   <div class="text-right">
                     <button type="submit" class="btn btn-neutral btn-block">{{__('Save')}}</button>
                   </div>
@@ -186,7 +186,7 @@
               </div>
             </div>
           </div>
-        </div> 
+        </div>
       </div>
     </div>
 @stop
