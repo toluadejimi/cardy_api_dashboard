@@ -1045,6 +1045,7 @@ if (!function_exists('get_pool')) {
         try {
 
             $api = errand_api_key();
+            $epKey = env('EPKEY');
 
             $curl = curl_init();
 
@@ -1060,16 +1061,18 @@ if (!function_exists('get_pool')) {
                 CURLOPT_HTTPHEADER => array(
                     'Accept: application/json',
                     'Content-Type: application/json',
-                    'epKey: ep_live_jFrIZdxqSzAdraLqbvhUfVYs',
+                    "epKey: $epKey",
                     "Authorization: Bearer $api",
                 ),
             ));
 
             $var = curl_exec($curl);
 
+
             curl_close($curl);
 
             $var = json_decode($var);
+
 
             $code = $var->code ?? null;
 
