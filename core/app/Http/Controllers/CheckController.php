@@ -221,8 +221,9 @@ class CheckController extends Controller
         $mainw = User::all()->sum('main_wallet');
         $bwall = User::all()->sum('bonus_wallet') ?? 0;
         $data['twallet'] = $mainw + $bwall;
-        $pp2 = str_replace(',', '', $data['pool']);
-        $pp3 = (int)$pp2;
+
+        $pp3 = $data['vfd_bal'] + $data['ttmfb_bal'];
+        
         $data['diff'] = $pp3 - $data['twallet'];
         $data['wd'] = Withdraw::whereStatus(1)->sum('amount');
         $data['wdc'] = Withdraw::whereStatus(1)->sum('charge');
