@@ -125,6 +125,7 @@
                                     <th>{{__('S / N')}}</th>
                                     <th>{{__('Serial No')}}</th>
                                     <th>Customer</th>
+                                    <th>Phone</th>
                                     <th>State</th>
                                     <th>Description</th>
                                     <th>Amount</th>
@@ -142,7 +143,7 @@
                                     <td>{{++$k}}.</td>
                                     <td>{{$item->serial_no}}</td>
                                     <td>{{$item->user->first_name ?? "name"}} {{$item->user->last_name ?? "name"}} </td>
-                                    <td>{{$item->user->phone}} </td>
+                                    <td>{{$item->user->phone ?? "Phone"}} </td>
                                     <td>{{$item->user->state ?? "name"}} </td>
                                     <td>{{$item->description}}</td>
                                     <td>{{number_format($item->amount ?? 0) }}</td>
