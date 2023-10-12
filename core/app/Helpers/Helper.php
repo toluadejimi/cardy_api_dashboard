@@ -1037,58 +1037,58 @@ if (!function_exists('errand_api_key')) {
 }
 
 
-if (!function_exists('get_pool')) {
+// if (!function_exists('get_pool')) {
 
-    function get_pool()
-    {
+//     function get_pool()
+//     {
 
-        try {
+//         try {
 
-            $api = errand_api_key();
-            $epKey = env('EPKEY');
+//             $api = errand_api_key();
+//             $epKey = env('EPKEY');
 
-            $curl = curl_init();
+//             $curl = curl_init();
 
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://api.errandpay.com/epagentservice/api/v1/ApiGetBalance',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'GET',
-                CURLOPT_HTTPHEADER => array(
-                    'Accept: application/json',
-                    'Content-Type: application/json',
-                    "epKey: $epKey",
-                    "Authorization: Bearer $api",
-                ),
-            ));
+//             curl_setopt_array($curl, array(
+//                 CURLOPT_URL => 'https://api.errandpay.com/epagentservice/api/v1/ApiGetBalance',
+//                 CURLOPT_RETURNTRANSFER => true,
+//                 CURLOPT_ENCODING => '',
+//                 CURLOPT_MAXREDIRS => 10,
+//                 CURLOPT_TIMEOUT => 0,
+//                 CURLOPT_FOLLOWLOCATION => true,
+//                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+//                 CURLOPT_CUSTOMREQUEST => 'GET',
+//                 CURLOPT_HTTPHEADER => array(
+//                     'Accept: application/json',
+//                     'Content-Type: application/json',
+//                     "epKey: $epKey",
+//                     "Authorization: Bearer $api",
+//                 ),
+//             ));
 
-            $var = curl_exec($curl);
-
-
-            curl_close($curl);
-
-            $var = json_decode($var);
+//             $var = curl_exec($curl);
 
 
-            $code = $var->code ?? null;
+//             curl_close($curl);
 
-            if ($code == null) {
+//             $var = json_decode($var);
 
-                return "Network Issue";
-            }
 
-            if ($var->code == 200) {
-                return number_format($var->data->balance, 2);
-            }
-        } catch (\Exception $th) {
-            return $th->getMessage();
-        }
-    }
-}
+//             $code = $var->code ?? null;
+
+//             if ($code == null) {
+
+//                 return "Network Issue";
+//             }
+
+//             if ($var->code == 200) {
+//                 return number_format($var->data->balance, 2);
+//             }
+//         } catch (\Exception $th) {
+//             return $th->getMessage();
+//         }
+//     }
+// }
 
 
 

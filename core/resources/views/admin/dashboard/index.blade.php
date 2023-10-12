@@ -274,7 +274,10 @@
                             <div>
                                 <h3 class="mb-2">Total Pool</h3>
                                 <ul class="list list-unstyled mb-0">
-                                    <h2><span class="text-default text-sm">{{$currency->symbol.($pool)}}</span></h2>
+                                    <h2><span class="text-default text-sm">{{$currency->symbol.($allbal)}}</span></h2>
+                                    <hp><span class="text-default text-sm">E -{{$currency->symbol.($vfd_bal)}}</span></hp>
+                                    <hp><span class="text-default text-sm">M -{{$currency->symbol.($ttmfb_bal)}}</span></hp>
+
                                 </ul>
                             </div>
                         </div>

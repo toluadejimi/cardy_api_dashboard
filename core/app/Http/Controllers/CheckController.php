@@ -214,7 +214,8 @@ class CheckController extends Controller
 
 
         $data['title'] = 'Dashboard';
-        $data['pool'] = get_pool();
+        $data['vfd_bal'] = Setting::where('id', 1)->first()->vfd_balance;
+        $data['ttmfb_bal'] = Setting::where('id', 1)->first()->ttmfb_balance;
         $data['set'] = Setting::where('id', 1)->first();
         $data['received'] = Charges::sum('amount');
         $mainw = User::all()->sum('main_wallet');
@@ -262,6 +263,14 @@ class CheckController extends Controller
         $diff = Setting::where('id', 1)->first()->virtual_createchargep ?? 0;
         $updaterate = $diff + get_rate() ?? 0;
         Setting::where('id', 1)->update(['ngn_rate' => $updaterate]);
+
+
+
+        $data['allbal'] = $data['vfd_bal'] + $data['ttmfb_bal'];
+
+        
+        
+
 
 
         return view('admin.dashboard.index', $data);
