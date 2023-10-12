@@ -223,7 +223,7 @@ class CheckController extends Controller
         $data['twallet'] = $mainw + $bwall;
 
         $pp3 = $data['vfd_bal'] + $data['ttmfb_bal'];
-        
+
         $data['diff'] = $pp3 - $data['twallet'];
         $data['wd'] = Withdraw::whereStatus(1)->sum('amount');
         $data['wdc'] = Withdraw::whereStatus(1)->sum('charge');
@@ -250,7 +250,7 @@ class CheckController extends Controller
         $data['in'] = Transactions::select('credit')->where('status', 1)->sum('credit');
         $data['out'] = Transactions::select('debit')->where('status', 1)->sum('debit');
         $data['or'] = Order::whereStatus(1)->sum('total');
-        $data['transactions'] = Transactions::latest()->get();
+        $data['transactions'] = Transactions::latest()->get()->paginate(20);
         $data['tfee'] = Terminal::select('*')->sum('amount');
         $data['dec'] = Deposits::whereStatus(1)->sum('charge');
         $data['totalusers'] = User::count();
