@@ -92,7 +92,6 @@
                                             <th>{{__('Session ID')}}</th>
                                             <th>{{__('Debit')}}</th>
                                             <th>{{__('Credit')}}</th>
-                                            <th>{{__('Balance')}}</th>
                                             <th>{{__('Type')}}</th>
                                             <th>{{__('Sender Name')}}</th>
                                             <th>{{__('Sender Bank')}}</th>
@@ -110,7 +109,6 @@
                                             <td>{{$val->e_ref}}</td>
                                             <td>{{number_format($val->debit, 2)}}</td>
                                             <td>{{number_format($val->credit, 2)}}</td>
-                                            <td>{{number_format($val->balance, 2)}}</td>
                                             <td>{{$val->title}}</td>
                                             <td>{{$val->sender_name ?? " No Details" }}</td>
                                             <td>{{$val->sender_bank ?? " No Details"}}</td>
