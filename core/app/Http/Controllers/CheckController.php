@@ -214,8 +214,8 @@ class CheckController extends Controller
 
 
         $data['title'] = 'Dashboard';
-        $data['vfd_bal'] = Setting::where('id', 1)->first()->vfd_balance;
-        $data['ttmfb_bal'] = Setting::where('id', 1)->first()->ttmfb_balance;
+        $data['vfd_bal'] = get_pool();
+        $data['ttmfb_bal'] = ttmfb_balance();
         $data['set'] = Setting::where('id', 1)->first();
         $data['received'] = Charges::sum('amount');
         $mainw = User::all()->sum('main_wallet');
