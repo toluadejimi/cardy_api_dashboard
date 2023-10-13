@@ -222,7 +222,7 @@ class CheckController extends Controller
         $bwall = User::all()->sum('bonus_wallet') ?? 0;
         $data['twallet'] = $mainw + $bwall;
 
-        $pp3 = $data['vfd_bal'] + $data['ttmfb_bal'];
+        $pp3 = get_pool() + ttmfb_balance();
 
         $data['diff'] = $pp3 - $data['twallet'];
         $data['wd'] = Withdraw::whereStatus(1)->sum('amount');
@@ -269,8 +269,8 @@ class CheckController extends Controller
 
         $data['allbal'] = $data['vfd_bal'] + $data['ttmfb_bal'];
 
-        
-        
+
+
 
 
 
@@ -925,7 +925,7 @@ class CheckController extends Controller
         $data['is_identification_verified'] = User::where('id', $id)->first()->is_identification_verified;
         $data['id'] = User::where('id', $id)->first()->id;
 
-     
+
         $data['transactions'] = Transactions::latest()->where('user_id', $user->id)->get();
 
         $data['transfer'] = Transfer::wheresender_id($user->id)->orderBy('id', 'DESC')->get();
@@ -1281,7 +1281,7 @@ class CheckController extends Controller
 
 
 
-   
+
 
     public function deactivate_customer(request $request)
     {

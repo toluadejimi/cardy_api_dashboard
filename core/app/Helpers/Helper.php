@@ -1037,58 +1037,135 @@ if (!function_exists('errand_api_key')) {
 }
 
 
-// if (!function_exists('get_pool')) {
-
-//     function get_pool()
-//     {
-
-//         try {
-
-//             $api = errand_api_key();
-//             $epKey = env('EPKEY');
-
-//             $curl = curl_init();
-
-//             curl_setopt_array($curl, array(
-//                 CURLOPT_URL => 'https://api.errandpay.com/epagentservice/api/v1/ApiGetBalance',
-//                 CURLOPT_RETURNTRANSFER => true,
-//                 CURLOPT_ENCODING => '',
-//                 CURLOPT_MAXREDIRS => 10,
-//                 CURLOPT_TIMEOUT => 0,
-//                 CURLOPT_FOLLOWLOCATION => true,
-//                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-//                 CURLOPT_CUSTOMREQUEST => 'GET',
-//                 CURLOPT_HTTPHEADER => array(
-//                     'Accept: application/json',
-//                     'Content-Type: application/json',
-//                     "epKey: $epKey",
-//                     "Authorization: Bearer $api",
-//                 ),
-//             ));
-
-//             $var = curl_exec($curl);
 
 
-//             curl_close($curl);
+function guid() {
+    function s4() {
+        return substr(md5(uniqid(rand(), true)), 0, 4);
+    }
 
-//             $var = json_decode($var);
+    return s4() . s4() . s4() . s4() . s4() . s4() . s4() . s4();
+}
+
+function timestamp() {
+    return substr(strval(time()), 0, 10);
+}
+
+function sha512($message) {
+    return hash('sha512', $message);
+}
+
+function ttmfb_balance(){
 
 
-//             $code = $var->code ?? null;
+    $username = env('MUSERNAME');
+    $prkey = env('MPRKEY');
+    $sckey = env('MSCKEY');
 
-//             if ($code == null) {
+    $unixTimeStamp = timestamp();
+    $sha = sha512($unixTimeStamp.$prkey);
+    $authHeader = 'magtipon ' . $username . ':' . base64_encode(hex2bin($sha));
 
-//                 return "Network Issue";
-//             }
 
-//             if ($var->code == 200) {
-//                 return number_format($var->data->balance, 2);
-//             }
-//         } catch (\Exception $th) {
-//             return $th->getMessage();
-//         }
-//     }
-// }
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "http://magtipon.buildbankng.com/api/v1/account/balance",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        //CURLOPT_POSTFIELDS => $body,
+        CURLOPT_HTTPHEADER => array(
+            "Authorization: $authHeader",
+            "Timestamp: $unixTimeStamp",
+            'Content-Type: application/json',
+        ),
+    ));
+
+    $var = curl_exec($curl);
+    curl_close($curl);
+    $var = json_decode($var);
+
+
+    $balance = $var->Balance ?? null;
+    $error = $var->error->message ?? null;
+
+    $status = $var->ResponseCode ?? null;
+
+    if($status == 90000){
+
+        return $balance;
+
+    }else{
+
+        return "No Network";
+    }
+
+
+
+
+}
+
+
+
+
+if (!function_exists('get_pool')) {
+
+    function get_pool()
+    {
+
+        try {
+
+            $api = errand_api_key();
+            $epKey = env('EPKEY');
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://api.errandpay.com/epagentservice/api/v1/ApiGetBalance',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_HTTPHEADER => array(
+                    'Accept: application/json',
+                    'Content-Type: application/json',
+                    "epKey: $epKey",
+                    "Authorization: Bearer $api",
+                ),
+            ));
+
+            $var = curl_exec($curl);
+
+
+            curl_close($curl);
+
+            $var = json_decode($var);
+
+
+            $code = $var->code ?? null;
+
+            if ($code == null) {
+
+                return "Network Issue";
+            }
+
+            if ($var->code == 200) {
+                return $var->data->balance;
+            }
+        } catch (\Exception $th) {
+            return $th->getMessage();
+        }
+    }
+}
 
 
 
