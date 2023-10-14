@@ -60,7 +60,7 @@ class LocalizationController extends Controller
     public function charge_fees(request $request){
 
 
-        public function move_money(){
+
 
         $pool_b = get_pool();
 
@@ -195,12 +195,15 @@ class LocalizationController extends Controller
             send_notification($result);
 
 
-        }
 
 
+
+                return back()->with('message', 'Charge has been updated');
 
 
     }
+
+}
 
         // $user1 = User::select('main_wallet')->where('id','203')->first()->main_wallet;
         // $user2 = User::select('main_wallet')->where('id','293369')->first()->main_wallet;
@@ -233,11 +236,9 @@ class LocalizationController extends Controller
         //     User::where('id','2')->first()->increment('main_wallet', $deuc);
         // }
 
-        return back()->with('message', 'Charge has been updated');
 
 
 
-    }
 
 
 
