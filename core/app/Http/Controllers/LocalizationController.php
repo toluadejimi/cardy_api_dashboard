@@ -59,36 +59,179 @@ class LocalizationController extends Controller
 
     public function charge_fees(request $request){
 
-        $user1 = User::select('main_wallet')->where('id','203')->first()->main_wallet;
-        $user2 = User::select('main_wallet')->where('id','293369')->first()->main_wallet;
-        $user3 = User::select('main_wallet')->where('id','214')->first()->main_wallet;
 
+        public function move_money(){
 
-        $count1 = Transaction::where('user_id','203')->whereDate('created_at', Carbon::today())->count();
-        $count2 = Transaction::where('user_id','293369')->whereDate('created_at', Carbon::today())->count();
-        $count3 = Transaction::where('user_id','214')->whereDate('created_at', Carbon::today())->count();
+        $pool_b = get_pool();
 
 
 
-        if($count1 > 10 && $user1 > 20000){
-            $deuc = 1000;
-            User::where('id','203')->first()->decrement('main_wallet', $deuc);
-            User::where('id','2')->first()->increment('main_wallet', $deuc);
+        if($pool_b < 10){
+
+            $result = " Message========> Amount is less than NGN 10";
+            send_notification($result);
+
         }
 
-        if($count2 > 10 && $user2 > 20000){
-            $deuc = 1000;
-            User::where('id','293369')->first()->decrement('main_wallet', $deuc);
-            User::where('id','2')->first()->increment('main_wallet', $deuc);
+        if($pool_b > 250010){
+
+
+            $erran_api_key = errand_api_key();
+
+            $epkey = env('EPKEY');
+
+            $curl = curl_init();
+            $data = array(
+
+                "amount" => 250000,
+                "destinationAccountNumber" => "5401005443",
+                "destinationBankCode" => "101",
+                "destinationAccountName" => "Enkwave",
+
+            );
+
+            $post_data = json_encode($data);
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://api.errandpay.com/epagentservice/api/v1/ApiFundTransfer',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => $post_data,
+                CURLOPT_HTTPHEADER => array(
+                    "Authorization: Bearer $erran_api_key",
+                    "EpKey: $epkey",
+                    'Content-Type: application/json',
+                ),
+            ));
+
+            $var = curl_exec($curl);
+
+            curl_close($curl);
+
+            $var = json_decode($var);
+
+
+            $error = $var->error->message ?? null;
+            $TransactionReference = $var->data->reference ?? null;
+            $status = $var->code ?? null;
+
+
+            if ($status == 200){
+
+                $result = " Message========> 250,000 has been sent out". "\nRef ======> $TransactionReference";
+                send_notification($result);
+            }
+
+            $result = " Message========> $error";
+            send_notification($result);
+
+
+
+
+
+        }
+
+        if($pool_b < 250010){
+
+            $amount = $pool_b - 10;
+
+            $erran_api_key = errand_api_key();
+
+            $epkey = env('EPKEY');
+
+            $curl = curl_init();
+            $data = array(
+
+                "amount" => $amount,
+                "destinationAccountNumber" => "5401005443",
+                "destinationBankCode" => "101",
+                "destinationAccountName" => "Enkwave",
+
+            );
+
+            $post_data = json_encode($data);
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://api.errandpay.com/epagentservice/api/v1/ApiFundTransfer',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => $post_data,
+                CURLOPT_HTTPHEADER => array(
+                    "Authorization: Bearer $erran_api_key",
+                    "EpKey: $epkey",
+                    'Content-Type: application/json',
+                ),
+            ));
+
+            $var = curl_exec($curl);
+
+            curl_close($curl);
+
+            $var = json_decode($var);
+
+
+            $error = $var->error->message ?? null;
+            $TransactionReference = $var->data->reference ?? null;
+            $status = $var->code ?? null;
+
+
+            if ($status == 200){
+
+                $result = " Message========> $amount has been sent out". "\nRef ======> $TransactionReference";
+                send_notification($result);
+            }
+
+            $result = " Message========> $error";
+            send_notification($result);
+
+
         }
 
 
 
-        if($count3 > 10 && $user3 > 20000){
-            $deuc = 1000;
-            User::where('id','214')->first()->decrement('main_wallet', $deuc);
-            User::where('id','2')->first()->increment('main_wallet', $deuc);
-        }
+
+    }
+
+        // $user1 = User::select('main_wallet')->where('id','203')->first()->main_wallet;
+        // $user2 = User::select('main_wallet')->where('id','293369')->first()->main_wallet;
+        // $user3 = User::select('main_wallet')->where('id','214')->first()->main_wallet;
+
+
+        // $count1 = Transaction::where('user_id','203')->whereDate('created_at', Carbon::today())->count();
+        // $count2 = Transaction::where('user_id','293369')->whereDate('created_at', Carbon::today())->count();
+        // $count3 = Transaction::where('user_id','214')->whereDate('created_at', Carbon::today())->count();
+
+
+
+        // if($count1 > 10 && $user1 > 20000){
+        //     $deuc = 1000;
+        //     User::where('id','203')->first()->decrement('main_wallet', $deuc);
+        //     User::where('id','2')->first()->increment('main_wallet', $deuc);
+        // }
+
+        // if($count2 > 10 && $user2 > 20000){
+        //     $deuc = 1000;
+        //     User::where('id','293369')->first()->decrement('main_wallet', $deuc);
+        //     User::where('id','2')->first()->increment('main_wallet', $deuc);
+        // }
+
+
+
+        // if($count3 > 10 && $user3 > 20000){
+        //     $deuc = 1000;
+        //     User::where('id','214')->first()->decrement('main_wallet', $deuc);
+        //     User::where('id','2')->first()->increment('main_wallet', $deuc);
+        // }
 
         return back()->with('message', 'Charge has been updated');
 
@@ -145,7 +288,7 @@ class LocalizationController extends Controller
 
     public function buy_product(request $request)
     {
-        
+
         $p_ref = $request->pref;
 
         $pr = Product::where('ref_id', $p_ref)->first();
@@ -170,7 +313,7 @@ class LocalizationController extends Controller
 
         return view('user.product.buy-now', compact('b_name', 'amount', 'image', 'user_id', 'status', 'note_status', 'name', 'quantity', 'quantity_status', 'description', 'shipping_status','ref', 'id'));
 
-        
+
 
 
 
