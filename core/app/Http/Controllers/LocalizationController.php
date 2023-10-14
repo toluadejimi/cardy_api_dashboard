@@ -196,12 +196,9 @@ class LocalizationController extends Controller
 
 
 
-
-
-                return back()->with('message', 'Charge has been updated');
-
-
     }
+
+      return back()->with('message', 'Charge has been updated');
 
 }
 
