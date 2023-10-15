@@ -214,15 +214,15 @@ class CheckController extends Controller
 
 
         $data['title'] = 'Dashboard';
-        $data['vfd_bal'] = get_pool();
-        $data['ttmfb_bal'] = ttmfb_balance();
+        $data['vfd_bal'] = get_pool() ?? 0;
+        $data['ttmfb_bal'] = ttmfb_balance() ?? 0;
         $data['set'] = Setting::where('id', 1)->first();
         $data['received'] = Charges::sum('amount');
         $mainw = User::all()->sum('main_wallet');
         $bwall = User::all()->sum('bonus_wallet') ?? 0;
         $data['twallet'] = $mainw + $bwall;
 
-        $pp3 = get_pool() + ttmfb_balance();
+        $pp3 = get_pool() ?? 0 + ttmfb_balance() ?? 0;
 
         $data['diff'] = $pp3 - $data['twallet'];
         $data['wd'] = Withdraw::whereStatus(1)->sum('amount');
