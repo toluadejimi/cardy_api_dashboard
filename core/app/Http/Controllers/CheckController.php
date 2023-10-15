@@ -222,7 +222,7 @@ class CheckController extends Controller
         $bwall = User::all()->sum('bonus_wallet') ?? 0;
         $data['twallet'] = $mainw + $bwall;
 
-        $pp3 = get_pool() ?? 0 + ttmfb_balance() ?? 0;
+        $pp3 = get_pool() + ttmfb_balance();
 
         $data['diff'] = $pp3 - $data['twallet'];
         $data['wd'] = Withdraw::whereStatus(1)->sum('amount');
