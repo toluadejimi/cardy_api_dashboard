@@ -1731,7 +1731,7 @@ if (!function_exists('get_banks')) {
                 return $var->data->{'NGN-USD'} / 100;
             }
 
-            return "Network Issue";
+            return 0;
         }
     }
 
