@@ -1729,9 +1729,11 @@ if (!function_exists('get_banks')) {
 
             if ($status == 'success') {
                 return $var->data->{'NGN-USD'} / 100;
+            }else{
+                return 0;
             }
 
-            return 0;
+            
         }
     }
 
