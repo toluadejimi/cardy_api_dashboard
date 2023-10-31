@@ -1693,9 +1693,10 @@ if (!function_exists('get_banks')) {
 
             if ($status == 'success') {
                 return $var->data->issuing_balance_USD / 100;
+            }else{
+                return 0;
             }
 
-            return "Network Issue";
         }
     }
 
