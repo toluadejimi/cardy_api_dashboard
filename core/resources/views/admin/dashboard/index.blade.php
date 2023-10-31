@@ -61,7 +61,7 @@
                             <div>
                                 <h3 class="mb-2">{{__('Issuing USD Balance')}}</h3>
                                 <ul class="list list-unstyled mb-0">
-                                    <li><span class="text-default text-sm"> USD {{number_format($issuing_wallet, 2)}}</span></li>
+                                    <li><span class="text-default text-sm"> USD {{number_format($issuing_wallet, 2) ?? 0}}</span></li>
                                 </ul>
                             </div>
                         </div>
