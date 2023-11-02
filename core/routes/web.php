@@ -643,6 +643,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::get('vcard', [CheckController::class, 'vcard'])->name('admin.vcard');
 
     Route::get('all-transactions', [CheckController::class, 'all_transactions'])->name('admin.all-transactions');
+
+    Route::get('search-transactions', [CheckController::class, 'search_transactions'])->name('admin.search-transactions');
+
+
+
+    
     Route::get('vaccount', [CheckController::class, 'vaccount'])->name('admin.vaccount');
     Route::get('terminals', [CheckController::class, 'terminals'])->name('admin.terminals');
 

@@ -108,8 +108,106 @@ class CheckController extends Controller
 
 
 
+
         return view('admin.all-transactions.index', $data);
     }
+
+
+    public function search_transactions(request $request)
+    {
+        $data['title'] = 'Transactions';
+
+        $transaction_type = $request->type ?? null;
+        
+        $data['transactions'] = Transactions::whereDate([
+            'created_at', '>=' => $request->from,
+            'created_at', '<=' => $request->to,
+            'transaction_type', '<=', $transaction_type,
+        ])->get();
+
+
+        $data['moneyin'] = Transactions::select('credit')->where('status', 1)->whereDate([
+            'created_at', '>=' => $request->from,
+            'created_at', '<=' => $request->to,
+        ])->sum('credit');
+
+
+
+        $data['moneyout'] = Transactions::select('debit')->where('status', 1)->whereDate([
+            'created_at', '>=' => $request->from,
+            'created_at', '<=' => $request->to,
+        ])->sum('debit');
+
+
+        $data['postransfer'] = Transactions::select('debit')->whereDate([
+            'created_at', '>=' => $request->from,
+            'created_at', '<=' => $request->to,
+            'transaction_type' => 'FundTransfer'
+
+        ])->where('status', 1)->sum('debit');
+
+
+        $data['mobiletransfer'] = Transactions::select('debit')
+        ->whereDate([
+            'created_at', '>=' => $request->from,
+            'created_at', '<=' => $request->to,
+            'transaction_type' => 'BankTransfer'
+
+        ])->where('status', 1)->sum('debit');
+
+
+
+
+        $data['purchase'] = Transactions::select('credit')
+        ->whereDate([
+            'created_at', '>=' => $request->from,
+            'created_at', '<=' => $request->to,
+            'transaction_type' => 'CashOut'
+        ])->where('status', 1)->sum('credit');
+
+
+
+        $data['walletfund'] = Transactions::select('credit')
+        ->whereDate([
+            'created_at', '>=' => $request->from,
+            'created_at', '<=' => $request->to,
+            'transaction_type' => 'VirtualFundWallet'
+
+        ])->where('status', 1)->sum('credit');
+
+
+        $data['webpay'] = Transactions::select('credit')
+
+        ->whereDate([
+            'created_at', '>=' => $request->from,
+            'created_at', '<=' => $request->to,
+            'type' => 'webpay'
+        ])->where('status', 1)->sum('credit');
+
+
+        $data['vas'] = Transactions::select('debit')
+        ->whereDate([
+            'created_at', '>=' => $request->from,
+            'created_at', '<=' => $request->to,
+            'type' => 'vas'
+        ])->where('status', 1)->sum('debit');
+
+
+
+
+        return view('admin.all-transactions.index', $data);
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     public function bpay()
     {
@@ -243,8 +341,9 @@ class CheckController extends Controller
             ->sum('credit');
 
 
+
         $data['money_in_today_pos'] = Transactions::whereDate('created_at', Carbon::yesterday())
-        ->where('transaction_type', 'CashOut')
+        ->where('title', 'POS Transasction')
         ->sum('credit');
 
 

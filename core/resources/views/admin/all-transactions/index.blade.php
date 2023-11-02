@@ -171,6 +171,41 @@
         </div>
 
 
+        <div class="col-md-12">
+            <div class="card">
+
+                <div class="card-body">
+
+                    <form action="{{ route('admin.search-transactions') }}" method="POST">
+
+
+                        <input type="date" class="form-control" name="from">
+
+                        <input type="date" class="form-control" name="to">
+
+                        {{-- <select class="form-control" name="transaction_type">
+
+                            <value data="">Any</value>
+                            <value data="CashOut">POS</value>
+                            <value data="">Purchase</value>
+                            <value data="">Any</value>
+
+
+                        </select> --}}
+
+                        <button type="submit" class="btn btn-success">Search</button> 
+
+
+                    </form>
+                    
+                </div
+
+            </div>
+
+
+        </div>
+
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
