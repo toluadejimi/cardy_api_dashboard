@@ -176,12 +176,17 @@
 
                 <div class="card-body">
 
-                    <form action="{{ route('admin.search-transactions') }}" method="POST">
+                    <form action="{{ route('admin.search-transactions') }}" method="GET">
 
+                        <div class="row">
 
-                        <input type="date" class="form-control" name="from">
+                            <div class="col-md-4">
+                                <input type="date" class="form-control" name="from">
+                            </div>
 
-                        <input type="date" class="form-control" name="to">
+                            <div class="col-md-4">
+                                <input type="date" class="form-control" name="to">
+                            </div>
 
                         {{-- <select class="form-control" name="transaction_type">
 
@@ -194,6 +199,9 @@
                         </select> --}}
 
                         <button type="submit" class="btn btn-success">Search</button> 
+
+                    </div>
+
 
 
                     </form>
