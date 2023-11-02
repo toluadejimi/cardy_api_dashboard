@@ -179,9 +179,9 @@
                     <div class="card-body">
                         <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
                             <div>
-                                <h3 class="mb-2">{{__('Agents')}}</h3>
+                                <h3 class="mb-2">{{__('Total Webpay')}}</h3>
                                 <ul class="list list-unstyled mb-0">
-                                    <li><span class="text-default text-sm">{{$agent}}</span></li>
+                                    <li><span class="text-default text-sm">{{$money_in_today_webpay}}</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -303,9 +303,9 @@
                     <div class="card-body">
                         <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
                             <div>
-                                <h3 class="mb-2">{{__('Business')}}</h3>
+                                <h3 class="mb-2">{{__('Total POS Today')}}</h3>
                                 <ul class="list list-unstyled mb-0">
-                                    <li><span class="text-default text-sm">{{$business}}</span></li>
+                                    <li><span class="text-default text-sm">{{$money_in_today_pos}}</span></li>
                                 </ul>
                             </div>
                         </div>

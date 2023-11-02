@@ -242,6 +242,17 @@ class CheckController extends Controller
         $data['money_in_today'] = Transactions::whereDate('created_at', Carbon::today())
             ->sum('credit');
 
+
+        $data['money_in_today_pos'] = Transactions::whereDate('created_at', Carbon::today())
+        ->where('transaction_type', 'CashOut')
+        ->sum('credit');
+
+
+        $data['money_in_today_webpay'] = Transactions::whereDate('created_at', Carbon::today())
+        ->where('transaction_type', 'VirtualFundWallet')
+        ->sum('credit');
+
+
         $data['money_out_today'] = Transactions::whereDate('created_at', Carbon::today())
             ->sum('debit');
 
