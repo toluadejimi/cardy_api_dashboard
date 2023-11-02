@@ -122,7 +122,7 @@ class CheckController extends Controller
         $data['transactions'] = Transactions::whereDate([
             'created_at', '>=' => $request->from,
             'created_at', '<=' => $request->to,
-            'transaction_type', '<=', $transaction_type,
+            'transaction_type' => $transaction_type,
         ])->get();
 
 
