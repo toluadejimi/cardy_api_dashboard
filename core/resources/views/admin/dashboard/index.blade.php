@@ -181,7 +181,7 @@
                             <div>
                                 <h3 class="mb-2">{{__('Total Webpay')}}</h3>
                                 <ul class="list list-unstyled mb-0">
-                                    <li><span class="text-default text-sm">{{$money_in_today_webpay}}</span></li>
+                                    <li><span class="text-default text-sm">{{number_format($money_in_today_webpay, 2)}}</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -305,7 +305,7 @@
                             <div>
                                 <h3 class="mb-2">{{__('Total POS Today')}}</h3>
                                 <ul class="list list-unstyled mb-0">
-                                    <li><span class="text-default text-sm">{{$money_in_today_pos}}</span></li>
+                                    <li><span class="text-default text-sm">{{number_format($money_in_today_pos, 2)}}</span></li>
                                 </ul>
                             </div>
                         </div>
