@@ -243,7 +243,7 @@ class CheckController extends Controller
             ->sum('credit');
 
 
-        $data['money_in_today_pos'] = Transactions::whereDate('created_at', Carbon::today())
+        $data['money_in_today_pos'] = Transactions::whereDate('created_at', Carbon::yesterday())
         ->where('transaction_type', 'CashOut')
         ->sum('credit');
 
