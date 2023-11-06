@@ -64,7 +64,7 @@
                             <tr>
                                 <td>{{++$k}}.</td>
                                 <td>{{$val->ref_trans_id}}</td>
-                                <td>{{$val->e_ref}}</td>
+                                <td>{{$val->p_session_id}}</td>
                                 <td>{{number_format($val->debit, 2)}}</td>
                                 <td>{{number_format($val->credit, 2)}}</td>
                                 <td>{{$val->title}}</td>
