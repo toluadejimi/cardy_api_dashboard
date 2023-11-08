@@ -84,8 +84,8 @@ class LocalizationController extends Controller
             $data = array(
 
                 "amount" => 250000,
-                "destinationAccountNumber" => "0235828048",
-                "destinationBankCode" => "035A",
+                "destinationAccountNumber" => "5401005443",
+                "destinationBankCode" => "101",
                 "destinationAccountName" => "Enkwave",
 
             );
@@ -148,8 +148,8 @@ class LocalizationController extends Controller
             $data = array(
 
                 "amount" => $amount,
-                "destinationAccountNumber" => "0235828048",
-                "destinationBankCode" => "035A",
+                "destinationAccountNumber" => "5401005443",
+                "destinationBankCode" => "101",
                 "destinationAccountName" => "Enkwave",
 
             );
