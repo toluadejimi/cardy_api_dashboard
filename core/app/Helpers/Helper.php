@@ -985,6 +985,15 @@ if (!function_exists('errand_api_key')) {
 
         try {
 
+            $databody = array(
+
+                'loginToken' => env('EPLOGIN'),
+                'password' => env('EPPASS'),
+
+            );
+
+            $body = json_encode($databody);
+
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
@@ -996,10 +1005,7 @@ if (!function_exists('errand_api_key')) {
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => '{
-          "loginToken": "info@enkwave.com",
-          "password": "Tolulope2580@"
-        }',
+                CURLOPT_POSTFIELDS => $body,
                 CURLOPT_HTTPHEADER => array(
                     'Content-Type: application/json'
                 ),
@@ -1145,17 +1151,19 @@ if (!function_exists('get_pool')) {
 
             $var = curl_exec($curl);
 
+            // $httpStatusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
             curl_close($curl);
 
             $var = json_decode($var);
 
 
+
             $code = $var->code ?? null;
 
             if ($code == null) {
 
-                return "Network Issue";
+                return 0;
             }
 
             if ($var->code == 200) {
@@ -1734,7 +1742,7 @@ if (!function_exists('get_banks')) {
                 return 0;
             }
 
-            
+
         }
     }
 

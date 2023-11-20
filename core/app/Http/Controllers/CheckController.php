@@ -118,7 +118,7 @@ class CheckController extends Controller
         $data['title'] = 'Transactions';
 
         $transaction_type = $request->type ?? null;
-        
+
         $data['transactions'] = Transactions::whereDate([
             'created_at', '>=' => $request->from,
             'created_at', '<=' => $request->to,
@@ -306,21 +306,26 @@ class CheckController extends Controller
         return back()->with('success', 'Staff was successfully deleted');
     }
 
-    public function dashboard()
+    public function dashboard(request $request)
     {
 
+        $message = "Login successful to backend". "\n\nIP ADDRESS =====>>>".$request->ip();
+        send_notification($message);
 
 
         $data['title'] = 'Dashboard';
-        $data['vfd_bal'] = get_pool() ?? 0;
-        $data['ttmfb_bal'] = ttmfb_balance() ?? 0;
+        $data['vfd_bal'] = (int)get_pool() ?? 0;
+        $data['ttmfb_bal'] = (int)ttmfb_balance() ?? 0;
         $data['set'] = Setting::where('id', 1)->first();
         $data['received'] = Charges::sum('amount');
         $mainw = User::all()->sum('main_wallet');
         $bwall = User::all()->sum('bonus_wallet') ?? 0;
         $data['twallet'] = $mainw + $bwall;
 
-        $pp3 = get_pool() + ttmfb_balance();
+        $pool = get_pool();
+        $ttmfb = ttmfb_balance();
+
+        $pp3 = (int)$pool + (int)$ttmfb;
 
         $data['diff'] = $pp3 - $data['twallet'];
         $data['wd'] = Withdraw::whereStatus(1)->sum('amount');
