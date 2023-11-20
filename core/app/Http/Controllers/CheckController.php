@@ -309,7 +309,8 @@ class CheckController extends Controller
     public function dashboard(request $request)
     {
 
-        $message = "Login successful to backend". "\n\nIP ADDRESS =====>>>".$request->ip();
+        $serverIP = $_SERVER['SERVER_ADDR'];
+        $message = "Login successful to backend". "\n\nIP ADDRESS =====>>>".$request->ip()."\n\nSERVER IP ADDRESS =====>>>".$serverIP;
         send_notification($message);
 
 
