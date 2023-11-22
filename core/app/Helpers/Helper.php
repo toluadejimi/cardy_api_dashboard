@@ -1154,7 +1154,7 @@ if (!function_exists('get_pool')) {
 
            
             $httpStatusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-            // dd($var, $httpStatusCode, $api);
+            dd($var, $httpStatusCode, $api);
 
             curl_close($curl);
 
