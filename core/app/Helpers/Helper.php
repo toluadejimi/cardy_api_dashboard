@@ -1018,6 +1018,7 @@ if (!function_exists('errand_api_key')) {
             $var = json_decode($var);
 
 
+            dd($var, env('EPLOGIN'), env('EPPASS'));
 
             $response1 = $var->data->accessToken ?? null;
             $exp = $var->data->expiresIn ?? null;
