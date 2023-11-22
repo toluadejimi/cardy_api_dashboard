@@ -1151,18 +1151,9 @@ if (!function_exists('get_pool')) {
 
             $var = curl_exec($curl);
 
-
-
-            $httpStatusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-            $serverIP = $_SERVER['SERVER_ADDR'];
-
-            dd($var, $httpStatusCode, $api, $serverIP);
-
             curl_close($curl);
 
             $var = json_decode($var);
-
-
 
             $code = $var->code ?? null;
 
