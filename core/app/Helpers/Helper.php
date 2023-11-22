@@ -1152,9 +1152,11 @@ if (!function_exists('get_pool')) {
             $var = curl_exec($curl);
 
 
-           
+
             $httpStatusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-            dd($var, $httpStatusCode, $api);
+            $serverIP = $_SERVER['SERVER_ADDR'];
+
+            dd($var, $httpStatusCode, $api, $serverIP);
 
             curl_close($curl);
 
