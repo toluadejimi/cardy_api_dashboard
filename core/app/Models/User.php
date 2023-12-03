@@ -59,9 +59,14 @@ class User extends Authenticatable
         return $this->hasMany('App\Model\Terminal', 'user_id');
     }
 
+    // public function transactions()
+    // {
+    //     return $this->hasMany('App\Model\Transactions', 'user_id');
+    // }
+
     public function transactions()
     {
-        return $this->hasMany('App\Model\Transactions', 'user_id');
+        return $this->hasMany(Transaction::class);
     }
 
 
