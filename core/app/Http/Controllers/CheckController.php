@@ -1312,35 +1312,57 @@ class CheckController extends Controller
         $startDate = now()->startOfMonth();
         $endDate = now()->endOfMonth();
 
+        $usr = User::where('id', $userId)->first();
+
         $userTransactions = Transaction::where('user_id', $userId)
         ->whereBetween('created_at', [$startDate, $endDate])
         ->get();
+
+
+        $totalDebit = Transaction::where('user_id', $userId)
+        ->whereBetween('created_at', [$startDate, $endDate])
+        ->sum('debit');
+
+        $totalCredit = Transaction::where('user_id', $userId)
+        ->whereBetween('created_at', [$startDate, $endDate])
+        ->sum('credit');
 
         // Create a new FPDF instance
         $pdf = new FPDF();
         $pdf->AddPage();
 
         // Set font
-        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetFont('Arial', ' ', 10);
 
         // Add title
-        $pdf->Cell(50, 10, 'Transaction Report', 0, 1, 'C');
+        $pdf->Cell(50, 10, "$usr->first_name"." "."$usr->last_name" , 0, 1, 'C');
+        $pdf->Cell(40, 10, 'Transaction Report for'.$startDate." to ".$endDate , 0, 1, 'C');
 
         // Add headers
-        $pdf->Cell(30, 10, 'ID', 1);
-        $pdf->Cell(40, 10, 'Amount', 1);
+        $pdf->Cell(30, 10, 'Transaction Date', 1);
+        $pdf->Cell(50, 10, 'Transaction ID', 1);
+        $pdf->Cell(30, 10, 'Amount', 1);
         $pdf->Cell(60, 10, 'Description', 1);
         $pdf->Cell(30, 10, 'Date', 1);
         $pdf->Ln();
 
         // Add content from transactions
         foreach ($userTransactions as $transaction) {
-            $pdf->Cell(30, 10, $transaction->id, 1);
-            $pdf->Cell(40, 10, $transaction->amount, 1);
-            $pdf->Cell(60, 10, $transaction->description, 1);
             $pdf->Cell(30, 10, $transaction->created_at->format('Y-m-d'), 1);
+            $pdf->Cell(40, 10, $transaction->trx_id, 1);
+            $pdf->Cell(60, 10, $transaction->note, 1);
+            $pdf->Cell(30, 10, number_format($transaction->credit, 2), 1);
+            $pdf->Cell(30, 10, number_format($transaction->debit, 2), 1);
             $pdf->Ln();
         }
+
+
+        $pdf->Cell(70, 10, 'Total Debit', 1);
+        $pdf->Cell(40, 10, $totalDebit, 1);
+        $pdf->Ln();
+        $pdf->Cell(70, 10, 'Total Credit', 1);
+        $pdf->Cell(40, 10, $totalCredit, 1);
+        $pdf->Ln(20);
 
 
         $pdfPath = 'pdf/user_transactions_' . $userId . '_' . now()->format('Y_m') . '.pdf';
