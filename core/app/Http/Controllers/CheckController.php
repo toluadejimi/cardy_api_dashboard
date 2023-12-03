@@ -30,6 +30,7 @@ use App\Models\Shipping;
 use App\Models\Terminal;
 use App\Models\Transfer;
 use App\Models\Withdraw;
+use Stripe\StripeClient;
 use App\Models\Btctrades;
 use App\Models\Donations;
 use App\Models\Compliance;
@@ -49,10 +50,9 @@ use App\Models\Billtransactions;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 use Illuminate\Support\Facades\View;
-
+use Illuminate\Support\Facades\Storage;
+use FPDF;
 
 
 
@@ -1316,9 +1316,32 @@ class CheckController extends Controller
         ->whereBetween('created_at', [$startDate, $endDate])
         ->get();
 
-        $pdf = PDF::loadView('pdf.user_transactions', $userTransactions);
+        // Create a new FPDF instance
+        $pdf = new FPDF();
+        $pdf->AddPage();
 
-        //$pdf = PDF::loadView('pdf.user_transactions', ['transactions' => $userTransactions]);
+        // Set font
+        $pdf->SetFont('Arial', 'B', 16);
+
+        // Add title
+        $pdf->Cell(40, 10, 'Transaction Report', 0, 1, 'C');
+
+        // Add headers
+        $pdf->Cell(30, 10, 'ID', 1);
+        $pdf->Cell(40, 10, 'Amount', 1);
+        $pdf->Cell(60, 10, 'Description', 1);
+        $pdf->Cell(30, 10, 'Date', 1);
+        $pdf->Ln();
+
+        // Add content from transactions
+        foreach ($userTransactions as $transaction) {
+            $pdf->Cell(30, 10, $transaction->id, 1);
+            $pdf->Cell(40, 10, $transaction->amount, 1);
+            $pdf->Cell(60, 10, $transaction->description, 1);
+            $pdf->Cell(30, 10, $transaction->created_at->format('Y-m-d'), 1);
+            $pdf->Ln();
+        }
+
 
         $pdfPath = 'pdf/user_transactions_' . $userId . '_' . now()->format('Y_m') . '.pdf';
         Storage::put($pdfPath, $pdf->output());

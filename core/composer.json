@@ -25,6 +25,7 @@
         "mews/purifier": "^3.3",
         "omnipay/stripe": "^3.1",
         "php-curl-class/php-curl-class": "^9.1",
+        "setasign/fpdf": "^1.8",
         "simplesoftwareio/simple-qrcode": "~4",
         "sonata-project/google-authenticator": "^2.3",
         "stripe/stripe-php": "^7.70"
