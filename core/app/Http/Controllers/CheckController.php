@@ -115,7 +115,7 @@ class CheckController extends Controller
 
         $data['transactions'] = Transactions::whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])->get();
       
-        $data['pos_total'] = Transactions::select('credit')
+        $data['purchase'] = Transactions::select('credit')
         ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
         ->where('transaction_type', 'CashOut')
         ->where('status', 1)->sum('credit');
@@ -125,7 +125,7 @@ class CheckController extends Controller
         $data['moneyout'] = Transactions::select('debit')->where('status', 1)->sum('debit');
         $data['postransfer'] = Transactions::select('debit')->where('transaction_type', 'FundTransfer')->where('status', 1)->sum('debit');
         $data['mobiletransfer'] = Transactions::select('debit')->where('transaction_type', 'BankTransfer')->where('status', 1)->sum('debit');
-        $data['purchase'] = Transactions::select('credit')->where('transaction_type', 'CashOut')->where('status', 1)->sum('credit');
+        //$data['purchase'] = Transactions::select('credit')->where('transaction_type', 'CashOut')->where('status', 1)->sum('credit');
         $data['walletfund'] = Transactions::select('credit')->where('transaction_type', 'VirtualFundWallet')->where('status', 1)->sum('credit');
         $data['webpay'] = Transactions::select('credit')->where('type', 'webpay')->where('status', 1)->sum('credit');
         $data['vas'] = Transactions::select('debit')->where('type', 'vas')->where('status', 1)->sum('debit');

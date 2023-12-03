@@ -286,12 +286,12 @@
                                 @endforeach
                             </tbody>
 
-                            <tfoot>
+                            {{-- <tfoot>
                                 <tr>
                                     <td colspan="n">Total:</td> 
                                     <td>{{ $pos_total }}</td>
                                 </tr>
-                            </tfoot>
+                            </tfoot> --}}
 
                             {{-- {{ $transactions->onEachSide(5)->links() }} --}}
 
