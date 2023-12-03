@@ -93,7 +93,7 @@ class CheckController extends Controller
     public function all_transactions()
     {
         $data['title'] = 'Transactions';
-        $data['transactions'] = Transactions::latest()->pick('500')->get();
+        $data['transactions'] = Transactions::latest()->take('500')->get();
         $data['moneyin'] = Transactions::select('credit')->sum('credit');
         $data['moneyout'] = Transactions::select('debit')->where('status', 1)->sum('debit');
         $data['postransfer'] = Transactions::select('debit')->where('transaction_type', 'FundTransfer')->where('status', 1)->sum('debit');
