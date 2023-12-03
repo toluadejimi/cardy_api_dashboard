@@ -355,7 +355,7 @@ class CheckController extends Controller
     public function Users()
     {
         $data['title'] = 'Clients';
-        $data['users'] = User::orderBy('first_name', 'ASC')->get();
+        $data['users'] = User::orderBy('main_wallet', 'desc')->get();
         return view('admin.user.index', $data);
     }
 
