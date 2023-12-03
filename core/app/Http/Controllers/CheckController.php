@@ -50,7 +50,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 use Illuminate\Support\Facades\View;
 
 
@@ -1316,12 +1316,14 @@ class CheckController extends Controller
         ->whereBetween('created_at', [$startDate, $endDate])
         ->get();
 
-        $pdf = PDF::loadView('pdf.user_transactions', ['transactions' => $userTransactions]);
+        $pdf = PDF::loadView('pdf.user_transactions', $userTransactions);
+
+        //$pdf = PDF::loadView('pdf.user_transactions', ['transactions' => $userTransactions]);
 
         $pdfPath = 'pdf/user_transactions_' . $userId . '_' . now()->format('Y_m') . '.pdf';
         Storage::put($pdfPath, $pdf->output());
 
-       
+
         echo "PDF generated: $pdfPath";
 
 
