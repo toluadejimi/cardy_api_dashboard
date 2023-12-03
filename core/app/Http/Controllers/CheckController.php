@@ -1335,7 +1335,7 @@ class CheckController extends Controller
         $pdf->SetFont('Arial', ' ', 10);
 
         // Add title
-        $pdf->Cell(50, 10, "$usr->first_name"." "."$usr->last_name" , 0, 1, 'C');
+        $pdf->Cell(50, 10, $usr->first_name." ".$usr->last_name , 0, 1, 'C');
         $pdf->Cell(40, 10, 'Transaction Report for'.$startDate." to ".$endDate , 0, 1, 'C');
 
         // Add headers
