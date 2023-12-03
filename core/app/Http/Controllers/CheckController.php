@@ -131,6 +131,7 @@ class CheckController extends Controller
         ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
         ->sum('credit');
 
+        $data['postransfer'] = 0;
 
         $data['moneyout'] = Transactions::select('debit')
         ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
