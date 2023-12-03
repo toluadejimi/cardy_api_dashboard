@@ -114,13 +114,11 @@ class CheckController extends Controller
         $transaction_type = $request->type ?? null;
 
         $data['transactions'] = Transactions::whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])->get();
-
-
-        // $data['transactions'] = Transactions::whereBetween([
-        //     'created_at', '=' => $request->from,
-        //     'created_at', '=' => $request->to,
-        //     'transaction_type' => $transaction_type,
-        // ])->get();
+      
+        $data['pos_total'] = Transactions::select('credit')
+        ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
+        ->where('transaction_type', 'CashOut')
+        ->where('status', 1)->sum('credit');
 
 
         $data['moneyin'] = Transactions::select('credit')->sum('credit');
