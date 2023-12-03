@@ -42,6 +42,9 @@
                                             <a class='dropdown-item' href="{{route('user.unblock', ['id' => $val->id])}}">{{__('Unblock')}}</a>
                                         @endif
                                         <a href="{{route('user.destory', ['id' => $val->id])}}" class="dropdown-item">{{__('Delete')}}</a>
+                                        <a href="{{route('report', ['userId' => $val->id])}}" class="dropdown-item">{{__('Transaction Report')}}</a>
+
+                                        report
 
                                     </div>
                                 </div>

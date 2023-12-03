@@ -70,6 +70,8 @@ Route::post('block-pos', [LocalizationController::class, 'block_pos_transfer']);
 
 
 
+
+
 //verify email
 Route::post('verify-email', [UserController::class, 'verify_email']);
 
@@ -407,6 +409,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::get('/logout', [CheckController::class, 'logout'])->name('admin.logout');
     Route::get('/dashboard', [CheckController::class, 'dashboard'])->name('admin.dashboard');
 
+
     //Blog controller
     Route::post('/createcategory', [PostController::class, 'CreateCategory']);
     Route::post('/updatecategory', [PostController::class, 'UpdateCategory']);
@@ -421,6 +424,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::get('blog/edit/{id}', [PostController::class, 'edit'])->name('blog.edit');
     Route::post('blog-update', [PostController::class, 'updatePost'])->name('blog.update');
 
+    Route::post('report/{userId}', [CheckController::class, 'sendtransactionreport'])->name('report');
 
     Route::get('user/destory/{id}', [CheckController::class, 'Destroyuser'])->name('user.destory');
 

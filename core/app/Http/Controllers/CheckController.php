@@ -2,77 +2,79 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PendingTransaction;
-use App\Models\Terminal;
-use App\Models\TerminalPayment;
+use Image;
+use Validator;
+use Stripe\Token;
+use Carbon\Carbon;
+use Stripe\Charge;
+use Stripe\Stripe;
+use App\Models\Faq;
+use App\Models\Bank;
+use App\Models\Cart;
+use App\Models\Logo;
+use App\Models\Page;
+use App\Models\User;
+use App\Models\About;
+use App\Models\Admin;
+use App\Models\Audit;
+use App\Models\Order;
+use App\Models\Plans;
+use App\Models\Reply;
+use App\Models\Staff;
 use App\Models\VCard;
-use App\Models\VirtualAccount;
+use App\Models\Branch;
+use App\Models\Review;
+use App\Models\Social;
+use App\Models\Ticket;
 use App\Models\Webkey;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Input;
+use App\Models\Charges;
+use App\Models\Contact;
+use App\Models\Gateway;
+use App\Models\History;
+use App\Models\Invoice;
+use App\Models\Product;
+use App\Models\Setting;
+use App\Models\Virtual;
+use App\Models\Currency;
+use App\Models\Deposits;
+use App\Models\Merchant;
+use App\Models\Requests;
+use App\Models\Sellcard;
+use App\Models\Settings;
+use App\Models\Shipping;
+use App\Models\Terminal;
+use App\Models\Transfer;
+use App\Models\Withdraw;
+use Barryvdh\DomPDF\PDF;
+use Stripe\StripeClient;
+use App\Models\Adminbank;
+use App\Models\Btctrades;
+use App\Models\Donations;
+use App\Models\Withdrawm;
+use App\Models\Compliance;
+use App\Models\Storefront;
+use App\Models\Exttransfer;
+use App\Models\Paymentlink;
+use App\Models\Subaccounts;
+use App\Models\Subscribers;
+use App\Models\Transaction;
+use App\Models\Banktransfer;
+use App\Models\Transactions;
+use Illuminate\Http\Request;
+use App\Models\VirtualAccount;
+use App\Models\Productcategory;
+use App\Models\TerminalPayment;
+use App\Models\Billtransactions;
+use App\Models\PendingTransaction;
+use App\Models\Storefrontproducts;
+use App\Models\Virtualtransactions;
 use Mews\Purifier\Facades\Purifier;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
-use Validator;
-use App\Models\User;
-use App\Models\Admin;
-use App\Models\Settings;
-use App\Models\Logo;
-use App\Models\Branch;
-use App\Models\Bank;
-use App\Models\Currency;
-use App\Models\Transfer;
-use App\Models\Adminbank;
-use App\Models\Gateway;
-use App\Models\Deposits;
-use App\Models\Banktransfer;
-use App\Models\Withdraw;
-use App\Models\Withdrawm;
-use App\Models\Merchant;
-use App\Models\Social;
-use App\Models\About;
-use App\Models\Faq;
-use App\Models\Page;
-use App\Models\Contact;
-use App\Models\Ticket;
-use App\Models\Setting;
-use App\Models\Reply;
-use App\Models\Review;
-use App\Models\Product;
-use App\Models\Order;
-use App\Models\Invoice;
-use App\Models\Charges;
-use App\Models\Exttransfer;
-use App\Models\Requests;
-use App\Models\Transactions;
-use App\Models\Donations;
-use App\Models\Paymentlink;
-use App\Models\Plans;
-use App\Models\Subscribers;
-use App\Models\Audit;
-use App\Models\Staff;
-use App\Models\Virtual;
-use App\Models\Billtransactions;
-use App\Models\Virtualtransactions;
-use App\Models\Sellcard;
-use App\Models\Btctrades;
-use App\Models\History;
-use App\Models\Compliance;
-use App\Models\Productcategory;
-use App\Models\Storefront;
-use App\Models\Storefrontproducts;
-use App\Models\Shipping;
-use App\Models\Subaccounts;
-use App\Models\Cart;
-use App\Models\Transaction;
-use Carbon\Carbon;
-use Stripe\Stripe;
-use Stripe\Token;
-use Stripe\Charge;
-use Stripe\StripeClient;
-use Image;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 
 class CheckController extends Controller
 {
@@ -113,46 +115,46 @@ class CheckController extends Controller
 
         $transaction_type = $request->type ?? null;
 
-        $data['transactions'] = Transactions::latest()->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])->get();
-      
+        $data['transactions'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])->get();
+
         $data['purchase'] = Transactions::select('credit')
-        ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
-        ->where('transaction_type', 'CashOut')
-        ->where('status', 1)->sum('credit');
+            ->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+            ->where('transaction_type', 'CashOut')
+            ->where('status', 1)->sum('credit');
 
 
         $data['mobiletransfer'] = Transactions::select('debit')
-        ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
-        ->where('transaction_type', 'BankTransfer')
-        ->where('status', 1)->sum('debit');
+            ->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+            ->where('transaction_type', 'BankTransfer')
+            ->where('status', 1)->sum('debit');
 
 
         $data['moneyin'] = Transactions::select('credit')
-        ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
-        ->sum('credit');
+            ->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+            ->sum('credit');
 
         $data['postransfer'] = 0;
 
         $data['moneyout'] = Transactions::select('debit')
-        ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
-        ->where('status', 1)->sum('debit');
+            ->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+            ->where('status', 1)->sum('debit');
 
         $data['walletfund'] = Transactions::select('credit')
-        ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
-        ->where('transaction_type', 'VirtualFundWallet')
-        ->where('status', 1)->sum('credit');
+            ->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+            ->where('transaction_type', 'VirtualFundWallet')
+            ->where('status', 1)->sum('credit');
 
 
         $data['webpay'] = Transactions::select('credit')
-        ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
-        ->where('type', 'webpay')->where('status', 1)
-        ->sum('credit');
+            ->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+            ->where('type', 'webpay')->where('status', 1)
+            ->sum('credit');
 
 
         $data['vas'] = Transactions::select('debit')
-        ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
-        ->where('type', 'vas')->where('status', 1)
-        ->sum('debit');
+            ->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+            ->where('type', 'vas')->where('status', 1)
+            ->sum('debit');
 
         return view('admin.all-transactions.index', $data);
     }
@@ -269,7 +271,7 @@ class CheckController extends Controller
     {
 
         $serverIP = $_SERVER['SERVER_ADDR'];
-        $message = "Login successful to backend". "\n\nIP ADDRESS =====>>>".$request->ip()."\n\nSERVER IP ADDRESS =====>>>".$serverIP;
+        $message = "Login successful to backend" . "\n\nIP ADDRESS =====>>>" . $request->ip() . "\n\nSERVER IP ADDRESS =====>>>" . $serverIP;
         send_notification($message);
 
 
@@ -308,13 +310,13 @@ class CheckController extends Controller
 
 
         $data['money_in_today_pos'] = Transactions::whereDate('created_at', Carbon::today())
-        ->where('title', 'POS Transasction')
-        ->sum('credit');
+            ->where('title', 'POS Transasction')
+            ->sum('credit');
 
 
         $data['money_in_today_webpay'] = Transactions::whereDate('created_at', Carbon::today())
-        ->where('transaction_type', 'VirtualFundWallet')
-        ->sum('credit');
+            ->where('transaction_type', 'VirtualFundWallet')
+            ->sum('credit');
 
 
         $data['money_out_today'] = Transactions::whereDate('created_at', Carbon::today())
@@ -357,7 +359,7 @@ class CheckController extends Controller
         $data['title'] = 'Clients';
 
         $data['users'] = User::orderBy('main_wallet', 'desc')->withCount(['transactions as pos_count' => function ($query) {
-            $query->where('transaction_type','CashOut');
+            $query->where('transaction_type', 'CashOut');
         }])->get();
 
 
@@ -969,7 +971,7 @@ class CheckController extends Controller
             'transaction_type' => 'VirtualFundWallet',
             'user_id' => $user->id,
             'status' => 1
-            ])->whereDate('created_at', Carbon::today())->count();
+        ])->whereDate('created_at', Carbon::today())->count();
 
 
 
@@ -977,14 +979,14 @@ class CheckController extends Controller
             'type' => 'vas',
             'user_id' => $user->id,
             'status' => 1
-            ])->whereDate('created_at', Carbon::today())->count();
+        ])->whereDate('created_at', Carbon::today())->count();
 
 
         $data['pos_count'] = Transactions::select('credit')->where([
             'transaction_type' => 'CashOut',
             'user_id' => $user->id,
             'status' => 1
-            ])->whereDate('created_at', Carbon::today())->count();
+        ])->whereDate('created_at', Carbon::today())->count();
 
 
 
@@ -992,7 +994,7 @@ class CheckController extends Controller
             'transaction_type' => 'BankTransfer',
             'user_id' => $user->id,
             'status' => 1
-            ])->whereDate('created_at', Carbon::today())->count();
+        ])->whereDate('created_at', Carbon::today())->count();
 
 
 
@@ -1099,17 +1101,16 @@ class CheckController extends Controller
         $wkey = new Webkey();
         $wkey->key = $webkey;
         $wkey->user_id = $com->user_id;
-        $wkey->qrlink = "https://web.enkpay.com/custom-paykey=?".$webkey;
+        $wkey->qrlink = "https://web.enkpay.com/custom-paykey=?" . $webkey;
         $wkey->save();
 
 
 
-        $webt = VirtualAccount::where('user_id',$com->user_id)->first()->business_id ?? null;
-        if($webt == null){
+        $webt = VirtualAccount::where('user_id', $com->user_id)->first()->business_id ?? null;
+        if ($webt == null) {
 
             $bid = User::where('id', $com->user_id)->first()->business_id;
             VirtualAccount::where('user_id', $com->user_id)->update(['business_id' => $bid]);
-
         }
 
 
@@ -1325,6 +1326,32 @@ class CheckController extends Controller
     }
 
 
+
+    public function sendtransactionreport($userId)
+    {
+        $startDate = now()->startOfMonth();
+        $endDate = now()->endOfMonth();
+
+        $userTransactions = Transaction::where('user_id', $userId)
+        ->whereBetween('created_at', [$startDate, $endDate])
+        ->get();
+
+        $pdf = PDF::loadView('pdf.user_transactions', ['transactions' => $userTransactions]);
+
+        $pdfPath = 'pdf/user_transactions_' . $userId . '_' . now()->format('Y_m') . '.pdf';
+        Storage::put($pdfPath, $pdf->output());
+
+       
+        echo "PDF generated: $pdfPath";
+
+
+        return back()->with('success', 'User was successfully deleted');
+
+
+        //$userTransactions->each->delete();
+    }
+
+
     public function terminal(request $request)
     {
 
@@ -1337,7 +1364,7 @@ class CheckController extends Controller
         $data['user'] = User::select('*')->get();
 
         $data['all_terminal'] = Terminal::withCount(['transactions as pos_count' => function ($query) {
-        $query->where('transaction_type','CashOut');
+            $query->where('transaction_type', 'CashOut');
         }])->get();
 
         $data['pcount'] = Transactions::where('transaction_type', 'CashOut')->count();
