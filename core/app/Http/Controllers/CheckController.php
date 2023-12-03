@@ -113,93 +113,45 @@ class CheckController extends Controller
 
         $transaction_type = $request->type ?? null;
 
-        $data['transactions'] = Transactions::whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])->get();
+        $data['transactions'] = Transactions::latest()->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])->get();
       
-        $data['purchase'] = Transactions::latest()->select('credit')
+        $data['purchase'] = Transactions::select('credit')
         ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
         ->where('transaction_type', 'CashOut')
         ->where('status', 1)->sum('credit');
 
 
-        $data['moneyin'] = Transactions::select('credit')->sum('credit');
-        $data['moneyout'] = Transactions::select('debit')->where('status', 1)->sum('debit');
-        $data['postransfer'] = Transactions::select('debit')->where('transaction_type', 'FundTransfer')->where('status', 1)->sum('debit');
-        $data['mobiletransfer'] = Transactions::select('debit')->where('transaction_type', 'BankTransfer')->where('status', 1)->sum('debit');
-        //$data['purchase'] = Transactions::select('credit')->where('transaction_type', 'CashOut')->where('status', 1)->sum('credit');
-        $data['walletfund'] = Transactions::select('credit')->where('transaction_type', 'VirtualFundWallet')->where('status', 1)->sum('credit');
-        $data['webpay'] = Transactions::select('credit')->where('type', 'webpay')->where('status', 1)->sum('credit');
-        $data['vas'] = Transactions::select('debit')->where('type', 'vas')->where('status', 1)->sum('debit');
+        $data['mobiletransfer'] = Transactions::select('debit')
+        ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
+        ->where('transaction_type', 'BankTransfer')
+        ->where('status', 1)->sum('debit');
 
 
-
-        // $data['moneyin'] = Transactions::select('credit')->where('status', 1)->whereDate([
-        //     'created_at', '>=' => $request->from,
-        //     'created_at', '<=' => $request->to,
-        // ])->sum('credit');
+        $data['moneyin'] = Transactions::select('credit')
+        ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
+        ->sum('credit');
 
 
+        $data['moneyout'] = Transactions::select('debit')
+        ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
+        ->where('status', 1)->sum('debit');
 
-        // $data['moneyout'] = Transactions::select('debit')->where('status', 1)->whereDate([
-        //     'created_at', '>=' => $request->from,
-        //     'created_at', '<=' => $request->to,
-        // ])->sum('debit');
-
-
-        // $data['postransfer'] = Transactions::select('debit')->whereDate([
-        //     'created_at', '>=' => $request->from,
-        //     'created_at', '<=' => $request->to,
-        //     'transaction_type' => 'FundTransfer'
-
-        // ])->where('status', 1)->sum('debit');
+        $data['walletfund'] = Transactions::select('credit')
+        ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
+        ->where('transaction_type', 'VirtualFundWallet')
+        ->where('status', 1)->sum('credit');
 
 
-        // $data['mobiletransfer'] = Transactions::select('debit')
-        // ->whereDate([
-        //     'created_at', '>=' => $request->from,
-        //     'created_at', '<=' => $request->to,
-        //     'transaction_type' => 'BankTransfer'
-
-        // ])->where('status', 1)->sum('debit');
+        $data['webpay'] = Transactions::select('credit')
+        ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
+        ->where('type', 'webpay')->where('status', 1)
+        ->sum('credit');
 
 
-
-
-        // $data['purchase'] = Transactions::select('credit')
-        // ->whereDate([
-        //     'created_at', '>=' => $request->from,
-        //     'created_at', '<=' => $request->to,
-        //     'transaction_type' => 'CashOut'
-        // ])->where('status', 1)->sum('credit');
-
-
-
-        // $data['walletfund'] = Transactions::select('credit')
-        // ->whereDate([
-        //     'created_at', '>=' => $request->from,
-        //     'created_at', '<=' => $request->to,
-        //     'transaction_type' => 'VirtualFundWallet'
-
-        // ])->where('status', 1)->sum('credit');
-
-
-        // $data['webpay'] = Transactions::select('credit')
-
-        // ->whereDate([
-        //     'created_at', '>=' => $request->from,
-        //     'created_at', '<=' => $request->to,
-        //     'type' => 'webpay'
-        // ])->where('status', 1)->sum('credit');
-
-
-        // $data['vas'] = Transactions::select('debit')
-        // ->whereDate([
-        //     'created_at', '>=' => $request->from,
-        //     'created_at', '<=' => $request->to,
-        //     'type' => 'vas'
-        // ])->where('status', 1)->sum('debit');
-
-
-
+        $data['vas'] = Transactions::select('debit')
+        ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
+        ->where('type', 'vas')->where('status', 1)
+        ->sum('debit');
 
         return view('admin.all-transactions.index', $data);
     }
