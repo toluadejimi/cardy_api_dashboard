@@ -6,6 +6,53 @@ backwards-incompatible changes that will affect existing usage.
 
 <!-- CHANGELOG_PLACEHOLDER -->
 
+## 9.18.2 - 2023-09-11
+
+- Fix use of mb_strpos() causing error when polyfill is used ([#813](https://github.com/php-curl-class/php-curl-class/pull/813))
+
+## 9.18.1 - 2023-08-29
+
+- Add additional check for decoding gzip-encoded responses ([#808](https://github.com/php-curl-class/php-curl-class/pull/808))
+
+## 9.18.0 - 2023-08-28
+
+- Implement Curl::setError() and MultiCurl::setError() ([#805](https://github.com/php-curl-class/php-curl-class/pull/805))
+- Rename ::setError() to ::afterSend() ([#807](https://github.com/php-curl-class/php-curl-class/pull/807))
+
+## 9.17.4 - 2023-07-10
+
+- Add coding standards rule to use the null coalescing operator ?? where possible ([#801](https://github.com/php-curl-class/php-curl-class/pull/801))
+- Replace isset with null coalescing operator ([#800](https://github.com/php-curl-class/php-curl-class/pull/800))
+
+## 9.17.3 - 2023-07-04
+
+- Update PHP_CodeSniffer ruleset: PSR2 → PSR12 ([#797](https://github.com/php-curl-class/php-curl-class/pull/797))
+- Add additional coding standard checks ([#796](https://github.com/php-curl-class/php-curl-class/pull/796))
+
+## 9.17.2 - 2023-06-27
+
+- Use short array syntax ([#793](https://github.com/php-curl-class/php-curl-class/pull/793))
+- Add PHP-CS-Fixer to check for unused imports ([#794](https://github.com/php-curl-class/php-curl-class/pull/794))
+- Replace `uniqid` by `random_bytes` ([#792](https://github.com/php-curl-class/php-curl-class/pull/792))
+
+## 9.17.1 - 2023-06-14
+
+- Improve and add tests for Curl::fastDownload() ([#791](https://github.com/php-curl-class/php-curl-class/pull/791))
+
+## 9.17.0 - 2023-06-13
+
+- Make method to display curl option value public ([#790](https://github.com/php-curl-class/php-curl-class/pull/790))
+
+## 9.16.1 - 2023-06-12
+
+- Differentiate between internal options and user-set options ([#788](https://github.com/php-curl-class/php-curl-class/pull/788))
+- Create method to display a curl option value ([#785](https://github.com/php-curl-class/php-curl-class/pull/785))
+- Fix existing header overwritten after using MultiCurl::addCurl() ([#787](https://github.com/php-curl-class/php-curl-class/pull/787))
+
+## 9.16.0 - 2023-05-25
+
+- Graduate Curl::fastDownload() ([#783](https://github.com/php-curl-class/php-curl-class/pull/783))
+
 ## 9.15.1 - 2023-05-24
 
 - Fix PHP CodeSniffer errors ([#782](https://github.com/php-curl-class/php-curl-class/pull/782))
