@@ -45,7 +45,6 @@ use App\Models\Shipping;
 use App\Models\Terminal;
 use App\Models\Transfer;
 use App\Models\Withdraw;
-use Barryvdh\DomPDF\PDF;
 use Stripe\StripeClient;
 use App\Models\Adminbank;
 use App\Models\Btctrades;
@@ -75,6 +74,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\PDF;
+
 
 class CheckController extends Controller
 {
