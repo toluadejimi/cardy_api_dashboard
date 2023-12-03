@@ -978,69 +978,69 @@ if (!function_exists('boomtime')) {
 
 
 
-if (!function_exists('errand_api_key')) {
+// if (!function_exists('errand_api_key')) {
 
-    function errand_api_key()
-    {
+//     function errand_api_key()
+//     {
 
-        try {
+//         try {
 
-            $databody = array(
+//             $databody = array(
 
-                'loginToken' => env('EPLOGIN'),
-                'password' => env('EPPASS'),
+//                 'loginToken' => env('EPLOGIN'),
+//                 'password' => env('EPPASS'),
 
-            );
+//             );
 
-            $body = json_encode($databody);
+//             $body = json_encode($databody);
 
-            $curl = curl_init();
+//             $curl = curl_init();
 
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://api.errandpay.com/epagentauth/api/v1/login',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => $body,
-                CURLOPT_HTTPHEADER => array(
-                    'Content-Type: application/json'
-                ),
-            ));
+//             curl_setopt_array($curl, array(
+//                 CURLOPT_URL => 'https://api.errandpay.com/epagentauth/api/v1/login',
+//                 CURLOPT_RETURNTRANSFER => true,
+//                 CURLOPT_ENCODING => '',
+//                 CURLOPT_MAXREDIRS => 10,
+//                 CURLOPT_TIMEOUT => 0,
+//                 CURLOPT_FOLLOWLOCATION => true,
+//                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+//                 CURLOPT_CUSTOMREQUEST => 'POST',
+//                 CURLOPT_POSTFIELDS => $body,
+//                 CURLOPT_HTTPHEADER => array(
+//                     'Content-Type: application/json'
+//                 ),
+//             ));
 
-            $var = curl_exec($curl);
-            curl_close($curl);
-
-
-            $var = json_decode($var);
+//             $var = curl_exec($curl);
+//             curl_close($curl);
 
 
-
-            $response1 = $var->data->accessToken ?? null;
-            $exp = $var->data->expiresIn ?? null;
-
-            $respose2 = 'ERA 001 Please try again later';
-            $response3 =  $var->error->message ?? null;
+//             $var = json_decode($var);
 
 
 
-            if ($var->code == 200) {
-                return $response1;
-            }
+//             $response1 = $var->data->accessToken ?? null;
+//             $exp = $var->data->expiresIn ?? null;
 
-            if ($var->code == 400) {
-                return $response3;
-            }
+//             $respose2 = 'ERA 001 Please try again later';
+//             $response3 =  $var->error->message ?? null;
 
-            return $respose2;
-        } catch (\Exception $th) {
-            return $th->getMessage();
-        }
-    }
-}
+
+
+//             if ($var->code == 200) {
+//                 return $response1;
+//             }
+
+//             if ($var->code == 400) {
+//                 return $response3;
+//             }
+
+//             return $respose2;
+//         } catch (\Exception $th) {
+//             return $th->getMessage();
+//         }
+//     }
+// }
 
 
 
@@ -1120,56 +1120,56 @@ function ttmfb_balance(){
 
 
 
-if (!function_exists('get_pool')) {
+// if (!function_exists('get_pool')) {
 
-    function get_pool()
-    {
+//     function get_pool()
+//     {
 
-        try {
+//         try {
 
-            $api = errand_api_key();
-            $epKey = env('EPKEY');
+//             $api = errand_api_key();
+//             $epKey = env('EPKEY');
 
-            $curl = curl_init();
+//             $curl = curl_init();
 
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://api.errandpay.com/epagentservice/api/v1/ApiGetBalance',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'GET',
-                CURLOPT_HTTPHEADER => array(
-                    'Accept: application/json',
-                    'Content-Type: application/json',
-                    "epKey: $epKey",
-                    "Authorization: Bearer $api",
-                ),
-            ));
+//             curl_setopt_array($curl, array(
+//                 CURLOPT_URL => 'https://api.errandpay.com/epagentservice/api/v1/ApiGetBalance',
+//                 CURLOPT_RETURNTRANSFER => true,
+//                 CURLOPT_ENCODING => '',
+//                 CURLOPT_MAXREDIRS => 10,
+//                 CURLOPT_TIMEOUT => 0,
+//                 CURLOPT_FOLLOWLOCATION => true,
+//                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+//                 CURLOPT_CUSTOMREQUEST => 'GET',
+//                 CURLOPT_HTTPHEADER => array(
+//                     'Accept: application/json',
+//                     'Content-Type: application/json',
+//                     "epKey: $epKey",
+//                     "Authorization: Bearer $api",
+//                 ),
+//             ));
 
-            $var = curl_exec($curl);
+//             $var = curl_exec($curl);
 
-            curl_close($curl);
+//             curl_close($curl);
 
-            $var = json_decode($var);
+//             $var = json_decode($var);
 
-            $code = $var->code ?? null;
+//             $code = $var->code ?? null;
 
-            if ($code == null) {
+//             if ($code == null) {
 
-                return 0;
-            }
+//                 return 0;
+//             }
 
-            if ($var->code == 200) {
-                return $var->data->balance;
-            }
-        } catch (\Exception $th) {
-            return $th->getMessage();
-        }
-    }
-}
+//             if ($var->code == 200) {
+//                 return $var->data->balance;
+//             }
+//         } catch (\Exception $th) {
+//             return $th->getMessage();
+//         }
+//     }
+// }
 
 
 

@@ -93,7 +93,7 @@ class CheckController extends Controller
     public function all_transactions()
     {
         $data['title'] = 'Transactions';
-        $data['transactions'] = Transactions::latest()->get();
+        $data['transactions'] = Transactions::latest()->pick('500')->get();
         $data['moneyin'] = Transactions::select('credit')->sum('credit');
         $data['moneyout'] = Transactions::select('debit')->where('status', 1)->sum('debit');
         $data['postransfer'] = Transactions::select('debit')->where('transaction_type', 'FundTransfer')->where('status', 1)->sum('debit');
@@ -102,12 +102,6 @@ class CheckController extends Controller
         $data['walletfund'] = Transactions::select('credit')->where('transaction_type', 'VirtualFundWallet')->where('status', 1)->sum('credit');
         $data['webpay'] = Transactions::select('credit')->where('type', 'webpay')->where('status', 1)->sum('credit');
         $data['vas'] = Transactions::select('debit')->where('type', 'vas')->where('status', 1)->sum('debit');
-
-
-
-
-
-
 
         return view('admin.all-transactions.index', $data);
     }
@@ -315,7 +309,7 @@ class CheckController extends Controller
 
 
         $data['title'] = 'Dashboard';
-        $data['vfd_bal'] = (int)get_pool() ?? 0;
+        //$data['vfd_bal'] = (int)get_pool() ?? 0;
         $data['ttmfb_bal'] = (int)ttmfb_balance() ?? 0;
         $data['set'] = Setting::where('id', 1)->first();
         $data['received'] = Charges::sum('amount');
@@ -323,10 +317,10 @@ class CheckController extends Controller
         $bwall = User::all()->sum('bonus_wallet') ?? 0;
         $data['twallet'] = $mainw + $bwall;
 
-        $pool = get_pool();
+        //$pool = get_pool();
         $ttmfb = ttmfb_balance();
 
-        $pp3 = (int)$pool + (int)$ttmfb;
+        $pp3 = (int)$ttmfb;
 
         $data['diff'] = $pp3 - $data['twallet'];
         $data['wd'] = Withdraw::whereStatus(1)->sum('amount');
@@ -383,7 +377,7 @@ class CheckController extends Controller
 
 
 
-        $data['allbal'] = $data['vfd_bal'] + $data['ttmfb_bal'];
+        $data['allbal'] = $data['ttmfb_bal'];
 
 
 
