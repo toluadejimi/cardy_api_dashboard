@@ -1321,7 +1321,7 @@ class CheckController extends Controller
         $pdf->AddPage();
 
         // Set font
-        $pdf->SetFont('Arial', 'R', 10);
+        $pdf->SetFont('Arial', '', 10);
 
         // Add title
         $pdf->Cell(50, 10, 'Transaction Report', 0, 1, 'C');
