@@ -1340,9 +1340,6 @@ class CheckController extends Controller
         $query->where('transaction_type','CashOut');
         }])->get();
 
-
-
-
         $data['pcount'] = Transactions::where('transaction_type', 'CashOut')->count();
         $data['tcount'] = Terminal::all()->count();
 

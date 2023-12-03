@@ -32,4 +32,10 @@ class Transaction extends Model
         return $this->belongsTo('App\Models\User','user_id');
     }
 
+
+    public function terminal()
+    {
+        return $this->belongsTo('App\Models\Terminal','user_id');
+    }
+
 }
