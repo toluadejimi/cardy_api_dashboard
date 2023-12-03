@@ -355,7 +355,13 @@ class CheckController extends Controller
     public function Users()
     {
         $data['title'] = 'Clients';
-        $data['users'] = User::orderBy('main_wallet', 'desc')->get();
+
+        $data['users'] = User::orderBy('main_wallet', 'desc')->withCount(['transactions as pos_count' => function ($query) {
+            $query->where('transaction_type','CashOut'
+        );
+        }])->get();
+
+
         return view('admin.user.index', $data);
     }
 

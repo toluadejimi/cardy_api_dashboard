@@ -19,6 +19,7 @@
                             <th>{{__('Balance')}}</th>
                             <th>{{__('State')}}</th>
                             <th>{{__('Type')}}</th>
+                            <th>{{__('POS Count')}}</th>
                             <th>{{__('Status')}}</th>
                             <th>{{__('Date Joied')}}</th>
                         </tr>
@@ -60,8 +61,9 @@
                                     <span class="badge badge-pill badge-warning">{{__('Business')}}</span>
                                 @endif
                             </td>
+                            <td>{{ $val->pos_count }}</td>
                             <td>
-                                @if($val->status==1)
+                                @if($val->status==2)
                                     <span class="badge badge-pill badge-primary">{{__('Active')}}</span>
                                 @elseif($val->status==4)
                                     <span class="badge badge-pill badge-danger">{{__('Blocked')}}</span>

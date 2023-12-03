@@ -64,6 +64,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Model\Transactions', 'user_id');
     }
 
+
+
     public function pending_transactions()
     {
         return $this->hasMany('App\Model\PendingTransaction', 'user_id');
