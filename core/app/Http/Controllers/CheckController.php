@@ -115,7 +115,7 @@ class CheckController extends Controller
 
         $data['transactions'] = Transactions::whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])->get();
       
-        $data['purchase'] = Transactions::select('credit')
+        $data['purchase'] = Transactions::latest()->select('credit')
         ->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])
         ->where('transaction_type', 'CashOut')
         ->where('status', 1)->sum('credit');
