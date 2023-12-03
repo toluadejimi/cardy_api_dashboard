@@ -114,8 +114,8 @@ class CheckController extends Controller
         $transaction_type = $request->type ?? null;
 
         $data['transactions'] = Transactions::whereDate([
-            'created_at', '>=' => $request->from,
-            'created_at', '<=' => $request->to,
+            'created_at', '=' => $request->from,
+            'created_at', '=' => $request->to,
             'transaction_type' => $transaction_type,
         ])->get();
 
