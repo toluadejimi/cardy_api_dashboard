@@ -2,55 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use Image;
-use Validator;
-use Stripe\Token;
+
 use Carbon\Carbon;
-use Stripe\Charge;
-use Stripe\Stripe;
-use App\Models\Faq;
+
 use App\Models\Bank;
-use App\Models\Cart;
-use App\Models\Logo;
-use App\Models\Page;
 use App\Models\User;
-use App\Models\About;
 use App\Models\Admin;
 use App\Models\Audit;
 use App\Models\Order;
 use App\Models\Plans;
 use App\Models\Reply;
-use App\Models\Staff;
 use App\Models\VCard;
-use App\Models\Branch;
-use App\Models\Review;
-use App\Models\Social;
 use App\Models\Ticket;
 use App\Models\Webkey;
 use App\Models\Charges;
 use App\Models\Contact;
-use App\Models\Gateway;
 use App\Models\History;
 use App\Models\Invoice;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Virtual;
-use App\Models\Currency;
 use App\Models\Deposits;
 use App\Models\Merchant;
 use App\Models\Requests;
-use App\Models\Sellcard;
 use App\Models\Settings;
 use App\Models\Shipping;
 use App\Models\Terminal;
 use App\Models\Transfer;
 use App\Models\Withdraw;
 use Barryvdh\DomPDF\PDF;
-use Stripe\StripeClient;
-use App\Models\Adminbank;
 use App\Models\Btctrades;
 use App\Models\Donations;
-use App\Models\Withdrawm;
 use App\Models\Compliance;
 use App\Models\Storefront;
 use App\Models\Exttransfer;
@@ -65,16 +47,14 @@ use App\Models\VirtualAccount;
 use App\Models\Productcategory;
 use App\Models\TerminalPayment;
 use App\Models\Billtransactions;
-use App\Models\PendingTransaction;
-use App\Models\Storefrontproducts;
-use App\Models\Virtualtransactions;
-use Mews\Purifier\Facades\Purifier;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\View;
+
+
 
 
 class CheckController extends Controller
