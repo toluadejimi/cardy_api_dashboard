@@ -30,7 +30,6 @@ use App\Models\Shipping;
 use App\Models\Terminal;
 use App\Models\Transfer;
 use App\Models\Withdraw;
-use Barryvdh\DomPDF\PDF;
 use App\Models\Btctrades;
 use App\Models\Donations;
 use App\Models\Compliance;
