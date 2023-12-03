@@ -128,6 +128,7 @@
                                     <th>Phone</th>
                                     <th>State</th>
                                     <th>Description</th>
+                                    <th>POS COUNT</th>
                                     <th>Amount</th>
                                     <th>Purchase Type</th>
                                     <th>V_account</th>
@@ -146,8 +147,8 @@
                                     <td>{{$item->user->phone ?? "Phone"}} </td>
                                     <td>{{$item->user->state ?? "name"}} </td>
                                     <td>{{$item->description}}</td>
+                                    <td>{{$item->pos_count}}</td>
                                     <td>{{number_format($item->amount ?? 0) }}</td>
-
                                     @if($item->p_type == "1")
                                     <td><span class="badge rounded-pill bg-success text-white ">Outright</span></td>
                                     @elseif($item->p_type == "2")

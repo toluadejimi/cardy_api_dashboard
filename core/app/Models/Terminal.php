@@ -18,6 +18,12 @@ class Terminal extends Model
     }
 
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+
     protected $fillable = [
         'user_id',
         'serial_no',

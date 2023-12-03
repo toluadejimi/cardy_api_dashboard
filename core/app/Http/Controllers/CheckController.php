@@ -357,8 +357,7 @@ class CheckController extends Controller
         $data['title'] = 'Clients';
 
         $data['users'] = User::orderBy('main_wallet', 'desc')->withCount(['transactions as pos_count' => function ($query) {
-            $query->where('transaction_type','CashOut'
-        );
+            $query->where('transaction_type','CashOut');
         }])->get();
 
 
@@ -1331,9 +1330,19 @@ class CheckController extends Controller
 
         $data['title'] = 'Terminal';
 
-        $data['all_terminal'] = Terminal::latest()->select('*')->get();
+        //$data['all_terminal'] = Terminal::latest()->select('*')->get();
         $data['amount'] = Terminal::select('*')->sum('amount');
+
+
         $data['user'] = User::select('*')->get();
+
+        $data['all_terminal'] = Terminal::withCount(['transactions as pos_count' => function ($query) {
+        $query->where('transaction_type','CashOut');
+        }])->get();
+
+
+
+
         $data['pcount'] = Transactions::where('transaction_type', 'CashOut')->count();
         $data['tcount'] = Terminal::all()->count();
 
