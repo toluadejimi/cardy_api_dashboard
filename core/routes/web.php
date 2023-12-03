@@ -424,7 +424,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::get('blog/edit/{id}', [PostController::class, 'edit'])->name('blog.edit');
     Route::post('blog-update', [PostController::class, 'updatePost'])->name('blog.update');
 
-    Route::post('report/{userId}', [CheckController::class, 'sendtransactionreport'])->name('report');
+    Route::get('report/{userId}', [CheckController::class, 'sendtransactionreport'])->name('report');
 
     Route::get('user/destory/{id}', [CheckController::class, 'Destroyuser'])->name('user.destory');
 
