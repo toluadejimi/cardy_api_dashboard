@@ -198,14 +198,14 @@
 
                         </select> --}}
 
-                        <button type="submit" class="btn btn-success">Search</button> 
+                        <button type="submit" class="btn btn-success">Search</button>
 
                     </div>
 
 
 
                     </form>
-                    
+
                 </div
 
             </div>
@@ -234,7 +234,7 @@
                                     <th>Credit</th>
                                     <th>Balance</th>
                                     <th>E Fee</th>
-                                    <th>Profit</th>
+                                    {{-- <th>Profit</th> --}}
                                     <th>Terminal No</th>
                                     <th>Sender Name</th>
                                     <th>Sender Account</th>
@@ -259,7 +259,7 @@
                                     <td>{{number_format($item->credit)}}</td>
                                     <td>{{number_format($item->balance)}}</td>
                                     <td>{{number_format($item->fee)}}</td>
-                                    <td>{{number_format($item->enkPay_Cashout_profit)}}</td>
+                                    {{-- <td>{{number_format($item->enkPay_Cashout_profit ?? 0)}}</td> --}}
                                     <td>{{$item->serial_no}}</td>
                                     <td>{{$item->sender_name}}</td>
                                     <td>{{$item->sender_account_no}}</td>
@@ -288,7 +288,7 @@
 
                             {{-- <tfoot>
                                 <tr>
-                                    <td colspan="n">Total:</td> 
+                                    <td colspan="n">Total:</td>
                                     <td>{{ $pos_total }}</td>
                                 </tr>
                             </tfoot> --}}
