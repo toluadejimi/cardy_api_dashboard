@@ -3,17 +3,23 @@
 namespace App\Http\Controllers;
 
 use App;
-use App\Models\Feature;
-use App\Models\Order;
-use App\Models\PendingTransaction;
-use App\Models\Product;
-use App\Models\Productimage;
-use App\Models\Transaction;
-use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\User;
+use App\Models\Order;
+use App\Models\Feature;
+use App\Models\Product;
+use App\Models\Transaction;
 use Ramsey\Uuid\FeatureSet;
+use App\Models\Productimage;
+use Illuminate\Http\Request;
+use Laravel\Passport\Passport;
+use App\Models\OauthAccessToken;
+use App\Models\PendingTransaction;
+use App\Rules\AllowedEmailDomains;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class LocalizationController extends Controller
 {
@@ -350,6 +356,96 @@ class LocalizationController extends Controller
 
 
     }
+
+
+
+    public function check_email(request $request){
+
+
+        $email = User::where('email', $request->email)->first()->email ?? null;
+
+        if($email == null){
+            return back()->with('error', 'Email not found on our platform');
+        }else{
+
+            $email = $request->email;
+            return view('auth.password-page', compact('email'));
+        }
+
+
+    }
+
+
+
+    public function password_page(request $request){
+
+        $email = $request->email;
+        return view('auth.password-page', compact('email'));
+
+
+    }
+
+    public function choose_type(request $request)
+    {
+
+        if($request->user_type == 1){
+            return redirect('company-register');
+        }else{
+
+            return redirect('personal-register');
+
+        }
+
+
+      
+
+    }
+
+    public function personal_register(request $request)
+    {
+
+            return view('auth.personal-register');
+
+    }
+
+    public function company_register(request $request)
+    {
+
+            return view('auth.company-register');
+
+    }
+
+    public function  personal_register_one(request $request)
+    {
+
+       
+
+    }
+
+    public function  verify_email(request $request)
+    {
+
+        $usr = User::where('email', $request->email)->first();
+
+            $data['first_name'] = $usr->first_name;
+            $data['last_name'] = $usr->last_name;
+            $data['email'] = $usr->email;
+            $data['phone'] = $usr->phone;
+            $data['message'] = " ";
+
+
+            return view('auth.verify-email', $data);
+
+    }
+
+
+   
+
+
+    
+
+
+    
 
 
 

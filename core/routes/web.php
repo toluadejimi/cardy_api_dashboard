@@ -44,10 +44,37 @@ Route::get('pricing', [LocalizationController::class, 'pricing']);
 Route::get('buy-product', [LocalizationController::class, 'buy_product']);
 Route::post('pay-now', [LocalizationController::class, 'pay_now']);
 
+Route::post('verify-code', [UserController::class, 'VerifyEmail'])->name('verify.email');
+
+Route::get('verify-email', [LocalizationController::class, 'verify_email']);
+
+Route::post('submitregister', [RegisterController::class, 'submitregister'])->name('submitregister');
+
+
+
+
+
 
 
 
 Route::get('exe', [LocalizationController::class, 'exe_view']);
+Route::get('password-page', [LocalizationController::class, 'password_page']);
+Route::post('login-email', [LocalizationController::class, 'login_email']);
+
+
+Route::post('register1', [LocalizationController::class, 'choose_type']);
+
+Route::get('personal-register', [LocalizationController::class, 'personal_register']);
+Route::get('personal-register', [LocalizationController::class, 'personal_register']);
+
+
+Route::get('company-register', [LocalizationController::class, 'company_register']);
+
+
+Route::get('check-email', [LocalizationController::class, 'check_email']);
+
+
+
 
 
 Route::post('charge-terminal-fee', [LocalizationController::class, 'charge_terminal_fee']);
@@ -154,11 +181,10 @@ Route::post('about', [FrontendController::class, 'subscribe'])->name('subscribe'
 // User routes
 Auth::routes();
 
-Route::post('login', [LoginController::class, 'submitlogin'])->name('submitlogin');
+Route::post('submitlogin', [LoginController::class, 'submitlogin'])->name('submitlogin');
 Route::get('login', [LoginController::class, 'login'])->name('login');
 Route::post('2fa', [faController::class, 'submitfa'])->name('submitfa');
 Route::get('2fa', [faController::class, 'faverify'])->name('2fa');
-Route::post('register', [RegisterController::class, 'submitregister'])->name('submitregister');
 Route::get('register', [RegisterController::class, 'register'])->name('register');
 Route::get('/forget', [UserController::class, 'forget'])->name('forget');
 Route::get('/r_pass', [UserController::class, 'r_pass'])->name('r_pass');
@@ -387,7 +413,6 @@ Route::group(['prefix' => 'user', ], function () {
                 Route::get('/resend-code', [UserController::class, 'ResendCode']);
 
 
-                Route::post('verify_email', [UserController::class, 'VerifyEmail'])->name('verify.email');
 
                 Route::get('no-bank', [UserController::class, 'nobank'])->name('user.nobank');
                 // Route::get('email-verify', [UserController::class, 'emailverfiy'])->name('user.emailverify');

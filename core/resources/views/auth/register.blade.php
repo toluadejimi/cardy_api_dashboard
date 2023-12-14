@@ -1,130 +1,176 @@
-@extends('loginlayout')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<div class="main-content">
-    <!-- Header -->
-    <div class="header py-5 pt-6">
-      <div class="container">
-        <div class="header-body text-center mb-7">
-        </div>
-      </div>
-    </div>
-    <!-- Page content -->
-    <div class="container mt--8 pb-5">
-      <div class="row justify-content-center">
-        <div class="col-lg-7 col-md-7">
-          <div class="card border-0 mb-0">
-            <div class="card-body px-lg-5 py-lg-5">
-              <div class="text-center text-dark mb-5">
-                <h3 class="text-dark font-weight-bolder">{{ __('Sign Up') }}</h3>
-                <small>{{$set->title}}</small>
-              </div>
-              <form role="form" action="{{route('submitregister')}}" method="post">
-                @csrf
-                <div class="form-group mb-3">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fad fa-briefcase"></i></span>
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url('') }}/asset/static/favicon.ico" />
+    <link href="{{ url('') }}/asset/static/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="msapplication-square128x128logo" content="/static/icons/icon_128x128.png" />
+    <meta name="msapplication-square256x256logo" content="/static/icons/icon_256x256.png" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="true" />
+
+    <meta charSet="utf-8" />
+    <meta content="width=device-width" name="viewport" />
+    <meta content="#55872d" name="theme-color" />
+    <meta name="description" content="Trust at your finger tips" />
+    <title>Signup
+        |
+        ENKPAY</title>
+    <meta name="next-head-count" content="5" />
+    <link rel="preload" href="{{ url('') }}/asset/_next/static/css/583447b48f4a4a8d.css" as="style" />
+    <link rel="stylesheet" href="{{ url('') }}/asset/_next/static/css/583447b48f4a4a8d.css" data-n-g />
+    <link rel="preload" href="{{ url('') }}/asset/_next/static/css/7a15e16b52cee935.css" as="style" />
+    <link rel="stylesheet" href="{{ url('') }}/asset/_next/static/css/7a15e16b52cee935.css" data-n-p />
+    <link rel="preload" href="{{ url('') }}/asset/_next/static/css/fadbcd57e6102439.css" as="style" />
+    <link rel="stylesheet" href="{{ url('') }}/asset/_next/static/css/fadbcd57e6102439.css" /><noscript
+        data-n-css></noscript>
+    <script defer nomodule src="{{ url('') }}/asset/_next/static/chunks/polyfills-5cd94c89d3acac5f.js"></script>
+    <script defer src="{{ url('') }}/asset/_next/static/chunks/3057.0937c3ed21687a91.js"></script>
+    <script src="{{ url('') }}/asset/_next/static/chunks/webpack-92f6386c0bd73f7f.js" defer></script>
+    <script src="{{ url('') }}/asset/_next/static/chunks/framework-f7faaaeb1dac90c4.js" defer></script>
+    <script src="{{ url('') }}/asset/_next/static/chunks/main-8dabb3ff1f162888.js" defer></script>
+    <script src="{{ url('') }}/asset/_next/static/chunks/pages/_app-86fe6d5cffe38e4e.js" defer></script>
+    <script src="{{ url('') }}/asset/_next/static/chunks/3e7c58dd-f41bd66325b7fc87.js" defer></script>
+    <script src="{{ url('') }}/asset/_next/static/chunks/1528-a5f3b2fe1231c59d.js" defer></script>
+    <script src="{{ url('') }}/asset/_next/static/chunks/3587-33c8b542f2d2bed5.js" defer></script>
+    <script src="{{ url('') }}/asset/_next/static/chunks/7242-b012f5c5008ca715.js" defer></script>
+    <script src="{{ url('') }}/asset/_next/static/chunks/8646-81161b2b5417aa76.js" defer></script>
+    <script src="{{ url('') }}/asset/_next/static/chunks/pages/auth/signup-42425b5fdb427ddb.js" defer></script>
+    <script src="{{ url('') }}/asset/_next/static/evoq0KftUotsAJGxHsq6i/_buildManifest.js" defer></script>
+    <script src="{{ url('') }}/asset/_next/static/evoq0KftUotsAJGxHsq6i/_ssgManifest.js" defer></script>
+    <script src="{{ url('') }}/asset/_next/static/evoq0KftUotsAJGxHsq6i/_middlewareManifest.js" defer></script>
+
+
+
+    <link rel="shortcut icon" type="image/png" href="{{ url('') }}/asset/images/favicon.png">
+    <link href="{{ url('') }}/asset/{{ url('') }}/asset/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link
+        href="{{ url('') }}/asset/{{ url('') }}/asset/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+        rel="stylesheet">
+    <link href="{{ url('') }}/asset/{{ url('') }}/asset/vendor/jquery-autocomplete/jquery-ui.css" rel="stylesheet">
+
+    <link href="{{ url('') }}/asset/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+
+
+    <!-- Style css -->
+
+    <link href="{{ url('') }}/asset/css/style.css" rel="stylesheet">
+
+
+
+
+</head>
+
+<body class="wrapper">
+
+
+    <div id="__next">
+        <div class="Layout_globalSettings__ZkPJf">
+            <div>
+                <div class="Header_headerContainer__GeVud">
+                    <div class="Header_farLeft__NHvAf"><a class="Header_logo__gVzWQ" rel="noopener noreferrer"
+                            href="https://enkpay.com"><svg width="149" height="40" fill="none">
+                                <path fill="url(#verifyme-logo_svg__pattern0)" d="M0 0h148.148v40H0z"></path>
+                                <defs>
+                                    <pattern id="verifyme-logo_svg__pattern0" patternContentUnits="objectBoundingBox"
+                                        width="1" height="1">
+
+                                    </pattern>
+                                    <img src="{{ url('') }}/asset/images/white.png" height="50" width="200">
+                                </defs>
+                            </svg></a>
+
                     </div>
-                    <input class="form-control" placeholder="{{__('Business Name')}}" type="text" name="business_name" required>
-                  </div>
-                  @if ($errors->has('business_name'))
-                    <span class="text-xs text-uppercase">{{$errors->first('business_name')}}</span>
-                  @endif
-                </div>
-                <div class="form-group row">
-                  <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-6">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="fad fa-user"></i></span>
+                    {{-- <div class=" " style="color:aliceblue;"><a 
+                            href="/login">Login</a>
+
+                        <button class="btn btn-primary">Get
+                            Started</button>
+                    </div> --}}
+                    <div class="Header_farRightMobile__xJozT"><a><svg width="31" height="16" fill="none">
+                                <g opacity="0.4" stroke="#000" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M1 1h29M1 8h24.65M1 15h16.675"></path>
+                                </g>
+                            </svg></a>
+                        <div class="Header_slideoutMenu__jbS0m">
+                            <div class="Header_slideoutMenuContainer__qTQgn">
+                                <div class="Header_column__veASn"><a>
+                                        <div class="Header_closeButton__P_gZ8">
+                                            <div class="Header_mdiv__izlbu">
+                                                <div class="Header_md__p1sfi"></div>
+                                            </div>
+                                        </div>
+                                    </a></div>
+                                <div class="Header_actionButtons__4YcIz"><a href="register"
+                                        class="Header_signUp__aPJg2">Sign Up</a><a href="login"
+                                        class="Header_login__9XpnS">Login</a>
+                                    <div class="Header_copyright__I9USR">copyright
+                                        © ENKPAY
+                                        <!-- -->2023
+                                    </div>
+                                </div>
                             </div>
-                            <input class="form-control" placeholder="{{__('First Name')}}" type="text" name="first_name" required>
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="fad fa-user"></i></span>
-                            </div>
-                            <input class="form-control" placeholder="{{__('Last Name')}}" type="text" name="last_name" required>
-                          </div>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-6">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="fad fa-envelope"></i></span>
-                            </div>
-                            <input class="form-control" placeholder="{{ __('Business Email')}}" type="email" name="email" required>
-                          </div>
-                          @if ($errors->has('email'))
-                            <span class="text-xs text-uppercase">{{$errors->first('email')}}</span>
-                          @endif
-                        </div>
-                        <div class="col-6">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="fad fa-phone-alt"></i></span>
-                            </div>
-                            <input class="form-control" placeholder="{{ __('Mobile')}}" type="number" name="phone" required>
-                          </div>
-                          @if ($errors->has('phone'))
-                            <span class="text-xs text-uppercase">{{$errors->first('phone')}}</span>
-                          @endif
                         </div>
                     </div>
-                  </div>
                 </div>
-                <div class="form-group row">
-                  <div class="col-lg-12">
-                    <select class="form-control select" name="country" required>
-                        <option value="">{{__('Select Country')}}</option>
-                          @foreach($country as $val)
-                            <option value="{{$val->country_id}}">{{$val->real['nicename']}}</option>
-                          @endforeach
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fad fa-unlock"></i></span>
-                    </div>
-                    <input class="form-control" id="new_password" placeholder="{{ __('Password')}}" type="password" name="password" required>
-                  </div>
-                  <span class="text-xs text-uppercase" id="result"></span>
-                </div>
-                <div class="custom-control custom-control-alternative custom-checkbox">
-                  <input class="custom-control-input" id=" customCheckLogin" type="checkbox" required>
-                  <label class="custom-control-label" for=" customCheckLogin">
-                    <span class="text-muted">Agree to <a href="{{route('terms')}}">Terms & Conditions</a> @if($set->stripe_connect==1) and the <a href="https://stripe.com/connect-account/legal/full">Stripe Connected Account Agreement</a>@endif</span>
-                  </label>
-                </div>
-                @if($set->recaptcha==1)
-                  {!! app('captcha')->display() !!}
-                  @if ($errors->has('g-recaptcha-response'))
-                      <span class="help-block">
-                          {{ $errors->first('g-recaptcha-response') }}
-                      </span>
-                  @endif
-                @endif
-                <div class="text-center">
-                  <button type="submit" class="btn btn-neutral btn-block my-4 text-uppercase"  id="update_password">{{__('Create an Account')}}</button>
-                  <div class="loginSignUpSeparator"><span class="textInSeparator">or</span></div>
-                  <a href="{{route('login')}}" class="btn btn-primary btn-block my-0 text-uppercase">{{__('Got an Account?')}}</a>
-                </div>
-              </form>
             </div>
-          </div>
+            <div class="Layout_container__NnjuH">
+                <div class="shared_auth_container__qG_A4">
+                    <aside class="shared_auth_aside__ms1p1">
+                        <h2 class="shared_auth_asideTitle__S1qBM">Already have
+                            an account?</h2>
+                        <p class="shared_auth_asideSubtitle__BAQ1J">Welcome
+                            back! Sign in to
+                            ENKPAY with your credentials</p>
+                        <a href="/login" style="color: aliceblue;"
+                            class="shared_auth_asideButton__Uh6HW Button_button__PjVhE Button_outline__EsWgH">Sign
+                            In</a>
+                    </aside>
+                    <div class="shared_auth_content__t2BiJ">
+                        <h2 class="shared_auth_contentTitle__Iwznb">Sign up to
+                            get started</h2>
+                        <p class=" ">Start
+                            getting to know
+                            your customers better</p>
 
+
+                        <form action="/register1" method="POST">
+                            @csrf
+                            <div class="Input_inputGroup__cOu_0"><label class="Input_label__5uJx3">User
+                                    Type</label><label class="shared_auth_radio__TDS9u"><input name="user_type"
+                                        type="radio"  value="1" />
+                                    <div><span>Corporate</span>
+                                        <p>Choose
+                                            this if you have a registered
+                                            business with an RC Number,
+                                            BN Number, CAC Number, etc.</p>
+                                    </div>
+                                </label><label class="shared_auth_radio__TDS9u"><input name="user_type" type="radio"
+                                        value="2" />
+                                    <div><span>Individual</span>
+                                        <p>Choose
+                                            this if you are an individual or if
+                                            you do not have a
+                                            registered business.</p>
+                                    </div>
+                                </label></div><button
+                                class="shared_auth_button__6ykOn Button_button__PjVhE Button_primary___XGO6"
+                                type="submit">Continue</button>
+                        </form>
+                        <div class="show-on-small"><br />
+                            <p class="align-center">Already have an account? <a style="color:aliceblue;" rel="noopener noreferrer"
+                                    class="strong no-decor" href="login">Sign In</a> now!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-@stop
+    <script id="__NEXT_DATA__" type="application/json">
+        {"props":{"pageProps":{"defaultType":"","industries":[{"id":1,"name":"Aerospace"},{"id":2,"name":"Agriculture"},{"id":3,"name":"Chemical"},{"id":4,"name":"Computer"},{"id":5,"name":"Building and Construction"},{"id":6,"name":"Defence"},{"id":7,"name":"Education"},{"id":8,"name":"Energy"},{"id":9,"name":"Entertainment"},{"id":10,"name":"Financial Services"},{"id":11,"name":"Food"},{"id":12,"name":"Health Care"},{"id":13,"name":"Hospitality"},{"id":14,"name":"Information"},{"id":15,"name":"Insurance"},{"id":16,"name":"Manufacturing"},{"id":17,"name":"Mass Media"},{"id":18,"name":"Mining"},{"id":19,"name":"Telecommunications"},{"id":20,"name":"Textile and Clothing"},{"id":21,"name":"Transport"},{"id":22,"name":"Water"},{"id":23,"name":"Legal"}],"states":[{"id":1,"name":"Abia"},{"id":2,"name":"Adamawa"},{"id":3,"name":"Akwa Ibom"},{"id":4,"name":"Anambra"},{"id":5,"name":"Bauchi"},{"id":6,"name":"Bayelsa"},{"id":7,"name":"Benue"},{"id":8,"name":"Borno"},{"id":9,"name":"Cross River"},{"id":10,"name":"Delta"},{"id":11,"name":"Ebonyi"},{"id":12,"name":"Edo"},{"id":13,"name":"Ekiti"},{"id":14,"name":"Enugu"},{"id":15,"name":"FCT"},{"id":16,"name":"Gombe"},{"id":17,"name":"Imo"},{"id":18,"name":"Jigawa"},{"id":19,"name":"Kaduna"},{"id":20,"name":"Kano"},{"id":21,"name":"Katsina"},{"id":22,"name":"Kebbi"},{"id":23,"name":"Kogi"},{"id":24,"name":"Kwara"},{"id":25,"name":"Lagos"},{"id":26,"name":"Nasarawa"},{"id":27,"name":"Niger"},{"id":28,"name":"Ogun"},{"id":29,"name":"Ondo"},{"id":30,"name":"Osun"},{"id":31,"name":"Oyo"},{"id":32,"name":"Plateau"},{"id":33,"name":"Rivers"},{"id":34,"name":"Sokoto"},{"id":35,"name":"Taraba"},{"id":36,"name":"Yobe"},{"id":37,"name":"Zamfara"}],"layout":{"hideFooter":true,"hideNav":true,"showBottomBackground":false,"showDashboard":false,"useDryLayout":false}}},"page":"/auth/signup","query":{},"buildId":"evoq0KftUotsAJGxHsq6i","isFallback":false,"dynamicIds":[32996],"customServer":true,"gip":true,"appGip":true,"scriptLoader":[]}
+    </script>
+</body>
+
+</html>

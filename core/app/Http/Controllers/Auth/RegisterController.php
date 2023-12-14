@@ -67,34 +67,39 @@ class RegisterController extends Controller
 
     public function submitregister(Request $request)
     {
+
         $set=Settings::first();
-        if($set->recaptcha==1){
-            $validator = Validator::make($request->all(), [
-                'first_name' => 'required|string|max:255',
-                'last_name' => 'required|string|max:255',
-                'business_name' => 'required|string|max:255|unique:users',
-                'email' => 'required|string|email|max:255|unique:users',
-                'phone' => 'required|numeric|unique:users',
-                'password' => 'required|string|min:6',
-                'g-recaptcha-response' => 'required|captcha'
-            ]);
-        }else{
-            $validator = Validator::make($request->all(), [
-                'first_name' => 'required|string|max:255',
-                'last_name' => 'required|string|max:255',
-                'business_name' => 'required|string|max:255|unique:users',
-                'email' => 'required|string|email|max:255|unique:users',
-                'phone' => 'required|numeric|unique:users',
-                'password' => 'required|string|min:6',
-            ]);
-        }
-        if ($validator->fails()) {
-            // adding an extra field 'error'...
-            $data['title']='Register';
-            $data['errors']=$validator->errors();
-            $data['country']=Countrysupported::wherestatus(1)->get();
-            return view('/auth/register', $data);
-        }
+        // if($set->recaptcha==1){
+        //     $validator = Validator::make($request->all(), [
+        //         'first_name' => 'required|string|max:255',
+        //         'last_name' => 'required|string|max:255',
+        //         'business_name' => 'required|string|max:255|unique:users',
+        //         'email' => 'required|string|email|max:255|unique:users',
+        //         'phone' => 'required|numeric|unique:users',
+        //         'password' => 'required|string|min:6',
+        //         'pin' => 'required|number|min:4',
+        //         'g-recaptcha-response' => 'required|captcha'
+        //     ]);
+        // }else{
+        //     $validator = Validator::make($request->all(), [
+        //         'first_name' => 'required|string|max:255',
+        //         'last_name' => 'required|string|max:255',
+        //         'email' => 'required|string|email|max:255|unique:users',
+        //         'phone' => 'required|numeric|unique:users',
+        //         'pin' => 'required|numeric|min:4',
+        //         'password' => 'required|string',
+        //     ]);
+        // }
+        // if ($validator->fails()) {
+        //     // adding an extra field 'error'...
+        //     $data['title']='Register';
+        //     $data['errors']=$validator->errors();
+        //     $data['country']=Countrysupported::wherestatus(1)->get();
+        //     return view('/auth/register', $data);
+        // }
+
+
+      
 
         if ($set->email_verification == 1) {
             $email_verify = 0;
@@ -104,109 +109,47 @@ class RegisterController extends Controller
         $country=Country::whereid($request->country)->first();
         $country_supported=Countrysupported::wherecountry_id($request->country)->first();
         $currency=Currency::whereStatus(1)->first();
-        if($set->stripe_connect==1){
-            $gate = Gateway::find(103);
-            $stripe = new StripeClient($gate->val2);
-            try{
-                $charge=$stripe->accounts->create([
-                    'type' => 'custom',
-                    'country' => $country->iso,
-                    'email' => $request->email,
-                    'capabilities' => [
-                        'card_payments' => ['requested' => true],
-                        'transfers' => ['requested' => true],
-                    ],
-                    'tos_acceptance' => [
-                        'date' => time(),
-                        'ip' => $_SERVER['REMOTE_ADDR'],
-                    ],
-                    'business_profile' => [
-                        'url' => url('/'),
-                    ],
-                ]);
-                $user = new User();
-                $user->image = 'person.png';
-                $user->first_name = $request->first_name;
-                $user->last_name = $request->last_name;
-                $user->business_name = $request->business_name;
-                $user->country = $request->country;
-                $user->pay_support = $country_supported->id;
-                $user->phone = $request->phone;
-                $user->email = $request->email;
-                $user->email_verify = $email_verify;
-                $user->verification_code = strtoupper(Str::random(6));
-                $user->email_time = Carbon::parse()->addMinutes(5);
-                $user->balance = $set->balance_reg;
-                $user->ip_address = user_ip();
-                $user->password = Hash::make($request->password);
-                $user->type = 4;
-                $user->last_login=Carbon::now();
-                $user->save();
-                $check=User::wherebusiness_name($request->business_name)->first();
-                $com = new Compliance;
-                $com->user_id=$check->id;
-                $com->save();
-                $user->stripe_id=$charge['id'];
-                $user->save();
-            } catch (\Stripe\Exception\RateLimitException $e) {
-                return back()->with('alert', $e->getMessage());
-            } catch (\Stripe\Exception\InvalidRequestException $e) {
-                return back()->with('alert', $e->getMessage());
-            } catch (\Stripe\Exception\AuthenticationException $e) {
-                return back()->with('alert', $e->getMessage());
-            } catch (\Stripe\Exception\ApiConnectionException $e) {
-                return back()->with('alert', $e->getMessage());
-            } catch (\Stripe\Exception\ApiErrorException $e) {
-                return back()->with('alert', $e->getMessage());
-            } catch (Exception $e) {
-                return back()->with('alert', $e->getMessage());
-            }
-        }else{
 
 
-            $public_key = random_int(100000000000, 99999999999999);
-            $secret_key = random_int(100000000000, 99999999999999);
+        $public_key = random_int(100000000000, 99999999999999);
+        $secret_key = random_int(100000000000, 99999999999999);
 
-            $tpublic_key = random_int(100000000000, 9999999999999);
-            $tsecret_key = random_int(100000000000, 9999999999999);
+        $tpublic_key = random_int(100000000000, 9999999999999);
+        $tsecret_key = random_int(100000000000, 9999999999999);
 
-            $otp = random_int(1000, 9999);
-
-            $user = new User();
-            $user->image = 'person.png';
-            $user->first_name = $request->first_name;
-            $user->last_name = $request->last_name;
-            $user->business_name = $request->business_name;
-            $user->country = $request->country;
-            $user->pay_support = $country_supported->id;
-            $user->phone = $request->phone;
-            $user->email = $request->email;
-            $user->email_verify = $email_verify;
-            $user->verification_code = $otp;
-            $user->email_time = Carbon::parse()->addMinutes(5);
-            $user->balance = $set->balance_reg;
-            $user->ip_address = user_ip();
-            $user->password = Hash::make($request->password);
-            $user->last_login=Carbon::now();
-            $user->business_email = $request->email;
-            $user->public_key= "live-".$public_key;
-            $user->secret_key = "live-".$secret_key;
-            $user->tpublic_key= "test-".$tpublic_key;
-            $user->tsecret_key = "test-".$tsecret_key;
-            $user->business_id = random_int(100000, 999999);
-            $user->business_email= $request->email;
-            $user->save();
-
-      
+        $otp = random_int(1000, 9999);
 
 
-                $subject = "OTP VERIFICATION CODE";
-                $text = "Your email verification code is "."<h2>".$user->verification_code."</h2>";
-                send_email($user->email,  $user->first_name, $subject, $text);
-                send_email($user->email, $user->first_name, 'Welcome to '.$set->site_name, $set->welcome_message);
+        
+        User::where('email', $request->email)->update([
 
+            'image' => 'person.png',
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'business_name' => $request->business_name,
+            'country' => $request->country,
+            'pay_support' => 8,
+            'phone' => $request->phone,
+            'pin' => Hash::make($request->pin),
+            'email' => $request->email,
+            'email_verify' => $email_verify,
+            'verification_code' => $otp,
+            'email_time' => Carbon::parse()->addMinutes(5),
+            'balance' => $set->balance_reg,
+            'ip_address' => user_ip(),
+            'password' => Hash::make($request->password),
+            'last_login'=> Carbon::now(),
+            'business_email' => $request->email,
+            'public_key'=> "live-".$public_key,
+            'secret_key' => "live-".$secret_key,
+            'tpublic_key'=> "test-".$tpublic_key,
+            'tsecret_key' => "test-".$tsecret_key,
+            'business_id' => random_int(100000, 999999),
+            'business_email'=> $request->email
 
+    
 
+        ]);
             // $data = array(
             //     'fromsender' => 'noreply@enkpay.com', 'EnkPay',
             //     'subject' => "OTP EMAIL",
@@ -228,19 +171,16 @@ class RegisterController extends Controller
             send_notification($message);
 
 
+            return redirect('login');
+
+
 
 
 
         }
 
 
-        if (Auth::guard('user')->attempt([
-            'email' => $request->email,
-            'password' => $request->password,
-        ])) {
-            return redirect()->route('user.nobank');
-        }
-    }
+    
     /**
      * Get a validator for an incoming registration request.
      *

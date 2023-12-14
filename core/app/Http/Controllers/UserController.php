@@ -2,73 +2,75 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Setting;
-use App\Models\VCard;
-use App\Models\VfdBank;
-use App\Models\VirtualAccount;
-use App\Models\Webkey;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Validator;
-use Stripe\Stripe;
+use Image;
+use Session;
+use Redirect;
 use Stripe\Token;
+use Carbon\Carbon;
 use Stripe\Charge;
-use Stripe\StripeClient;
-use App\Models\User;
-use App\Models\Settings;
-use App\Models\Logo;
+use Stripe\Stripe;
 use App\Models\Bank;
-use App\Models\Currency;
-use App\Models\Transfer;
-use App\Models\Adminbank;
-use App\Models\Gateway;
-use App\Models\Deposits;
-use App\Models\Banktransfer;
-use App\Models\Withdraw;
-use App\Models\Exttransfer;
-use App\Models\Merchant;
-use App\Models\Ticket;
+use App\Models\Cart;
+use App\Models\Logo;
+use App\Models\User;
+use Omnipay\Omnipay;
+use App\Models\Audit;
+use App\Models\Order;
+use App\Models\Plans;
 use App\Models\Reply;
+use App\Models\VCard;
+use Flutterwave\Bill;
+use App\Models\Ticket;
+use App\Models\Webkey;
+use App\Models\Charges;
+use App\Models\Country;
+use App\Models\Gateway;
+use App\Models\History;
 use App\Models\Invoice;
 use App\Models\Product;
-use App\Models\Productimage;
-use App\Models\Order;
-use App\Models\Audit;
-use App\Models\Requests;
-use App\Models\Paymentlink;
-use App\Models\Transactions;
-use App\Models\Charges;
-use App\Models\Donations;
-use App\Models\Plans;
-use App\Models\Subscribers;
+use App\Models\Setting;
+use App\Models\VfdBank;
 use App\Models\Virtual;
-use App\Models\Billtransactions;
-use App\Models\Virtualtransactions;
-use App\Models\Btctrades;
-use App\Models\History;
-use App\Models\Subaccounts;
-use App\Models\Banksupported;
-use App\Models\Countrysupported;
-use App\Models\Country;
-use App\Models\Productcategory;
-use App\Models\Storefront;
-use App\Models\VirtualCard;
-use App\Models\Storefrontproducts;
+use App\Models\Currency;
+use App\Models\Deposits;
+use App\Models\Merchant;
+use App\Models\Requests;
+use App\Models\Settings;
 use App\Models\Shipping;
-use App\Models\Cart;
+use App\Models\Transfer;
+use App\Models\Withdraw;
+use Stripe\StripeClient;
+use App\Models\Adminbank;
+use App\Models\Btctrades;
+use App\Models\Donations;
 use App\Models\Compliance;
-use Carbon\Carbon;
-use Session;
-use Image;
-use Redirect;
+use App\Models\Storefront;
+use App\Models\Exttransfer;
+use App\Models\Paymentlink;
+use App\Models\Subaccounts;
+use App\Models\Subscribers;
+use App\Models\VirtualCard;
+use Illuminate\Support\Str;
+use App\Models\Banktransfer;
+use App\Models\Productimage;
+use App\Models\Transactions;
+use Illuminate\Http\Request;
+use App\Models\Banksupported;
 use App\Lib\CoinPaymentHosted;
-use Omnipay\Omnipay;
+use App\Models\VirtualAccount;
+use App\Models\Productcategory;
+use App\Models\Billtransactions;
+use App\Models\Countrysupported;
+use App\Models\Storefrontproducts;
+use App\Rules\AllowedEmailDomains;
+use App\Models\Virtualtransactions;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
@@ -117,36 +119,110 @@ class UserController extends Controller
     public function  verify_email(Request $request)
     {
 
+        $validator = Validator::make($request->all(), [
+            'email' => ['required', 'email', new AllowedEmailDomains(['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com'])],
+            // Add other validation rules for other fields
+        ]);
+    
+        if ($validator->fails()) {
+        return back()->with('error', 'Kindly use a valid email');
+        }
+        
+            
 
-        $time = Carbon::now()->addMinutes(1);
-
-
-        $get_code = random_int(1000000, 9999999);
-
-        User::where('email', $request->email)->update(['verification_code' => $get_code]);
-
-        $code = User::where('email', $request->email)->first()->verification_code;
-
-
-
-
-
-
-        $data = array(
-            'fromsender' => 'noreply@enkpay.com', 'EnkPay',
-            'subject' => "Email Verification",
-            'toreceiver' => $request->email,
-            'code' => $code,
-        );
-
-        Mail::send('emails.email-verify', ["data1" => $data], function ($message) use ($data) {
-            $message->from($data['fromsender']);
-            $message->to($data['toreceiver']);
-            $message->subject($data['subject']);
-        });
+        $ck = User::where('email', $request->email)->first() ?? null;
 
 
-        return back()->with('success', 'Email sent successfully');
+     
+
+        if($ck == null){
+
+            $usr = new User();
+            $usr->email = $request->email;
+            $usr->phone = $request->phone;
+            $usr->first_name = $request->first_name;
+            $usr->last_name = $request->last_name;
+            $usr->save();
+
+
+            $time = Carbon::now()->addMinutes(1);
+
+
+            $get_code = random_int(1000, 9999);
+            User::where('email', $request->email)->update(['sms_code' => $get_code]);
+            $code = User::where('email', $request->email)->first()->sms_code;
+    
+    
+            $data = array(
+                'fromsender' => 'noreply@enkpay.com', 'EnkPay',
+                'subject' => "Email Verification",
+                'toreceiver' => $request->email,
+                'code' => $code,
+            );
+    
+            Mail::send('emails.email-verify', ["data1" => $data], function ($message) use ($data) {
+                $message->from($data['fromsender']);
+                $message->to($data['toreceiver']);
+                $message->subject($data['subject']);
+            });
+    
+    
+            $data['first_name'] = $request->first_name;
+            $data['last_name'] = $request->last_name;
+            $data['email'] = $request->email;
+            $data['phone'] = $request->phone;
+            $data['message'] = null;
+
+            return view('auth.verify-email', $data);
+
+        }
+
+        if($ck->email == $request->email && $ck->status == 2){
+            return back()->with('error', 'An account already exist with the email, kindly login');
+        }
+
+        if($ck->email == $request->email && $ck->is_email_verified == 0){
+
+            $get_code = random_int(1000, 9999);
+            User::where('email', $request->email)->update(['sms_code' => $get_code]);
+            $code = User::where('email', $request->email)->first()->sms_code;
+    
+    
+    
+            $data = array(
+                'fromsender' => 'noreply@enkpay.com', 'EnkPay',
+                'subject' => "Email Verification",
+                'toreceiver' => $request->email,
+                'code' => $code,
+            );
+    
+            Mail::send('emails.email-verify', ["data1" => $data], function ($message) use ($data) {
+                $message->from($data['fromsender']);
+                $message->to($data['toreceiver']);
+                $message->subject($data['subject']);
+            });
+    
+    
+            $data['first_name'] = $request->first_name;
+            $data['last_name'] = $request->last_name;
+            $data['email'] = $request->email;
+            $data['phone'] = $request->phone;
+            $data['message'] = null;
+
+            return view('auth.verify-email', $data);
+
+
+        }
+
+        if($ck->email == $request->email && $ck->is_email_verified == 1 && $ck->status == 0){
+            return back()->with('error', 'Your Email has been verified but you need to verify your account, Login to continue');
+        }
+
+
+
+        
+
+      
     }
 
     public function cart()
@@ -169,9 +245,13 @@ class UserController extends Controller
         $data['title'] = $set->site_name . ' Dashboard';
         $data['balance'] = User::where('id', Auth::id())->first()->main_wallet;
         $data['all'] = Transactions::latest()->whereuser_id(Auth::id())->get();
+        $data['total_out'] = Transactions::where('user_id', Auth::id())->sum('debit');
+        $data['total_in'] = Transactions::where('user_id', Auth::id())->sum('credit');
         $data['revenue'] = History::whereuser_id(Auth::guard('user')->user()->id)->wheretype(1)->where('amount', '!=', null)->sum('amount');
         $data['t_payout'] = Withdraw::whereuser_id(Auth::guard('user')->user()->id)->wherestatus(1)->sum('amount');
         $data['n_payout'] = Withdraw::whereuser_id(Auth::guard('user')->user()->id)->wherestatus(0)->sum('amount');
+        $data['percentage'] =Transactions::where('user_id', Auth::id())->sum('credit') / 100;
+
         return view('user.dashboard.index', $data);
     }
 
@@ -5444,14 +5524,31 @@ class UserController extends Controller
             return back()->with('alert', 'Code can not be empty');
         }
 
-        if ($code == Auth::user()->verification_code) {
+        $sms_code = User::where('email', $request->email)->first()->sms_code;
 
-            User::where('id', Auth::id())->update(['is_email_verified' => 1]);
+        if ($code == $sms_code) {
 
-            return redirect()->route('user.dashboard')->with('success', 'Email Verified.');
+            User::where('email', $request->email)->update(['is_email_verified' => 1]);
+
+            $data['first_name'] = $request->first_name;
+            $data['last_name'] = $request->last_name;
+            $data['email'] = $request->email;
+            $data['phone'] = $request->phone;
+
+            return view('auth.password', $data);
         }
 
-        return back()->with('alert', 'Your OTP Code is invalid');
+
+
+
+            $data['first_name'] = $request->first_name;
+            $data['last_name'] = $request->last_name;
+            $data['email'] = $request->email;
+            $data['phone'] = $request->phone;
+            $data['message'] = "Invalid code, Try again";
+
+            return view('auth.verify-email', $data)->with('error', 'Your OTP Code is invalid, Try Again');
+        
 
 
 
@@ -5748,6 +5845,13 @@ class UserController extends Controller
         $data['bank_transfer'] = Transactions::latest()->whereuser_id($user)->get();
         $data['wallet_fund'] = Transactions::latest()->whereuser_id($user)->get();
         $data['bill_payment'] = Transactions::latest()->whereuser_id($user)->get();
+
+        $data['total_in'] = Transactions::whereuser_id($user)->where('status', 1)->sum('credit');
+        $data['total_out'] = Transactions::whereuser_id($user)->where('status', 1)->sum('debit');
+        $data['transfer'] = Transactions::whereuser_id($user)->where('type', 'transfer')->sum('debit');
+        $data['bills'] = Transactions::whereuser_id($user)->where('type', 'vas')->sum('debit');
+
+
 
         $data['donation'] = Transactions::wheresender_id($user)->wheretype(2)->orWhere('receiver_id', $user)->where('type', 2)->latest()->get();
         $data['invoice'] = Transactions::wheresender_id($user)->wheretype(3)->orWhere('receiver_id', $user)->where('type', 3)->latest()->get();

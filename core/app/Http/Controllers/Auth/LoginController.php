@@ -86,7 +86,7 @@ class LoginController extends Controller
 
             
         } else {
-        	return back()->with('alert', 'Oops! You have entered invalid credentials')->withInput($request->only('email', 'remember'));
+        	return back()->with('error', 'Oops! You have entered invalid credentials')->withInput($request->only('email', 'remember'));
         }
 
     }
