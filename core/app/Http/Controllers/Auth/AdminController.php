@@ -44,6 +44,16 @@ class AdminController extends Controller {
         return back()->with('alert', 'Oops! You have entered invalid credentials');
       }
     }
+
+    public function admin1(Request $request){
+
+        $data['username'] = $request->username;
+        return view('admin.admin2', $data);
+
+    }
+
+
+    
     
 
 }

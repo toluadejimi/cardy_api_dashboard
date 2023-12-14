@@ -42,7 +42,7 @@
   color: #f27236;
 }
 .Button_greenPrimary__f5f4g {
-  background-color: #55872d;
+  background-color: #2704b2;
   color: #fff;
 }
 .Button_greenSecondary__F0L_Y {
@@ -55,7 +55,7 @@
 }
 .Button_greenTetiary__5TtOf {
   background-color: transparent;
-  color: #55872d;
+  color: #2704b2;
   padding: 10px 0;
   position: relative;
 }
@@ -86,8 +86,8 @@
 .Header_navbarContainer__ylyvB a:hover {
   opacity: 1;
   font-weight: 700;
-  color: #55872d !important;
-  border-bottom: 1px solid #55872d;
+  color: #2704b2 !important;
+  border-bottom: 1px solid #2704b2;
 }
 .Header_navbarContainer__ylyvB {
   display: flex;
@@ -162,7 +162,7 @@
   position: fixed;
   top: 0;
   right: 0;
-  background-color: #55872d;
+  background-color: #2704b2;
   overflow-x: hidden;
   transition: 0.5s;
   color: #fff;
@@ -355,7 +355,7 @@
   position: absolute;
   top: 8px;
   right: 8px;
-  color: #55872d;
+  color: #2704b2;
   width: 25px;
   height: 20px;
   cursor: pointer;
@@ -632,7 +632,7 @@
   background-color: rgba(108, 186, 45, 0.16);
   border-radius: 3px;
   padding: 10px;
-  color: #55872d;
+  color: #2704b2;
 }
 .Input_formErrorItem__YCV_U {
   display: block;
@@ -688,7 +688,7 @@
   flex-flow: row;
   justify-content: space-between;
   width: 100%;
-  background-color: #55872d;
+  background-color: #2704b2;
   color: #fff;
   margin: 40px 0 0;
   justify-items: flex-start;

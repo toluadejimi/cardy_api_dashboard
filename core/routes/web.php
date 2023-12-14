@@ -430,6 +430,9 @@ Route::post('user-password/reset', [ResetPasswordController::class, 'reset']);
 Route::get('admin', [AdminController::class, 'adminlogin'])->name('admin.loginForm');
 Route::post('admin', [AdminController::class, 'submitadminlogin'])->name('admin.login');
 
+Route::post('admin1', [AdminController::class, 'admin1']);
+
+
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::get('/logout', [CheckController::class, 'logout'])->name('admin.logout');
     Route::get('/dashboard', [CheckController::class, 'dashboard'])->name('admin.dashboard');

@@ -167,36 +167,27 @@
 
                       
 
-                        <form action="admin1" method="post">
+                        <form action="{{ route('admin.login') }}" method="post">
                             @csrf
 
                             <div class="Input_inputGroup__cOu_0">
-                                <label class="Input_label__5uJx3">Email
-                                    Address</label><input class="Input_input__gCIPK" name="username"
-                                    placeholder="john@examplemail.com" required type="text" />
+                                <label class="Input_label__5uJx3">Password</label><input class="Input_input__gCIPK" name="password"
+                                    placeholder="*****" required type="password" />
+                                    <input type="text" name="username" hidden value="{{ $username }}" >
                                 
                             </div>
 
 
                             <div class="Input_inputGroup__cOu_0">
-                                
-   
                                     
                                     <button
                                 class="shared_auth_button__6ykOn Button_button__PjVhE Button_primary___XGO6"
                                 type="submit">Continue</button>
                         </form>
 
-                        <div class="show-on-small"><br />
-                            <p class="align-center"> <a style="color: aliceblue;" rel="noopener noreferrer"
-                                    class="strong no-decor" href="forgot-email">Forgot Email</a></p>
-                        </div>
 
 
-                        <div class="show-on-small"><br />
-                            <p class="align-center">Dont have an account yet? <a style="color: aliceblue;" rel="noopener noreferrer"
-                                    class="strong no-decor" href="register">Sign Up</a> now!</p>
-                        </div>
+                       
                     </div>
 
 
