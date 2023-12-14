@@ -75,7 +75,7 @@ function deleteAllCookie(reload = true)
 	var theme =  getUrlParams('theme');
 	/* Dz Theme Demo Settings  */
 	
-	var dlabThemeSet0 = { /* Default Theme */
+	var dlabThemeSet1 = { /* Default Theme */
 		typography: "Nunito",
 		version: "light",
 		layout: "vertical",
@@ -92,7 +92,7 @@ function deleteAllCookie(reload = true)
 		
 	};
 	
-	var dlabThemeSet1 = {
+	var dlabThemeSet0 = {
 		typography: "poppins",
 		version: "light",
 		layout: "vertical",
