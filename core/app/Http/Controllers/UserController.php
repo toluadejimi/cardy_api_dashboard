@@ -123,17 +123,17 @@ class UserController extends Controller
             'email' => ['required', 'email', new AllowedEmailDomains(['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com'])],
             // Add other validation rules for other fields
         ]);
-    
+
         if ($validator->fails()) {
         return back()->with('error', 'Kindly use a valid email');
         }
-        
-            
+
+
 
         $ck = User::where('email', $request->email)->first() ?? null;
 
 
-     
+
 
         if($ck == null){
 
@@ -151,22 +151,22 @@ class UserController extends Controller
             $get_code = random_int(1000, 9999);
             User::where('email', $request->email)->update(['sms_code' => $get_code]);
             $code = User::where('email', $request->email)->first()->sms_code;
-    
-    
+
+
             $data = array(
                 'fromsender' => 'noreply@enkpay.com', 'EnkPay',
                 'subject' => "Email Verification",
                 'toreceiver' => $request->email,
                 'code' => $code,
             );
-    
+
             Mail::send('emails.email-verify', ["data1" => $data], function ($message) use ($data) {
                 $message->from($data['fromsender']);
                 $message->to($data['toreceiver']);
                 $message->subject($data['subject']);
             });
-    
-    
+
+
             $data['first_name'] = $request->first_name;
             $data['last_name'] = $request->last_name;
             $data['email'] = $request->email;
@@ -186,23 +186,23 @@ class UserController extends Controller
             $get_code = random_int(1000, 9999);
             User::where('email', $request->email)->update(['sms_code' => $get_code]);
             $code = User::where('email', $request->email)->first()->sms_code;
-    
-    
-    
+
+
+
             $data = array(
                 'fromsender' => 'noreply@enkpay.com', 'EnkPay',
                 'subject' => "Email Verification",
                 'toreceiver' => $request->email,
                 'code' => $code,
             );
-    
+
             Mail::send('emails.email-verify', ["data1" => $data], function ($message) use ($data) {
                 $message->from($data['fromsender']);
                 $message->to($data['toreceiver']);
                 $message->subject($data['subject']);
             });
-    
-    
+
+
             $data['first_name'] = $request->first_name;
             $data['last_name'] = $request->last_name;
             $data['email'] = $request->email;
@@ -220,9 +220,9 @@ class UserController extends Controller
 
 
 
-        
 
-      
+
+
     }
 
     public function cart()
@@ -245,8 +245,8 @@ class UserController extends Controller
         $data['title'] = $set->site_name . ' Dashboard';
         $data['balance'] = User::where('id', Auth::id())->first()->main_wallet;
         $data['all'] = Transactions::latest()->whereuser_id(Auth::id())->get();
-        $data['total_out'] = Transactions::where('user_id', Auth::id())->sum('debit');
-        $data['total_in'] = Transactions::where('user_id', Auth::id())->sum('credit');
+        $data['total_out'] = Transactions::where('user_id', Auth::id())->where('status', 1)->sum('debit');
+        $data['total_in'] = Transactions::where('user_id', Auth::id())->where('status', 1)->sum('credit');
         $data['revenue'] = History::whereuser_id(Auth::guard('user')->user()->id)->wheretype(1)->where('amount', '!=', null)->sum('amount');
         $data['t_payout'] = Withdraw::whereuser_id(Auth::guard('user')->user()->id)->wherestatus(1)->sum('amount');
         $data['n_payout'] = Withdraw::whereuser_id(Auth::guard('user')->user()->id)->wherestatus(0)->sum('amount');
@@ -5548,7 +5548,7 @@ class UserController extends Controller
             $data['message'] = "Invalid code, Try again";
 
             return view('auth.verify-email', $data)->with('error', 'Your OTP Code is invalid, Try Again');
-        
+
 
 
 
