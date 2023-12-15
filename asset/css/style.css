@@ -23872,7 +23872,7 @@ table#example {
   padding: 0rem 0 2rem 0; }
 
 table.dataTable {
-  font-size: 14px; }
+  font-size: 10px; }
 
 #example2_wrapper .dataTables_scrollBody {
   max-height: 33.25rem !important; }
@@ -23899,27 +23899,27 @@ table.dataTable thead th {
   white-space: nowrap;
   font-size: 1rem;
   text-transform: capitalize;
-  font-weight: 500;
-  padding: 20px 15px; }
+  font-weight: 100;
+  padding: 10px 20px; }
   [data-theme-version="dark"] table.dataTable thead th {
     color: #fff; }
   @media only screen and (max-width: 87.5rem) {
     table.dataTable thead th {
-      font-size: 16px; } }
+      font-size: 12px; } }
 
 table.dataTable tbody td {
-  padding: 20px 15px;
-  font-size: 14px;
-  font-weight: 400;
+  padding: 10px 25px;
+  font-size: 12px;
+  font-weight: 100;
   border-bottom: 0;
   color: #fff; }
   @media only screen and (max-width: 35.9375rem) {
     table.dataTable tbody td {
-      padding: 8px 5px; } }
+      padding: 4px 3px; } }
   @media only screen and (max-width: 87.5rem) {
     table.dataTable tbody td {
-      font-size: 14px;
-      padding: 8px 15px; } }
+      font-size: 7px;
+      padding: 4px 7px; } }
 
 table.dataTable tr.selected {
   color: var(--primary); }

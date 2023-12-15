@@ -42,6 +42,83 @@ let dataSet = [
 
 (function($) {
     "use strict"
+
+
+	var table = (function() {
+		var $dtButtons = $('#datatable-buttons');
+		var $dtButtons1 = $('#datatable-buttons1');
+		var $dtButtons2 = $('#datatable-buttons2');
+		var $dtButtons3 = $('#datatable-buttons3');
+		var $dtButtons4 = $('#datatable-buttons4');
+		var $dtButtons5 = $('#datatable-buttons5');
+		var $dtButtons6 = $('#datatable-buttons6');
+		var $dtButtons7 = $('#datatable-buttons7');
+		
+		function init($this) {
+	
+			// For more options check out the Datatables Docs:
+			// https://datatables.net/extensions/buttons/
+	
+			var buttons = ["copy", "pdf", "excel"];
+	
+			// Basic options. For more options check out the Datatables Docs:
+			// https://datatables.net/manual/options
+	
+			var options = {
+				keys: !0,
+				lengthChange: !1,
+				dom: 'Bfrtip',
+				buttons: buttons,
+				// select: {
+				// 	style: "multi"
+				// },
+				language: {
+					paginate: {
+						previous: "<i class='fad fa-angle-left'>",
+						next: "<i class='fad fa-angle-right'>"
+					}
+				}
+			};
+	
+			// Init the datatable
+	
+			var table = $this.on( 'init.dt', function () {
+				$('.dt-buttons .btn').addClass('btn-sm');
+			}).DataTable(options);
+		}
+	
+	
+		// Events
+	
+		if ($dtButtons.length) {
+			init($dtButtons);
+		}	
+		if ($dtButtons1.length) {
+			init($dtButtons1);
+		}	
+		if ($dtButtons2.length) {
+			init($dtButtons2);
+		}	
+		if ($dtButtons3.length) {
+			init($dtButtons3);
+		}	
+		if ($dtButtons4.length) {
+			init($dtButtons4);
+		}	
+		if ($dtButtons5.length) {
+			init($dtButtons5);
+		}	
+		if ($dtButtons6.length) {
+			init($dtButtons6);
+		}
+		if ($dtButtons7.length) {
+			init($dtButtons7);
+		}
+	
+	})();
+
+
+
     //example 1
     var table = $('#example').DataTable({
         createdRow: function ( row, data, index ) {
@@ -68,7 +145,6 @@ let dataSet = [
     table.rows().every(function() {
     this.nodes().to$().removeClass('selected')
     });
-
 
 
     //example 2
@@ -163,11 +239,11 @@ let dataSet = [
 		
 		// dataTable7
 		var table = $('#example7').DataTable({
-			searching: false,
+			searching: true,
 			paging:true,
-			select: false,
-			info: false,         
-			lengthChange:false ,
+			select: true,
+			info: true,         
+			lengthChange:true ,
 			language: {
 			paginate: {
 			  next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',

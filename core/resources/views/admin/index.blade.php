@@ -59,6 +59,7 @@
     <script src="{{ url('') }}/asset/_next/static/evoq0KftUotsAJGxHsq6i/_buildManifest.js" defer></script>
     <script src="{{ url('') }}/asset/_next/static/evoq0KftUotsAJGxHsq6i/_ssgManifest.js" defer></script>
     <script src="{{ url('') }}/asset/_next/static/evoq0KftUotsAJGxHsq6i/_middlewareManifest.js" defer></script>
+    
 </head>
 
 <body class="wrapper">
