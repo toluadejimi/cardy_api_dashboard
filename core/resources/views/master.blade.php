@@ -1131,55 +1131,6 @@ function check(){
 $("#seeAnotherField").change(check);
   check();
 </script>
-<script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-  var myChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-          labels: [<?php foreach($history as $val){ echo "'".date("M j",strtotime($val->updated_at))."'".','; }?>],
-          datasets: [{
-              label: 'Received',
-              data: [<?php foreach($history as $val){ echo $val->amount.','; }?>],
-              backgroundColor: [
-                  'transparent'
-              ],
-              borderColor: [
-                  '#058d27'
-              ],
-              borderWidth: 1,
-              pointBorderColor: 'rgba(0, 0, 0, 0.1)',
-              pointBorderWidth:1
-          }]
-      },
-      options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true,
-                      fontColor: '#32325d'
-                  }
-              }],
-              xAxes: [{
-                  ticks: {
-                      fontColor: '#32325d'
-                  }
-              }]
-          },
-        tooltips: {
-          enabled:true,
-          backgroundColor:'rgba(0, 0, 0, 0.8)'
-        }
-      }
-    });
-</script>
-
-
-
-
-
-
-
-
 
 
 
