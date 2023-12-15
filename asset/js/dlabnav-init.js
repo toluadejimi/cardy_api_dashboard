@@ -1,7 +1,21 @@
 
 "use strict"
 
-var dlabSettingsOptions = {};
+var dlabSettingsOptions = {
+	typography: "poppins",
+	version: "light",
+	layout: "vertical",
+	primary: "color_1",
+	headerBg: "color_1",
+	navheaderBg: "color_1",
+	sidebarBg: "color_1",
+	sidebarStyle: "full",
+	themecolor:"theme_3",
+	sidebarPosition: "fixed",
+	headerPosition: "fixed",
+	containerLayout: "full",
+	navigationBarImg:'{{url('')}}/asset/images/sidebar-img/2.jpg'
+};
 
 function getUrlParams(dParam) 
 	{
@@ -41,11 +55,11 @@ function getUrlParams(dParam)
 			navheaderBg: "color_1",
 			sidebarBg: "color_1",
 			sidebarStyle: "full",
-			themecolor:"theme_1",
+			themecolor:"theme_3",
 			sidebarPosition: "fixed",
 			headerPosition: "fixed",
 			containerLayout: "full",
-			navigationBarImg: ''  /* image path or null*/
+			navigationBarImg: 'https://enkpay.com/asset/images/sidebar-img/2.jpg'  /* image path or null*/
 		};
 		
 	
@@ -81,9 +95,9 @@ function getUrlParams(dParam)
 			sidebarStyle: (dzSidebarStyle != '') ? dzSidebarStyle : "full",
 			sidebarPosition: (dzSidebarPosition != '') ? dzSidebarPosition : "fixed",
 			headerPosition: (dzHeaderPosition != '') ? dzHeaderPosition : "fixed",
-			themecolor: (dzThemeColor != '') ? dzThemeColor : "theme_1",
+			themecolor: (dzThemeColor != '') ? dzThemeColor : "theme_3",
 			containerLayout: (dzContainerLayout != '') ? dzContainerLayout : "full",
-			navigationbarImg: (dzNavigationbarImg != '') ? dzNavigationbarImg : 'images/sidebar-img/1.jpg',
+			navigationbarImg: (dzNavigationbarImg != '') ? dzNavigationbarImg : '{{url('')}}/asset/images/sidebar-img/2.jpg',
 			direction: direction,
         };
 		
