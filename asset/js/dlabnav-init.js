@@ -3,7 +3,7 @@
 
 var dlabSettingsOptions = {
 	typography: "poppins",
-	version: "light",
+	version: "dark",
 	layout: "vertical",
 	primary: "color_1",
 	headerBg: "color_1",
@@ -14,7 +14,7 @@ var dlabSettingsOptions = {
 	sidebarPosition: "fixed",
 	headerPosition: "fixed",
 	containerLayout: "full",
-	navigationBarImg:'{{url('')}}/asset/images/sidebar-img/2.jpg'
+	navigationBarImg:'https://enkpay.com/asset/images/sidebar-img/2.jpg'
 };
 
 function getUrlParams(dParam) 
@@ -97,7 +97,7 @@ function getUrlParams(dParam)
 			headerPosition: (dzHeaderPosition != '') ? dzHeaderPosition : "fixed",
 			themecolor: (dzThemeColor != '') ? dzThemeColor : "theme_3",
 			containerLayout: (dzContainerLayout != '') ? dzContainerLayout : "full",
-			navigationbarImg: (dzNavigationbarImg != '') ? dzNavigationbarImg : '{{url('')}}/asset/images/sidebar-img/2.jpg',
+			navigationbarImg: (dzNavigationbarImg != '') ? dzNavigationbarImg : 'https://enkpay.com/asset/images/sidebar-img/2.jpg',
 			direction: direction,
         };
 		

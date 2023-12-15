@@ -1145,11 +1145,11 @@ Scripts
 <script src="vendor/jquery-autocomplete/jquery-ui.js"></script> 
 <!-- <script src="./js/dashboard/dashboard-2.js"></script> -->
 <!-- Dashboard 1 -->
-<script src="js/dashboard/dashboard-1.js"></script>
-<script src="js/custom.min.js"></script>
-<script src="js/dlabnav-init.js"></script>
-<script src="js/demo.js"></script>
-<script src="js/styleSwitcher.js"></script>
+<script src="{{url('/')}}/asset/js/dashboard/dashboard-1.js"></script>
+<script src="{{url('/')}}/asset/js/custom.min.js"></script>
+<script src="{{url('/')}}/asset/js/dlabnav-init.js"></script>
+<script src="{{url('/')}}/asset/js/demo.js"></script>
+<script src="{{url('/')}}/asset/js/styleSwitcher.js"></script>
 
 </body>
 </html>

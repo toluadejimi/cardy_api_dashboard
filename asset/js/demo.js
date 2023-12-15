@@ -1,21 +1,19 @@
 "use strict"
 
 var themeOptionArr = {
-			typography: '',
-			version: '',
-			layout: '',
-			primary: '',
-			themeBg: '',
-			headerBg: '',
-			navheaderBg: '',
-			sidebarBg: '',
-			themecolor:'',
-			sidebarStyle: '',
-			sidebarPosition: '',
-			headerPosition: '',
-			containerLayout: '',
-			navigationBarImg:''
-			//direction: '',
+			typography: "Nunito",
+			version: "light",
+			layout: "vertical",
+			primary: "color_1",
+			headerBg: "color_1",
+			navheaderBg: "color_1",
+			sidebarBg: "color_1",
+			sidebarStyle: "full",
+			themeBg:"theme_3",
+			sidebarPosition: "fixed",
+			headerPosition: "fixed",
+			containerLayout: "full",
+			navigationBarImg:'https://enkpay.com/asset/images/sidebar-img/2.jpg'
 		};
 		
 		
@@ -84,11 +82,11 @@ function deleteAllCookie(reload = true)
 		navheaderBg: "color_1",
 		sidebarBg: "color_1",
 		sidebarStyle: "full",
-		themeBg:"theme_1",
+		themeBg:"theme_3",
 		sidebarPosition: "fixed",
 		headerPosition: "fixed",
 		containerLayout: "full",
-		navigationBarImg:''
+		navigationBarImg:'https://enkpay.com/asset/images/sidebar-img/2.jpg'
 		
 	};
 	
