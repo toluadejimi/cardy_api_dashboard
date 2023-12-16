@@ -13,6 +13,9 @@
 
         <link href="{{url('')}}/asset/css/plugins.css" rel="stylesheet" />
         <link rel="stylesheet" href="{{url('')}}/asset/css/style3.css">
+        <link rel="stylesheet" href="{{url('')}}/asset/css/stylesnow.css">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css'>
+
     </head>
 
     <body class="v-dark bg-dots dsn-ajax">
@@ -2219,6 +2222,7 @@
         <script src="{{url('')}}/asset/js/plugins.min.js"></script>
         <script src="{{url('')}}/asset/js/plugins/dsn-grid.min.js"></script>
         <script src="{{url('')}}/asset/js/custom.js"></script>
+        <script  src="{{url('')}}/asset/js/scriptsnow.js"></script>
 
     </body>
 
