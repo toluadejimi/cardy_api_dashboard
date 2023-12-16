@@ -1,2532 +1,2225 @@
 <!doctype html>
-<html lang="en-US">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="profile" href="https://gmpg.org/xfn/11">
-    <title>ENKPAY </title>
-    <meta name='robots' content='max-image-preview:large' />
-    <link rel="alternate" type="application/rss+xml" title="Fintex &raquo; Feed" href="feed/index.html" />
-    <link rel="alternate" type="application/rss+xml" title="Fintex &raquo; Comments Feed"
-        href="comments/feed/index.html" />
-    <script>
-        window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/templatekit.tokomoo.com\/mobilekit2\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.2.2"}};
-/*! This file is auto-generated */
-!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){p.clearRect(0,0,i.width,i.height),p.fillText(e,0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(t,0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(p&&p.fillText)switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s("\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!s("\ud83c\uddfa\ud83c\uddf3","\ud83c\uddfa\u200b\ud83c\uddf3")&&!s("\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!s("\ud83e\udef1\ud83c\udffb\u200d\ud83e\udef2\ud83c\udfff","\ud83e\udef1\ud83c\udffb\u200b\ud83e\udef2\ud83c\udfff")}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
-    </script>
-    <style>
-        img.wp-smiley,
-        img.emoji {
-            display: inline !important;
-            border: none !important;
-            box-shadow: none !important;
-            height: 1em !important;
-            width: 1em !important;
-            margin: 0 0.07em !important;
-            vertical-align: -0.1em !important;
-            background: none !important;
-            padding: 0 !important;
-        }
-    </style>
-    <link rel='stylesheet' id='wp-block-library-css'
-        href='{{url('/')}}/asset/wp-includes/css/dist/block-library/style.min.css%3Fver=6.2.2.css' media='all' />
-    <link rel='stylesheet' id='classic-theme-styles-css' href='{{url('/')}}/asset/wp-includes/css/classic-themes.min.css%3Fver=6.2.2.css'
-        media='all' />
-    <style id='global-styles-inline-css'>
-        body {
-            --wp--preset--color--black: #000000;
-            --wp--preset--color--cyan-bluish-gray: #abb8c3;
-            --wp--preset--color--white: #ffffff;
-            --wp--preset--color--pale-pink: #f78da7;
-            --wp--preset--color--vivid-red: #cf2e2e;
-            --wp--preset--color--luminous-vivid-orange: #ff6900;
-            --wp--preset--color--luminous-vivid-amber: #fcb900;
-            --wp--preset--color--light-green-cyan: #7bdcb5;
-            --wp--preset--color--vivid-green-cyan: #00d084;
-            --wp--preset--color--pale-cyan-blue: #8ed1fc;
-            --wp--preset--color--vivid-cyan-blue: #0693e3;
-            --wp--preset--color--vivid-purple: #9b51e0;
-            --wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg, rgba(6, 147, 227, 1) 0%, rgb(155, 81, 224) 100%);
-            --wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg, rgb(122, 220, 180) 0%, rgb(0, 208, 130) 100%);
-            --wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg, rgba(252, 185, 0, 1) 0%, rgba(255, 105, 0, 1) 100%);
-            --wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg, rgba(255, 105, 0, 1) 0%, rgb(207, 46, 46) 100%);
-            --wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg, rgb(238, 238, 238) 0%, rgb(169, 184, 195) 100%);
-            --wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg, rgb(74, 234, 220) 0%, rgb(151, 120, 209) 20%, rgb(207, 42, 186) 40%, rgb(238, 44, 130) 60%, rgb(251, 105, 98) 80%, rgb(254, 248, 76) 100%);
-            --wp--preset--gradient--blush-light-purple: linear-gradient(135deg, rgb(255, 206, 236) 0%, rgb(152, 150, 240) 100%);
-            --wp--preset--gradient--blush-bordeaux: linear-gradient(135deg, rgb(254, 205, 165) 0%, rgb(254, 45, 45) 50%, rgb(107, 0, 62) 100%);
-            --wp--preset--gradient--luminous-dusk: linear-gradient(135deg, rgb(255, 203, 112) 0%, rgb(199, 81, 192) 50%, rgb(65, 88, 208) 100%);
-            --wp--preset--gradient--pale-ocean: linear-gradient(135deg, rgb(255, 245, 203) 0%, rgb(182, 227, 212) 50%, rgb(51, 167, 181) 100%);
-            --wp--preset--gradient--electric-grass: linear-gradient(135deg, rgb(202, 248, 128) 0%, rgb(113, 206, 126) 100%);
-            --wp--preset--gradient--midnight: linear-gradient(135deg, rgb(2, 3, 129) 0%, rgb(40, 116, 252) 100%);
-            --wp--preset--duotone--dark-grayscale: url('index.html');
-            --wp--preset--duotone--grayscale: url('index.html');
-            --wp--preset--duotone--purple-yellow: url('index.html');
-            --wp--preset--duotone--blue-red: url('index.html');
-            --wp--preset--duotone--midnight: url('index.html');
-            --wp--preset--duotone--magenta-yellow: url('index.html');
-            --wp--preset--duotone--purple-green: url('index.html');
-            --wp--preset--duotone--blue-orange: url('index.html');
-            --wp--preset--font-size--small: 13px;
-            --wp--preset--font-size--medium: 20px;
-            --wp--preset--font-size--large: 36px;
-            --wp--preset--font-size--x-large: 42px;
-            --wp--preset--spacing--20: 0.44rem;
-            --wp--preset--spacing--30: 0.67rem;
-            --wp--preset--spacing--40: 1rem;
-            --wp--preset--spacing--50: 1.5rem;
-            --wp--preset--spacing--60: 2.25rem;
-            --wp--preset--spacing--70: 3.38rem;
-            --wp--preset--spacing--80: 5.06rem;
-            --wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);
-            --wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);
-            --wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);
-            --wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);
-            --wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);
-        }
-
-        :where(.is-layout-flex) {
-            gap: 0.5em;
-        }
-
-        body .is-layout-flow>.alignleft {
-            float: left;
-            margin-inline-start: 0;
-            margin-inline-end: 2em;
-        }
-
-        body .is-layout-flow>.alignright {
-            float: right;
-            margin-inline-start: 2em;
-            margin-inline-end: 0;
-        }
-
-        body .is-layout-flow>.aligncenter {
-            margin-left: auto !important;
-            margin-right: auto !important;
-        }
-
-        body .is-layout-constrained>.alignleft {
-            float: left;
-            margin-inline-start: 0;
-            margin-inline-end: 2em;
-        }
-
-        body .is-layout-constrained>.alignright {
-            float: right;
-            margin-inline-start: 2em;
-            margin-inline-end: 0;
-        }
-
-        body .is-layout-constrained>.aligncenter {
-            margin-left: auto !important;
-            margin-right: auto !important;
-        }
-
-        body .is-layout-constrained> :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
-            max-width: var(--wp--style--global--content-size);
-            margin-left: auto !important;
-            margin-right: auto !important;
-        }
-
-        body .is-layout-constrained>.alignwide {
-            max-width: var(--wp--style--global--wide-size);
-        }
-
-        body .is-layout-flex {
-            display: flex;
-        }
-
-        body .is-layout-flex {
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        body .is-layout-flex>* {
-            margin: 0;
-        }
-
-        :where(.wp-block-columns.is-layout-flex) {
-            gap: 2em;
-        }
-
-        .has-black-color {
-            color: var(--wp--preset--color--black) !important;
-        }
-
-        .has-cyan-bluish-gray-color {
-            color: var(--wp--preset--color--cyan-bluish-gray) !important;
-        }
-
-        .has-white-color {
-            color: var(--wp--preset--color--white) !important;
-        }
-
-        .has-pale-pink-color {
-            color: var(--wp--preset--color--pale-pink) !important;
-        }
-
-        .has-vivid-red-color {
-            color: var(--wp--preset--color--vivid-red) !important;
-        }
-
-        .has-luminous-vivid-orange-color {
-            color: var(--wp--preset--color--luminous-vivid-orange) !important;
-        }
-
-        .has-luminous-vivid-amber-color {
-            color: var(--wp--preset--color--luminous-vivid-amber) !important;
-        }
-
-        .has-light-green-cyan-color {
-            color: var(--wp--preset--color--light-green-cyan) !important;
-        }
-
-        .has-vivid-green-cyan-color {
-            color: var(--wp--preset--color--vivid-green-cyan) !important;
-        }
-
-        .has-pale-cyan-blue-color {
-            color: var(--wp--preset--color--pale-cyan-blue) !important;
-        }
-
-        .has-vivid-cyan-blue-color {
-            color: var(--wp--preset--color--vivid-cyan-blue) !important;
-        }
-
-        .has-vivid-purple-color {
-            color: var(--wp--preset--color--vivid-purple) !important;
-        }
-
-        .has-black-background-color {
-            background-color: var(--wp--preset--color--black) !important;
-        }
-
-        .has-cyan-bluish-gray-background-color {
-            background-color: var(--wp--preset--color--cyan-bluish-gray) !important;
-        }
-
-        .has-white-background-color {
-            background-color: var(--wp--preset--color--white) !important;
-        }
-
-        .has-pale-pink-background-color {
-            background-color: var(--wp--preset--color--pale-pink) !important;
-        }
-
-        .has-vivid-red-background-color {
-            background-color: var(--wp--preset--color--vivid-red) !important;
-        }
-
-        .has-luminous-vivid-orange-background-color {
-            background-color: var(--wp--preset--color--luminous-vivid-orange) !important;
-        }
-
-        .has-luminous-vivid-amber-background-color {
-            background-color: var(--wp--preset--color--luminous-vivid-amber) !important;
-        }
-
-        .has-light-green-cyan-background-color {
-            background-color: var(--wp--preset--color--light-green-cyan) !important;
-        }
-
-        .has-vivid-green-cyan-background-color {
-            background-color: var(--wp--preset--color--vivid-green-cyan) !important;
-        }
-
-        .has-pale-cyan-blue-background-color {
-            background-color: var(--wp--preset--color--pale-cyan-blue) !important;
-        }
-
-        .has-vivid-cyan-blue-background-color {
-            background-color: var(--wp--preset--color--vivid-cyan-blue) !important;
-        }
-
-        .has-vivid-purple-background-color {
-            background-color: var(--wp--preset--color--vivid-purple) !important;
-        }
-
-        .has-black-border-color {
-            border-color: var(--wp--preset--color--black) !important;
-        }
-
-        .has-cyan-bluish-gray-border-color {
-            border-color: var(--wp--preset--color--cyan-bluish-gray) !important;
-        }
-
-        .has-white-border-color {
-            border-color: var(--wp--preset--color--white) !important;
-        }
-
-        .has-pale-pink-border-color {
-            border-color: var(--wp--preset--color--pale-pink) !important;
-        }
-
-        .has-vivid-red-border-color {
-            border-color: var(--wp--preset--color--vivid-red) !important;
-        }
-
-        .has-luminous-vivid-orange-border-color {
-            border-color: var(--wp--preset--color--luminous-vivid-orange) !important;
-        }
-
-        .has-luminous-vivid-amber-border-color {
-            border-color: var(--wp--preset--color--luminous-vivid-amber) !important;
-        }
-
-        .has-light-green-cyan-border-color {
-            border-color: var(--wp--preset--color--light-green-cyan) !important;
-        }
-
-        .has-vivid-green-cyan-border-color {
-            border-color: var(--wp--preset--color--vivid-green-cyan) !important;
-        }
-
-        .has-pale-cyan-blue-border-color {
-            border-color: var(--wp--preset--color--pale-cyan-blue) !important;
-        }
-
-        .has-vivid-cyan-blue-border-color {
-            border-color: var(--wp--preset--color--vivid-cyan-blue) !important;
-        }
-
-        .has-vivid-purple-border-color {
-            border-color: var(--wp--preset--color--vivid-purple) !important;
-        }
-
-        .has-vivid-cyan-blue-to-vivid-purple-gradient-background {
-            background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;
-        }
-
-        .has-light-green-cyan-to-vivid-green-cyan-gradient-background {
-            background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;
-        }
-
-        .has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background {
-            background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;
-        }
-
-        .has-luminous-vivid-orange-to-vivid-red-gradient-background {
-            background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;
-        }
-
-        .has-very-light-gray-to-cyan-bluish-gray-gradient-background {
-            background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;
-        }
-
-        .has-cool-to-warm-spectrum-gradient-background {
-            background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;
-        }
-
-        .has-blush-light-purple-gradient-background {
-            background: var(--wp--preset--gradient--blush-light-purple) !important;
-        }
-
-        .has-blush-bordeaux-gradient-background {
-            background: var(--wp--preset--gradient--blush-bordeaux) !important;
-        }
-
-        .has-luminous-dusk-gradient-background {
-            background: var(--wp--preset--gradient--luminous-dusk) !important;
-        }
-
-        .has-pale-ocean-gradient-background {
-            background: var(--wp--preset--gradient--pale-ocean) !important;
-        }
-
-        .has-electric-grass-gradient-background {
-            background: var(--wp--preset--gradient--electric-grass) !important;
-        }
-
-        .has-midnight-gradient-background {
-            background: var(--wp--preset--gradient--midnight) !important;
-        }
-
-        .has-small-font-size {
-            font-size: var(--wp--preset--font-size--small) !important;
-        }
-
-        .has-medium-font-size {
-            font-size: var(--wp--preset--font-size--medium) !important;
-        }
-
-        .has-large-font-size {
-            font-size: var(--wp--preset--font-size--large) !important;
-        }
-
-        .has-x-large-font-size {
-            font-size: var(--wp--preset--font-size--x-large) !important;
-        }
-
-        .wp-block-navigation a:where(:not(.wp-element-button)) {
-            color: inherit;
-        }
-
-        :where(.wp-block-columns.is-layout-flex) {
-            gap: 2em;
-        }
-
-        .wp-block-pullquote {
-            font-size: 1.5em;
-            line-height: 1.6;
-        }
-    </style>
-    <link rel='stylesheet' id='template-kit-export-css'
-        href='{{url('/')}}/asset/wp-content/plugins/template-kit-export/public/assets/css/template-kit-export-public.min.css%3Fver=1.0.21.css'
-        media='all' />
-    <link rel='stylesheet' id='hello-elementor-css'
-        href='{{url('/')}}/asset/wp-content/themes/hello-elementor/style.min.css%3Fver=2.8.1.css' media='all' />
-    <link rel='stylesheet' id='hello-elementor-theme-style-css'
-        href='{{url('/')}}/asset/wp-content/themes/hello-elementor/theme.min.css%3Fver=2.8.1.css' media='all' />
-    <link rel='stylesheet' id='elementor-frontend-css'
-        href='{{url('/')}}/asset/wp-content/plugins/elementor/assets/css/frontend-lite.min.css%3Fver=3.14.1.css' media='all' />
-    <link rel='stylesheet' id='elementor-post-9-css'
-        href='{{url('/')}}/asset/wp-content/uploads/sites/110/elementor/css/post-9.css%3Fver=1687816190.css' media='all' />
-    <link rel='stylesheet' id='elementor-icons-css'
-        href='{{url('/')}}/asset/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css%3Fver=5.20.0.css'
-        media='all' />
-    <link rel='stylesheet' id='swiper-css'
-        href='{{url('/')}}/asset/wp-content/plugins/elementor/assets/lib/swiper/css/swiper.min.css%3Fver=5.3.6.css' media='all' />
-    <link rel='stylesheet' id='elementor-pro-css'
-        href='{{url('/')}}/asset/wp-content/plugins/elementor-pro/assets/css/frontend-lite.min.css%3Fver=3.12.2.css' media='all' />
-    <link rel='stylesheet' id='elementor-post-1062-css'
-        href='{{url('/')}}/asset/wp-content/uploads/sites/110/elementor/css/post-1062.css%3Fver=1687816190.css' media='all' />
-    <link rel='stylesheet' id='elementor-post-919-css'
-        href='{{url('/')}}/asset/wp-content/uploads/sites/110/elementor/css/post-919.css%3Fver=1687816190.css' media='all' />
-    <link rel='stylesheet' id='elementor-post-947-css'
-        href='{{url('/')}}/asset/wp-content/uploads/sites/110/elementor/css/post-947.css%3Fver=1687816190.css' media='all' />
-    <link rel='stylesheet' id='google-fonts-1-css'
-        href='https://fonts.googleapis.com/css?family=Sora%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=auto&#038;ver=6.2.2'
-        media='all' />
-    <link rel='stylesheet' id='elementor-icons-shared-0-css'
-        href='{{url('/')}}/asset/wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.min.css%3Fver=5.15.3.css'
-        media='all' />
-    <link rel='stylesheet' id='elementor-icons-fa-solid-css'
-        href='{{url('/')}}/asset/wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.min.css%3Fver=5.15.3.css' media='all' />
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <script src='{{url('/')}}/asset/wp-includes/js/jquery/jquery.min.js%3Fver=3.6.4' id='jquery-core-js'></script>
-    <script src='{{url('/')}}/asset/wp-includes/js/jquery/jquery-migrate.min.js%3Fver=3.4.0' id='jquery-migrate-js'></script>
-    <script src='{{url('/')}}/asset/wp-content/plugins/template-kit-export/public/assets/js/template-kit-export-public.min.js%3Fver=1.0.21'
-        id='template-kit-export-js'></script>
-    <link rel="https://api.w.org/" href="{{url('/')}}/asset/wp-json/index.html" />
-    <link rel="alternate" type="application/json" href="{{url('/')}}/asset/wp-json/wp/v2/pages/1062" />
-    <link rel="EditURI" type="application/rsd+xml" title="RSD" href="xmlrpc.php%3Frsd" />
-    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="wp-includes/wlwmanifest.xml" />
-    <meta name="generator" content="WordPress 6.2.2" />
-    <link rel="canonical" href="index.html" />
-    <link rel='shortlink' href='index.html' />
-    <link rel="alternate" type="application/json+oembed"
-        href="{{url('/')}}/asset/wp-json/oembed/1.0/embed%3Furl=https:%252F%252Ftemplatekit.tokomoo.com%252Fmobilekit2%252F" />
-    <link rel="alternate" type="text/xml+oembed"
-        href="{{url('/')}}/asset/wp-json/oembed/1.0/embed%3Furl=https:%252F%252Ftemplatekit.tokomoo.com%252Fmobilekit2%252F&amp;format=xml" />
-    <meta name="generator"
-        content="Elementor 3.14.1; features: e_dom_optimization, e_optimized_assets_loading, e_optimized_css_loading, a11y_improvements, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto">
-    <link rel="icon" href="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/fintex-favicon-150x150.png" sizes="32x32" />
-    <link rel="icon" href="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/fintex-favicon-300x300.png" sizes="192x192" />
-    <link rel="apple-touch-icon" href="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/fintex-favicon-300x300.png" />
-    <meta name="msapplication-TileImage"
-        content="https://templatekit.tokomoo.com/mobilekit2/wp-content/uploads/sites/110/2022/11/fintex-favicon-300x300.png" />
-</head>
-
-<body data-rsssl=1
-    class="home page-template page-template-elementor_header_footer page page-id-1062 wp-custom-logo elementor-default elementor-template-full-width elementor-kit-9 elementor-page elementor-page-1062">
-
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none"
-        style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;">
-        <defs>
-            <filter id="wp-duotone-dark-grayscale">
-                <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
-                    values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
-                <feComponentTransfer color-interpolation-filters="sRGB">
-                    <feFuncR type="table" tableValues="0 0.49803921568627" />
-                    <feFuncG type="table" tableValues="0 0.49803921568627" />
-                    <feFuncB type="table" tableValues="0 0.49803921568627" />
-                    <feFuncA type="table" tableValues="1 1" />
-                </feComponentTransfer>
-                <feComposite in2="SourceGraphic" operator="in" />
-            </filter>
-        </defs>
-    </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none"
-        style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;">
-        <defs>
-            <filter id="wp-duotone-grayscale">
-                <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
-                    values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
-                <feComponentTransfer color-interpolation-filters="sRGB">
-                    <feFuncR type="table" tableValues="0 1" />
-                    <feFuncG type="table" tableValues="0 1" />
-                    <feFuncB type="table" tableValues="0 1" />
-                    <feFuncA type="table" tableValues="1 1" />
-                </feComponentTransfer>
-                <feComposite in2="SourceGraphic" operator="in" />
-            </filter>
-        </defs>
-    </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none"
-        style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;">
-        <defs>
-            <filter id="wp-duotone-purple-yellow">
-                <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
-                    values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
-                <feComponentTransfer color-interpolation-filters="sRGB">
-                    <feFuncR type="table" tableValues="0.54901960784314 0.98823529411765" />
-                    <feFuncG type="table" tableValues="0 1" />
-                    <feFuncB type="table" tableValues="0.71764705882353 0.25490196078431" />
-                    <feFuncA type="table" tableValues="1 1" />
-                </feComponentTransfer>
-                <feComposite in2="SourceGraphic" operator="in" />
-            </filter>
-        </defs>
-    </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none"
-        style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;">
-        <defs>
-            <filter id="wp-duotone-blue-red">
-                <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
-                    values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
-                <feComponentTransfer color-interpolation-filters="sRGB">
-                    <feFuncR type="table" tableValues="0 1" />
-                    <feFuncG type="table" tableValues="0 0.27843137254902" />
-                    <feFuncB type="table" tableValues="0.5921568627451 0.27843137254902" />
-                    <feFuncA type="table" tableValues="1 1" />
-                </feComponentTransfer>
-                <feComposite in2="SourceGraphic" operator="in" />
-            </filter>
-        </defs>
-    </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none"
-        style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;">
-        <defs>
-            <filter id="wp-duotone-midnight">
-                <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
-                    values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
-                <feComponentTransfer color-interpolation-filters="sRGB">
-                    <feFuncR type="table" tableValues="0 0" />
-                    <feFuncG type="table" tableValues="0 0.64705882352941" />
-                    <feFuncB type="table" tableValues="0 1" />
-                    <feFuncA type="table" tableValues="1 1" />
-                </feComponentTransfer>
-                <feComposite in2="SourceGraphic" operator="in" />
-            </filter>
-        </defs>
-    </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none"
-        style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;">
-        <defs>
-            <filter id="wp-duotone-magenta-yellow">
-                <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
-                    values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
-                <feComponentTransfer color-interpolation-filters="sRGB">
-                    <feFuncR type="table" tableValues="0.78039215686275 1" />
-                    <feFuncG type="table" tableValues="0 0.94901960784314" />
-                    <feFuncB type="table" tableValues="0.35294117647059 0.47058823529412" />
-                    <feFuncA type="table" tableValues="1 1" />
-                </feComponentTransfer>
-                <feComposite in2="SourceGraphic" operator="in" />
-            </filter>
-        </defs>
-    </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none"
-        style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;">
-        <defs>
-            <filter id="wp-duotone-purple-green">
-                <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
-                    values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
-                <feComponentTransfer color-interpolation-filters="sRGB">
-                    <feFuncR type="table" tableValues="0.65098039215686 0.40392156862745" />
-                    <feFuncG type="table" tableValues="0 1" />
-                    <feFuncB type="table" tableValues="0.44705882352941 0.4" />
-                    <feFuncA type="table" tableValues="1 1" />
-                </feComponentTransfer>
-                <feComposite in2="SourceGraphic" operator="in" />
-            </filter>
-        </defs>
-    </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none"
-        style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;">
-        <defs>
-            <filter id="wp-duotone-blue-orange">
-                <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
-                    values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
-                <feComponentTransfer color-interpolation-filters="sRGB">
-                    <feFuncR type="table" tableValues="0.098039215686275 1" />
-                    <feFuncG type="table" tableValues="0 0.66274509803922" />
-                    <feFuncB type="table" tableValues="0.84705882352941 0.41960784313725" />
-                    <feFuncA type="table" tableValues="1 1" />
-                </feComponentTransfer>
-                <feComposite in2="SourceGraphic" operator="in" />
-            </filter>
-        </defs>
-    </svg>
-    <a class="skip-link screen-reader-text" href="index.html#content">Skip to content</a>
-
-    <div data-elementor-type="header" data-elementor-id="919" class="elementor elementor-919 elementor-location-header">
-        <section
-            class="elementor-section elementor-top-section elementor-element elementor-element-afe0c94 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-            data-id="afe0c94" data-element_type="section">
-            <div class="elementor-container elementor-column-gap-no">
-                <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-40fa767"
-                    data-id="40fa767" data-element_type="column">
-                    <div class="elementor-widget-wrap elementor-element-populated">
-                        <section
-                            class="elementor-section elementor-inner-section elementor-element elementor-element-1b98baf elementor-section-full_width elementor-hidden-tablet elementor-hidden-mobile elementor-section-content-middle elementor-section-height-default elementor-section-height-default"
-                            data-id="1b98baf" data-element_type="section">
-                            <div class="elementor-container elementor-column-gap-no">
-                                <div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-18e035f"
-                                    data-id="18e035f" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-80c489f elementor-widget elementor-widget-theme-site-logo elementor-widget-image"
-                                            data-id="80c489f" data-element_type="widget"
-                                            data-widget_type="theme-site-logo.default">
-                                            <div class="elementor-widget-container">
-                                                <style>
-                                                    /*! elementor - v3.14.0 - 26-06-2023 */
-                                                    .elementor-widget-image {
-                                                        text-align: center
-                                                    }
-
-                                                    .elementor-widget-image a {
-                                                        display: inline-block
-                                                    }
-
-                                                    .elementor-widget-image a img[src$=".svg"] {
-                                                        width: 48px
-                                                    }
-
-                                                    .elementor-widget-image img {
-                                                        vertical-align: middle;
-                                                        display: inline-block
-                                                    }
-                                                </style> <a href="https://templatekit.tokomoo.com/mobilekit2">
-                                                    <img width="301" height="81"
-                                                        src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/fintex-logo-white-2.png"
-                                                        class="attachment-full size-full wp-image-931" alt=""
-                                                        loading="lazy" /> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-9b9333b"
-                                    data-id="9b9333b" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-5ee98a8 elementor-widget__width-auto elementor-nav-menu--stretch elementor-widget-mobile__width-inherit elementor-nav-menu--dropdown-tablet elementor-nav-menu__text-align-aside elementor-nav-menu--toggle elementor-nav-menu--burger elementor-widget elementor-widget-nav-menu"
-                                            data-id="5ee98a8" data-element_type="widget"
-                                            data-settings="{&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;&lt;i class=\&quot;fas fa-chevron-down\&quot;&gt;&lt;\/i&gt;&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;full_width&quot;:&quot;stretch&quot;,&quot;layout&quot;:&quot;horizontal&quot;,&quot;toggle&quot;:&quot;burger&quot;}"
-                                            data-widget_type="nav-menu.default">
-                                            <div class="elementor-widget-container">
-                                                <link rel="stylesheet"
-                                                    href="{{url('/')}}/asset/wp-content/plugins/elementor-pro/assets/css/widget-nav-menu.min.css">
-                                                <nav
-                                                    class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-underline e--animation-slide">
-                                                    <ul id="menu-1-5ee98a8" class="elementor-nav-menu">
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1062 current_page_item menu-item-1143">
-                                                            <a href="index.html" aria-current="page"
-                                                                class="elementor-item elementor-item-active">Home</a>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1142">
-                                                            <a href="https://enkwave.com"
-                                                                class="elementor-item">Who We Are</a>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1144">
-                                                            <a href="#"
-                                                                class="elementor-item elementor-item-anchor">Services</a>
-                                                            <ul class="sub-menu elementor-nav-menu--dropdown">
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1141">
-                                                                    <a href="#"
-                                                                        class="elementor-sub-item">Personal</a>
-                                                                </li>
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1140">
-                                                                    <a href="#"
-                                                                        class="elementor-sub-item">Business</a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1134">
-                                                            <a href="contact"
-                                                                class="elementor-item">Contact Us</a>
-                                                        </li>
-                                                    </ul>
-                                                </nav>
-                                                <div class="elementor-menu-toggle" role="button" tabindex="0"
-                                                    aria-label="Menu Toggle" aria-expanded="false">
-                                                    <i aria-hidden="true" role="presentation"
-                                                        class="elementor-menu-toggle__icon--open eicon-menu-bar"></i><i
-                                                        aria-hidden="true" role="presentation"
-                                                        class="elementor-menu-toggle__icon--close eicon-close"></i>
-                                                    <span class="elementor-screen-only">Menu</span>
-                                                </div>
-                                                <nav class="elementor-nav-menu--dropdown elementor-nav-menu__container"
-                                                    aria-hidden="true">
-                                                    <ul id="menu-2-5ee98a8" class="elementor-nav-menu">
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1062 current_page_item menu-item-1143">
-                                                            <a href="index.html" aria-current="page"
-                                                                class="elementor-item elementor-item-active"
-                                                                tabindex="-1">Home</a>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1142">
-                                                            <a href="index.html%3Fp=1064.html" class="elementor-item"
-                                                                tabindex="-1">About Us</a>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1144">
-                                                            <a href="index.html#"
-                                                                class="elementor-item elementor-item-anchor"
-                                                                tabindex="-1">Features</a>
-                                                            <ul class="sub-menu elementor-nav-menu--dropdown">
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1141">
-                                                                    <a href="index.html%3Fp=1067.html"
-                                                                        class="elementor-sub-item"
-                                                                        tabindex="-1">Features</a>
-                                                                </li>
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1140">
-                                                                    <a href="index.html%3Fp=1069.html"
-                                                                        class="elementor-sub-item" tabindex="-1">Feature
-                                                                        Detail</a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-915">
-                                                            <a href="index.html#"
-                                                                class="elementor-item elementor-item-anchor"
-                                                                tabindex="-1">Pages</a>
-                                                            <ul class="sub-menu elementor-nav-menu--dropdown">
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1138">
-                                                                    <a href="/pricing"
-                                                                        class="elementor-sub-item"
-                                                                        tabindex="-1">Pricing</a>
-                                                                </li>
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1139">
-                                                                    <a href="index.html%3Fp=1071.html"
-                                                                        class="elementor-sub-item"
-                                                                        tabindex="-1">Team</a>
-                                                                </li>
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1136">
-                                                                    <a href="index.html%3Fp=1079.html"
-                                                                        class="elementor-sub-item"
-                                                                        tabindex="-1">Partners</a>
-                                                                </li>
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1137">
-                                                                    <a href="index.html%3Fp=1076.html"
-                                                                        class="elementor-sub-item"
-                                                                        tabindex="-1">Career</a>
-                                                                </li>
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1135">
-                                                                    <a href="index.html%3Fp=1081.html"
-                                                                        class="elementor-sub-item" tabindex="-1">FAQ</a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1134">
-                                                            <a href="index.html%3Fp=1083.html" class="elementor-item"
-                                                                tabindex="-1">Contact Us</a>
-                                                        </li>
-                                                    </ul>
-                                                </nav>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-d0f3293"
-                                    data-id="d0f3293" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-2a37325 elementor-align-right elementor-widget elementor-widget-button"
-                                            data-id="2a37325" data-element_type="widget"
-                                            data-widget_type="button.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-button-wrapper">
-                                                    <a class="elementor-button elementor-button-link elementor-size-sm elementor-animation-grow"
-                                                        href="login">
-                                                        <span class="elementor-button-content-wrapper">
-                                                            <span class="elementor-button-text">Login</span>
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <section
-                            class="elementor-section elementor-inner-section elementor-element elementor-element-a744190 elementor-section-full_width elementor-section-content-middle elementor-hidden-desktop elementor-section-height-default elementor-section-height-default"
-                            data-id="a744190" data-element_type="section">
-                            <div class="elementor-container elementor-column-gap-no">
-                                <div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-319d013"
-                                    data-id="319d013" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-8d06e03 elementor-widget elementor-widget-theme-site-logo elementor-widget-image"
-                                            data-id="8d06e03" data-element_type="widget"
-                                            data-widget_type="theme-site-logo.default">
-                                            <div class="elementor-widget-container">
-                                                <a href="https://templatekit.tokomoo.com/mobilekit2">
-                                                    <img width="301" height="81"
-                                                        src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/fintex-logo-white-2.png"
-                                                        class="attachment-full size-full wp-image-931" alt=""
-                                                        loading="lazy" /> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-a98048e elementor-hidden-mobile"
-                                    data-id="a98048e" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-6e0d527 elementor-align-right elementor-widget elementor-widget-button"
-                                            data-id="6e0d527" data-element_type="widget"
-                                            data-widget_type="button.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-button-wrapper">
-                                                    <a class="elementor-button elementor-button-link elementor-size-sm elementor-animation-grow"
-                                                        href="register">
-                                                        <span class="elementor-button-content-wrapper">
-                                                            <span class="elementor-button-text">Get Started</span>
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-2727df3"
-                                    data-id="2727df3" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-fe2bc4a elementor-widget__width-auto elementor-nav-menu--stretch elementor-widget-mobile__width-inherit elementor-nav-menu--dropdown-tablet elementor-nav-menu__text-align-aside elementor-nav-menu--toggle elementor-nav-menu--burger elementor-widget elementor-widget-nav-menu"
-                                            data-id="fe2bc4a" data-element_type="widget"
-                                            data-settings="{&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;&lt;i class=\&quot;fas fa-chevron-down\&quot;&gt;&lt;\/i&gt;&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;full_width&quot;:&quot;stretch&quot;,&quot;layout&quot;:&quot;horizontal&quot;,&quot;toggle&quot;:&quot;burger&quot;}"
-                                            data-widget_type="nav-menu.default">
-                                            <div class="elementor-widget-container">
-                                                <nav
-                                                    class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-underline e--animation-slide">
-                                                    <ul id="menu-1-fe2bc4a" class="elementor-nav-menu">
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1062 current_page_item menu-item-1143">
-                                                            <a href="index.html" aria-current="page"
-                                                                class="elementor-item elementor-item-active">Home</a>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1142">
-                                                            <a href="index.html%3Fp=1064.html"
-                                                                class="elementor-item">About Us</a>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1144">
-                                                            <a href="index.html#"
-                                                                class="elementor-item elementor-item-anchor">Features</a>
-                                                            <ul class="sub-menu elementor-nav-menu--dropdown">
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1141">
-                                                                    <a href="index.html%3Fp=1067.html"
-                                                                        class="elementor-sub-item">Features</a>
-                                                                </li>
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1140">
-                                                                    <a href="index.html%3Fp=1069.html"
-                                                                        class="elementor-sub-item">Feature Detail</a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-915">
-                                                            <a href="index.html#"
-                                                                class="elementor-item elementor-item-anchor">Pages</a>
-                                                            <ul class="sub-menu elementor-nav-menu--dropdown">
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1138">
-                                                                    <a href="/pricing"
-                                                                        class="elementor-sub-item">Pricing</a>
-                                                                </li>
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1139">
-                                                                    <a href="index.html%3Fp=1071.html"
-                                                                        class="elementor-sub-item">Team</a>
-                                                                </li>
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1136">
-                                                                    <a href="index.html%3Fp=1079.html"
-                                                                        class="elementor-sub-item">Partners</a>
-                                                                </li>
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1137">
-                                                                    <a href="index.html%3Fp=1076.html"
-                                                                        class="elementor-sub-item">Career</a>
-                                                                </li>
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1135">
-                                                                    <a href="index.html%3Fp=1081.html"
-                                                                        class="elementor-sub-item">FAQ</a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1134">
-                                                            <a href="index.html%3Fp=1083.html"
-                                                                class="elementor-item">Contact Us</a>
-                                                        </li>
-                                                    </ul>
-                                                </nav>
-                                                <div class="elementor-menu-toggle" role="button" tabindex="0"
-                                                    aria-label="Menu Toggle" aria-expanded="false">
-                                                    <i aria-hidden="true" role="presentation"
-                                                        class="elementor-menu-toggle__icon--open eicon-menu-bar"></i><i
-                                                        aria-hidden="true" role="presentation"
-                                                        class="elementor-menu-toggle__icon--close eicon-close"></i>
-                                                    <span class="elementor-screen-only">Menu</span>
-                                                </div>
-                                                <nav class="elementor-nav-menu--dropdown elementor-nav-menu__container"
-                                                    aria-hidden="true">
-                                                    <ul id="menu-2-fe2bc4a" class="elementor-nav-menu">
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1062 current_page_item menu-item-1143">
-                                                            <a href="index.html" aria-current="page"
-                                                                class="elementor-item elementor-item-active"
-                                                                tabindex="-1">Home</a>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1142">
-                                                            <a href="index.html%3Fp=1064.html" class="elementor-item"
-                                                                tabindex="-1">About Us</a>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1144">
-                                                            <a href="index.html#"
-                                                                class="elementor-item elementor-item-anchor"
-                                                                tabindex="-1">Features</a>
-                                                            <ul class="sub-menu elementor-nav-menu--dropdown">
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1141">
-                                                                    <a href="index.html%3Fp=1067.html"
-                                                                        class="elementor-sub-item"
-                                                                        tabindex="-1">Features</a>
-                                                                </li>
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1140">
-                                                                    <a href="index.html%3Fp=1069.html"
-                                                                        class="elementor-sub-item" tabindex="-1">Feature
-                                                                        Detail</a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-915">
-                                                            <a href="index.html#"
-                                                                class="elementor-item elementor-item-anchor"
-                                                                tabindex="-1">Pages</a>
-                                                            <ul class="sub-menu elementor-nav-menu--dropdown">
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1138">
-                                                                    <a href="/pricing"
-                                                                        class="elementor-sub-item"
-                                                                        tabindex="-1">Pricing</a>
-                                                                </li>
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1139">
-                                                                    <a href="index.html%3Fp=1071.html"
-                                                                        class="elementor-sub-item"
-                                                                        tabindex="-1">Team</a>
-                                                                </li>
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1136">
-                                                                    <a href="index.html%3Fp=1079.html"
-                                                                        class="elementor-sub-item"
-                                                                        tabindex="-1">Partners</a>
-                                                                </li>
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1137">
-                                                                    <a href="index.html%3Fp=1076.html"
-                                                                        class="elementor-sub-item"
-                                                                        tabindex="-1">Career</a>
-                                                                </li>
-                                                                <li
-                                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1135">
-                                                                    <a href="index.html%3Fp=1081.html"
-                                                                        class="elementor-sub-item" tabindex="-1">FAQ</a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1134">
-                                                            <a href="index.html%3Fp=1083.html" class="elementor-item"
-                                                                tabindex="-1">Contact Us</a>
-                                                        </li>
-                                                    </ul>
-                                                </nav>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-    <div data-elementor-type="wp-page" data-elementor-id="1062" class="elementor elementor-1062">
-        <section
-            class="elementor-section elementor-top-section elementor-element elementor-element-3705f82 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-            data-id="3705f82" data-element_type="section"
-            data-settings="{&quot;background_background&quot;:&quot;gradient&quot;}">
-            <div class="elementor-background-overlay"></div>
-            <div class="elementor-container elementor-column-gap-no">
-                <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-5e8318e4"
-                    data-id="5e8318e4" data-element_type="column">
-                    <div class="elementor-widget-wrap elementor-element-populated">
-                        <section
-                            class="elementor-section elementor-inner-section elementor-element elementor-element-2f1eca77 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
-                            data-id="2f1eca77" data-element_type="section">
-                            <div class="elementor-container elementor-column-gap-no">
-                                <div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-35e8f9bc"
-                                    data-id="35e8f9bc" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-5fa70e58 elementor-widget elementor-widget-heading"
-                                            data-id="5fa70e58" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <style>
-                                                    /*! elementor - v3.14.0 - 26-06-2023 */
-                                                    .elementor-heading-title {
-                                                        padding: 0;
-                                                        margin: 0;
-                                                        line-height: 1
-                                                    }
-
-                                                    .elementor-widget-heading .elementor-heading-title[class*=elementor-size-]>a {
-                                                        color: inherit;
-                                                        font-size: inherit;
-                                                        line-height: inherit
-                                                    }
-
-                                                    .elementor-widget-heading .elementor-heading-title.elementor-size-small {
-                                                        font-size: 15px
-                                                    }
-
-                                                    .elementor-widget-heading .elementor-heading-title.elementor-size-medium {
-                                                        font-size: 19px
-                                                    }
-
-                                                    .elementor-widget-heading .elementor-heading-title.elementor-size-large {
-                                                        font-size: 29px
-                                                    }
-
-                                                    .elementor-widget-heading .elementor-heading-title.elementor-size-xl {
-                                                        font-size: 39px
-                                                    }
-
-                                                    .elementor-widget-heading .elementor-heading-title.elementor-size-xxl {
-                                                        font-size: 59px
-                                                    }
-                                                </style>
-                                                <h1 class="elementor-heading-title elementor-size-default">Fast Payment
-                                                    Gateway Solution</h1>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-f94f360 elementor-widget elementor-widget-text-editor"
-                                            data-id="f94f360" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                <style>
-                                                    /*! elementor - v3.14.0 - 26-06-2023 */
-                                                    .elementor-widget-text-editor.elementor-drop-cap-view-stacked .elementor-drop-cap {
-                                                        background-color: #69727d;
-                                                        color: #fff
-                                                    }
-
-                                                    .elementor-widget-text-editor.elementor-drop-cap-view-framed .elementor-drop-cap {
-                                                        color: #69727d;
-                                                        border: 3px solid;
-                                                        background-color: transparent
-                                                    }
-
-                                                    .elementor-widget-text-editor:not(.elementor-drop-cap-view-default) .elementor-drop-cap {
-                                                        margin-top: 8px
-                                                    }
-
-                                                    .elementor-widget-text-editor:not(.elementor-drop-cap-view-default) .elementor-drop-cap-letter {
-                                                        width: 1em;
-                                                        height: 1em
-                                                    }
-
-                                                    .elementor-widget-text-editor .elementor-drop-cap {
-                                                        float: left;
-                                                        text-align: center;
-                                                        line-height: 1;
-                                                        font-size: 50px
-                                                    }
-
-                                                    .elementor-widget-text-editor .elementor-drop-cap-letter {
-                                                        display: inline-block
-                                                    }
-                                                </style>
-                                                <p>ENKPAY all-in-one monetization platform that maximizes your revenues and makes  online and offline payment easier.</p><br>
-                                                <p>Webpay | POS | Mobile app</p>
-
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-e1e0b8d elementor-widget__width-auto elementor-mobile-align-justify elementor-widget-mobile__width-inherit elementor-widget elementor-widget-button"
-                                            data-id="e1e0b8d" data-element_type="widget"
-                                            data-widget_type="button.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-button-wrapper">
-                                                    <a class="elementor-button elementor-button-link elementor-size-sm elementor-animation-grow"
-                                                        href="register">
-                                                        <span class="elementor-button-content-wrapper">
-                                                            <span class="elementor-button-text">Get Started</span>
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-2edcf280 elementor-invisible"
-                                    data-id="2edcf280" data-element_type="column"
-                                    data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;animation&quot;:&quot;zoomIn&quot;}">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-background-overlay"></div>
-                                        <div class="elementor-element elementor-element-3b7399d9 elementor-widget elementor-widget-image"
-                                            data-id="3b7399d9" data-element_type="widget"
-                                            data-widget_type="image.default">
-                                            <div class="elementor-widget-container">
-                                                <img decoding="async" width="791" height="781"
-                                                    src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/app-screen-hero.png"
-                                                    class="attachment-large size-large wp-image-35" alt=""
-                                                    loading="lazy"
-                                                    srcset="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/app-screen-hero.png 791w, wp-content/uploads/sites/110/2022/11/app-screen-hero-300x296.png 300w, wp-content/uploads/sites/110/2022/11/app-screen-hero-768x758.png 768w"
-                                                    sizes="(max-width: 791px) 100vw, 791px" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section
-            class="elementor-section elementor-top-section elementor-element elementor-element-389ce454 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-            data-id="389ce454" data-element_type="section">
-            <div class="elementor-container elementor-column-gap-no">
-
-                <div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-212f6e41"
-                data-id="212f6e41" data-element_type="column">
-                <div class="elementor-widget-wrap elementor-element-populated">
-                    <div class="elementor-element elementor-element-25abc141 elementor-widget elementor-widget-heading"
-                        data-id="25abc141" data-element_type="widget" data-widget_type="heading.default">
-                        <div class="elementor-widget-container">
-                            <h2 class="elementor-heading-title elementor-size-default">Payments and data.
-                                Future-proofed</h2>
-                        </div>
-                    </div>
-                    <div class="elementor-element elementor-element-124b10e9 elementor-position-left elementor-vertical-align-top elementor-widget elementor-widget-image-box"
-                        data-id="124b10e9" data-element_type="widget" data-widget_type="image-box.default">
-                        <div class="elementor-widget-container">
-                            <style>
-                                /*! elementor - v3.14.0 - 26-06-2023 */
-                                .elementor-widget-image-box .elementor-image-box-content {
-                                    width: 100%
-                                }
-
-                                @media (min-width:768px) {
-
-                                    .elementor-widget-image-box.elementor-position-left .elementor-image-box-wrapper,
-                                    .elementor-widget-image-box.elementor-position-right .elementor-image-box-wrapper {
-                                        display: flex
-                                    }
-
-                                    .elementor-widget-image-box.elementor-position-right .elementor-image-box-wrapper {
-                                        text-align: right;
-                                        flex-direction: row-reverse
-                                    }
-
-                                    .elementor-widget-image-box.elementor-position-left .elementor-image-box-wrapper {
-                                        text-align: left;
-                                        flex-direction: row
-                                    }
-
-                                    .elementor-widget-image-box.elementor-position-top .elementor-image-box-img {
-                                        margin: auto
-                                    }
-
-                                    .elementor-widget-image-box.elementor-vertical-align-top .elementor-image-box-wrapper {
-                                        align-items: flex-start
-                                    }
-
-                                    .elementor-widget-image-box.elementor-vertical-align-middle .elementor-image-box-wrapper {
-                                        align-items: center
-                                    }
-
-                                    .elementor-widget-image-box.elementor-vertical-align-bottom .elementor-image-box-wrapper {
-                                        align-items: flex-end
-                                    }
-                                }
-
-                                @media (max-width:767px) {
-                                    .elementor-widget-image-box .elementor-image-box-img {
-                                        margin-left: auto !important;
-                                        margin-right: auto !important;
-                                        margin-bottom: 15px
-                                    }
-                                }
-
-                                .elementor-widget-image-box .elementor-image-box-img {
-                                    display: inline-block
-                                }
-
-                                .elementor-widget-image-box .elementor-image-box-title a {
-                                    color: inherit
-                                }
-
-                                .elementor-widget-image-box .elementor-image-box-wrapper {
-                                    text-align: center
-                                }
-
-                                .elementor-widget-image-box .elementor-image-box-description {
-                                    margin: 0
-                                }
-                            </style>
-                            <div class="elementor-image-box-wrapper">
-                                <figure class="elementor-image-box-img"><img decoding="async" width="150"
-                                        height="150" src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/feature-icon-1.png"
-                                        class="attachment-full size-full wp-image-83" alt="" loading="lazy" />
-                                </figure>
-                                <div class="elementor-image-box-content">
-                                    <h5 class="elementor-image-box-title">End late payments</h5>
-                                    <p class="elementor-image-box-description">We provide instant settlement of all received funds. i.e you can withdraw your money anytime you wish.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="elementor-element elementor-element-5a02f686 elementor-position-left elementor-vertical-align-top elementor-widget elementor-widget-image-box"
-                        data-id="5a02f686" data-element_type="widget" data-widget_type="image-box.default">
-                        <div class="elementor-widget-container">
-                            <div class="elementor-image-box-wrapper">
-                                <figure class="elementor-image-box-img"><img decoding="async" width="150"
-                                        height="150" src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/feature-icon-3.png"
-                                        class="attachment-full size-full wp-image-172" alt="" loading="lazy" />
-                                </figure>
-                                <div class="elementor-image-box-content">
-                                    <h5 class="elementor-image-box-title">Admin Dashboard</h5>
-                                    <p class="elementor-image-box-description">You can track all your payment on our admin dashboard with no stress.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="elementor-element elementor-element-2d48727d elementor-position-left elementor-vertical-align-top elementor-widget elementor-widget-image-box"
-                        data-id="2d48727d" data-element_type="widget" data-widget_type="image-box.default">
-                        <div class="elementor-widget-container">
-                            <div class="elementor-image-box-wrapper">
-                                <figure class="elementor-image-box-img"><img decoding="async" width="150"
-                                        height="150" src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/feature-icon-2.png"
-                                        class="attachment-full size-full wp-image-171" alt="" loading="lazy" />
-                                </figure>
-                                <div class="elementor-image-box-content">
-                                    <h5 class="elementor-image-box-title">Forget expensive fees</h5>
-                                    <p class="elementor-image-box-description">We charge very low on each transaction through ENKPAY. <a href="/pricing">See our  pricing</a></a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-                <div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-70324174 elementor-invisible"
-                    data-id="70324174" data-element_type="column"
-                    data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;animation&quot;:&quot;fadeInUp&quot;}">
-                    <div class="elementor-widget-wrap elementor-element-populated">
-                        <div class="elementor-background-overlay"></div>
-                        <div class="elementor-element elementor-element-ffa7cbb elementor-widget elementor-widget-image"
-                            data-id="ffa7cbb" data-element_type="widget" data-widget_type="image.default">
-                            <div class="elementor-widget-container">
-                                <img decoding="async" width="735" height="609"
-                                    src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/app-screen-1-v3.png"
-                                    class="attachment-large size-large wp-image-90" alt="" loading="lazy"
-                                    srcset="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/app-screen-1-v3.png 735w, wp-content/uploads/sites/110/2022/11/app-screen-1-v3-300x249.png 300w"
-                                    sizes="(max-width: 735px) 100vw, 735px" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<html class="no-js" lang>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" href="{{url('')}}/asset/img/whitel.png" sizes="32x32" />
+        <link rel="icon" href="{{url('')}}/asset/img/whitel.png" sizes="192x192" />
+
+        <title>ENKPAY | SWIFT PAYMENT</title>
+
+        <link href="{{url('')}}/asset/css/plugins.css" rel="stylesheet" />
+        <link rel="stylesheet" href="{{url('')}}/asset/css/style3.css">
+    </head>
+
+    <body class="v-dark bg-dots dsn-ajax">
+
+        <div id="dsn_preloader" class="preloader">
+
+            <div class="dsnload p-absolute">
+                <span class="dsnload__row">
+                    <span class="dsnload__img">
+                        <img src="{{url('')}}/asset/img/whitel.png" class="logo-dark"
+                            alt="ENKPAY" decoding="async" loading="lazy" />
+                        <img src="{{url('')}}/asset/img/bbl.png" class="logo-light"
+                            alt="ENKPAY" decoding="async" loading="lazy" />
+                    </span>
+                </span>
+                <span class="dsnload__row dsnload__row--sibling">
+                    <span class="dsnload__img">
+                        <img src="{{url('')}}/asset/img/whitel.png" class="logo-dark"
+                            alt="ENKPAY" decoding="async" loading="lazy" />
+                        <img src="{{url('')}}/asset/img/bbl.png" class="logo-light"
+                            alt="ENKPAY" decoding="async" loading="lazy" />
+                    </span>
+                </span>
+                <span class="dsnload__row dsnload__row--sibling">
+                    <span class="dsnload__img">
+                        <img src="{{url('')}}/asset/img/whitel.png" class="logo-dark"
+                            alt="ENKPAY" decoding="async" loading="lazy" />
+                        <img src="{{url('')}}/asset/img/bbl.png" class="logo-light"
+                            alt="ENKPAY" decoding="async" loading="lazy" />
+                    </span>
+                </span>
+                <span class="dsnload__row dsnload__row--sibling">
+                    <span class="dsnload__img">
+                        <img src="{{url('')}}/asset/img/whitel.png" class="logo-dark"
+                            alt="ENKPAY" decoding="async" loading="lazy" />
+                        <img src="{{url('')}}/asset/img/bbl.png" class="logo-light"
+                            alt="ENKPAY" decoding="async" loading="lazy" />
+                    </span>
+                </span>
 
             </div>
-        </section>
-
-
-
-
-
-
-        <section
-        class="elementor-section elementor-top-section elementor-element elementor-element-389ce454 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-        data-id="389ce454" data-element_type="section">
-        <div class="elementor-container elementor-column-gap-no">
-            <div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-70324174 elementor-invisible"
-                data-id="70324174" data-element_type="column"
-                data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;animation&quot;:&quot;fadeInUp&quot;}">
-                <div class="elementor-widget-wrap elementor-element-populated">
-                    <div class="elementor-background-overlay"></div>
-                    <div class="elementor-element elementor-element-ffa7cbb elementor-widget elementor-widget-image"
-                        data-id="ffa7cbb" data-element_type="widget" data-widget_type="image.default">
-                        <div class="elementor-widget-container">
-                            <img decoding="async" width="735" height="609"
-                                src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/pos.png"
-                                class="attachment-large size-large wp-image-90" alt="" loading="lazy"
-                                srcset="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/pos.png 735w, wp-content/uploads/sites/110/2022/11/app-screen-1-v3-300x249.png 300w"
-                                sizes="(max-width: 735px) 100vw, 735px" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-212f6e41"
-                data-id="212f6e41" data-element_type="column">
-                <div class="elementor-widget-wrap elementor-element-populated">
-                    <div class="elementor-element elementor-element-25abc141 elementor-widget elementor-widget-heading"
-                        data-id="25abc141" data-element_type="widget" data-widget_type="heading.default">
-                        <div class="elementor-widget-container">
-                            <h2 class="elementor-heading-title elementor-size-default">POS Payments for all business</h2>
-                        </div>
-                    </div>
-                    <div class="elementor-element elementor-element-124b10e9 elementor-position-left elementor-vertical-align-top elementor-widget elementor-widget-image-box"
-                        data-id="124b10e9" data-element_type="widget" data-widget_type="image-box.default">
-                        <div class="elementor-widget-container">
-                            <style>
-                                /*! elementor - v3.14.0 - 26-06-2023 */
-                                .elementor-widget-image-box .elementor-image-box-content {
-                                    width: 100%
-                                }
-
-                                @media (min-width:768px) {
-
-                                    .elementor-widget-image-box.elementor-position-left .elementor-image-box-wrapper,
-                                    .elementor-widget-image-box.elementor-position-right .elementor-image-box-wrapper {
-                                        display: flex
-                                    }
-
-                                    .elementor-widget-image-box.elementor-position-right .elementor-image-box-wrapper {
-                                        text-align: right;
-                                        flex-direction: row-reverse
-                                    }
-
-                                    .elementor-widget-image-box.elementor-position-left .elementor-image-box-wrapper {
-                                        text-align: left;
-                                        flex-direction: row
-                                    }
-
-                                    .elementor-widget-image-box.elementor-position-top .elementor-image-box-img {
-                                        margin: auto
-                                    }
-
-                                    .elementor-widget-image-box.elementor-vertical-align-top .elementor-image-box-wrapper {
-                                        align-items: flex-start
-                                    }
-
-                                    .elementor-widget-image-box.elementor-vertical-align-middle .elementor-image-box-wrapper {
-                                        align-items: center
-                                    }
-
-                                    .elementor-widget-image-box.elementor-vertical-align-bottom .elementor-image-box-wrapper {
-                                        align-items: flex-end
-                                    }
-                                }
-
-                                @media (max-width:767px) {
-                                    .elementor-widget-image-box .elementor-image-box-img {
-                                        margin-left: auto !important;
-                                        margin-right: auto !important;
-                                        margin-bottom: 15px
-                                    }
-                                }
-
-                                .elementor-widget-image-box .elementor-image-box-img {
-                                    display: inline-block
-                                }
-
-                                .elementor-widget-image-box .elementor-image-box-title a {
-                                    color: inherit
-                                }
-
-                                .elementor-widget-image-box .elementor-image-box-wrapper {
-                                    text-align: center
-                                }
-
-                                .elementor-widget-image-box .elementor-image-box-description {
-                                    margin: 0
-                                }
-                            </style>
-                            <div class="elementor-image-box-wrapper">
-                                <figure class="elementor-image-box-img"><img decoding="async" width="150"
-                                        height="150" src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/feature-icon-1.png"
-                                        class="attachment-full size-full wp-image-83" alt="" loading="lazy" />
-                                </figure>
-                                <div class="elementor-image-box-content">
-                                    <h5 class="elementor-image-box-title">Fast Transactions</h5>
-                                    <p class="elementor-image-box-description">Our POS works very fast and process transactiosns swiftly.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="elementor-element elementor-element-5a02f686 elementor-position-left elementor-vertical-align-top elementor-widget elementor-widget-image-box"
-                        data-id="5a02f686" data-element_type="widget" data-widget_type="image-box.default">
-                        <div class="elementor-widget-container">
-                            <div class="elementor-image-box-wrapper">
-                                <figure class="elementor-image-box-img"><img decoding="async" width="150"
-                                        height="150" src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/feature-icon-3.png"
-                                        class="attachment-full size-full wp-image-172" alt="" loading="lazy" />
-                                </figure>
-                                <div class="elementor-image-box-content">
-                                    <h5 class="elementor-image-box-title">Low Transaaction Fee</h5>
-                                    <p class="elementor-image-box-description">Our POS fee charge is very low on all transactions.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="elementor-element elementor-element-2d48727d elementor-position-left elementor-vertical-align-top elementor-widget elementor-widget-image-box"
-                        data-id="2d48727d" data-element_type="widget" data-widget_type="image-box.default">
-                        <div class="elementor-widget-container">
-                            <div class="elementor-image-box-wrapper">
-                                <figure class="elementor-image-box-img"><img decoding="async" width="150"
-                                        height="150" src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/feature-icon-2.png"
-                                        class="attachment-full size-full wp-image-171" alt="" loading="lazy" />
-                                </figure>
-                                <div class="elementor-image-box-content">
-                                    <h5 class="elementor-image-box-title">24/7 Cuatomer Service</h5>
-                                    <p class="elementor-image-box-description">We Provide 24/7 customer services.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <svg width="100%" height="100%" viewBox="0 0 100 100"
+                class="v-middle" preserveAspectRatio="xMinYMin meet"
+                fill="none">
+                <lineargradient id="linearColors" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="var(--theme-color)"></stop>
+                    <stop offset="50%" stop-color="var(--border-color)"></stop>
+                    <stop offset="100%" stop-color="var(--assistant-color)"></stop>
+                </lineargradient>
+                <path class="dsn-progress-path"
+                    d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+            </svg>
+            <div class="loading-circle v-middle">
+                <p class="loading-count v-middle">0</p>
             </div>
 
-
-
-
-
-
-
-
-
-
+            <span class="loading-text text-uppercase mt-30 dsn-container">Loading
+                ...</span>
+            <div class="bg-load background-section d-flex align-items-end">
+                <svg class="dsn-separator-bottom dsn-icon-assistant-color"
+                    width="100%" height="100%" viewBox="0 0 100 10"
+                    preserveAspectRatio="none">
+                    <path class="path-anim separator__path"
+                        data-dsn-to="M 0 0 C 40 0 55 0 100 0 L 0 0 Z"
+                        vector-effect="non-scaling-stroke"
+                        d="M 0 0 C 40 16 75 10 100 0 L 0 0 Z"></path>
+                </svg>
+            </div>
 
         </div>
-    </section>
+
+        <main id="main_root" class="main-root">
+
+            <!-- ========== Menu ========== -->
+            <header id="site_menu_header"
+                class="site-header  dsn-container d-none dsn-hamburger">
+                <div class="main-logo">
+                    <a href="/" data-dsn-text="Blackdsn"
+                        class="custom-logo-link main-brand effect-ajax"
+                        rel="home"
+                        aria-current="page">
+                        <img src="{{url('')}}/asset/img/whitel.png"
+                            class="custom-logo logo-light" alt="ENKPAY" />
+                        <img src="{{url('')}}/asset/img/bbl.png"
+                            class="custom-logo logo-dark" alt="ENKPAY" />
+                    </a>
+                </div>
+                <nav class="main-navigation ">
+                    <div class="menu-cover-title header-container dsn-container">MENU</div>
+                    <ul id="dsn-primary-list" class="primary-nav h2">
+                        <li class="nav-item has-sub-menu">
+                            <a title="Home" href="/">
+                                <span class="overflow ">Home</span>
+                            </a>
+
+                        </li>
+                        <li class="nav-item has-sub-menu">
+                            <a title="Home" href="#">
+                                <span class="overflow ">Who We Are</span>
+                            </a>
+
+                        </li>
+                        <li class="nav-item has-sub-menu">
+                            <a title="Home" href="#">
+                                <span class="overflow ">Become an Agent</span>
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item ">
+                            <a title="Service" href="#">
+                                <span class="overflow">Pricing</span>
+                            </a>
+                        </li>
+                        <li class="nav-item has-sub-menu">
+                            <a title="Home" href="#">
+                                <span class="overflow ">Contact Us</span>
+                            </a>
+
+                        </li>
+                        <li class="nav-item ">
+                            <a title="Service" href="#">
+                                <span class="overflow">Api Documentation</span>
+                            </a>
+                        </li>
 
 
+                    </ul>
+                    <div
+                        class="container-content  d-flex flex-column justify-content-center section-margin">
+                        <div class="nav__info">
+                            <div class="nav-content">
+                                <h5 class="sm-title-block mb-10">Head Office</h5>
+                                4, Bode Thomas, Surulere, Lagos
 
-
-
-
-
-
-
-        <section
-            class="elementor-section elementor-top-section elementor-element elementor-element-21c0e9d elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-            data-id="21c0e9d" data-element_type="section"
-            data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-            <div class="elementor-container elementor-column-gap-no">
-                <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-ae16654"
-                    data-id="ae16654" data-element_type="column">
-                    <div class="elementor-widget-wrap elementor-element-populated">
-                        <section
-                            class="elementor-section elementor-inner-section elementor-element elementor-element-4a64187d elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-                            data-id="4a64187d" data-element_type="section">
-                            <div class="elementor-container elementor-column-gap-no">
-                                <div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-36950c8b"
-                                    data-id="36950c8b" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-20675b4a elementor-widget elementor-widget-heading"
-                                            data-id="20675b4a" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <h2 class="elementor-heading-title elementor-size-default">All the
-                                                    features you need</h2>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-11309a87 elementor-widget elementor-widget-text-editor"
-                                            data-id="11309a87" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                <p><strong>ENKPAY</strong> has got all you need to move your business to the peak, with all enkpay features collection is always seamless</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                        </section>
-                        <section
-                            class="elementor-section elementor-inner-section elementor-element elementor-element-2d25268c elementor-section-full_width elementor-section-height-default elementor-section-height-default"
-                            data-id="2d25268c" data-element_type="section">
-                            <div class="elementor-container elementor-column-gap-default">
-                                <div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-5d3c43f elementor-invisible"
-                                    data-id="5d3c43f" data-element_type="column"
-                                    data-settings="{&quot;background_background&quot;:&quot;gradient&quot;,&quot;animation&quot;:&quot;fadeInUp&quot;,&quot;animation_delay&quot;:&quot;100&quot;}">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-356a29ad elementor-widget elementor-widget-heading"
-                                            data-id="356a29ad" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <h5 class="elementor-heading-title elementor-size-default">Virtual Card
-                                                    Management</h5>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-2392881d elementor-widget elementor-widget-text-editor"
-                                            data-id="2392881d" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                <p>Manage all your virtual card in one place</p>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-1e82ecf4 elementor-tablet-align-center elementor-mobile-align-left elementor-widget elementor-widget-button"
-                                            data-id="1e82ecf4" data-element_type="widget"
-                                            data-widget_type="button.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-button-wrapper">
-                                                    <a class="elementor-button elementor-button-link elementor-size-sm elementor-animation-grow"
-                                                        href="/register">
-                                                        <span class="elementor-button-content-wrapper">
-                                                            <span
-                                                                class="elementor-button-icon elementor-align-icon-right">
-                                                                <i aria-hidden="true" class="fas fa-arrow-right"></i>
-                                                            </span>
-                                                            <span class="elementor-button-text">Learn More</span>
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-78236177 elementor-widget elementor-widget-image"
-                                            data-id="78236177" data-element_type="widget"
-                                            data-widget_type="image.default">
-                                            <div class="elementor-widget-container">
-                                                <img decoding="async" width="316" height="296"
-                                                    src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/app-feature-1.png"
-                                                    class="attachment-large size-large wp-image-106" alt=""
-                                                    loading="lazy"
-                                                    srcset="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/app-feature-1.png 316w, wp-content/uploads/sites/110/2022/11/app-feature-1-300x281.png 300w"
-                                                    sizes="(max-width: 316px) 100vw, 316px" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-31d7be7b elementor-invisible"
-                                    data-id="31d7be7b" data-element_type="column"
-                                    data-settings="{&quot;background_background&quot;:&quot;gradient&quot;,&quot;animation&quot;:&quot;fadeInUp&quot;,&quot;animation_delay&quot;:&quot;200&quot;}">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-699f64a5 elementor-widget elementor-widget-heading"
-                                            data-id="699f64a5" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <h5 class="elementor-heading-title elementor-size-default">Personal
-                                                    Dashboard</h5>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-1dc67715 elementor-widget elementor-widget-text-editor"
-                                            data-id="1dc67715" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                <p>Friendly dashboard to monitor your account</p>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-57eb7fcf elementor-tablet-align-center elementor-mobile-align-left elementor-widget elementor-widget-button"
-                                            data-id="57eb7fcf" data-element_type="widget"
-                                            data-widget_type="button.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-button-wrapper">
-                                                    <a class="elementor-button elementor-button-link elementor-size-sm elementor-animation-grow"
-                                                        href="/register">
-                                                        <span class="elementor-button-content-wrapper">
-                                                            <span
-                                                                class="elementor-button-icon elementor-align-icon-right">
-                                                                <i aria-hidden="true" class="fas fa-arrow-right"></i>
-                                                            </span>
-                                                            <span class="elementor-button-text">Learn More</span>
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-780a98ed elementor-widget elementor-widget-image"
-                                            data-id="780a98ed" data-element_type="widget"
-                                            data-widget_type="image.default">
-                                            <div class="elementor-widget-container">
-                                                <img decoding="async" width="315" height="296"
-                                                    src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/app-feature-2.png"
-                                                    class="attachment-large size-large wp-image-174" alt=""
-                                                    loading="lazy"
-                                                    srcset="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/app-feature-2.png 315w, wp-content/uploads/sites/110/2022/11/app-feature-2-300x282.png 300w"
-                                                    sizes="(max-width: 315px) 100vw, 315px" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-516ccd0f elementor-invisible"
-                                    data-id="516ccd0f" data-element_type="column"
-                                    data-settings="{&quot;background_background&quot;:&quot;gradient&quot;,&quot;animation&quot;:&quot;fadeInUp&quot;,&quot;animation_delay&quot;:&quot;300&quot;}">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-78a05fb3 elementor-widget elementor-widget-heading"
-                                            data-id="78a05fb3" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <h5 class="elementor-heading-title elementor-size-default">Business
-                                                    Tracking</h5>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-714387f0 elementor-widget elementor-widget-text-editor"
-                                            data-id="714387f0" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                <p>Easy way to manage your business finances.</p>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-533b8ebf elementor-tablet-align-center elementor-mobile-align-left elementor-widget elementor-widget-button"
-                                            data-id="533b8ebf" data-element_type="widget"
-                                            data-widget_type="button.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-button-wrapper">
-                                                    <a class="elementor-button elementor-button-link elementor-size-sm elementor-animation-grow"
-                                                        href="/register">
-                                                        <span class="elementor-button-content-wrapper">
-                                                            <span
-                                                                class="elementor-button-icon elementor-align-icon-right">
-                                                                <i aria-hidden="true" class="fas fa-arrow-right"></i>
-                                                            </span>
-                                                            <span class="elementor-button-text">Learn More</span>
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-78e52d28 elementor-widget elementor-widget-image"
-                                            data-id="78e52d28" data-element_type="widget"
-                                            data-widget_type="image.default">
-                                            <div class="elementor-widget-container">
-                                                <img decoding="async" width="315" height="296"
-                                                    src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/app-feature-3.png"
-                                                    class="attachment-large size-large wp-image-175" alt=""
-                                                    loading="lazy"
-                                                    srcset="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/app-feature-3.png 315w, wp-content/uploads/sites/110/2022/11/app-feature-3-300x282.png 300w"
-                                                    sizes="(max-width: 315px) 100vw, 315px" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="nav-content mt-30">
+                                <h5 class="sm-title-block mb-10">Contact</h5>
+                                <p class="links over-hidden mb-1">
+                                    <a class="link-hover d-block"
+                                        href="tel:00201004392260"
+                                        data-hover-text="+00 (2)012 3321">+234 050 59613</a>
+
+                                </p>
+                                <p class="links over-hidden"><a
+                                        class="link-hover"
+                                        href="mailto:info@dsngrid.com"
+                                        data-hover-text="info@dsngrid.com">info@enkpay.com</a></p>
+
                             </div>
-                        </section>
+                        </div>
+
+                    </div>
+                </nav>
+                <div id="navbar_toggle" class="navbar-toggle">
+                    <div class="toggle-icon">
+                        <div class="toggle-line"></div>
+                        <div class="toggle-line"></div>
+                        <div class="toggle-line"></div>
+                    </div>
+                    <div class="toggle-text">
+                        <div class="text-menu">Menu</div>
+                        <div class="text-open">Open</div>
+                        <div class="text-close">Close</div>
                     </div>
                 </div>
-            </div>
-        </section>
-        {{-- <section
-            class="elementor-section elementor-top-section elementor-element elementor-element-3e830f3 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-            data-id="3e830f3" data-element_type="section">
-            <div class="elementor-container elementor-column-gap-no">
-                <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-28744ca7"
-                    data-id="28744ca7" data-element_type="column">
-                    <div class="elementor-widget-wrap elementor-element-populated">
-                        <section
-                            class="elementor-section elementor-inner-section elementor-element elementor-element-420a0fc9 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
-                            data-id="420a0fc9" data-element_type="section">
-                            <div class="elementor-container elementor-column-gap-no">
-                                <div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-c0b5e9"
-                                    data-id="c0b5e9" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-2a783c0e elementor-widget elementor-widget-heading"
-                                            data-id="2a783c0e" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <h2 class="elementor-heading-title elementor-size-default">Online
-                                                    Payments. But without the hassle.</h2>
-                                            </div>
+                <div class="bg-load background-main"></div>
+
+                <svg width="100%" height="100%" viewBox="0 0 100 100"
+                    preserveAspectRatio="none"
+                    class="bg-load dsn-svg-transition">
+                    <path vector-effect="non-scaling-stroke"
+                        d="M 0 100 V 100 Q 50 100 100 100 V 100 z" />
+                </svg>
+
+            </header>
+            <!-- ========== End Menu ========== -->
+
+            <!-- ========== Slider Parallax ========== -->
+            <header
+                class="v-dark-head dsn-slider-width-circle dsn-header-animation">
+                <div
+                    class="main-slider v-dark-head-mobile has-horizontal  active-nav-slider dsn-webgl has-paginate"
+                    data-dsn-webgl='{"displacement" : "{{url('')}}/asset/img/displacement/8.jpg"}'
+                    data-dsn-option='{"direction":"horizontal","allowTouchMove":true,"watchSlidesProgress":true,"grabCursor":true,"mousewheel":false}'>
+
+                    <div class="content-slider slide-inner h-100 over-hidden">
+                        <div
+                            class="bg-container p-absolute  dsn-hero-parallax-img  w-100 h-100 z-index-1 dsn-hero-parallax-img">
+                            <div class="swiper-container h-100">
+                                <div class="swiper-wrapper">
+                                    <div
+                                        class="slide-item swiper-slide over-hidden">
+                                        <div
+                                            class="image-bg cover-bg w-100 h-100 before-z-index"
+                                            data-overlay="2">
+                                            <img
+                                                class="cover-bg-img dsn-swiper-parallax-transform"
+                                                src="{{url('')}}/asset/img/send1.jpeg"
+                                                alt data-dsn-position="50% 50%" />
                                         </div>
-                                        <div class="elementor-element elementor-element-5b8502ef elementor-widget elementor-widget-text-editor"
-                                            data-id="5b8502ef" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                <p>Paying online and offline becomes so easy and very</p>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-51379cd7 elementor-mobile-align-justify elementor-widget elementor-widget-button"
-                                            data-id="51379cd7" data-element_type="widget"
-                                            data-widget_type="button.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-button-wrapper">
-                                                    <a class="elementor-button elementor-button-link elementor-size-sm elementor-animation-grow"
-                                                        href="index.html#">
-                                                        <span class="elementor-button-content-wrapper">
-                                                            <span class="elementor-button-text">Learn More</span>
-                                                        </span>
-                                                    </a>
+
+                                        <div class="slide-content p-absolute">
+                                            <div
+                                                class="p-relative head-meta swiper-animate-head  d-flex justify-content-center mb-20">
+                                                <div
+                                                    class="circle-before metas mb-10">
+                                                    <span>Easy way to</span>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-7fc2e881"
-                                    data-id="7fc2e881" data-element_type="column"
-                                    data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-1533f312 elementor-view-stacked elementor-shape-circle elementor-widget elementor-widget-icon"
-                                            data-id="1533f312" data-element_type="widget"
-                                            data-widget_type="icon.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-icon-wrapper">
-                                                    <a class="elementor-icon elementor-animation-grow"
-                                                        href="index.html#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJ0eXBlIjoidmlkZW8iLCJ2aWRlb1R5cGUiOiJ5b3V0dWJlIiwidXJsIjoiaHR0cHM6XC9cL3d3dy55b3V0dWJlLmNvbVwvZW1iZWRcL1hIT21CVjRqc19FP2ZlYXR1cmU9b2VtYmVkIn0%3D">
-                                                        <i aria-hidden="true" class="fas fa-play"></i> </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <section
-                            class="elementor-section elementor-inner-section elementor-element elementor-element-643575d2 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
-                            data-id="643575d2" data-element_type="section">
-                            <div class="elementor-container elementor-column-gap-no">
-                                <div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-7024bf93"
-                                    data-id="7024bf93" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-7b1953bd elementor-hidden-mobile elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
-                                            data-id="7b1953bd" data-element_type="widget"
-                                            data-widget_type="divider.default">
-                                            <div class="elementor-widget-container">
-                                                <style>
-                                                    /*! elementor - v3.14.0 - 26-06-2023 */
-                                                    .elementor-widget-divider {
-                                                        --divider-border-style: none;
-                                                        --divider-border-width: 1px;
-                                                        --divider-color: #0c0d0e;
-                                                        --divider-icon-size: 20px;
-                                                        --divider-element-spacing: 10px;
-                                                        --divider-pattern-height: 24px;
-                                                        --divider-pattern-size: 20px;
-                                                        --divider-pattern-url: none;
-                                                        --divider-pattern-repeat: repeat-x
-                                                    }
+                                            <h2
+                                                class="title has-box-mod p-relative mb-10">
+                                                <a href="#"
+                                                    data-dsn-split="chars"
+                                                    class="effect-ajax"
+                                                    data-dsn-ajax="slider">
+                                                    SEND MONEY
+                                                </a>
+                                            </h2>
 
-                                                    .elementor-widget-divider .elementor-divider {
-                                                        display: flex
-                                                    }
-
-                                                    .elementor-widget-divider .elementor-divider__text {
-                                                        font-size: 15px;
-                                                        line-height: 1;
-                                                        max-width: 95%
-                                                    }
-
-                                                    .elementor-widget-divider .elementor-divider__element {
-                                                        margin: 0 var(--divider-element-spacing);
-                                                        flex-shrink: 0
-                                                    }
-
-                                                    .elementor-widget-divider .elementor-icon {
-                                                        font-size: var(--divider-icon-size)
-                                                    }
-
-                                                    .elementor-widget-divider .elementor-divider-separator {
-                                                        display: flex;
-                                                        margin: 0;
-                                                        direction: ltr
-                                                    }
-
-                                                    .elementor-widget-divider--view-line_icon .elementor-divider-separator,
-                                                    .elementor-widget-divider--view-line_text .elementor-divider-separator {
-                                                        align-items: center
-                                                    }
-
-                                                    .elementor-widget-divider--view-line_icon .elementor-divider-separator:after,
-                                                    .elementor-widget-divider--view-line_icon .elementor-divider-separator:before,
-                                                    .elementor-widget-divider--view-line_text .elementor-divider-separator:after,
-                                                    .elementor-widget-divider--view-line_text .elementor-divider-separator:before {
-                                                        display: block;
-                                                        content: "";
-                                                        border-bottom: 0;
-                                                        flex-grow: 1;
-                                                        border-top: var(--divider-border-width) var(--divider-border-style) var(--divider-color)
-                                                    }
-
-                                                    .elementor-widget-divider--element-align-left .elementor-divider .elementor-divider-separator>.elementor-divider__svg:first-of-type {
-                                                        flex-grow: 0;
-                                                        flex-shrink: 100
-                                                    }
-
-                                                    .elementor-widget-divider--element-align-left .elementor-divider-separator:before {
-                                                        content: none
-                                                    }
-
-                                                    .elementor-widget-divider--element-align-left .elementor-divider__element {
-                                                        margin-left: 0
-                                                    }
-
-                                                    .elementor-widget-divider--element-align-right .elementor-divider .elementor-divider-separator>.elementor-divider__svg:last-of-type {
-                                                        flex-grow: 0;
-                                                        flex-shrink: 100
-                                                    }
-
-                                                    .elementor-widget-divider--element-align-right .elementor-divider-separator:after {
-                                                        content: none
-                                                    }
-
-                                                    .elementor-widget-divider--element-align-right .elementor-divider__element {
-                                                        margin-right: 0
-                                                    }
-
-                                                    .elementor-widget-divider:not(.elementor-widget-divider--view-line_text):not(.elementor-widget-divider--view-line_icon) .elementor-divider-separator {
-                                                        border-top: var(--divider-border-width) var(--divider-border-style) var(--divider-color)
-                                                    }
-
-                                                    .elementor-widget-divider--separator-type-pattern {
-                                                        --divider-border-style: none
-                                                    }
-
-                                                    .elementor-widget-divider--separator-type-pattern.elementor-widget-divider--view-line .elementor-divider-separator,
-                                                    .elementor-widget-divider--separator-type-pattern:not(.elementor-widget-divider--view-line) .elementor-divider-separator:after,
-                                                    .elementor-widget-divider--separator-type-pattern:not(.elementor-widget-divider--view-line) .elementor-divider-separator:before,
-                                                    .elementor-widget-divider--separator-type-pattern:not([class*=elementor-widget-divider--view]) .elementor-divider-separator {
-                                                        width: 100%;
-                                                        min-height: var(--divider-pattern-height);
-                                                        -webkit-mask-size: var(--divider-pattern-size) 100%;
-                                                        mask-size: var(--divider-pattern-size) 100%;
-                                                        -webkit-mask-repeat: var(--divider-pattern-repeat);
-                                                        mask-repeat: var(--divider-pattern-repeat);
-                                                        background-color: var(--divider-color);
-                                                        -webkit-mask-image: var(--divider-pattern-url);
-                                                        mask-image: var(--divider-pattern-url)
-                                                    }
-
-                                                    .elementor-widget-divider--no-spacing {
-                                                        --divider-pattern-size: auto
-                                                    }
-
-                                                    .elementor-widget-divider--bg-round {
-                                                        --divider-pattern-repeat: round
-                                                    }
-
-                                                    .rtl .elementor-widget-divider .elementor-divider__text {
-                                                        direction: rtl
-                                                    }
-
-                                                    .e-con-inner>.elementor-widget-divider,
-                                                    .e-con>.elementor-widget-divider {
-                                                        width: var(--container-widget-width, 100%);
-                                                        --flex-grow: var(--container-widget-flex-grow)
-                                                    }
-                                                </style>
-                                                <div class="elementor-divider">
-                                                    <span class="elementor-divider-separator">
+                                            <div
+                                                class="dsn-icon-heading-color dsn-def-btn d-flex justify-content-center mt-30 me-10">
+                                                <a
+                                                    class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-left"
+                                                    href="/login"
+                                                    data-dsn-text="LOGIN">
+                                                    <span
+                                                        class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
+                                                        <i
+                                                            class="fas fa-sign-in-alt"
+                                                            aria-hidden="true"></i>
                                                     </span>
-                                                </div>
+                                                    <span
+                                                        class="title-btn p-relative  z-index-1 ">LOGIN</span>
+                                                </a>
+
+
+
+                                                <a
+                                                    class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-right"
+                                                    href="register"
+                                                    data-dsn-text="JOIN US">
+                                                    <span
+                                                        class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
+                                                        <i
+                                                            class="fas fa-angle-right"
+                                                            aria-hidden="true"></i>
+                                                    </span>
+                                                    <span
+                                                        class="title-btn p-relative  z-index-1 ">REGISTER</span>
+                                                </a>
+
                                             </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-3a2bff48 elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-position-top elementor-vertical-align-top elementor-widget elementor-widget-image-box"
-                                            data-id="3a2bff48" data-element_type="widget"
-                                            data-widget_type="image-box.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-image-box-wrapper">
-                                                    <div class="elementor-image-box-content">
-                                                        <h5 class="elementor-image-box-title">User friendly</h5>
-                                                        <p class="elementor-image-box-description">Sed ut perspiciatis
-                                                            unde omnis iste natus error sit voluptatem acctium.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-58ca4dbd elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-position-top elementor-vertical-align-top elementor-widget elementor-widget-image-box"
-                                            data-id="58ca4dbd" data-element_type="widget"
-                                            data-widget_type="image-box.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-image-box-wrapper">
-                                                    <div class="elementor-image-box-content">
-                                                        <h5 class="elementor-image-box-title">Best Support</h5>
-                                                        <p class="elementor-image-box-description">Sed ut perspiciatis
-                                                            unde omnis iste natus error sit voluptatem acctium.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-18176f9d elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-position-top elementor-vertical-align-top elementor-widget elementor-widget-image-box"
-                                            data-id="18176f9d" data-element_type="widget"
-                                            data-widget_type="image-box.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-image-box-wrapper">
-                                                    <div class="elementor-image-box-content">
-                                                        <h5 class="elementor-image-box-title"> Secure payment</h5>
-                                                        <p class="elementor-image-box-description">Sed ut perspiciatis
-                                                            unde omnis iste natus error sit voluptatem acctium.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </section> --}}
-        <section
-            class="elementor-section elementor-top-section elementor-element elementor-element-6fc92e08 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-            data-id="6fc92e08" data-element_type="section"
-            data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-            <div class="elementor-background-overlay"></div>
-            <div class="elementor-container elementor-column-gap-no">
-                <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-7a79e085"
-                    data-id="7a79e085" data-element_type="column">
-                    <div class="elementor-widget-wrap elementor-element-populated">
-                        <div class="elementor-element elementor-element-7afa4a68 elementor-widget elementor-widget-heading"
-                            data-id="7afa4a68" data-element_type="widget" data-widget_type="heading.default">
-                            <div class="elementor-widget-container">
-                                <h2 class="elementor-heading-title elementor-size-default">Client story</h2>
-                            </div>
-                        </div>
-                        <div class="elementor-element elementor-element-20a50418 elementor-view-stacked elementor-shape-circle elementor-widget elementor-widget-icon"
-                            data-id="20a50418" data-element_type="widget" data-widget_type="icon.default">
-                            <div class="elementor-widget-container">
-                                <div class="elementor-icon-wrapper">
-                                    <div class="elementor-icon">
-                                        <i aria-hidden="true" class="fas fa-quote-left"></i>
+                                    <div
+                                        class="slide-item swiper-slide over-hidden">
+                                        <div
+                                            class="image-bg cover-bg w-100 h-100 before-z-index"
+                                            data-overlay="3">
+                                            <img
+                                                class="cover-bg-img dsn-swiper-parallax-transform"
+                                                src="{{url('')}}/asset/img/rece.jpeg"
+                                                alt data-dsn-position="50% 50%" />
+                                        </div>
+                                        <div class="slide-content p-absolute">
+                                            <div
+                                                class="p-relative head-meta swiper-animate-head  d-flex justify-content-center mb-20">
+                                                <div
+                                                    class="circle-before metas mb-10">
+                                                    <span>Smart Way to</span>
+                                                </div>
+                                            </div>
+                                            <h2
+                                                class="title has-box-mod p-relative mb-10">
+                                                <a href="#"
+                                                    data-dsn-split="chars"
+                                                    class="effect-ajax"
+                                                    data-dsn-ajax="slider">
+                                                    RECEIVE MONEY
+                                                </a>
+                                            </h2>
+
+                                            <div
+                                            class="dsn-icon-heading-color dsn-def-btn d-flex justify-content-center mt-30 me-10">
+                                            <a
+                                                class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-left"
+                                                href="login"
+                                                data-dsn-text="LOGIN">
+                                                <span
+                                                    class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
+                                                    <i
+                                                        class="fas fa-sign-in-alt"
+                                                        aria-hidden="true"></i>
+                                                </span>
+                                                <span
+                                                    class="title-btn p-relative  z-index-1 ">LOGIN</span>
+                                            </a>
+
+
+
+                                            <a
+                                                class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-right"
+                                                href="register"
+                                                data-dsn-text="REGISTER">
+                                                <span
+                                                    class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
+                                                    <i
+                                                        class="fas fa-angle-right"
+                                                        aria-hidden="true"></i>
+                                                </span>
+                                                <span
+                                                    class="title-btn p-relative  z-index-1 ">REGISTER</span>
+                                            </a>
+
+                                        </div>
+
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="elementor-element elementor-element-109b3f85 elementor-invisible elementor-widget elementor-widget-testimonial"
-                            data-id="109b3f85" data-element_type="widget"
-                            data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;}"
-                            data-widget_type="testimonial.default">
-                            <div class="elementor-widget-container">
-                                <style>
-                                    /*! elementor - v3.14.0 - 26-06-2023 */
-                                    .elementor-testimonial-wrapper {
-                                        overflow: hidden;
-                                        text-align: center
-                                    }
+                                    <div
+                                        class="slide-item swiper-slide over-hidden">
+                                        <div
+                                            class="image-bg cover-bg w-100 h-100 before-z-index"
+                                            data-overlay="2">
+                                            <img
+                                                class="cover-bg-img dsn-swiper-parallax-transform"
+                                                src="{{url('')}}/asset/img/bills.jpeg"
+                                                alt data-dsn-position="50% 50%" />
+                                        </div>
+                                        <div class="slide-content p-absolute">
+                                            <div
+                                                class="p-relative head-meta swiper-animate-head  d-flex justify-content-center mb-20">
+                                                <div
+                                                    class="circle-before metas mb-10">
 
-                                    .elementor-testimonial-wrapper .elementor-testimonial-content {
-                                        font-size: 1.3em;
-                                        margin-bottom: 20px
-                                    }
+                                                    <span>Swift way to</span>
+                                                </div>
+                                            </div>
+                                            <h2
+                                                class="title has-box-mod p-relative mb-10">
+                                                <a href="#"
+                                                    data-dsn-split="chars"
+                                                    class="effect-ajax"
+                                                    data-dsn-ajax="slider">
+                                                    PAY BILLS
+                                                </a>
+                                            </h2>
 
-                                    .elementor-testimonial-wrapper .elementor-testimonial-name {
-                                        line-height: 1.5;
-                                        display: block
-                                    }
+                                            <div
+                                            class="dsn-icon-heading-color dsn-def-btn d-flex justify-content-center mt-30 me-10">
+                                            <a
+                                                class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-left"
+                                                href="login"
+                                                data-dsn-text="Login">
+                                                <span
+                                                    class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
+                                                    <i
+                                                        class="fas fa-sign-in-alt"
+                                                        aria-hidden="true"></i>
+                                                </span>
+                                                <span
+                                                    class="title-btn p-relative  z-index-1 ">LOGIN</span>
+                                            </a>
 
-                                    .elementor-testimonial-wrapper .elementor-testimonial-job {
-                                        font-size: .85em;
-                                        display: block
-                                    }
 
-                                    .elementor-testimonial-wrapper .elementor-testimonial-meta {
-                                        width: 100%;
-                                        line-height: 1
-                                    }
 
-                                    .elementor-testimonial-wrapper .elementor-testimonial-meta-inner {
-                                        display: inline-block
-                                    }
+                                            <a
+                                                class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-right"
+                                                href="register"
+                                                data-dsn-text="JOIN US">
+                                                <span
+                                                    class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
+                                                    <i
+                                                        class="fas fa-angle-right"
+                                                        aria-hidden="true"></i>
+                                                </span>
+                                                <span
+                                                    class="title-btn p-relative  z-index-1 ">REGISTER</span>
+                                            </a>
 
-                                    .elementor-testimonial-wrapper .elementor-testimonial-meta .elementor-testimonial-details,
-                                    .elementor-testimonial-wrapper .elementor-testimonial-meta .elementor-testimonial-image {
-                                        display: table-cell;
-                                        vertical-align: middle
-                                    }
+                                        </div>
 
-                                    .elementor-testimonial-wrapper .elementor-testimonial-meta .elementor-testimonial-image img {
-                                        width: 60px;
-                                        height: 60px;
-                                        border-radius: 50%;
-                                        -o-object-fit: cover;
-                                        object-fit: cover;
-                                        max-width: none
-                                    }
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="slide-item swiper-slide over-hidden">
+                                        <div
+                                            class="image-bg cover-bg w-100 h-100 before-z-index"
+                                            data-overlay="2">
+                                            <img
+                                                class="cover-bg-img dsn-swiper-parallax-transform"
+                                                src="{{url('')}}/asset/img/get.jpeg"
+                                                alt data-dsn-position="50% 50%" />
+                                        </div>
+                                        <div class="slide-content p-absolute">
+                                            <div
+                                                class="p-relative head-meta swiper-animate-head  d-flex justify-content-center mb-20">
+                                                <div
+                                                    class="circle-before metas mb-10">
+                                                    <span>Join Us</span>
+                                                </div>
+                                            </div>
+                                            <h2
+                                                class="title has-box-mod p-relative mb-10">
+                                                <a href="#"
+                                                    data-dsn-split="chars"
+                                                    class="effect-ajax"
+                                                    data-dsn-ajax="slider">
+                                                    GET STARTED
+                                                </a>
+                                            </h2>
 
-                                    .elementor-testimonial-wrapper .elementor-testimonial-meta.elementor-testimonial-image-position-aside .elementor-testimonial-image {
-                                        padding-right: 15px
-                                    }
+                                            <div
+                                            class="dsn-icon-heading-color dsn-def-btn d-flex justify-content-center mt-30 me-10">
+                                            <a
+                                                class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-left"
+                                                href="login"
+                                                data-dsn-text="LOGIN">
+                                                <span
+                                                    class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
+                                                    <i
+                                                        class="fas fa-sign-in-alt"
+                                                        aria-hidden="true"></i>
+                                                </span>
+                                                <span
+                                                    class="title-btn p-relative  z-index-1 ">LOGIN</span>
+                                            </a>
 
-                                    .elementor-testimonial-wrapper .elementor-testimonial-meta.elementor-testimonial-image-position-aside .elementor-testimonial-details {
-                                        text-align: left
-                                    }
 
-                                    .elementor-testimonial-wrapper .elementor-testimonial-meta.elementor-testimonial-image-position-top .elementor-testimonial-details,
-                                    .elementor-testimonial-wrapper .elementor-testimonial-meta.elementor-testimonial-image-position-top .elementor-testimonial-image {
-                                        display: block
-                                    }
 
-                                    .elementor-testimonial-wrapper .elementor-testimonial-meta.elementor-testimonial-image-position-top .elementor-testimonial-image {
-                                        margin-bottom: 20px
-                                    }
-                                </style>
-                                <div class="elementor-testimonial-wrapper">
-                                    <div class="elementor-testimonial-content">"Ever since i have intergrated with ENKPAY, it has been so seamless and easy for me and my customers to make payment on my website."</div>
+                                            <a
+                                                class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-right"
+                                                href="register"
+                                                data-dsn-text="GET STARTED">
+                                                <span
+                                                    class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
+                                                    <i
+                                                        class="fas fa-angle-right"
+                                                        aria-hidden="true"></i>
+                                                </span>
+                                                <span
+                                                    class="title-btn p-relative  z-index-1 ">REGISTER</span>
+                                            </a>
+
+                                        </div>
+
+                                        </div>
+                                    </div>
 
                                     <div
-                                        class="elementor-testimonial-meta elementor-has-image elementor-testimonial-image-position-top">
-                                        <div class="elementor-testimonial-meta-inner">
-                                            <div class="elementor-testimonial-image">
-                                                <img decoding="async" width="300" height="300"
-                                                    src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/review-2.jpg"
-                                                    class="attachment-full size-full wp-image-123" alt="" loading="lazy"
-                                                    srcset="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/review-2.png 300w, wp-content/uploads/sites/110/2022/11/review-2.png 150w"
-                                                    sizes="(max-width: 300px) 100vw, 300px" />
+                                        class="slide-item swiper-slide over-hidden">
+                                        <div
+                                            class="image-bg cover-bg w-100 h-100 before-z-index"
+                                            data-overlay="3">
+                                            <img
+                                                class="cover-bg-img dsn-swiper-parallax-transform"
+                                                src="{{url('')}}/asset/img/api.jpeg"
+                                                alt data-dsn-position="50% 50%" />
+                                        </div>
+                                        <div class="slide-content p-absolute">
+                                            <div
+                                                class="p-relative head-meta swiper-animate-head  d-flex justify-content-center mb-20">
+                                                <div
+                                                    class="circle-before metas mb-10">
+                                                    <span>Connect with</span>
+                                                </div>
                                             </div>
+                                            <h2
+                                                class="title has-box-mod p-relative mb-10">
+                                                <a href="#"
+                                                    data-dsn-split="chars"
+                                                    class="effect-ajax"
+                                                    data-dsn-ajax="slider">
+                                                    APIS AND PLUGINS
+                                                </a>
+                                            </h2>
 
-                                            <div class="elementor-testimonial-details">
-                                                <div class="elementor-testimonial-name">Kayode Ajayi</div>
-                                                <div class="elementor-testimonial-job">Lightbulb CO-Founder</div>
-                                            </div>
+                                            <div
+                                            class="dsn-icon-heading-color dsn-def-btn d-flex justify-content-center mt-30 me-10">
+                                            <a
+                                                class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-left"
+                                                href="login"
+                                                data-dsn-text="LOGIN">
+                                                <span
+                                                    class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
+                                                    <i
+                                                        class="fas fa-sign-in-alt"
+                                                        aria-hidden="true"></i>
+                                                </span>
+                                                <span
+                                                    class="title-btn p-relative  z-index-1 ">LOGIN</span>
+                                            </a>
+
+
+
+                                            <a
+                                                class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-right"
+                                                href="register"
+                                                data-dsn-text="REGISTER">
+                                                <span
+                                                    class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
+                                                    <i
+                                                        class="fas fa-angle-right"
+                                                        aria-hidden="true"></i>
+                                                </span>
+                                                <span
+                                                    class="title-btn p-relative  z-index-1 ">REGISTER</span>
+                                            </a>
+
+                                        </div>
+
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
+                        <div
+                            class="dsn-container d-flex align-items-center justify-content-center text-center dsn-slider-content dsn-hero-parallax-title"></div>
+                    </div>
+
+                    <div class="dsn-swiper-paginate">
+                        <div
+                            class="swiper-pagination dsn-swiper-circle mr-30 ml-30 heading-color"></div>
+                    </div>
+
+                    <div
+                        class="control-nav w-100  d-flex dsn-container  align-items-center justify-content-between">
+                        <div class="prev-paginate dsn-paginate-arrow box-shadow"></div>
+
+                        <div
+                            class="dsn-pagination p-relative d-flex align-items-end">
+                            <span class="slider-current-index h2">01</span>
+                            <span class="sm-title-block">/ </span><span
+                                class="total sm-title-block"> 6</span>
+                        </div>
+
+                        <div class="next-paginate dsn-paginate-arrow box-shadow"></div>
+
+                    </div>
+
+                </div>
+            </header>
+            <!-- ========== End Slider Parallax ========== -->
+
+            <div id="page_wrapper" class="wrapper">
+                <!-- ========== About Section ========== -->
+                <div
+                    class="about-section about-3 container d-grid grid-md-2 section-margin"
+                    data-dsn-gap="30px 60px">
+                    <div class="box-left">
+                        <div class="section-title d-flex">
+                            <div class="sub-section-title">
+                                <p
+                                    class="description d-inline-block p-relative square-before mb-10 dsn-up">ENKPAY</p>
+                                <h2
+                                    class="title-h2 dsn-heading-title p-relative title-block-lg d-block dsn-up">Payments
+                                    and data. Future-proofed</h2>
+                            </div>
+                        </div>
+                        <div class="dsn-accordion mt-30" role="tablist"
+                            data-dsn-iconsize="35px">
+                            <div class="accordion__wrapper">
+
+                                <div class="accordion__item  active">
+                                    <div
+                                        class="accordion__question user-no-selection expanded d-flex align-items-center  accordion-icon">
+                                        <span class="dsn-icon">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                id="Layer_1" x="0px" y="0px"
+                                                width="50px" height="50px"
+                                                viewBox="0 0 50 50"
+                                                xml:space="preserve"><g> <path
+                                                        fill-rule="evenodd"
+                                                        clip-rule="evenodd"
+                                                        d="M18.072,40.553c0-0.932-0.062-1.868,0.013-2.794  c0.146-1.81-0.475-3.234-1.633-4.647c-1.268-1.547-2.404-3.274-3.239-5.089c-2.214-4.811-1.168-9.314,1.994-13.308  c3.294-4.164,7.795-5.363,12.816-4.145c5.08,1.233,8.364,4.637,9.375,9.721c0.67,3.365,0.388,6.819-2.079,9.689  c-0.868,1.011-1.687,2.122-2.249,3.318c-0.621,1.318-1.179,2.764-1.305,4.193c-0.222,2.52-0.048,5.071-0.133,7.605  c-0.068,2.067-2.064,4.004-4.106,4.059c-1.696,0.045-3.395,0.022-5.093,0.01c-2.438-0.018-4.307-1.811-4.394-4.262  c-0.052-1.448-0.009-2.9-0.009-4.351C18.044,40.553,18.058,40.553,18.072,40.553z M29.94,41.686c0-1.752-0.168-3.318,0.051-4.828  c0.194-1.339,0.652-2.706,1.297-3.897c0.728-1.344,1.849-2.469,2.705-3.752c3.775-5.662,2.175-12.419-3.692-15.824  c-4.225-2.452-9.512-1.524-12.7,1.058c-2.954,2.392-5.222,7.669-3.05,12.026c0.78,1.565,1.752,3.034,2.618,4.558  c0.761,1.339,1.444,2.724,2.27,4.019c0.262,0.412,0.863,0.845,1.318,0.856c1.754,0.044,3.512-0.096,5.27-0.13  c0.693-0.015,1.626-0.207,1.623,0.894c-0.003,1.088-0.926,0.904-1.626,0.908c-2.005,0.013-4.01,0.005-6.139,0.005  c0,2.522-0.13,5.002,0.05,7.458c0.103,1.41,0.977,2.499,2.635,2.528c1.346,0.024,2.692,0.075,4.039,0.059  c2.395-0.029,3.558-1.525,3.075-4.293c-2.051,0-4.161,0.048-6.266-0.036c-0.464-0.018-0.91-0.496-1.364-0.763  c0.47-0.281,0.931-0.785,1.412-0.807C25.527,41.633,27.596,41.686,29.94,41.686z"></path>
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        clip-rule="evenodd"
+                                                        style="--dsn-color-icon : var(--heading-color)"
+                                                        d="M12.989,10.347c-0.546,0.164-1.233,0.569-1.437,0.398  C10.38,9.76,9.294,8.665,8.257,7.536C8.094,7.359,8.201,6.679,8.414,6.484c0.216-0.197,0.87-0.252,1.07-0.074  c1.073,0.952,2.07,1.99,3.078,3.015C12.695,9.56,12.735,9.785,12.989,10.347z"></path>
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        clip-rule="evenodd"
+                                                        style="--dsn-color-icon : var(--heading-color)"
+                                                        d="M37.373,10.994c-0.099-0.492-0.441-1.185-0.246-1.411  c1.004-1.159,2.125-2.219,3.264-3.25c0.158-0.143,0.743-0.042,0.94,0.146c0.202,0.194,0.346,0.792,0.214,0.937  c-1.069,1.167-2.205,2.273-3.336,3.383C38.117,10.89,37.918,10.873,37.373,10.994z"></path>
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        clip-rule="evenodd"
+                                                        style="--dsn-color-icon : var(--heading-color)"
+                                                        d="M25.748,3.132c-0.001,0.618,0.112,1.265-0.041,1.842  c-0.103,0.389-0.58,0.678-0.889,1.013c-0.276-0.315-0.765-0.613-0.792-0.947c-0.096-1.227-0.11-2.473,0.001-3.697  c0.033-0.363,0.578-0.679,0.888-1.017c0.277,0.37,0.69,0.704,0.799,1.119C25.854,1.973,25.749,2.566,25.748,3.132z"></path>
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        clip-rule="evenodd"
+                                                        style="--dsn-color-icon : var(--heading-color)"
+                                                        d="M43.725,23.819c-0.406-0.043-0.854,0.003-1.205-0.158  c-0.268-0.123-0.608-0.546-0.565-0.769c0.06-0.315,0.435-0.796,0.692-0.807c1.327-0.057,2.663-0.028,3.989,0.072  c0.305,0.022,0.58,0.445,0.869,0.684c-0.339,0.265-0.655,0.713-1.021,0.758c-0.905,0.11-1.835,0.036-2.755,0.036  C43.728,23.696,43.726,23.758,43.725,23.819z"></path>
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        clip-rule="evenodd"
+                                                        style="--dsn-color-icon : var(--heading-color)"
+                                                        d="M3.5,24.01c-0.448-0.367-0.896-0.733-1.343-1.101  c0.493-0.293,0.963-0.779,1.482-0.837c0.958-0.106,1.954-0.026,2.915,0.112c0.416,0.061,0.783,0.457,1.172,0.701  c-0.37,0.255-0.72,0.687-1.113,0.731c-0.962,0.107-1.945,0.035-2.92,0.035C3.629,23.771,3.564,23.89,3.5,24.01z"></path>
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        clip-rule="evenodd"
+                                                        style="--dsn-color-icon : var(--heading-color)"
+                                                        d="M25.306,16.083c3.552,0.405,6.106,2.751,6.305,6.291  c0.022,0.39-0.47,0.808-0.723,1.212c-0.27-0.31-0.708-0.583-0.783-0.935c-0.595-2.77-2.146-4.448-5.048-4.813  c-0.33-0.04-0.586-0.662-0.876-1.014C24.64,16.521,25.099,16.218,25.306,16.083z"></path></g></svg>
+                                        </span>
+
+                                        <p
+                                            class="sm-title-block tab-title heading-color"
+                                            role="tab" data-tab="0">End late
+                                            payments</p>
+                                    </div>
+                                    <div
+                                        class="accordion__answer tab-description active accordion-icon"
+                                        role="tabpanel"
+                                        data-tab="0">
+                                        <p>We provide instant settlement of all
+                                            received funds. i.e you can withdraw
+                                            your money anytime you wish.</p>
+                                    </div>
+                                </div>
+                                <div class="accordion__item  ">
+                                    <div
+                                        class="accordion__question user-no-selection  d-flex align-items-center  accordion-icon">
+                                        <span class="dsn-icon">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                id="Layer_1" x="0px" y="0px"
+                                                width="50px" height="50px"
+                                                viewBox="0 0 50 50"
+                                                xml:space="preserve"><g> <path
+                                                        fill-rule="evenodd"
+                                                        clip-rule="evenodd"
+                                                        d="M25.515,27.051c-0.371-0.159-0.756-0.298-1.117-0.483  c-6.626-3.398-13.254-6.794-19.865-10.221c-0.416-0.215-1.031-0.76-0.972-1.019c0.102-0.446,0.593-0.919,1.04-1.152  c6.651-3.461,13.312-6.904,20.007-10.279c0.516-0.259,1.414-0.177,1.955,0.099c3.589,1.828,7.11,3.788,10.689,5.634  c3.028,1.562,6.114,3.01,9.149,4.558c0.454,0.232,0.77,0.738,1.149,1.116c-0.358,0.331-0.665,0.76-1.082,0.977  c-6.629,3.457-13.272,6.887-19.914,10.319C26.234,26.765,25.895,26.888,25.515,27.051z M44.76,15.372  c-0.513-0.362-0.775-0.596-1.078-0.752c-5.791-2.994-11.577-5.999-17.402-8.927c-0.479-0.24-1.32-0.129-1.835,0.131  c-5.546,2.792-11.063,5.643-16.583,8.488c-0.508,0.262-0.983,0.59-1.696,1.021c6.433,3.309,12.539,6.471,18.68,9.562  c0.432,0.217,1.206,0.052,1.695-0.189c2.922-1.443,5.806-2.963,8.705-4.454C38.347,18.659,41.449,17.07,44.76,15.372z"></path>
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        clip-rule="evenodd"
+                                                        style="--dsn-color-icon : var(--heading-color)"
+                                                        d="M6.153,25.292c1.245,0.667,2.225,1.209,3.22,1.722  c5.014,2.583,10.02,5.182,15.065,7.701c0.544,0.272,1.446,0.323,1.973,0.059c5.826-2.926,11.61-5.933,17.403-8.924  c0.257-0.133,0.479-0.329,0.912-0.632c-1.152-0.605-2.191-1.057-3.114-1.681c-0.401-0.271-0.563-0.897-0.833-1.363  c0.501-0.038,1.084-0.26,1.489-0.081c1.456,0.645,2.868,1.395,4.266,2.163c1.333,0.732,1.365,1.37,0.078,2.036  c-6.755,3.495-13.519,6.975-20.308,10.403c-0.455,0.229-1.24,0.185-1.71-0.053c-6.743-3.407-13.462-6.859-20.174-10.326  c-1.297-0.67-1.284-1.349,0.015-2.057c1.454-0.792,2.922-1.563,4.431-2.241c0.35-0.157,0.885,0.097,1.334,0.162  c-0.185,0.413-0.256,0.999-0.575,1.206C8.602,24.052,7.487,24.577,6.153,25.292z"></path>
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        clip-rule="evenodd"
+                                                        d="M44.767,35.25c-1.224-0.643-2.298-1.123-3.27-1.759  c-0.362-0.237-0.485-0.838-0.718-1.272c0.493-0.05,1.072-0.29,1.465-0.115c1.51,0.674,2.977,1.452,4.43,2.247  c1.189,0.651,1.184,1.312-0.063,1.957c-6.71,3.476-13.429,6.936-20.176,10.341c-0.502,0.253-1.354,0.251-1.857-0.002  c-6.748-3.402-13.468-6.859-20.181-10.33c-1.246-0.645-1.257-1.307-0.06-1.968c1.496-0.824,3.012-1.618,4.566-2.322  c0.339-0.154,0.877,0.129,1.323,0.211c-0.203,0.407-0.299,0.974-0.627,1.189c-0.968,0.637-2.028,1.135-3.331,1.838  c0.666,0.42,1.023,0.683,1.412,0.884c5.565,2.872,11.125,5.757,16.72,8.57c0.548,0.275,1.453,0.354,1.977,0.091  c5.83-2.921,11.619-5.925,17.416-8.912C44.055,35.763,44.287,35.572,44.767,35.25z"></path></g></svg>
+                                        </span>
+                                        <p
+                                            class="sm-title-block tab-title heading-color"
+                                            role="tab" data-tab="1">Admin
+                                            Dashboard</p>
+                                    </div>
+                                    <div
+                                        class="accordion__answer tab-description  accordion-icon"
+                                        role="tabpanel" data-tab="1">
+                                        <p>
+                                            You can track all your payment on
+                                            our admin dashboard with no stress.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="accordion__item  ">
+                                    <div
+                                        class="accordion__question user-no-selection  d-flex align-items-center  accordion-icon">
+                                        <span class="dsn-icon">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                id="Layer_1" x="0px" y="0px"
+                                                width="50px" height="50px"
+                                                viewBox="0 0 50 50"
+                                                xml:space="preserve"><g> <path
+                                                        fill-rule="evenodd"
+                                                        clip-rule="evenodd"
+                                                        d="M20.944,14.012c-4.79,0-9.443,0-14.079,0c-0.452,1.854-1.236,2.1-4.715,1.769  c-1.399-0.134-1.274-1.091-1.086-1.813c0.312-1.194-1.164-3.078,1.064-3.523c3.126-0.625,4.292-0.086,4.752,1.688  c4.629,0,9.276,0,13.868,0c0.118-0.163,0.229-0.245,0.233-0.331c0.09-2.241-0.195-2.33,2.678-2.304  c0.658,0.006,1.317,0.002,1.977,0.001c2.706-0.002,2.706-0.002,3.098,2.574c4.658,0,9.343,0,14.028,0  c0.466-1.725,1.538-2.251,4.723-1.621c2.313,0.458,0.729,2.421,1.086,3.657c0.234,0.809,0.101,1.608-1.242,1.682  c-3.792,0.208-4.104,0.136-4.549-1.773c-4.639,0-9.293,0-13.927,0c-0.084,0.115-0.196,0.196-0.201,0.283  c-0.151,2.852-0.224,2.339-2.926,2.396c-0.933,0.02-1.873-0.059-2.8,0.018c-1.438,0.122-2.06-0.415-1.887-1.776  C21.072,14.691,20.992,14.435,20.944,14.012z M22.922,14.82c1.354,0,2.532,0,3.76,0c0-1.218,0-2.326,0-3.482  c-1.313,0-2.524,0-3.76,0C22.922,12.551,22.922,13.624,22.922,14.82z M2.87,13.928c0.7,0,1.222,0,1.799,0c0-0.619,0-1.152,0-1.81  c-0.681,0.039-1.241,0.071-1.799,0.104C2.87,12.868,2.87,13.322,2.87,13.928z M44.924,14.051c0.724-0.057,1.244-0.097,1.8-0.141  c0-0.62,0-1.11,0-1.667c-0.65,0-1.208,0-1.8,0C44.924,12.848,44.924,13.344,44.924,14.051z"></path>
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        clip-rule="evenodd"
+                                                        d="M1.02,36.725c0.056-4.04-0.59-3.539,3.75-3.533  c4.271,0.006,3.804-0.574,3.787,3.667c-0.017,4.106,0.509,3.49-3.765,3.521C1.019,40.406,1.019,40.385,1.02,36.725z M6.617,38.565  c0-1.231,0-2.34,0-3.511c-1.272,0-2.45,0-3.699,0c0,1.21,0,2.318,0,3.511C4.168,38.565,5.308,38.565,6.617,38.565z"></path>
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        clip-rule="evenodd"
+                                                        d="M48.61,36.829c-0.063,4.104,0.604,3.548-3.725,3.545  c-4.384-0.005-3.819,0.6-3.825-3.618c-0.005-4.118-0.47-3.565,3.739-3.564C49.19,33.191,48.553,32.618,48.61,36.829z M42.997,38.54  c1.304,0,2.48,0,3.705,0c0-1.218,0-2.325,0-3.477c-1.287,0-2.464,0-3.705,0C42.997,36.242,42.997,37.313,42.997,38.54z"></path>
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        clip-rule="evenodd"
+                                                        style="--dsn-color-icon : var(--heading-color)"
+                                                        d="M3.907,30.129c0.707-4.828,2.875-8.57,6.166-11.771  c0.722-0.703,1.485-1.393,2.334-1.945c0.389-0.254,1.032-0.162,1.56-0.227c-0.164,0.507-0.158,1.205-0.519,1.491  c-3.182,2.508-5.611,5.502-6.952,9.222c-0.351,0.972-0.454,2.024-0.816,2.99c-0.182,0.484-0.693,0.857-1.055,1.282  C4.338,30.754,4.049,30.335,3.907,30.129z"></path>
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        clip-rule="evenodd"
+                                                        style="--dsn-color-icon : var(--heading-color)"
+                                                        d="M45.727,30.116c-0.137,0.204-0.422,0.629-0.708,1.055  c-0.359-0.42-0.962-0.804-1.04-1.267c-0.854-5.004-3.428-8.997-7.643-12.118c-0.414-0.307-0.467-1.046-0.688-1.585  c0.575,0.087,1.295-0.005,1.704,0.287C42.037,19.831,44.871,24.229,45.727,30.116z"></path></g></svg>
+                                        </span>
+                                        <p
+                                            class="sm-title-block tab-title heading-color"
+                                            role="tab" data-tab="2">Forget
+                                            expensive fees</p>
+                                    </div>
+                                    <div
+                                        class="accordion__answer tab-description  accordion-icon"
+                                        role="tabpanel" data-tab="2">
+                                        <p>
+                                            We charge very low on each
+                                            transaction through ENKPAY. See our
+                                            pricing
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box-right">
+                        <h3
+                            class="title-block heading-color body-font text-upper">ALL
+                            IN ONE SERVICE</h3>
+                        <p class="mt-30">
+                            ENKPAY all-in-one monetization platform that
+                            maximizes your revenues and makes online and offline
+                            payment easier.
+
+                        </p>
+
+                        <div class="experience mt-30">
+                            <span
+                                class="exp-number dsn-animate-number exp-font-2">
+                                <span class="animate-number">5</span>
+                            </span>
+                            <h5 class="title-block mt-20">
+                                YEARS OF <br>PAYMENT EXPERIENCE
+                            </h5>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section
-            class="elementor-section elementor-top-section elementor-element elementor-element-887a569 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-            data-id="887a569" data-element_type="section">
-            <div class="elementor-container elementor-column-gap-no">
-                <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-256d0182"
-                    data-id="256d0182" data-element_type="column">
-                    <div class="elementor-widget-wrap elementor-element-populated">
-                        <section
-                            class="elementor-section elementor-inner-section elementor-element elementor-element-48b7aa5d elementor-section-full_width elementor-section-height-default elementor-section-height-default"
-                            data-id="48b7aa5d" data-element_type="section">
-                            <div class="elementor-container elementor-column-gap-no">
-                                <div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-71e103b9"
-                                    data-id="71e103b9" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-7e448c5 elementor-invisible elementor-widget elementor-widget-image"
-                                            data-id="7e448c5" data-element_type="widget"
-                                            data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;}"
-                                            data-widget_type="image.default">
-                                            <div class="elementor-widget-container">
-                                                <img decoding="async" width="479" height="466"
-                                                    src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/integration.png"
-                                                    class="attachment-large size-large wp-image-124" alt=""
-                                                    loading="lazy"
-                                                    srcset="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/integration.png 479w, wp-content/uploads/sites/110/2022/11/integration-300x292.png 300w"
-                                                    sizes="(max-width: 479px) 100vw, 479px" />
+                <!-- ========== End About Section ========== -->
+
+                <!-- ========== Service ========== -->
+                <div class="mt-section background-section section-padding">
+                    <div class="container">
+                        <div class="section-title mb-70 d-flex">
+                            <div class="sub-section-title ">
+                                <p
+                                    class="description d-inline-block p-relative square-before mb-10">ENKPAY</p>
+                                <h2
+                                    class="title-h2 body-font title-block-lg d-block heading-color">Let’s
+                                    Check <b>what we offer
+                                    </b></h2>
+                            </div>
+                        </div>
+                        <div class="icon-top dsn-icon-heading-color">
+                            <div class="dsn-service d-grid grid-sm-2 "
+                                data-dsn-iconsize="20px">
+
+                                <div
+                                    class="dsn-up service-item p-relative grid-item">
+                                    <div
+                                        class="service-item-inner  number-item h-100">
+                                        <div class="dsn-icon"><i
+                                                class="far fa-window-minimize"
+                                                aria-hidden="true"></i></div>
+                                        <div class="service-content p-relative">
+                                            <h4
+                                                class="service_title  title-block mb-20">SEND
+                                                AND RECEIVE MONEY</h4>
+                                            <div
+                                                class="service_description max-w570 dsn-auto">
+                                                <p>
+                                                    Empower your financial
+                                                    freedom – effortlessly send
+                                                    and receive money with speed
+                                                    and security. Your
+                                                    transactions, your way.
+                                                </p>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-3a267d4"
-                                    data-id="3a267d4" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-5a905639 elementor-widget elementor-widget-heading"
-                                            data-id="5a905639" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <h2 class="elementor-heading-title elementor-size-default">Build your project with our plugins.</h2>
+
+                                <div
+                                    class="dsn-up service-item p-relative grid-item">
+                                    <div
+                                        class="service-item-inner  number-item h-100">
+                                        <div class="dsn-icon"><i
+                                                class="far fa-window-minimize"
+                                                aria-hidden="true"></i></div>
+                                        <div class="service-content p-relative">
+                                            <h4
+                                                class="service_title  title-block mb-20">POS
+                                                CARD PAYMENT</h4>
+                                            <div
+                                                class="service_description max-w570 dsn-auto">
+                                                <p>
+                                                    Experience seamless
+                                                    transactions with our POS
+                                                    card payment solution –
+                                                    fast, secure, and designed
+                                                    for your convenience. Pay
+                                                    with ease, anytime,
+                                                    anywhere.
+                                                </p>
                                             </div>
+
                                         </div>
-                                        <div class="elementor-element elementor-element-4d9cb6af elementor-widget elementor-widget-text-editor"
-                                            data-id="4d9cb6af" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                <p>Accept payment easily with ENKPAY on your project. Plug and play with no stress</p>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="dsn-up service-item p-relative grid-item">
+                                    <div
+                                        class="service-item-inner  number-item h-100">
+                                        <div class="dsn-icon"><i
+                                                class="far fa-window-minimize"
+                                                aria-hidden="true"></i></div>
+                                        <div class="service-content p-relative">
+                                            <h4
+                                                class="service_title  title-block mb-20">WEB
+                                                PAYMENT</h4>
+                                            <div
+                                                class="service_description max-w570 dsn-auto">
+                                                <p>
+                                                    Simplify your online
+                                                    experience with our secure
+                                                    web payment solution. Fast,
+                                                    easy, and reliable – make
+                                                    payments effortlessly from
+                                                    the comfort of your device
+                                                </p>
                                             </div>
+
                                         </div>
-                                        <div class="elementor-element elementor-element-72d1e1a8 elementor-widget elementor-widget-button"
-                                            data-id="72d1e1a8" data-element_type="widget"
-                                            data-widget_type="button.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-button-wrapper">
-                                                    <a class="elementor-button elementor-button-link elementor-size-sm elementor-animation-grow"
-                                                        href="register">
-                                                        <span class="elementor-button-content-wrapper">
-                                                            <span class="elementor-button-text">Connect Now </span>
-                                                        </span>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="dsn-up service-item p-relative grid-item">
+                                    <div
+                                        class="service-item-inner  number-item h-100">
+                                        <div class="dsn-icon"><i
+                                                class="far fa-window-minimize"
+                                                aria-hidden="true"></i></div>
+                                        <div class="service-content p-relative">
+                                            <h4
+                                                class="service_title  title-block mb-20">VIRTUAL
+                                                CARDS</h4>
+                                            <div
+                                                class="service_description max-w570 dsn-auto">
+                                                <p>
+                                                    Unlock a world of secure and
+                                                    flexible transactions with
+                                                    our virtual cards. Shop
+                                                    online, pay securely, and
+                                                    take control of your digital
+                                                    payments effortlessly.
+                                                </p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- ========== End Service ========== -->
+
+                <!-- ========== Awarded ========== -->
+                <div
+                    class="dsn-award text-center p-relative mb-section background-section">
+                    <div
+                        class="dsn-bg-mask w-100 h-50 bottom-0  background-main z-index-1"></div>
+                    <div
+                        class="section-padding container background-main border-style p-relative z-index-2">
+                        <div class="d-grid grid-md-3">
+                            <div class="award-item">
+                                <h5 class="font-number dsn-animate-number">
+                                    <span class="animate-number">2050</span>+
+                                </h5>
+                                <h4 class="title-block mt-10">CUSTOMERS</h4>
+                                <p class="sm-p mt-10">
+                                    Proudly serving a thriving community with
+                                    2050+ customers! Your trust fuels our
+                                    dedication to delivering exceptional
+                                    service. Thank you for being part of our
+                                    journey!
+                                </p>
+                            </div>
+                            <div class="award-item">
+                                <h5 class="font-number dsn-animate-number">
+                                    <span class="animate-number">4000</span>+
+                                </h5>
+                                <h4 class="title-block mt-10">POS TERMINALS AND
+                                    AGENTS</h4>
+                                <p class="sm-p mt-10">
+                                    Empowering financial transactions with over
+                                    1500 POS terminals and dedicated agents.
+                                    Join a network that prioritizes seamless
+                                    payments and unparalleled service for every
+                                    transaction
+                                </p>
+                            </div>
+                            <div class="award-item">
+                                <h5 class="font-number dsn-animate-number">
+                                    <span class="animate-number">24/7</span>+
+                                </h5>
+                                <h4 class="title-block mt-10">CARE SUPPORT</h4>
+                                <p class="sm-p mt-10">
+                                    Experience peace of mind with our 24/7
+                                    support. We're here for you around the
+                                    clock, ensuring your questions are answered
+                                    and issues resolved promptly. Your
+                                    satisfaction is our commitment.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- ========== End Awarded ========== -->
+
+                <!-- ========== Portfolio ========== -->
+                <!-- ==========    <div class="section-margin">
+                    <div class="container section-title mb-70 d-flex">
+                        <div class="sub-section-title ">
+                            <p
+                                class="description d-inline-block p-relative square-before mb-10">OUR
+                                WORKS </p>
+                            <h2
+                                class="title-h2 body-font title-block-lg d-block heading-color">
+                                Our latest <br><b>AWESOME DESIGNS </b>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="p-relative dsn-style-cards">
+                        <div class="root-posts">
+                            <div
+                                class="dsn-posts dsn-post-type-cards box-image-normal box-image-hover ">
+                                <div
+                                    class="has-parallax-image dsn-swiper p-relative"
+                                    data-dsn-option='{"slidesPerView":3,"spaceBetween":60}'>
+                                    <div class="swiper-container ">
+                                        <div class="swiper-wrapper v-dark-head">
+                                            <article
+                                                class="dsn-item-post grid-item over-hidden p-relative box-hover-image swiper-slide">
+                                                <div class="box-content d-flex ">
+                                                    <a
+                                                        class="effect-ajax box-image-link bg-shadow"
+                                                        href="project-6.html"
+                                                        data-dsn-ajax="work"
+                                                        title="HEADPHONES">
+                                                        <div
+                                                            class="box-image-bg before-z-index dsn-swiper-parallax-transform"
+                                                            data-swiper-parallax-scale="1.2"
+                                                            data-overlay="4">
+                                                            <img
+                                                                class="cover-bg-img"
+                                                                src="{{url('')}}/asset/img/portfolio/project6/1.jpg"
+                                                                alt />
+                                                        </div>
                                                     </a>
+                                                    <div
+                                                        class="post-content dsn-bg p-relative z-index-1 d-flex flex-column text-center"
+                                                        data-swiper-parallax-opacity="0">
+                                                        <div
+                                                            class="post-title-info">
+                                                            <div
+                                                                class="post-meta max-w750">
+                                                                <div
+                                                                    class="p-relative d-inline-block dsn-category dsn-bg metas mb-10 entry-meta">
+                                                                    <span
+                                                                        data-separator="&">ENKPAY</span>
+                                                                </div>
+                                                            </div>
+                                                            <h2
+                                                                class="post-title title-h2">
+                                                                <a
+                                                                    href="project-6.html"
+                                                                    class="effect-ajax"
+                                                                    data-dsn-ajax="work">
+                                                                    BANK
+                                                                    TRANSFER
+                                                                </a>
+                                                            </h2>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </article>
+                                            <article
+                                                class="dsn-item-post grid-item over-hidden p-relative box-hover-image swiper-slide">
+                                                <div class="box-content d-flex ">
+                                                    <a
+                                                        class="effect-ajax box-image-link bg-shadow"
+                                                        href="project-5.html"
+                                                        data-dsn-ajax="work"
+                                                        title="DOG CHOW">
+                                                        <div
+                                                            class="box-image-bg before-z-index dsn-swiper-parallax-transform"
+                                                            data-swiper-parallax-scale="1.2"
+                                                            data-overlay="3">
+                                                            <img
+                                                                class="cover-bg-img"
+                                                                src="{{url('')}}/asset/img/portfolio/project5/1.jpg"
+                                                                alt />
+                                                        </div>
+                                                    </a>
+                                                    <div
+                                                        class="post-content dsn-bg p-relative z-index-1 d-flex flex-column text-center"
+                                                        data-swiper-parallax-opacity="0">
+                                                        <div
+                                                            class="post-title-info">
+                                                            <div
+                                                                class="post-meta max-w750">
+                                                                <div
+                                                                    class="p-relative d-inline-block dsn-category dsn-bg metas mb-10 entry-meta">
+                                                                    <span
+                                                                        data-separator=" & ">Photography</span>
+                                                                    <span
+                                                                        data-separator=" & ">Production</span>
+                                                                </div>
+                                                            </div>
+                                                            <h2
+                                                                class="post-title title-h2">
+                                                                <a
+                                                                    href="project-5.html"
+                                                                    class="effect-ajax"
+                                                                    data-dsn-ajax="work">
+                                                                    PAY BILLS
+                                                                </a>
+                                                            </h2>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </article>
+                                            <article
+                                                class="dsn-item-post grid-item over-hidden p-relative box-hover-image swiper-slide">
+                                                <div class="box-content d-flex ">
+                                                    <a
+                                                        class="effect-ajax box-image-link bg-shadow"
+                                                        href="project-4.html"
+                                                        data-dsn-ajax="work"
+                                                        title="OPEN RUN">
+                                                        <div
+                                                            class="box-image-bg before-z-index dsn-swiper-parallax-transform"
+                                                            data-swiper-parallax-scale="1.2"
+                                                            data-overlay="2">
+                                                            <img
+                                                                class="cover-bg-img"
+                                                                src="{{url('')}}/asset/img/portfolio/project4/1.jpg"
+                                                                alt />
+                                                        </div>
+                                                    </a>
+                                                    <div
+                                                        class="post-content dsn-bg p-relative z-index-1 d-flex flex-column text-center"
+                                                        data-swiper-parallax-opacity="0">
+                                                        <div
+                                                            class="post-title-info">
+                                                            <div
+                                                                class="post-meta max-w750">
+                                                                <div
+                                                                    class="p-relative d-inline-block dsn-category dsn-bg metas mb-10 entry-meta">
+                                                                    <span
+                                                                        data-separator=" & ">Production</span>
+                                                                </div>
+                                                            </div>
+                                                            <h2
+                                                                class="post-title title-h2">
+                                                                <a
+                                                                    href="project-4.html"
+                                                                    class="effect-ajax"
+                                                                    data-dsn-ajax="work">
+                                                                    OPEN RUN
+                                                                </a>
+                                                            </h2>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </article>
+                                            <article
+                                                class="dsn-item-post grid-item over-hidden p-relative box-hover-image swiper-slide">
+                                                <div class="box-content d-flex ">
+                                                    <a
+                                                        class="effect-ajax box-image-link bg-shadow"
+                                                        href="project-3.html"
+                                                        data-dsn-ajax="work"
+                                                        title="AUDI RS">
+                                                        <div
+                                                            class="box-image-bg before-z-index dsn-swiper-parallax-transform"
+                                                            data-swiper-parallax-scale="1.2"
+                                                            data-overlay="2">
+                                                            <img
+                                                                class="cover-bg-img"
+                                                                src="{{url('')}}/asset/img/portfolio/project3/1.jpg"
+                                                                alt />
+                                                        </div>
+                                                    </a>
+                                                    <div
+                                                        class="post-content dsn-bg p-relative z-index-1 d-flex flex-column text-center"
+                                                        data-swiper-parallax-opacity="0">
+                                                        <div
+                                                            class="post-title-info">
+                                                            <div
+                                                                class="post-meta max-w750">
+                                                                <div
+                                                                    class="p-relative d-inline-block dsn-category dsn-bg metas mb-10 entry-meta">
+                                                                    <span
+                                                                        data-separator=" & ">Photography</span>
+                                                                    <span
+                                                                        data-separator=" & ">Production</span>
+                                                                </div>
+                                                            </div>
+                                                            <h2
+                                                                class="post-title title-h2">
+                                                                <a
+                                                                    href="project-3.html"
+                                                                    class="effect-ajax"
+                                                                    data-dsn-ajax="work">
+                                                                    AUDI RS
+                                                                </a>
+                                                            </h2>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </article>
+                                            <article
+                                                class="dsn-item-post grid-item over-hidden p-relative box-hover-image swiper-slide">
+                                                <div class="box-content d-flex ">
+                                                    <a
+                                                        class="effect-ajax box-image-link bg-shadow"
+                                                        href="project-2.html"
+                                                        data-dsn-ajax="work"
+                                                        title="MEN FASHION">
+                                                        <div
+                                                            class="box-image-bg before-z-index dsn-swiper-parallax-transform"
+                                                            data-swiper-parallax-scale="1.2"
+                                                            data-overlay="4">
+                                                            <img
+                                                                class="cover-bg-img"
+                                                                src="{{url('')}}/asset/img/portfolio/project2/1.jpg"
+                                                                alt />
+                                                        </div>
+                                                    </a>
+                                                    <div
+                                                        class="post-content dsn-bg p-relative z-index-1 d-flex flex-column text-center"
+                                                        data-swiper-parallax-opacity="0">
+                                                        <div
+                                                            class="post-title-info">
+                                                            <div
+                                                                class="post-meta max-w750">
+                                                                <div
+                                                                    class="p-relative d-inline-block dsn-category dsn-bg metas mb-10 entry-meta">
+                                                                    <span
+                                                                        data-separator=" & ">Photography</span>
+                                                                </div>
+                                                            </div>
+                                                            <h2
+                                                                class="post-title title-h2">
+                                                                <a
+                                                                    href="project-2.html"
+                                                                    class="effect-ajax"
+                                                                    data-dsn-ajax="work">
+                                                                    MEN FASHION
+                                                                </a>
+                                                            </h2>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </article>
+                                            <article
+                                                class="dsn-item-post grid-item over-hidden p-relative box-hover-image swiper-slide">
+                                                <div class="box-content d-flex ">
+                                                    <a
+                                                        class="effect-ajax box-image-link bg-shadow"
+                                                        href="project-1.html"
+                                                        data-dsn-ajax="work"
+                                                        title="VISIONAID">
+                                                        <div
+                                                            class="box-image-bg before-z-index dsn-swiper-parallax-transform"
+                                                            data-swiper-parallax-scale="1.2"
+                                                            data-overlay="4">
+                                                            <img
+                                                                class="cover-bg-img"
+                                                                src="{{url('')}}/asset/img/portfolio/project1/1.jpg"
+                                                                alt />
+                                                        </div>
+                                                    </a>
+                                                    <div
+                                                        class="post-content dsn-bg p-relative z-index-1 d-flex flex-column text-center"
+                                                        data-swiper-parallax-opacity="0">
+                                                        <div
+                                                            class="post-title-info">
+                                                            <div
+                                                                class="post-meta max-w750">
+                                                                <div
+                                                                    class="p-relative d-inline-block dsn-category dsn-bg metas mb-10 entry-meta">
+                                                                    <span
+                                                                        data-separator=" & ">Creative</span>
+                                                                    <span
+                                                                        data-separator=" & ">Photography</span>
+                                                                </div>
+                                                            </div>
+                                                            <h2
+                                                                class="post-title title-h2">
+                                                                <a
+                                                                    href="project-1.html"
+                                                                    class="effect-ajax"
+                                                                    data-dsn-ajax="work">
+                                                                    VISIONAID
+                                                                </a>
+                                                            </h2>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </article>
+                                        </div>
+                                        <div
+                                            class="dsn-swiper-paginate  d-flex p-relative w-100 h-100 mt-50 align-items-center dsn-container justify-content-between">
+                                            <div class="swiper-prev">
+                                                <div class="prev-container">
+                                                    <div class="container-inner">
+                                                        <div class="triangle"></div>
+                                                        <svg class="circle"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 24 24">
+                                                            <g
+                                                                class="circle-wrap"
+                                                                fill="none"
+                                                                stroke-width="1"
+                                                                stroke-linejoin="round"
+                                                                stroke-miterlimit="10">
+                                                                <circle cx="12"
+                                                                    cy="12"
+                                                                    r="10.5"></circle>
+                                                            </g>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="swiper-pagination  mr-30 ml-30 heading-color"
+                                                data-dsn-type="progressbar"></div>
+                                            <div class="swiper-next">
+                                                <div class="next-container">
+                                                    <div class="container-inner">
+                                                        <div class="triangle"></div>
+                                                        <svg class="circle"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            width="24"
+                                                            height="24"
+                                                            viewBox="0 0 24 24">
+                                                            <g
+                                                                class="circle-wrap"
+                                                                fill="none"
+                                                                stroke-width="1"
+                                                                stroke-linejoin="round"
+                                                                stroke-miterlimit="10">
+                                                                <circle cx="12"
+                                                                    cy="12"
+                                                                    r="10.5"></circle>
+                                                            </g>
+                                                        </svg>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </section>
-        {{-- <section
-            class="elementor-section elementor-top-section elementor-element elementor-element-f4a4885 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
-            data-id="f4a4885" data-element_type="section">
-            <div class="elementor-container elementor-column-gap-no">
-                <div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-38f73e6c"
-                    data-id="38f73e6c" data-element_type="column">
-                    <div class="elementor-widget-wrap elementor-element-populated">
-                        <section
-                            class="elementor-section elementor-inner-section elementor-element elementor-element-6e8532b0 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-                            data-id="6e8532b0" data-element_type="section">
-                            <div class="elementor-container elementor-column-gap-no">
-                                <div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-201c466"
-                                    data-id="201c466" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-6b431b15 elementor-widget elementor-widget-heading"
-                                            data-id="6b431b15" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <h2 class="elementor-heading-title elementor-size-default">Ready for
-                                                    payments to be frustration-free?</h2>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-29cac940 elementor-widget elementor-widget-text-editor"
-                                            data-id="29cac940" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-                                                    tellus, luctus nec ullamcor.</p>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-28d007df elementor-widget__width-initial elementor-widget-tablet__width-initial elementor-widget-mobile__width-initial elementor-widget elementor-widget-image"
-                                            data-id="28d007df" data-element_type="widget"
-                                            data-widget_type="image.default">
-                                            <div class="elementor-widget-container">
-                                                <a href="index.html#">
-                                                    <img decoding="async" width="189" height="56"
-                                                        src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/app-store.png"
-                                                        class="elementor-animation-grow attachment-large size-large wp-image-125"
-                                                        alt="" loading="lazy" /> </a>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-3580106d elementor-widget__width-initial elementor-widget elementor-widget-spacer"
-                                            data-id="3580106d" data-element_type="widget"
-                                            data-widget_type="spacer.default">
-                                            <div class="elementor-widget-container">
-                                                <style>
-                                                    /*! elementor - v3.14.0 - 26-06-2023 */
-                                                    .elementor-column .elementor-spacer-inner {
-                                                        height: var(--spacer-size)
-                                                    }
-
-                                                    .e-con {
-                                                        --container-widget-width: 100%
-                                                    }
-
-                                                    .e-con-inner>.elementor-widget-spacer,
-                                                    .e-con>.elementor-widget-spacer {
-                                                        width: var(--container-widget-width, var(--spacer-size));
-                                                        --align-self: var(--container-widget-align-self, initial);
-                                                        --flex-shrink: 0
-                                                    }
-
-                                                    .e-con-inner>.elementor-widget-spacer>.elementor-widget-container,
-                                                    .e-con-inner>.elementor-widget-spacer>.elementor-widget-container>.elementor-spacer,
-                                                    .e-con>.elementor-widget-spacer>.elementor-widget-container,
-                                                    .e-con>.elementor-widget-spacer>.elementor-widget-container>.elementor-spacer {
-                                                        height: 100%
-                                                    }
-
-                                                    .e-con-inner>.elementor-widget-spacer>.elementor-widget-container>.elementor-spacer>.elementor-spacer-inner,
-                                                    .e-con>.elementor-widget-spacer>.elementor-widget-container>.elementor-spacer>.elementor-spacer-inner {
-                                                        height: var(--container-widget-height, var(--spacer-size))
-                                                    }
-                                                </style>
-                                                <div class="elementor-spacer">
-                                                    <div class="elementor-spacer-inner"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-10730f18 elementor-widget__width-initial elementor-widget-tablet__width-initial elementor-widget-mobile__width-initial elementor-widget elementor-widget-image"
-                                            data-id="10730f18" data-element_type="widget"
-                                            data-widget_type="image.default">
-                                            <div class="elementor-widget-container">
-                                                <a href="index.html#">
-                                                    <img decoding="async" width="193" height="56"
-                                                        src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/google-play.png"
-                                                        class="elementor-animation-grow attachment-large size-large wp-image-126"
-                                                        alt="" loading="lazy" /> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-                <div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-7a79d20c"
-                    data-id="7a79d20c" data-element_type="column">
-                    <div class="elementor-widget-wrap elementor-element-populated">
-                        <div class="elementor-element elementor-element-79ee5834 elementor-invisible elementor-widget elementor-widget-image"
-                            data-id="79ee5834" data-element_type="widget"
-                            data-settings="{&quot;_animation&quot;:&quot;fadeInRight&quot;}"
-                            data-widget_type="image.default">
-                            <div class="elementor-widget-container">
-                                <img decoding="async" width="1141" height="694"
-                                    src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/dashboard-cta-2-1.png"
-                                    class="attachment-full size-full wp-image-191" alt="" loading="lazy"
-                                    srcset="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/dashboard-cta-2-1.png 1141w, wp-content/uploads/sites/110/2022/11/dashboard-cta-2-1-300x182.png 300w, wp-content/uploads/sites/110/2022/11/dashboard-cta-2-1-1024x623.png 1024w, wp-content/uploads/sites/110/2022/11/dashboard-cta-2-1-768x467.png 768w, wp-content/uploads/sites/110/2022/11/dashboard-cta-2-1-800x487.png 800w"
-                                    sizes="(max-width: 1141px) 100vw, 1141px" />
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section> --}}
-    </div>
-    <div data-elementor-type="footer" data-elementor-id="947" class="elementor elementor-947 elementor-location-footer">
-        <section
-            class="elementor-section elementor-top-section elementor-element elementor-element-bf80414 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-            data-id="bf80414" data-element_type="section"
-            data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-            <div class="elementor-container elementor-column-gap-no">
-                <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-6b8d2b4"
-                    data-id="6b8d2b4" data-element_type="column">
-                    <div class="elementor-widget-wrap elementor-element-populated">
-                        <section
-                            class="elementor-section elementor-inner-section elementor-element elementor-element-997bd09 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
-                            data-id="997bd09" data-element_type="section">
-                            <div class="elementor-container elementor-column-gap-no">
-                                <div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-5e39638"
-                                    data-id="5e39638" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-adcd8e7 elementor-widget elementor-widget-image"
-                                            data-id="adcd8e7" data-element_type="widget"
-                                            data-widget_type="image.default">
-                                            <div class="elementor-widget-container">
-                                                <img width="301" height="81"
-                                                    src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/fintex-logo.png"
-                                                    class="attachment-large size-large wp-image-927" alt=""
-                                                    loading="lazy" />
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-8c22505 elementor-widget elementor-widget-text-editor"
-                                            data-id="8c22505" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                <p>Enjoy Seamless Transactions on ENKPAY.
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <section
-                                            class="elementor-section elementor-inner-section elementor-element elementor-element-5c3c02f elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-                                            data-id="5c3c02f" data-element_type="section">
-                                            <div class="elementor-container elementor-column-gap-default">
-                                                <div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-a6d0f54"
-                                                    data-id="a6d0f54" data-element_type="column">
-                                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                                        <div class="elementor-element elementor-element-cc1421d elementor-widget elementor-widget-image"
-                                                            data-id="cc1421d" data-element_type="widget"
-                                                            data-widget_type="image.default">
-                                                            <div class="elementor-widget-container">
-                                                                <a href="https://apps.apple.com/us/app/enkpay/id6448091026">
-                                                                    <img width="189" height="56"
-                                                                        src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/app-store.png"
-                                                                        class="elementor-animation-grow attachment-large size-large wp-image-125"
-                                                                        alt="" loading="lazy" /> </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-e2a39e3"
-                                                    data-id="e2a39e3" data-element_type="column">
-                                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                                        <div class="elementor-element elementor-element-5bdf3c0 elementor-widget elementor-widget-image"
-                                                            data-id="5bdf3c0" data-element_type="widget"
-                                                            data-widget_type="image.default">
-                                                            <div class="elementor-widget-container">
-                                                                <a href="https://play.google.com/store/search?q=enkpay&c=apps&hl=en_GB">
-                                                                    <img width="193" height="56"
-                                                                        src="{{url('/')}}/asset/wp-content/uploads/sites/110/2022/11/google-play.png"
-                                                                        class="elementor-animation-grow attachment-large size-large wp-image-126"
-                                                                        alt="" loading="lazy" /> </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                    </div>
-                                </div>
-                                <div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-1d7505a"
-                                    data-id="1d7505a" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-a00969c elementor-widget elementor-widget-heading"
-                                            data-id="a00969c" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <h6 class="elementor-heading-title elementor-size-default">Other pages
-                                                </h6>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-f893528 elementor-list-item-link-inline elementor-icon-list--layout-traditional elementor-widget elementor-widget-icon-list"
-                                            data-id="f893528" data-element_type="widget"
-                                            data-widget_type="icon-list.default">
-                                            <div class="elementor-widget-container">
-                                                <link rel="stylesheet"
-                                                    href="{{url('/')}}/asset/wp-content/plugins/elementor/assets/css/widget-icon-list.min.css">
-                                                <ul class="elementor-icon-list-items">
-                                                    <li class="elementor-icon-list-item">
-                                                        <a href="index.html#">
+                </div> ========== -->
+                <!-- ========== End Portfolio ========== -->
 
-                                                            <span class="elementor-icon-list-text">Home</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="elementor-icon-list-item">
-                                                        <a href="index.html#">
-
-                                                            <span class="elementor-icon-list-text">About Us</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="elementor-icon-list-item">
-                                                        <a href="index.html#">
-
-                                                            <span class="elementor-icon-list-text">Features</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="elementor-icon-list-item">
-                                                        <a href="index.html#">
-
-                                                            <span class="elementor-icon-list-text">Pricing</span>
-                                                        </a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-fa8ce34"
-                                    data-id="fa8ce34" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-98ae473 elementor-widget elementor-widget-heading"
-                                            data-id="98ae473" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <h6 class="elementor-heading-title elementor-size-default">Quick links
-                                                </h6>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-aabd0f9 elementor-list-item-link-inline elementor-icon-list--layout-traditional elementor-widget elementor-widget-icon-list"
-                                            data-id="aabd0f9" data-element_type="widget"
-                                            data-widget_type="icon-list.default">
-                                            <div class="elementor-widget-container">
-                                                <ul class="elementor-icon-list-items">
-                                                    <li class="elementor-icon-list-item">
-                                                        <a href="index.html#">
-
-                                                            <span class="elementor-icon-list-text">Privacy Policy</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="elementor-icon-list-item">
-                                                        <a href="index.html#">
-
-                                                            <span class="elementor-icon-list-text"> Term Of
-                                                                Service</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="elementor-icon-list-item">
-                                                        <a href="index.html#">
-
-                                                            <span class="elementor-icon-list-text">Disclaimer</span>
-                                                        </a>
-                                                    </li>
-
-                                                    <li class="elementor-icon-list-item">
-                                                        <a href="/faq">
-
-                                                            <span class="elementor-icon-list-text">FAQ</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-6dbbbcb"
-                                    data-id="6dbbbcb" data-element_type="column">
-                                    <div class="elementor-widget-wrap elementor-element-populated">
-                                        <div class="elementor-element elementor-element-6d41fd5 elementor-widget elementor-widget-heading"
-                                            data-id="6d41fd5" data-element_type="widget"
-                                            data-widget_type="heading.default">
-                                            <div class="elementor-widget-container">
-                                                <h6 class="elementor-heading-title elementor-size-default">Contact us
-                                                </h6>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-cbf45d9 elementor-widget elementor-widget-text-editor"
-                                            data-id="cbf45d9" data-element_type="widget"
-                                            data-widget_type="text-editor.default">
-                                            <div class="elementor-widget-container">
-                                                <p>Our Support and Sales team is available 24 /7 to answer your queries
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-04e1e34 elementor-list-item-link-inline elementor-icon-list--layout-traditional elementor-widget elementor-widget-icon-list"
-                                            data-id="04e1e34" data-element_type="widget"
-                                            data-widget_type="icon-list.default">
-                                            <div class="elementor-widget-container">
-                                                <ul class="elementor-icon-list-items">
-                                                    <li class="elementor-icon-list-item">
-                                                        <a href="index.html#">
-
-                                                            <span class="elementor-icon-list-icon">
-                                                                <i aria-hidden="true" class="fas fa-phone-alt"></i>
-                                                            </span>
-                                                            <span class="elementor-icon-list-text">+234 81 050 59613</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="elementor-icon-list-item">
-                                                        <a href="index.html#">
-
-                                                            <span class="elementor-icon-list-icon">
-                                                                <i aria-hidden="true" class="fas fa-envelope"></i>
-                                                            </span>
-                                                            <span class="elementor-icon-list-text"><span class="__cf_email__" data-cfemail="4f3c3a3f3f203d3b0f2e2b222621612c2022">info@enkwave.com</span></span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <div class="elementor-element elementor-element-ba3d572 elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
-                            data-id="ba3d572" data-element_type="widget" data-widget_type="divider.default">
-                            <div class="elementor-widget-container">
-                                <div class="elementor-divider">
-                                    <span class="elementor-divider-separator">
+                <!-- ========== Play Video ========== -->
+                <!-- ==========    <div
+                    class="section-video  section-margin background-section p-relative section-padding hv-100 dsn-animate-video v-dark-head"
+                    data-dsn-option='{"speed":5}'>
+                    <div class="container d-flex align-items-center h-100">
+                        <div
+                            class="content d-grid grid-3 justify-content-between align-items-center w-100">
+                            <h6 class="title animate-left text-left">PLAY</h6>
+                            <div
+                                class="dsn-normal-btn dsn-icon-heading-color d-flex justify-content-center">
+                                <a
+                                    class="dsn-btn dsn-border border-color-default vid background-section move-circle has-icon-left"
+                                    href="https://vimeo.com/175353205"
+                                    target="_blank" rel="nofollow"
+                                    data-dsn="parallax">
+                                    <span
+                                        class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
+                                        <i class="fas fa-play"></i>
                                     </span>
+                                    <span class="title-btn p-relative z-index-1">PLAY</span>
+                                </a>
+                            </div>
+                            <h6 class="title animate-right text-right">REEL</h6>
+                        </div>
+                    </div>
+                    <div
+                        class="dsn-bg-section p-absolute w-100 h-100 over-hidden top-0 left-0">
+                        <div
+                            class="h-100 img-box-parallax before-z-index section-margin w-100"
+                            data-overlay="4">
+                            <img src="{{url('')}}/asset/img/about-4.jpg"
+                                class="cover-bg-img has-direction" alt>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- ========== End Play Video ========== -->
+
+                <!-- ========== testimonials
+                <div class="p-relative container section-margin">
+                    <div class="section-title mb-70 d-flex">
+                        <div class="sub-section-title ">
+                            <p
+                                class="description d-inline-block p-relative square-before mb-10">testimonials</p>
+                            <h2
+                                class="title-h2 body-font title-block-lg d-block heading-color">What
+                                People <b>are Saying</b></h2>
+                        </div>
+                    </div>
+                    <div
+                        class="filter-swiper-blur image-left-style quote-box-style elementor-align-center text-center">
+                        <div
+                            class="dsn-testimonials dsn-swiper p-relative has-parallax-image"
+                            data-dsn-option='{"spaceBetween":30,"slidesPerView":1}'>
+
+                            <div class="testimonials-content">
+                                <div class="testimonial-inner">
+                                    <svg version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        x="0px" y="0px"
+                                        viewBox="0 0 509 396.83"
+                                        enable-background="new 0 0 509 396.83"
+                                        xml:space="preserve">
+                                        <g>
+                                            <path fill-rule="evenodd"
+                                                clip-rule="evenodd"
+                                                d="M105.098,396.83c-2.062,0-4.122,0-6.183,0 c0.123-48.731,0.116-97.466,0.493-146.195c0.062-7.844-3.65-8.881-10.09-8.843c-29.772,0.182-59.545,0.047-89.318,0.026 C0,161.382,0,80.947,0,0c81.742,0,163.484,0,245.227,0c0.023,83.874,0.496,167.752-0.071,251.624 c-0.436,64.131-47.354,121.936-109.503,136.974C125.404,391.076,115.279,394.073,105.098,396.83z M127.891,360.509 c6.063-1.545,10.049-2.226,13.799-3.568c42.174-15.098,74.277-58.896,74.735-104.55c0.718-71.273,0.187-142.558,0.454-213.837 c0.03-7.696-2.596-10.07-10.136-10.038c-55.961,0.236-111.927,0.287-167.887-0.042c-8.413-0.049-10.398,3.014-10.363,10.831 c0.254,54.408,0.317,108.815-0.047,163.22c-0.061,8.994,3.321,10.93,11.452,10.803c25.744-0.405,51.505,0.184,77.245-0.329 c8.78-0.174,10.986,2.931,10.911,11.301c-0.363,40.63-0.164,81.264-0.163,121.897C127.891,350.262,127.891,354.325,127.891,360.509 z" />
+                                            <path fill-rule="evenodd"
+                                                clip-rule="evenodd"
+                                                d="M368.871,396.83c-2.061,0-4.122,0-6.184,0 c0.057-48.133-0.099-96.267,0.354-144.395c0.081-8.996-3.268-10.854-11.386-10.722c-26.047,0.42-52.108-0.083-78.152,0.299 c-7.577,0.108-10.083-2.194-10.053-9.942c0.294-77.357,0.262-154.713,0.322-232.07C345.353,0,426.929,0,509,0 c0,89.562,0,179.125,0,268.687c-1.256,3.464-2.793,6.854-3.73,10.401c-15.376,58.112-51.126,95.756-109.9,110.431 C386.48,391.735,377.7,394.382,368.871,396.83z M391.554,360.501c5.951-1.528,9.958-2.176,13.686-3.57 c43.103-16.135,74.464-59.44,74.864-105.611c0.616-70.931,0.138-141.869,0.404-212.803c0.03-7.722-2.58-10.037-10.111-10.005 c-55.963,0.24-111.926,0.285-167.889-0.036c-8.406-0.048-10.429,3.048-10.392,10.853c0.245,54.405,0.31,108.813-0.049,163.216 c-0.059,9.03,3.45,10.9,11.528,10.778c25.741-0.39,51.504,0.193,77.245-0.325c8.785-0.178,10.956,2.917,10.878,11.284 c-0.368,40.629-0.167,81.263-0.165,121.897C391.554,350.25,391.554,354.318,391.554,360.501z" />
+                                        </g>
+                                    </svg>
+                                    <div class="swiper-container">
+                                        <div class="swiper-wrapper">
+                                            <div
+                                                class="swiper-slide testimonial-inner-item border-style">
+                                                <div
+                                                    class="avatar box-img dsn-auto">
+                                                    <img
+                                                        src='{{url('')}}/asset/img/team/1.jpg'
+                                                        class="cover-bg-img" alt />
+                                                </div>
+                                                <div class="testimonial-item">
+                                                    <div
+                                                        class="testimonial-content mb-25">
+                                                        <div class="quote">
+                                                            <p
+                                                                class="max-w750 testimonial-content p-large">
+                                                                This theme is
+                                                                awesome and the
+                                                                designer is very
+                                                                helpful. I
+                                                                had a
+                                                                few
+                                                                questions
+                                                                purchase. He/She
+                                                                helped me with
+                                                                all the doubts.
+                                                                Also, they
+                                                                provide
+                                                                quick
+                                                                support. Thank
+                                                                you so much for
+                                                                a beautiful
+                                                                theme
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="content-inner border-top justify-content-center">
+                                                        <div
+                                                            class="d-flex align-items-center ">
+                                                            <div
+                                                                class="avatar box-img dsn-auto">
+                                                                <img
+                                                                    src='{{url('')}}/asset/img/team/1.jpg'
+                                                                    class="cover-bg-img"
+                                                                    alt />
+                                                            </div>
+                                                            <div
+                                                                class="label box-text">
+                                                                <h4
+                                                                    class="testimonial-name sm-title-block">MTL
+                                                                    Graphic</h4>
+                                                                <h5
+                                                                    class="testimonial-position">Graphic
+                                                                    Design</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="swiper-slide testimonial-inner-item border-style">
+                                                <div
+                                                    class="avatar box-img dsn-auto">
+                                                    <img
+                                                        src='{{url('')}}/asset/img/team/2.jpg'
+                                                        class="cover-bg-img" alt />
+                                                </div>
+                                                <div class="testimonial-item">
+                                                    <div
+                                                        class="testimonial-content mb-25">
+                                                        <div class="quote">
+                                                            <p
+                                                                class="max-w750 testimonial-content p-large">
+                                                                This theme is
+                                                                awesome and the
+                                                                designer is very
+                                                                helpful. I
+                                                                had a
+                                                                few
+                                                                questions
+                                                                purchase. He/She
+                                                                helped me with
+                                                                all the doubts.
+                                                                Also, they
+                                                                provide
+                                                                quick
+                                                                support. Thank
+                                                                you so much for
+                                                                a beautiful
+                                                                theme
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="content-inner border-top justify-content-center">
+                                                        <div
+                                                            class="d-flex align-items-center ">
+                                                            <div
+                                                                class="avatar box-img dsn-auto">
+                                                                <img
+                                                                    src='{{url('')}}/asset/img/team/2.jpg'
+                                                                    class="cover-bg-img"
+                                                                    alt />
+                                                            </div>
+                                                            <div
+                                                                class="label box-text">
+                                                                <h4
+                                                                    class="testimonial-name sm-title-block">Jeremy
+                                                                    Smith</h4>
+                                                                <h5
+                                                                    class="testimonial-position">Creative
+                                                                    Studio Head</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="swiper-slide testimonial-inner-item border-style">
+                                                <div
+                                                    class="avatar box-img dsn-auto">
+                                                    <img
+                                                        src='{{url('')}}/asset/img/team/3.jpg'
+                                                        class="cover-bg-img" alt />
+                                                </div>
+                                                <div class="testimonial-item">
+                                                    <div
+                                                        class="testimonial-content mb-25">
+                                                        <div class="quote">
+                                                            <p
+                                                                class="max-w750 testimonial-content p-large">
+                                                                This theme is
+                                                                awesome and the
+                                                                designer is very
+                                                                helpful. I
+                                                                had a
+                                                                few
+                                                                questions
+                                                                purchase. He/She
+                                                                helped me with
+                                                                all the doubts.
+                                                                Also, they
+                                                                provide
+                                                                quick
+                                                                support. Thank
+                                                                you so much for
+                                                                a beautiful
+                                                                theme
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="content-inner border-top justify-content-center">
+                                                        <div
+                                                            class="d-flex align-items-center ">
+                                                            <div
+                                                                class="avatar box-img dsn-auto">
+                                                                <img
+                                                                    src='{{url('')}}/asset/img/team/3.jpg'
+                                                                    class="cover-bg-img"
+                                                                    alt />
+                                                            </div>
+                                                            <div
+                                                                class="label box-text">
+                                                                <h4
+                                                                    class="testimonial-name sm-title-block">Angelo
+                                                                    Walking</h4>
+                                                                <h5
+                                                                    class="testimonial-position">Developer
+                                                                    Lead</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="swiper-slide testimonial-inner-item border-style">
+                                                <div
+                                                    class="avatar box-img dsn-auto">
+                                                    <img
+                                                        src='{{url('')}}/asset/img/team/4.jpg'
+                                                        class="cover-bg-img" alt />
+                                                </div>
+                                                <div class="testimonial-item">
+                                                    <div
+                                                        class="testimonial-content mb-25">
+                                                        <div class="quote">
+                                                            <p
+                                                                class="max-w750 testimonial-content p-large">
+                                                                This theme is
+                                                                awesome and the
+                                                                designer is very
+                                                                helpful. I
+                                                                had a
+                                                                few
+                                                                questions
+                                                                purchase. He/She
+                                                                helped me with
+                                                                all the doubts.
+                                                                Also, they
+                                                                provide
+                                                                quick
+                                                                support. Thank
+                                                                you so much for
+                                                                a beautiful
+                                                                theme
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="content-inner border-top justify-content-center">
+                                                        <div
+                                                            class="d-flex align-items-center ">
+                                                            <div
+                                                                class="avatar box-img dsn-auto">
+                                                                <img
+                                                                    src='{{url('')}}/asset/img/team/4.jpg'
+                                                                    class="cover-bg-img"
+                                                                    alt />
+                                                            </div>
+                                                            <div
+                                                                class="label box-text">
+                                                                <h4
+                                                                    class="testimonial-name sm-title-block">Bill
+                                                                    Gardner</h4>
+                                                                <h5
+                                                                    class="testimonial-position">Web
+                                                                    designer</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="dsn-swiper-paginate  d-flex p-relative w-100 h-100 mt-30 align-items-center container justify-content-between">
+                                    <div class="swiper-prev">
+                                        <div class="prev-container">
+                                            <div class="container-inner">
+                                                <div class="triangle"></div>
+                                                <svg class="circle"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24">
+                                                    <g class="circle-wrap"
+                                                        fill="none"
+                                                        stroke-width="1"
+                                                        stroke-linejoin="round"
+                                                        stroke-miterlimit="10">
+                                                        <circle cx="12" cy="12"
+                                                            r="10.5"></circle>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="swiper-pagination  mr-30 ml-30 heading-color"
+                                        data-dsn-type="bullets"></div>
+                                    <div class="swiper-next">
+                                        <div class="next-container">
+                                            <div class="container-inner">
+                                                <div class="triangle"></div>
+                                                <svg class="circle"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="24"
+                                                    height="24"
+                                                    viewBox="0 0 24 24">
+                                                    <g class="circle-wrap"
+                                                        fill="none"
+                                                        stroke-width="1"
+                                                        stroke-linejoin="round"
+                                                        stroke-miterlimit="10">
+                                                        <circle cx="12" cy="12"
+                                                            r="10.5"></circle>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div> ========== -->
+
+                <!-- ========== Stories
+                <div
+                    class="p-relative background-section section-margin section-padding">
+                    <div class="container">
+                        <div class="section-title mb-70 d-flex">
+                            <div class="sub-section-title ">
+                                <p
+                                    class="description d-inline-block p-relative square-before mb-10">Latest
+                                    News</p>
+                                <h2
+                                    class="title-h2 d-block heading-color body-font">Latest
+                                    and <b>greatest post</b></h2>
+                            </div>
+                        </div>
+                        <div
+                            class="p-relative dsn-style-classic box-image-transform">
+                            <div class="root-posts ">
+                                <div
+                                    class="dsn-posts dsn-post-type-classic h-350 d-grid grid-lg-3 grid-sm-2">
+                                    <article
+                                        class="dsn-item-post grid-item over-hidden p-20 border-style">
+                                        <div class="box-content d-flex ">
+                                            <a
+                                                class="effect-ajax box-image-link bg-shadow"
+                                                href="single-post.html"
+                                                data-dsn-text="Our Stories">
+                                                <div
+                                                    class="box-image-bg before-z-index dsn-swiper-parallax-transform"
+                                                    data-overlay="4">
+                                                    <img
+                                                        src="{{url('')}}/asset/img/blog/1.jpg"
+                                                        class="cover-bg-img" alt />
+                                                </div>
+                                            </a>
+                                            <div
+                                                class="post-content dsn-bg p-relative z-index-1 d-flex flex-column">
+
+                                                <div class="post-title-info">
+                                                    <div
+                                                        class="post-meta max-w750">
+                                                        <div
+                                                            class="entry-date d-inline-block entry-meta mb-10">
+                                                            June 12, 2022
+                                                        </div>
+                                                        <span
+                                                            class="mr-5 ml-5 separator-between">
+                                                            ..</span>
+                                                        <div
+                                                            class="p-relative d-inline-block dsn-category dsn-bg metas mb-10 entry-meta">
+                                                            <span
+                                                                data-separator=" & ">Uncategorized</span>
+                                                        </div>
+                                                    </div>
+                                                    <h2
+                                                        class="post-title dsn-bg title-block">
+                                                        <a class="effect-ajax"
+                                                            href="single-post.html"
+                                                            data-dsn-text="Our Stories">
+                                                            Wildlife could be
+                                                            amazing, see why.
+                                                        </a>
+                                                    </h2>
+                                                </div>
+
+                                                <div
+                                                    class="post-description-info ">
+                                                    <div
+                                                        class="d-flex mt-20 dsn-def-btn dsn-hover-icon">
+                                                        <a
+                                                            href="single-post.html"
+                                                            class="effect-ajax dsn-btn dsn-border border-color-default  background-section has-icon-left">
+                                                            <span
+                                                                class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
+                                                                <i
+                                                                    class="fas fa-angle-right"></i>
+                                                            </span>
+                                                            <span
+                                                                class="title-btn p-relative  z-index-1 heading-color">READ
+                                                                ARTICLE</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </article>
+                                    <article
+                                        class="dsn-item-post grid-item over-hidden p-20 border-style">
+                                        <div class="box-content d-flex ">
+                                            <a
+                                                class="effect-ajax box-image-link bg-shadow"
+                                                href="single-post.html"
+                                                data-dsn-text="Our Stories">
+                                                <div
+                                                    class="box-image-bg before-z-index dsn-swiper-parallax-transform"
+                                                    data-overlay="4">
+                                                    <img
+                                                        src="{{url('')}}/asset/img/blog/2.jpg"
+                                                        class="cover-bg-img" alt />
+                                                </div>
+                                            </a>
+                                            <div
+                                                class="post-content dsn-bg p-relative z-index-1 d-flex flex-column">
+
+                                                <div class="post-title-info">
+                                                    <div
+                                                        class="post-meta max-w750">
+                                                        <div
+                                                            class="entry-date d-inline-block entry-meta mb-10">
+                                                            Marc 15, 2022
+                                                        </div>
+                                                        <span
+                                                            class="mr-5 ml-5 separator-between">
+                                                            ..</span>
+                                                        <div
+                                                            class="p-relative d-inline-block dsn-category dsn-bg metas mb-10 entry-meta">
+                                                            <span
+                                                                data-separator=" & ">Editorial</span>
+                                                        </div>
+                                                    </div>
+                                                    <h2
+                                                        class="post-title dsn-bg title-block">
+                                                        <a class="effect-ajax"
+                                                            href="single-post.html"
+                                                            data-dsn-text="Our Stories">
+                                                            Quick tips for an
+                                                            effective styled
+                                                            wedding
+                                                        </a>
+                                                    </h2>
+                                                </div>
+
+                                                <div
+                                                    class="post-description-info ">
+                                                    <div
+                                                        class="d-flex mt-20 dsn-def-btn dsn-hover-icon">
+                                                        <a
+                                                            href="single-post.html"
+                                                            class="effect-ajax dsn-btn dsn-border border-color-default  background-section has-icon-left">
+                                                            <span
+                                                                class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
+                                                                <i
+                                                                    class="fas fa-angle-right"></i>
+                                                            </span>
+                                                            <span
+                                                                class="title-btn p-relative  z-index-1 heading-color">READ
+                                                                ARTICLE</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </article>
+                                    <article
+                                        class="dsn-item-post grid-item over-hidden p-20 border-style">
+                                        <div class="box-content d-flex ">
+                                            <a
+                                                class="effect-ajax box-image-link bg-shadow"
+                                                href="single-post.html"
+                                                data-dsn-text="Our Stories">
+                                                <div
+                                                    class="box-image-bg before-z-index dsn-swiper-parallax-transform"
+                                                    data-overlay="4">
+                                                    <img
+                                                        src="{{url('')}}/asset/img/blog/3.jpg"
+                                                        class="cover-bg-img" alt />
+                                                </div>
+                                            </a>
+                                            <div
+                                                class="post-content dsn-bg p-relative z-index-1 d-flex flex-column">
+
+                                                <div class="post-title-info">
+                                                    <div
+                                                        class="post-meta max-w750">
+                                                        <div
+                                                            class="entry-date d-inline-block entry-meta mb-10">
+                                                            Oct 23, 2022
+                                                        </div>
+                                                        <span
+                                                            class="mr-5 ml-5 separator-between">
+                                                            ..</span>
+                                                        <div
+                                                            class="p-relative d-inline-block dsn-category dsn-bg metas mb-10 entry-meta">
+                                                            <span
+                                                                data-separator=" & ">Editorial</span>
+                                                        </div>
+                                                    </div>
+                                                    <h2
+                                                        class="post-title dsn-bg title-block">
+                                                        <a class="effect-ajax"
+                                                            href="single-post.html"
+                                                            data-dsn-text="Our Stories">
+                                                            Soul Artwork from
+                                                            Lizzy styled wedding
+                                                        </a>
+                                                    </h2>
+                                                </div>
+
+                                                <div
+                                                    class="post-description-info ">
+                                                    <div
+                                                        class="d-flex mt-20 dsn-def-btn dsn-hover-icon">
+                                                        <a
+                                                            href="single-post.html"
+                                                            class="effect-ajax dsn-btn dsn-border border-color-default  background-section has-icon-left">
+                                                            <span
+                                                                class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
+                                                                <i
+                                                                    class="fas fa-angle-right"></i>
+                                                            </span>
+                                                            <span
+                                                                class="title-btn p-relative  z-index-1 heading-color">READ
+                                                                ARTICLE</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </article>
                                 </div>
                             </div>
                         </div>
-                        <div class="elementor-element elementor-element-528153b elementor-widget elementor-widget-heading"
-                            data-id="528153b" data-element_type="widget" data-widget_type="heading.default">
-                            <div class="elementor-widget-container">
-                                <span class="elementor-heading-title elementor-size-default">Copyright © 2023 ENKPAY.
-                                    All rights reserved.</span>
-                            </div>
+                    </div>
+
+                </div>   ========== -->
+
+                <!-- ========== Brand
+                <div class="p-relative container section-margin">
+                    <div class="section-title mb-70 d-flex">
+                        <div class="sub-section-title ">
+                            <p
+                                class="description d-inline-block p-relative square-before mb-10">Our
+                                Clients </p>
+                            <h2 class="title-h2 d-block heading-color body-font">Your
+                                successful, <b>our reputation</b></h2>
                         </div>
                     </div>
+                    <div
+                        class="d-grid grid-md-4 grid-sm-2 d-grid-no-space dsn-brand border-style">
+                        <div class="brand-item border-bottom border-right">
+                            <div
+                                class="brand-item-inner  over-hidden p-relative ">
+                                <img src="{{url('')}}/asset/img/brand/1.svg" alt>
+                            </div>
+                        </div>
+                        <div class="brand-item border-bottom border-right">
+                            <div
+                                class="brand-item-inner  over-hidden p-relative ">
+                                <img src="{{url('')}}/asset/img/brand/2.svg" alt>
+                            </div>
+                        </div>
+                        <div class="brand-item border-bottom border-right">
+                            <div
+                                class="brand-item-inner  over-hidden p-relative ">
+                                <img src="{{url('')}}/asset/img/brand/3.svg" alt>
+                            </div>
+                        </div>
+                        <div class="brand-item border-bottom">
+                            <div
+                                class="brand-item-inner  over-hidden p-relative ">
+                                <img src="{{url('')}}/asset/img/brand/4.svg" alt>
+                            </div>
+                        </div>
+                        <div class="brand-item border-right">
+                            <div
+                                class="brand-item-inner  over-hidden p-relative ">
+                                <img src="{{url('')}}/asset/img/brand/5.svg" alt>
+                            </div>
+                        </div>
+                        <div class="brand-item border-right">
+                            <div
+                                class="brand-item-inner  over-hidden p-relative ">
+                                <img src="{{url('')}}/asset/img/brand/6.svg" alt>
+                            </div>
+                        </div>
+                        <div class="brand-item border-right">
+                            <div
+                                class="brand-item-inner  over-hidden p-relative ">
+                                <img src="{{url('')}}/asset/img/brand/1.svg" alt>
+                            </div>
+                        </div>
+                        <div class="brand-item">
+                            <div
+                                class="brand-item-inner  over-hidden p-relative ">
+                                <img src="{{url('')}}/asset/img/brand/4.svg" alt>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-            </div>
-        </section>
-        <section
-            class="elementor-section elementor-top-section elementor-element elementor-element-a5edc3a elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-            data-id="a5edc3a" data-element_type="section">
-            <div class="elementor-container elementor-column-gap-default">
-                <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-64c8c07"
-                    data-id="64c8c07" data-element_type="column">
-                    <div class="elementor-widget-wrap elementor-element-populated">
-                        <section
-                            class="elementor-section elementor-inner-section elementor-element elementor-element-b1b645e elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-                            data-id="b1b645e" data-element_type="section">
-                            <div class="elementor-container elementor-column-gap-default">
-                                <div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-64e574d"
-                                    data-id="64e574d" data-element_type="column">
-                                    <div class="elementor-widget-wrap">
+               End Brand ========== -->
+
+                <!-- ========== Footer ========== -->
+                <footer id="dsn_footer"
+                    class="dsn-footer p-relative footer-animate svg-animate background-section">
+                    <svg
+                        class="dsn-separator dsn-separator-up  dsn-icon-main-color"
+                        width="100%" height="100%"
+                        viewBox="0 0 100 10" preserveAspectRatio="none">
+                        <path class="path-anim separator__path"
+                            data-dsn-to="M 0 0 C 40 0 55 0 100 0 L 0 0 Z"
+                            vector-effect="non-scaling-stroke"
+                            d="M 0 0 C 40 16 75 10 100 0 L 0 0 Z"></path>
+                    </svg>
+                    <div class="footer-content p-relative mt-section">
+
+                        <div class="text-center container">
+                            <h2 class="title-h2 ">
+                               BECOME AN
+                                <span class="d-block"><b><i></i></b>AGENT</span>
+                            </h2>
+                            <div
+                                class="dsn-icon-heading-color dsn-def-btn d-flex justify-content-center mt-30">
+                                <a
+                                    class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-left"
+                                    href="register"
+                                    data-dsn-text="GET STARTED">
+                                    <span
+                                        class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
+                                        <i class="fas fa-angle-right"
+                                            aria-hidden="true"></i>
+                                    </span>
+                                    <span
+                                        class="title-btn p-relative  z-index-1 ">START
+                                        A PROJECT</span>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="dsn-container pt-60">
+                            <div class="d-grid grid-lg-4 grid-md-2 ">
+                                <div class="grid-col-1">
+                                    <div class="dsn-logo main-logo">
+                                        <div class="main-logo">
+                                            <a
+                                                href="/"
+                                                data-dsn-text="Blackdsn"
+                                                class="custom-logo-link main-brand effect-ajax"
+                                                rel="home">
+                                                <img
+                                                    class="custom-logo logo-light"
+                                                    src="{{url('')}}/asset/img/whitel.png"
+                                                    alt="ENKPAY" />
+                                                <img
+                                                    class="custom-logo logo-dark"
+                                                    src="{{url('')}}/asset/img/bbl.png"
+                                                    alt="ENKPAY" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <ul
+                                        class="dsn-socials box-social mt-20 dsn-icon-heading-color">
+                                        <li><a href="#"
+                                                target="_blank" rel="nofollow"
+                                                class="init-color move-circle border-color-default"
+                                                data-dsn="parallax"><span
+                                                    class="dsn-icon"><i
+                                                        class="fab fa-facebook-f"></i></span><span>FB</span></a>
+                                        </li>
+                                        <li><a href="#"
+                                                target="_blank" rel="nofollow"
+                                                class="init-color move-circle border-color-default"
+                                                data-dsn="parallax"><span
+                                                    class="dsn-icon"><i
+                                                        class="fab fa-twitter"></i></span><span>TW</span></a>
+                                        </li>
+                                        <li><a href="#"
+                                                target="_blank" rel="nofollow"
+                                                class="init-color move-circle border-color-default"
+                                                data-dsn="parallax"><span
+                                                    class="dsn-icon"><i
+                                                        class="fab fa-linkedin-in"></i></span><span>LN</span></a></li>
+                                        <li><a href="#"
+                                                target="_blank" rel="nofollow"
+                                                class="init-color move-circle border-color-default"
+                                                data-dsn="parallax"><span
+                                                    class="dsn-icon"><i
+                                                        class="fab fa-instagram"></i></span><span>IN</span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="grid-col-2">
+                                    <h4
+                                        class="subtitle p-relative line-shape  line-shape-after "><span
+                                            class="background-revere ">NAVIGATION</span>
+                                    </h4>
+                                    <div class="menu-footer-menu-container">
+                                        <ul id="menu-footer-menu" class="menu">
+                                            <li class="menu-item">
+                                                <a
+                                                    href="/"
+                                                    class="effect-ajax">HOME</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#"
+                                                    class="effect-ajax">WHO WE ARE</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#"
+                                                    class="effect-ajax">PRICING</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#"
+                                                    class="effect-ajax">API DOCUMENTATION</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#"
+                                                    class="effect-ajax">CONTACT</a>
+                                            </li>
+
+                                        </ul>
                                     </div>
                                 </div>
-                                <div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-e076899"
-                                    data-id="e076899" data-element_type="column">
-                                    <div class="elementor-widget-wrap">
+                                <div class="grid-col-3">
+                                    <h4
+                                        class="subtitle p-relative line-shape  line-shape-after "><span
+                                            class="background-revere ">CONTACT</span>
+                                    </h4>
+
+                                    <div class="col-contact">
+                                        <p><strong>T</strong> : +234 050 59613</p>
+
+                                        <p class="over-hidden mt-10">
+                                            <strong>E</strong> : <a
+                                                class="link-hover"
+                                                href="business.html#"
+                                                data-hover-text="info@dsngrid.com">info@emkpay.com</a>
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <div class="grid-col-4">
+                                    <h4
+                                        class="subtitle p-relative line-shape  line-shape-after "><span
+                                            class="background-revere ">ADDRESS</span>
+                                    </h4>
+                                    <div class="col-address">
+                                        <p>
+                                            4 Bode Thomas<br> Surulere<br>Lagos
+                                        </p>
                                     </div>
                                 </div>
                             </div>
-                        </section>
+                            <div
+                                class="footer-bottom mt-60 pt-30 border-top pb-30 text-center">
+                                <p class="over-hidden">
+                                    © 2024 Digital Agency Designed by
+                                    <a href="#" class="link-hover"
+                                        data-hover-text="DSN Grid"
+                                        target="_blank">ENKPAY</a>
+                                </p>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
+                </footer>
+                <!-- ========== End Footer ========== -->
+
             </div>
-        </section>
-    </div>
 
-    <link rel='stylesheet' id='e-animations-css'
-        href='{{url('/')}}/asset/wp-content/plugins/elementor/assets/lib/animations/animations.min.css%3Fver=3.14.1.css' media='all' />
-    <script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src={{url('/')}}/asset/wp-content/themes/hello-elementor/assets/js/hello-frontend.min.js%3Fver=1.0.0'
-        id='hello-theme-frontend-js'></script>
-    <script src='{{url('/')}}/asset/wp-content/plugins/elementor-pro/assets/lib/smartmenus/jquery.smartmenus.min.js%3Fver=1.0.1'
-        id='smartmenus-js'></script>
-    <script src='{{url('/')}}/asset/wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.min.js%3Fver=3.12.2'
-        id='elementor-pro-webpack-runtime-js'></script>
-    <script src='{{url('/')}}/asset/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js%3Fver=3.14.1'
-        id='elementor-webpack-runtime-js'></script>
-    <script src='{{url('/')}}/asset/wp-content/plugins/elementor/assets/js/frontend-modules.min.js%3Fver=3.14.1'
-        id='elementor-frontend-modules-js'></script>
-    <script src='{{url('/')}}/asset/wp-includes/js/dist/vendor/wp-polyfill-inert.min.js%3Fver=3.1.2' id='wp-polyfill-inert-js'></script>
-    <script src='{{url('/')}}/asset/wp-includes/js/dist/vendor/regenerator-runtime.min.js%3Fver=0.13.11' id='regenerator-runtime-js'>
-    </script>
-    <script src='{{url('/')}}/asset/wp-includes/js/dist/vendor/wp-polyfill.min.js%3Fver=3.15.0' id='wp-polyfill-js'></script>
-    <script src='{{url('/')}}/asset/wp-includes/js/dist/hooks.min.js%3Fver=4169d3cf8e8d95a3d6d5' id='wp-hooks-js'></script>
-    <script src='{{url('/')}}/asset/wp-includes/js/dist/i18n.min.js%3Fver=9e794f35a71bb98672ae' id='wp-i18n-js'></script>
-    <script id='wp-i18n-js-after'>
-        wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
-    </script>
-    <script id='elementor-pro-frontend-js-before'>
-        var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/templatekit.tokomoo.com\/mobilekit2\/wp-admin\/admin-ajax.php","nonce":"935a18d9b1","urls":{"assets":"https:\/\/templatekit.tokomoo.com\/mobilekit2\/wp-content\/plugins\/elementor-pro\/assets\/","rest":"https:\/\/templatekit.tokomoo.com\/mobilekit2\/wp-json\/"},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"}},"facebook_sdk":{"lang":"en_US","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/templatekit.tokomoo.com\/mobilekit2\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
-    </script>
-    <script src='{{url('/')}}/asset/wp-content/plugins/elementor-pro/assets/js/frontend.min.js%3Fver=3.12.2'
-        id='elementor-pro-frontend-js'></script>
-    <script src='{{url('/')}}/asset/wp-content/plugins/elementor/assets/lib/waypoints/waypoints.min.js%3Fver=4.0.2'
-        id='elementor-waypoints-js'></script>
-    <script src='{{url('/')}}/asset/wp-includes/js/jquery/ui/core.min.js%3Fver=1.13.2' id='jquery-ui-core-js'></script>
-    <script id='elementor-frontend-js-before'>
-        var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Share on Facebook","shareOnTwitter":"Share on Twitter","pinIt":"Pin it","download":"Download","downloadImage":"Download image","fullscreen":"Fullscreen","zoom":"Zoom","share":"Share","playVideo":"Play Video","previous":"Previous","next":"Next","close":"Close","a11yCarouselWrapperAriaLabel":"Carousel | Horizontal scrolling: Arrow Left & Right","a11yCarouselPrevSlideMessage":"Previous slide","a11yCarouselNextSlideMessage":"Next slide","a11yCarouselFirstSlideMessage":"This is the first slide","a11yCarouselLastSlideMessage":"This is the last slide","a11yCarouselPaginationBulletMessage":"Go to slide"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Mobile Portrait","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Mobile Landscape","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tablet Portrait","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablet Landscape","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Laptop","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"Widescreen","value":2400,"default_value":2400,"direction":"min","is_enabled":false}}},"version":"3.14.1","is_static":false,"experimentalFeatures":{"e_dom_optimization":true,"e_optimized_assets_loading":true,"e_optimized_css_loading":true,"a11y_improvements":true,"additional_custom_breakpoints":true,"theme_builder_v2":true,"hello-theme-header-footer":true,"landing-pages":true,"page-transitions":true,"notes":true,"loop":true,"form-submissions":true,"e_scroll_snap":true},"urls":{"assets":"https:\/\/templatekit.tokomoo.com\/mobilekit2\/wp-content\/plugins\/elementor\/assets\/"},"swiperClass":"swiper-container","settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description","hello_header_logo_type":"logo","hello_header_menu_layout":"horizontal","hello_footer_logo_type":"logo"},"post":{"id":1062,"title":"Fintex%20%E2%80%93%20Mobile%20App%20%26%20Fintech%20Startup","excerpt":"","featuredImage":false}};
-    </script>
-    <script src='{{url('/')}}/asset/wp-content/plugins/elementor/assets/js/frontend.min.js%3Fver=3.14.1' id='elementor-frontend-js'>
-    </script>
-    <script src='{{url('/')}}/asset/wp-content/plugins/elementor-pro/assets/js/elements-handlers.min.js%3Fver=3.12.2'
-        id='pro-elements-handlers-js'></script>
-    <script type="text/javascript">
-        jQuery(document).ready(function ($) {
+        </main>
 
-            for (let i = 0; i < document.forms.length; ++i) {
-                let form = document.forms[i];
-				if ($(form).attr("method") != "get") { $(form).append('<input type="hidden" name="cuItpU-iTno" value="c_a]*TWLhi8JDR" />'); }
-if ($(form).attr("method") != "get") { $(form).append('<input type="hidden" name="y_fStoWP" value="yE2rCnQTmipfW*1" />'); }
-if ($(form).attr("method") != "get") { $(form).append('<input type="hidden" name="fWzFLjgMYCJd" value="P_zFH@[x6Z5IOEt" />'); }
-if ($(form).attr("method") != "get") { $(form).append('<input type="hidden" name="IdtWb-zxYPBQ" value="PinfNJxrt" />'); }
-            }
+        <!-- ========== Cursor ========== -->
+        <div id="dsn_cursor" class="ball"></div>
+        <div id="dsn_cursor_inner" class="ball"></div>
+        <!-- ========== End Cursor ========== -->
 
-            $(document).on('submit', 'form', function () {
-				if ($(this).attr("method") != "get") { $(this).append('<input type="hidden" name="cuItpU-iTno" value="c_a]*TWLhi8JDR" />'); }
-if ($(this).attr("method") != "get") { $(this).append('<input type="hidden" name="y_fStoWP" value="yE2rCnQTmipfW*1" />'); }
-if ($(this).attr("method") != "get") { $(this).append('<input type="hidden" name="fWzFLjgMYCJd" value="P_zFH@[x6Z5IOEt" />'); }
-if ($(this).attr("method") != "get") { $(this).append('<input type="hidden" name="IdtWb-zxYPBQ" value="PinfNJxrt" />'); }
-                return true;
-            });
+        <!-- ==========  Social ========== -->
+        <div
+            class="social-side d-flex align-items-center flex-column justify-content-center">
 
-            jQuery.ajaxSetup({
-                beforeSend: function (e, data) {
+            <ul class="socials d-flex flex-column-reverse">
+                <li style="--dsn-index-animate : 0;">
+                    <a href="business.html#0" target="_blank" rel="nofollow">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        <span>Fb</span>
+                    </a>
+                </li>
+                <li style="--dsn-index-animate : 1;">
+                    <a href="business.html#0" target="_blank" rel="nofollow">
+                        <i class="fab fa-instagram" aria-hidden="true"></i><span>Instagram</span>
+                    </a>
+                </li>
+                <li style="--dsn-index-animate : 2;">
+                    <a href="business.html#0" target="_blank" rel="nofollow">
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Tw</span>
+                    </a>
+                </li>
+                <li style="--dsn-index-animate : 3;">
+                    <a href="business.html#0" target="_blank" rel="nofollow">
+                        <i class="fab fa-linkedin-in" aria-hidden="true"></i><span>Linkedin</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="icon">FOLLOW US</div>
+        </div>
+        <!-- ========== End Social ========== -->
 
-                    if (data.type !== 'POST') return;
+        <!-- ========== Style Option Page ========== -->
+        <div id="dsn_box_options" class="day-night">
+            <div class="night active" data-dsn-theme="dark">
+                <svg width="48" height="48" viewBox="0 0 48 48">
+                    <rect x="12.3" y="23.5" width="2.6" height="1"></rect>
+                    <rect x="16.1" y="15.3"
+                        transform="matrix(0.7071 -0.7071 0.7071 0.7071 -6.8871 16.5732)"
+                        width="1"
+                        height="2.6"></rect>
+                    <rect x="23.5" y="12.3" width="1" height="2.6"></rect>
+                    <rect x="30.1" y="16.1"
+                        transform="matrix(0.7071 -0.7071 0.7071 0.7071 -2.5145 27.0538)"
+                        width="2.6"
+                        height="1"></rect>
+                    <rect x="33.1" y="23.5" width="2.6" height="1"></rect>
+                    <rect x="30.9" y="30.1"
+                        transform="matrix(0.7071 -0.7071 0.7071 0.7071 -12.9952 31.4264)"
+                        width="1"
+                        height="2.6"></rect>
+                    <rect x="23.5" y="33.1" width="1" height="2.6"></rect>
+                    <rect x="15.3" y="30.9"
+                        transform="matrix(0.7071 -0.7071 0.7071 0.7071 -17.3677 20.9457)"
+                        width="2.6"
+                        height="1"></rect>
+                    <path
+                        d="M24,18.7c-2.9,0-5.3,2.4-5.3,5.3s2.4,5.3,5.3,5.3s5.3-2.4,5.3-5.3S26.9,18.7,24,18.7z M24,28.3c-2.4,0-4.3-1.9-4.3-4.3s1.9-4.3,4.3-4.3s4.3,1.9,4.3,4.3S26.4,28.3,24,28.3z">
+                    </path>
+                </svg>
 
-                    if (typeof data.data === 'object' && data.data !== null) {
-						data.data.append("cuItpU-iTno", "c_a]*TWLhi8JDR");
-data.data.append("y_fStoWP", "yE2rCnQTmipfW*1");
-data.data.append("fWzFLjgMYCJd", "P_zFH@[x6Z5IOEt");
-data.data.append("IdtWb-zxYPBQ", "PinfNJxrt");
-                    }
-                    else {
-                        data.data = data.data + '&cuItpU-iTno=c_a]*TWLhi8JDR&y_fStoWP=yE2rCnQTmipfW*1&fWzFLjgMYCJd=P_zFH@[x6Z5IOEt&IdtWb-zxYPBQ=PinfNJxrt';
-                    }
-                }
-            });
+            </div>
+            <div class="moon" data-dsn-theme="night">
+                <svg width="48" height="48" viewBox="0 0 48 48">
+                    <path
+                        d="M24,33.9c-5.4,0-9.9-4.4-9.9-9.9c0-4.3,2.7-8,6.8-9.4l0.8-0.3l-0.1,0.9c-0.2,0.6-0.2,1.3-0.2,1.9c0,5.2,4.3,9.5,9.5,9.5c0.6,0,1.3-0.1,1.9-0.2l0.8-0.2L33.3,27C32,31.1,28.3,33.9,24,33.9z M20.4,15.9c-3.2,1.4-5.3,4.5-5.3,8.1c0,4.9,4,8.9,8.9,8.9c3.6,0,6.7-2.1,8.1-5.3c-0.4,0-0.8,0.1-1.3,0.1c-5.8,0-10.5-4.7-10.5-10.5C20.4,16.7,20.4,16.3,20.4,15.9z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+        <!-- ========== End Style Option Page ========== -->
 
-        });
-    </script>
+        <!-- ========== Line BG ========== -->
+        <div id="line_head"><span class="container"></span></div>
+        <!-- ========== End Line BG ========== -->
 
-</body>
+        <script src="{{url('')}}/asset/js/jquery-3.1.1.min.js"></script>
+        <script src="{{url('')}}/asset/js/plugins.min.js"></script>
+        <script src="{{url('')}}/asset/js/plugins/dsn-grid.min.js"></script>
+        <script src="{{url('')}}/asset/js/custom.js"></script>
+
+    </body>
 
 </html>
