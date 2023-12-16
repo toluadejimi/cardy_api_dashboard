@@ -1984,23 +1984,19 @@
 
                         <div class="text-center container">
                             <h2 class="title-h2 ">
-                               BECOME AN
-                                <span class="d-block"><b><i></i></b>AGENT</span>
+                               Download our <b>App</b>
                             </h2>
                             <div
                                 class="dsn-icon-heading-color dsn-def-btn d-flex justify-content-center mt-30">
-                                <a
-                                    class="dsn-btn dsn-border border-color-default  background-main   has-icon-left"
-                                    href="register"
-                                    data-dsn-text="GET STARTED">
-                                    <span
-                                        class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
-                                        <i class="fas fa-angle-right"
-                                            aria-hidden="true"></i>
-                                    </span>
-                                    <span
-                                        class="title-btn p-relative  z-index-1 ">START
-                                        A PROJECT</span>
+                                
+
+                                <hr>        
+                                <a class="mt-0 mb-1" href="https://play.google.com/store/apps/details?id=com.enk_pay_project.mobileapp">
+                                    <img src="{{ url('') }}/asset/images/gg.png" height="60" width="200" alt="Descriptive text for the image">
+                                </a>
+        
+                                <a class="mb-2" href="https://play.google.com/store/apps/details?id=com.enk_pay_project.mobileapp">
+                                    <img src="{{ url('') }}/asset/images/ios.png" height="55" width="200" alt="Descriptive text for the image">
                                 </a>
                             </div>
 
