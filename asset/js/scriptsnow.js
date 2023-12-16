@@ -1,9 +1,7 @@
 const body = document.body;
 
 
-setInterval(createSnowFlake, 50);
-
-
+setInterval(createSnowFlake, 20);
 function createSnowFlake() {
 	const snow_flake = document.createElement('i');
 	snow_flake.classList.add('fas');

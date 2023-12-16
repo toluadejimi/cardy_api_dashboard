@@ -132,6 +132,20 @@
                             <a href="register" style="color: aliceblue;"
                             class="shared_auth_asideButton__Uh6HW Button_button__PjVhE Button_outline__EsWgH">Get
                             Started</a>
+
+
+                            <hr>
+                            <p class=" mt-4 shared_auth_asideSubtitle__BAQ1J">Download our app</p>
+    
+                            <a class="mt-0 mb-1" href="https://play.google.com/store/apps/details?id=com.enk_pay_project.mobileapp">
+                                <img src="{{ url('') }}/asset/images/gg.png" height="60" width="200" alt="Descriptive text for the image">
+                            </a>
+    
+                            <a class="mb-2" href="https://play.google.com/store/apps/details?id=com.enk_pay_project.mobileapp">
+                                <img src="{{ url('') }}/asset/images/ios.png" height="55" width="200" alt="Descriptive text for the image">
+                            </a>
+                            
+
                     </aside>
 
                   
@@ -212,6 +226,12 @@
     </div>
     </div>
     </div>
+
+    <script  src="{{url('')}}/asset/js/scriptsnow.js"></script>
+    <link rel="stylesheet" href="{{url('')}}/asset/css/stylesnow.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css'>
+
+
 
 </body>
 

@@ -339,7 +339,7 @@
                                     <div
                                         class="slide-item swiper-slide over-hidden">
                                         <div
-                                            class="image-bg cover-bg w-100 h-100 before-z-index"
+                                            class="image-bg cover-bg w-100 h-100 after-z-index"
                                             data-overlay="2">
                                             <img
                                                 class="cover-bg-img dsn-swiper-parallax-transform"
@@ -2223,6 +2223,7 @@
         <script src="{{url('')}}/asset/js/plugins/dsn-grid.min.js"></script>
         <script src="{{url('')}}/asset/js/custom.js"></script>
         <script  src="{{url('')}}/asset/js/scriptsnow.js"></script>
+      
 
     </body>
 

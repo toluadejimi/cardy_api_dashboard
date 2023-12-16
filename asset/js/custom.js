@@ -2,7 +2,7 @@
 
 const dsnParam = {
   map: {
-    marker_icon: "assets/img/map-marker.png",
+    marker_icon: "https://enkpay.com/asset/img/map-marker.png",
     api: "AIzaSyDMyAS2jdzj-vdgBIFaIStYOWJtSlghndg"
   },
   cursor: {
@@ -16,12 +16,13 @@ const dsnParam = {
     smoothTouch: false,
     mouseMultiplier: 1
   },
-  name: "BLACKDSN"
+  name: "ENKPAY"
 };
 
 (function ($) {
   "use strict";
 
+  createSnowFlake();
   preloader();
   effectBackForward();
 
@@ -315,6 +316,24 @@ const dsnParam = {
   /**
    *
    */
+
+
+  function createSnowFlake() {
+    const snow_flake = document.createElement('i');
+    snow_flake.classList.add('fas');
+    snow_flake.classList.add('fa-snowflake');
+    snow_flake.style.left = Math.random() * window.innerWidth + 'px';
+    snow_flake.style.animationDuration = Math.random() * 3 + 2 + 's'; // between 2 - 5 seconds
+    snow_flake.style.opacity = Math.random();
+    snow_flake.style.fontSize = Math.random() * 10 + 10 + 'px';
+    
+    document.body.appendChild(snow_flake);
+  
+    
+    setTimeout(() => {
+      snow_flake.remove();
+    }, 100000)
+  }
 
 
   function preloader() {

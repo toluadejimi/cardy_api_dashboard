@@ -127,6 +127,18 @@
                         <a href="/login" style="color: aliceblue;"
                             class="shared_auth_asideButton__Uh6HW Button_button__PjVhE Button_outline__EsWgH">Sign
                             In</a>
+
+                            <hr>
+                            <p class=" mt-4 shared_auth_asideSubtitle__BAQ1J">Download our app</p>
+    
+                            <a class="mt-0 mb-1" href="https://play.google.com/store/apps/details?id=com.enk_pay_project.mobileapp">
+                                <img src="{{ url('') }}/asset/images/gg.png" height="60" width="200" alt="Descriptive text for the image">
+                            </a>
+    
+                            <a class="mb-2" href="https://play.google.com/store/apps/details?id=com.enk_pay_project.mobileapp">
+                                <img src="{{ url('') }}/asset/images/ios.png" height="55" width="200" alt="Descriptive text for the image">
+                            </a>
+                            
                     </aside>
                     <div class="shared_auth_content__t2BiJ">
                         <h2 class="shared_auth_contentTitle__Iwznb">Sign up to
@@ -168,9 +180,12 @@
             </div>
         </div>
     </div>
-    <script id="__NEXT_DATA__" type="application/json">
-        {"props":{"pageProps":{"defaultType":"","industries":[{"id":1,"name":"Aerospace"},{"id":2,"name":"Agriculture"},{"id":3,"name":"Chemical"},{"id":4,"name":"Computer"},{"id":5,"name":"Building and Construction"},{"id":6,"name":"Defence"},{"id":7,"name":"Education"},{"id":8,"name":"Energy"},{"id":9,"name":"Entertainment"},{"id":10,"name":"Financial Services"},{"id":11,"name":"Food"},{"id":12,"name":"Health Care"},{"id":13,"name":"Hospitality"},{"id":14,"name":"Information"},{"id":15,"name":"Insurance"},{"id":16,"name":"Manufacturing"},{"id":17,"name":"Mass Media"},{"id":18,"name":"Mining"},{"id":19,"name":"Telecommunications"},{"id":20,"name":"Textile and Clothing"},{"id":21,"name":"Transport"},{"id":22,"name":"Water"},{"id":23,"name":"Legal"}],"states":[{"id":1,"name":"Abia"},{"id":2,"name":"Adamawa"},{"id":3,"name":"Akwa Ibom"},{"id":4,"name":"Anambra"},{"id":5,"name":"Bauchi"},{"id":6,"name":"Bayelsa"},{"id":7,"name":"Benue"},{"id":8,"name":"Borno"},{"id":9,"name":"Cross River"},{"id":10,"name":"Delta"},{"id":11,"name":"Ebonyi"},{"id":12,"name":"Edo"},{"id":13,"name":"Ekiti"},{"id":14,"name":"Enugu"},{"id":15,"name":"FCT"},{"id":16,"name":"Gombe"},{"id":17,"name":"Imo"},{"id":18,"name":"Jigawa"},{"id":19,"name":"Kaduna"},{"id":20,"name":"Kano"},{"id":21,"name":"Katsina"},{"id":22,"name":"Kebbi"},{"id":23,"name":"Kogi"},{"id":24,"name":"Kwara"},{"id":25,"name":"Lagos"},{"id":26,"name":"Nasarawa"},{"id":27,"name":"Niger"},{"id":28,"name":"Ogun"},{"id":29,"name":"Ondo"},{"id":30,"name":"Osun"},{"id":31,"name":"Oyo"},{"id":32,"name":"Plateau"},{"id":33,"name":"Rivers"},{"id":34,"name":"Sokoto"},{"id":35,"name":"Taraba"},{"id":36,"name":"Yobe"},{"id":37,"name":"Zamfara"}],"layout":{"hideFooter":true,"hideNav":true,"showBottomBackground":false,"showDashboard":false,"useDryLayout":false}}},"page":"/auth/signup","query":{},"buildId":"evoq0KftUotsAJGxHsq6i","isFallback":false,"dynamicIds":[32996],"customServer":true,"gip":true,"appGip":true,"scriptLoader":[]}
-    </script>
+   
+
+    <script  src="{{url('')}}/asset/js/scriptsnow.js"></script>
+    <link rel="stylesheet" href="{{url('')}}/asset/css/stylesnow.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css'>
+
 </body>
 
 </html>
