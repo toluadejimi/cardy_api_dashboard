@@ -18,6 +18,6 @@ function createSnowFlake() {
 	
 	setTimeout(() => {
 		snow_flake.remove();
-	}, 30000)
+	}, 100000)
 }
 
