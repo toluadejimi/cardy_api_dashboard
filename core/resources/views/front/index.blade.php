@@ -94,7 +94,7 @@
                 class="site-header  dsn-container d-none dsn-hamburger">
                 <div class="main-logo">
                     <a href="/" data-dsn-text="Blackdsn"
-                        class="custom-logo-link main-brand effect-ajax"
+                        class="custom-logo-link main-brand "
                         rel="home"
                         aria-current="page">
                         <img src="{{url('')}}/asset/img/whitel.png"
@@ -230,7 +230,7 @@
                                                 class="title has-box-mod p-relative mb-10">
                                                 <a href="#"
                                                     data-dsn-split="chars"
-                                                    class="effect-ajax"
+                                                    class=""
                                                     data-dsn-ajax="slider">
                                                     SEND MONEY
                                                 </a>
@@ -239,7 +239,7 @@
                                             <div
                                                 class="dsn-icon-heading-color dsn-def-btn d-flex justify-content-center mt-30 me-10">
                                                 <a
-                                                    class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-left"
+                                                    class="dsn-btn dsn-border border-color-default  background-main has-icon-left"
                                                     href="/login"
                                                     data-dsn-text="LOGIN">
                                                     <span
@@ -255,7 +255,7 @@
 
 
                                                 <a
-                                                    class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-right"
+                                                    class="dsn-btn dsn-border border-color-default  background-main   has-icon-right"
                                                     href="register"
                                                     data-dsn-text="JOIN US">
                                                     <span
@@ -294,7 +294,7 @@
                                                 class="title has-box-mod p-relative mb-10">
                                                 <a href="#"
                                                     data-dsn-split="chars"
-                                                    class="effect-ajax"
+                                                    class=""
                                                     data-dsn-ajax="slider">
                                                     RECEIVE MONEY
                                                 </a>
@@ -303,7 +303,7 @@
                                             <div
                                             class="dsn-icon-heading-color dsn-def-btn d-flex justify-content-center mt-30 me-10">
                                             <a
-                                                class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-left"
+                                                class="dsn-btn dsn-border border-color-default  background-main   has-icon-left"
                                                 href="login"
                                                 data-dsn-text="LOGIN">
                                                 <span
@@ -319,7 +319,7 @@
 
 
                                             <a
-                                                class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-right"
+                                                class="dsn-btn dsn-border border-color-default  background-main   has-icon-right"
                                                 href="register"
                                                 data-dsn-text="REGISTER">
                                                 <span
@@ -359,7 +359,7 @@
                                                 class="title has-box-mod p-relative mb-10">
                                                 <a href="#"
                                                     data-dsn-split="chars"
-                                                    class="effect-ajax"
+                                                    class=""
                                                     data-dsn-ajax="slider">
                                                     PAY BILLS
                                                 </a>
@@ -368,7 +368,7 @@
                                             <div
                                             class="dsn-icon-heading-color dsn-def-btn d-flex justify-content-center mt-30 me-10">
                                             <a
-                                                class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-left"
+                                                class="dsn-btn dsn-border border-color-default  background-main   has-icon-left"
                                                 href="login"
                                                 data-dsn-text="Login">
                                                 <span
@@ -384,7 +384,7 @@
 
 
                                             <a
-                                                class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-right"
+                                                class="dsn-btn dsn-border border-color-default  background-main   has-icon-right"
                                                 href="register"
                                                 data-dsn-text="JOIN US">
                                                 <span
@@ -423,7 +423,7 @@
                                                 class="title has-box-mod p-relative mb-10">
                                                 <a href="#"
                                                     data-dsn-split="chars"
-                                                    class="effect-ajax"
+                                                    class=""
                                                     data-dsn-ajax="slider">
                                                     GET STARTED
                                                 </a>
@@ -432,7 +432,7 @@
                                             <div
                                             class="dsn-icon-heading-color dsn-def-btn d-flex justify-content-center mt-30 me-10">
                                             <a
-                                                class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-left"
+                                                class="dsn-btn dsn-border border-color-default  background-main   has-icon-left"
                                                 href="login"
                                                 data-dsn-text="LOGIN">
                                                 <span
@@ -448,7 +448,7 @@
 
 
                                             <a
-                                                class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-right"
+                                                class="dsn-btn dsn-border border-color-default  background-main   has-icon-right"
                                                 href="register"
                                                 data-dsn-text="GET STARTED">
                                                 <span
@@ -488,7 +488,7 @@
                                                 class="title has-box-mod p-relative mb-10">
                                                 <a href="#"
                                                     data-dsn-split="chars"
-                                                    class="effect-ajax"
+                                                    class=""
                                                     data-dsn-ajax="slider">
                                                     APIS AND PLUGINS
                                                 </a>
@@ -497,7 +497,7 @@
                                             <div
                                             class="dsn-icon-heading-color dsn-def-btn d-flex justify-content-center mt-30 me-10">
                                             <a
-                                                class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-left"
+                                                class="dsn-btn dsn-border border-color-default  background-main   has-icon-left"
                                                 href="login"
                                                 data-dsn-text="LOGIN">
                                                 <span
@@ -513,7 +513,7 @@
 
 
                                             <a
-                                                class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-right"
+                                                class="dsn-btn dsn-border border-color-default  background-main   has-icon-right"
                                                 href="register"
                                                 data-dsn-text="REGISTER">
                                                 <span
@@ -968,7 +968,7 @@
                                                 class="dsn-item-post grid-item over-hidden p-relative box-hover-image swiper-slide">
                                                 <div class="box-content d-flex ">
                                                     <a
-                                                        class="effect-ajax box-image-link bg-shadow"
+                                                        class=" box-image-link bg-shadow"
                                                         href="project-6.html"
                                                         data-dsn-ajax="work"
                                                         title="HEADPHONES">
@@ -999,7 +999,7 @@
                                                                 class="post-title title-h2">
                                                                 <a
                                                                     href="project-6.html"
-                                                                    class="effect-ajax"
+                                                                    class=""
                                                                     data-dsn-ajax="work">
                                                                     BANK
                                                                     TRANSFER
@@ -1016,7 +1016,7 @@
                                                 class="dsn-item-post grid-item over-hidden p-relative box-hover-image swiper-slide">
                                                 <div class="box-content d-flex ">
                                                     <a
-                                                        class="effect-ajax box-image-link bg-shadow"
+                                                        class=" box-image-link bg-shadow"
                                                         href="project-5.html"
                                                         data-dsn-ajax="work"
                                                         title="DOG CHOW">
@@ -1049,7 +1049,7 @@
                                                                 class="post-title title-h2">
                                                                 <a
                                                                     href="project-5.html"
-                                                                    class="effect-ajax"
+                                                                    class=""
                                                                     data-dsn-ajax="work">
                                                                     PAY BILLS
                                                                 </a>
@@ -1064,7 +1064,7 @@
                                                 class="dsn-item-post grid-item over-hidden p-relative box-hover-image swiper-slide">
                                                 <div class="box-content d-flex ">
                                                     <a
-                                                        class="effect-ajax box-image-link bg-shadow"
+                                                        class=" box-image-link bg-shadow"
                                                         href="project-4.html"
                                                         data-dsn-ajax="work"
                                                         title="OPEN RUN">
@@ -1095,7 +1095,7 @@
                                                                 class="post-title title-h2">
                                                                 <a
                                                                     href="project-4.html"
-                                                                    class="effect-ajax"
+                                                                    class=""
                                                                     data-dsn-ajax="work">
                                                                     OPEN RUN
                                                                 </a>
@@ -1110,7 +1110,7 @@
                                                 class="dsn-item-post grid-item over-hidden p-relative box-hover-image swiper-slide">
                                                 <div class="box-content d-flex ">
                                                     <a
-                                                        class="effect-ajax box-image-link bg-shadow"
+                                                        class=" box-image-link bg-shadow"
                                                         href="project-3.html"
                                                         data-dsn-ajax="work"
                                                         title="AUDI RS">
@@ -1143,7 +1143,7 @@
                                                                 class="post-title title-h2">
                                                                 <a
                                                                     href="project-3.html"
-                                                                    class="effect-ajax"
+                                                                    class=""
                                                                     data-dsn-ajax="work">
                                                                     AUDI RS
                                                                 </a>
@@ -1158,7 +1158,7 @@
                                                 class="dsn-item-post grid-item over-hidden p-relative box-hover-image swiper-slide">
                                                 <div class="box-content d-flex ">
                                                     <a
-                                                        class="effect-ajax box-image-link bg-shadow"
+                                                        class=" box-image-link bg-shadow"
                                                         href="project-2.html"
                                                         data-dsn-ajax="work"
                                                         title="MEN FASHION">
@@ -1189,7 +1189,7 @@
                                                                 class="post-title title-h2">
                                                                 <a
                                                                     href="project-2.html"
-                                                                    class="effect-ajax"
+                                                                    class=""
                                                                     data-dsn-ajax="work">
                                                                     MEN FASHION
                                                                 </a>
@@ -1204,7 +1204,7 @@
                                                 class="dsn-item-post grid-item over-hidden p-relative box-hover-image swiper-slide">
                                                 <div class="box-content d-flex ">
                                                     <a
-                                                        class="effect-ajax box-image-link bg-shadow"
+                                                        class=" box-image-link bg-shadow"
                                                         href="project-1.html"
                                                         data-dsn-ajax="work"
                                                         title="VISIONAID">
@@ -1237,7 +1237,7 @@
                                                                 class="post-title title-h2">
                                                                 <a
                                                                     href="project-1.html"
-                                                                    class="effect-ajax"
+                                                                    class=""
                                                                     data-dsn-ajax="work">
                                                                     VISIONAID
                                                                 </a>
@@ -1694,7 +1694,7 @@
                                         class="dsn-item-post grid-item over-hidden p-20 border-style">
                                         <div class="box-content d-flex ">
                                             <a
-                                                class="effect-ajax box-image-link bg-shadow"
+                                                class=" box-image-link bg-shadow"
                                                 href="single-post.html"
                                                 data-dsn-text="Our Stories">
                                                 <div
@@ -1726,7 +1726,7 @@
                                                     </div>
                                                     <h2
                                                         class="post-title dsn-bg title-block">
-                                                        <a class="effect-ajax"
+                                                        <a class=""
                                                             href="single-post.html"
                                                             data-dsn-text="Our Stories">
                                                             Wildlife could be
@@ -1741,7 +1741,7 @@
                                                         class="d-flex mt-20 dsn-def-btn dsn-hover-icon">
                                                         <a
                                                             href="single-post.html"
-                                                            class="effect-ajax dsn-btn dsn-border border-color-default  background-section has-icon-left">
+                                                            class=" dsn-btn dsn-border border-color-default  background-section has-icon-left">
                                                             <span
                                                                 class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
                                                                 <i
@@ -1762,7 +1762,7 @@
                                         class="dsn-item-post grid-item over-hidden p-20 border-style">
                                         <div class="box-content d-flex ">
                                             <a
-                                                class="effect-ajax box-image-link bg-shadow"
+                                                class=" box-image-link bg-shadow"
                                                 href="single-post.html"
                                                 data-dsn-text="Our Stories">
                                                 <div
@@ -1794,7 +1794,7 @@
                                                     </div>
                                                     <h2
                                                         class="post-title dsn-bg title-block">
-                                                        <a class="effect-ajax"
+                                                        <a class=""
                                                             href="single-post.html"
                                                             data-dsn-text="Our Stories">
                                                             Quick tips for an
@@ -1810,7 +1810,7 @@
                                                         class="d-flex mt-20 dsn-def-btn dsn-hover-icon">
                                                         <a
                                                             href="single-post.html"
-                                                            class="effect-ajax dsn-btn dsn-border border-color-default  background-section has-icon-left">
+                                                            class=" dsn-btn dsn-border border-color-default  background-section has-icon-left">
                                                             <span
                                                                 class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
                                                                 <i
@@ -1831,7 +1831,7 @@
                                         class="dsn-item-post grid-item over-hidden p-20 border-style">
                                         <div class="box-content d-flex ">
                                             <a
-                                                class="effect-ajax box-image-link bg-shadow"
+                                                class=" box-image-link bg-shadow"
                                                 href="single-post.html"
                                                 data-dsn-text="Our Stories">
                                                 <div
@@ -1863,7 +1863,7 @@
                                                     </div>
                                                     <h2
                                                         class="post-title dsn-bg title-block">
-                                                        <a class="effect-ajax"
+                                                        <a class=""
                                                             href="single-post.html"
                                                             data-dsn-text="Our Stories">
                                                             Soul Artwork from
@@ -1878,7 +1878,7 @@
                                                         class="d-flex mt-20 dsn-def-btn dsn-hover-icon">
                                                         <a
                                                             href="single-post.html"
-                                                            class="effect-ajax dsn-btn dsn-border border-color-default  background-section has-icon-left">
+                                                            class=" dsn-btn dsn-border border-color-default  background-section has-icon-left">
                                                             <span
                                                                 class="dsn-icon dsn-bg-before btn-icon-left heading-color z-index-1">
                                                                 <i
@@ -1990,7 +1990,7 @@
                             <div
                                 class="dsn-icon-heading-color dsn-def-btn d-flex justify-content-center mt-30">
                                 <a
-                                    class="dsn-btn dsn-border border-color-default  background-main  effect-ajax has-icon-left"
+                                    class="dsn-btn dsn-border border-color-default  background-main   has-icon-left"
                                     href="register"
                                     data-dsn-text="GET STARTED">
                                     <span
@@ -2013,7 +2013,7 @@
                                             <a
                                                 href="/"
                                                 data-dsn-text="Blackdsn"
-                                                class="custom-logo-link main-brand effect-ajax"
+                                                class="custom-logo-link main-brand "
                                                 rel="home">
                                                 <img
                                                     class="custom-logo logo-light"
@@ -2067,23 +2067,23 @@
                                             <li class="menu-item">
                                                 <a
                                                     href="/"
-                                                    class="effect-ajax">HOME</a>
+                                                    class="">HOME</a>
                                             </li>
                                             <li class="menu-item">
                                                 <a href="#"
-                                                    class="effect-ajax">WHO WE ARE</a>
+                                                    class="">WHO WE ARE</a>
                                             </li>
                                             <li class="menu-item">
                                                 <a href="#"
-                                                    class="effect-ajax">PRICING</a>
+                                                    class="">PRICING</a>
                                             </li>
                                             <li class="menu-item">
                                                 <a href="#"
-                                                    class="effect-ajax">API DOCUMENTATION</a>
+                                                    class="">API DOCUMENTATION</a>
                                             </li>
                                             <li class="menu-item">
                                                 <a href="#"
-                                                    class="effect-ajax">CONTACT</a>
+                                                    class="">CONTACT</a>
                                             </li>
 
                                         </ul>
