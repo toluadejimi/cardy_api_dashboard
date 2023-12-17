@@ -18,6 +18,7 @@ use App\Models\Audit;
 use App\Models\Order;
 use App\Models\Plans;
 use App\Models\Reply;
+use App\Models\Ttmfb;
 use App\Models\VCard;
 use Flutterwave\Bill;
 use App\Models\Ticket;
@@ -84,36 +85,7 @@ class UserController extends Controller
     {
     }
     //Cart
-    public function updatecart(Request $request)
-    {
-        if (empty(Session::get('uniqueid'))) {
-            $cart['uniqueid'] = $request->uniqueid;
-            $cart['product'] = $request->product;
-            $cart['title'] = $request->title;
-            $cart['quantity'] = $request->quantity;
-            $cart['cost'] = $request->cost;
-            $cart['store'] = $request->store;
-            $cart['total'] = $request->quantity * $request->cost;
-            Session::put('uniqueid', $request->uniqueid);
-            Cart::create($cart);
-        } else {
-            $cart = Cart::whereuniqueid($request->uniqueid)->whereproduct($request->product)->first();
-            $check = Cart::whereuniqueid($request->uniqueid)->whereproduct($request->product)->count();
-            if ($check > 0) {
-                $data =  $request->all();
-                $cart->update($data);
-                $cart->total = $request->quantity * $request->cost;
-                $cart->save();
-            } else {
-                $cart = new Cart;
-                $cart->fill($request->all());
-                $cart->save();
-                $cart->total = $request->quantity * $request->cost;
-                $cart->save();
-            }
-        }
-        return back()->with('success', 'Successfully Added to Cart.');
-    }
+
 
 
     public function  verify_email(Request $request)
@@ -125,7 +97,7 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-        return back()->with('error', 'Kindly use a valid email');
+            return back()->with('error', 'Kindly use a valid email');
         }
 
 
@@ -135,7 +107,7 @@ class UserController extends Controller
 
 
 
-        if($ck == null){
+        if ($ck == null) {
 
             $usr = new User();
             $usr->email = $request->email;
@@ -174,14 +146,13 @@ class UserController extends Controller
             $data['message'] = null;
 
             return view('auth.verify-email', $data);
-
         }
 
-        if($ck->email == $request->email && $ck->status == 2){
+        if ($ck->email == $request->email && $ck->status == 2) {
             return back()->with('error', 'An account already exist with the email, kindly login');
         }
 
-        if($ck->email == $request->email && $ck->is_email_verified == 0){
+        if ($ck->email == $request->email && $ck->is_email_verified == 0) {
 
             $get_code = random_int(1000, 9999);
             User::where('email', $request->email)->update(['sms_code' => $get_code]);
@@ -210,19 +181,11 @@ class UserController extends Controller
             $data['message'] = null;
 
             return view('auth.verify-email', $data);
-
-
         }
 
-        if($ck->email == $request->email && $ck->is_email_verified == 1 && $ck->status == 0){
+        if ($ck->email == $request->email && $ck->is_email_verified == 1 && $ck->status == 0) {
             return back()->with('error', 'Your Email has been verified but you need to verify your account, Login to continue');
         }
-
-
-
-
-
-
     }
 
     public function cart()
@@ -250,7 +213,10 @@ class UserController extends Controller
         $data['revenue'] = History::whereuser_id(Auth::guard('user')->user()->id)->wheretype(1)->where('amount', '!=', null)->sum('amount');
         $data['t_payout'] = Withdraw::whereuser_id(Auth::guard('user')->user()->id)->wherestatus(1)->sum('amount');
         $data['n_payout'] = Withdraw::whereuser_id(Auth::guard('user')->user()->id)->wherestatus(0)->sum('amount');
-        $data['percentage'] =Transactions::where('user_id', Auth::id())->sum('credit') / 100;
+        $data['percentage'] = Transactions::where('user_id', Auth::id())->sum('credit') / 100;
+
+        $data['message'] = null;
+
 
         return view('user.dashboard.index', $data);
     }
@@ -392,42 +358,35 @@ class UserController extends Controller
     public function webhook_update(Request $request)
     {
 
-        if($request->url == null){
+        if ($request->url == null) {
             return back()->with('alert', 'Webhook Url can not be empty');
         }
 
 
-        if ($request->type == 'wordpress'){
+        if ($request->type == 'wordpress') {
 
-            $url = $request->url."/wc-api/wc_gsama/";
+            $url = $request->url . "/wc-api/wc_gsama/";
 
-            $u =Webkey::whereuser_id(Auth::guard('user')->user()->id)->update(['url' => $url]);
+            $u = Webkey::whereuser_id(Auth::guard('user')->user()->id)->update(['url' => $url]);
 
             Webkey::whereuser_id(Auth::guard('user')->user()->id)->update(['charge_status' => $request->charge]);
 
             return back()->with('success', 'Webhook Url updated successfully');
-
-
         }
 
-        if ($request->type == 'other'){
-            $u =Webkey::whereuser_id(Auth::guard('user')->user()->id)->update(['url' => $request->url]);
+        if ($request->type == 'other') {
+            $u = Webkey::whereuser_id(Auth::guard('user')->user()->id)->update(['url' => $request->url]);
 
             Webkey::whereuser_id(Auth::guard('user')->user()->id)->update(['charge_status' => $request->charge]);
 
 
             return back()->with('success', 'Webhook Url updated successfully');
-
-
         }
 
 
 
         Webkey::whereuser_id(Auth::guard('user')->user()->id)->update(['charge_status' => $request->charge]);
         return back()->with('success', 'updated successfully');
-
-
-
     }
 
 
@@ -712,13 +671,13 @@ class UserController extends Controller
 
         $user_id = VCard::where('user_id', Auth::id())->first()->user_id ?? null;
 
-        if($chk == null){
+        if ($chk == null) {
             $data['vc'] = VCard::whereUser_id(Auth::guard('user')->user()->id)->first() ?? null;
             return view('user.virtual.index', $data);
         }
 
 
-        if($chk->user_id  ==  Auth::guard('user')->user()->id){
+        if ($chk->user_id  ==  Auth::guard('user')->user()->id) {
 
 
             $card_id = $chk->card_id;
@@ -748,7 +707,7 @@ class UserController extends Controller
 
             VCard::where('user_id', Auth::id())->update([
 
-                'amount' => $balance/100,
+                'amount' => $balance / 100,
 
             ]);
 
@@ -766,21 +725,14 @@ class UserController extends Controller
                     'state' => $var->data->billing_address->state,
                     'zip_code' => $var->data->billing_address->billing_zip_code,
                     'name_on_card' => $var->data->card_name,
-                    'amount' => $balance/100,
+                    'amount' => $balance / 100,
 
                 ]);
 
                 return view('user.virtual.index', $data);
             }
-
-
-
-        } return view('user.virtual.index', $data);
-
-
-
-
-
+        }
+        return view('user.virtual.index', $data);
     }
 
     public function fundVirtual(Request $request)
@@ -794,7 +746,7 @@ class UserController extends Controller
         $user_wallet = User::where('id', Auth::id())->first()->main_wallet;
 
 
-        if (Auth::user()->main_wallet < $amount_to_charge ) {
+        if (Auth::user()->main_wallet < $amount_to_charge) {
             return back()->with('alert', 'Account balance is insufficient, Fund your wallet');
         }
 
@@ -803,7 +755,7 @@ class UserController extends Controller
 
 
 
-        $ref = "CAD-".random_int(1000000, 9999999);
+        $ref = "CAD-" . random_int(1000000, 9999999);
 
         //fund card
         $get_card_id = VCard::select('*')->where('user_id', Auth::id())->first()->card_id;
@@ -853,7 +805,7 @@ class UserController extends Controller
 
 
             $balance = $user_wallet - $amount_to_charge;
-            User::where('id', Auth::id())->decrement('main_wallet', $amount_to_charge );
+            User::where('id', Auth::id())->decrement('main_wallet', $amount_to_charge);
 
             $trasnaction = new Transactions();
             $trasnaction->user_id = Auth::id();
@@ -863,7 +815,7 @@ class UserController extends Controller
             $trasnaction->title = "USD Card Funding";
             $trasnaction->type = "CardFunding";
             $trasnaction->amount = $amount_to_charge;
-            $trasnaction->note = "USD CARD FUNDING | USD ".$amount_in_usd /100;
+            $trasnaction->note = "USD CARD FUNDING | USD " . $amount_in_usd / 100;
             $trasnaction->fee = 0;
             $trasnaction->e_charges = 0;
             $trasnaction->balance = $balance;
@@ -1025,13 +977,12 @@ class UserController extends Controller
             $trasnaction->user_id = Auth::id();
             $trasnaction->transaction_type = "CardWithdraw";
             $trasnaction->amount = $amt_in_naira;
-            $trasnaction->note = "Card Liquidation | NGN ". number_format($amt_in_naira, 2);
+            $trasnaction->note = "Card Liquidation | NGN " . number_format($amt_in_naira, 2);
             $trasnaction->fee = 0;
             $trasnaction->e_charges = 0;
             $trasnaction->balance = $balance;
             $trasnaction->status = 1;
             $trasnaction->save();
-
         }
 
         $mymessage = "VCARD ERROR " . "|" . $message;
@@ -1055,7 +1006,7 @@ class UserController extends Controller
         $bkey = env('BKEY');
         $card_fee_ngn =  $key->ngn_rate * $key->virtual_createcharge;
 
-        if(Auth::user()->main_wallet < $card_fee_ngn){
+        if (Auth::user()->main_wallet < $card_fee_ngn) {
             return back()->with('alert', 'Account balance is insufficient, Fund your wallet');
         }
 
@@ -1099,7 +1050,7 @@ class UserController extends Controller
 
         $var = json_decode($var);
         $status = $var->status ?? null;
-        $message = "VCard Error | ".  $var->message ?? null;
+        $message = "VCard Error | " .  $var->message ?? null;
 
         if ($status == "success") {
 
@@ -1200,7 +1151,7 @@ class UserController extends Controller
 
         $data = $var->data->transactions ?? null;
 
-        if($data == null ){
+        if ($data == null) {
 
             return back()->with('alert', 'No Transaction on card yet');
         }
@@ -3189,47 +3140,39 @@ class UserController extends Controller
 
         $usr = User::where('id', Auth::id())->first();
 
-        if($usr->status == 0){
+        if ($usr->status == 0) {
 
-            return back()->with('alert', 'Please Verify your account');
+            return back()->with('error', 'Please Verify your account');
         }
 
-        if($vb == null ){
+        if ($vb == null) {
 
             $create_account = create_p_account();
 
 
-            if($create_account  == 200){
+            if ($create_account  == 200) {
 
                 $data['account'] = VirtualAccount::whereUserId(Auth::id())->first() ?? null;
                 $data['charges'] = \App\Models\Charge::where('title', 'bwebpay')->first()->amount ?? null;
-                $data['gateways'] = Gateway::whereStatus(1)->orderBy('id', 'DESC')->get();
                 return view('user.fund.index', $data);
-
             }
 
-            return back()->with('alert', 'Funding service not available at the moment');
-        }else{
+            return back()->with('error', 'Funding service not available at the moment');
+        } else {
 
             $data['account'] = VirtualAccount::whereUserId(Auth::id())->get() ?? null;
             $usr = User::where('id', Auth::id())->first();
 
             $data['charges'] = \App\Models\Charge::where('title', 'bwebpay')->first()->amount ?? null;
-
-
-
             return view('user.fund.index', $data);
-
         }
-
-
-
     }
 
     public function bank_transfer()
     {
         $data['title'] = 'Bank transfer';
-        $data['bank'] = Adminbank::whereId(1)->first();
+        $data['bank'] = Ttmfb::all();
+
         return view('user.fund.bank_transfer', $data);
     }
 
@@ -4898,31 +4841,30 @@ class UserController extends Controller
 
         $ckcom = Compliance::where('user_id', Auth::guard('user')->user()->id)->first() ?? null;
 
-        if(empty($ckcom) || $ckcom == null){
-        $com = new Compliance();
-        $com->user_id = Auth::guard('user')->user()->id;
-        $com->first_name = $user->first_name;
-        $com->last_name = $user->last_name;
-        $com->save();
+        if (empty($ckcom) || $ckcom == null) {
+            $com = new Compliance();
+            $com->user_id = Auth::guard('user')->user()->id;
+            $com->first_name = $user->first_name;
+            $com->last_name = $user->last_name;
+            $com->save();
         }
 
 
-        $qr= Webkey::where('user_id', Auth::guard('user')->user()->id)->first()->qrlink ?? null;
-        $webkey= Webkey::where('user_id', Auth::guard('user')->user()->id)->first()->key ?? null;
+        $qr = Webkey::where('user_id', Auth::guard('user')->user()->id)->first()->qrlink ?? null;
+        $webkey = Webkey::where('user_id', Auth::guard('user')->user()->id)->first()->key ?? null;
 
 
-        if($qr == null){
+        if ($qr == null) {
 
-            $qrlink = "https://web.enkpay.com/custom-pay?key=".$webkey;
+            $qrlink = "https://web.enkpay.com/custom-pay?key=" . $webkey;
             Webkey::where('user_id', Auth::guard('user')->user()->id)->update(['qrlink' => $qrlink]);
-
         }
 
 
 
 
 
-        $data['qrlink']=Webkey::where('user_id', Auth::guard('user')->user()->id)->first()->qrlink ?? null;
+        $data['qrlink'] = Webkey::where('user_id', Auth::guard('user')->user()->id)->first()->qrlink ?? null;
 
         $data['key'] = Webkey::where('user_id', Auth::id())->first() ?? null;
         $data['compliance'] = Compliance::where('user_id', Auth::id())->first()->status ?? null;
@@ -5045,11 +4987,11 @@ class UserController extends Controller
     {
 
 
-     $key = env('BKEY');
+        $key = env('BKEY');
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $filename = 'image_'.time().'.'.$image->extension();
+            $filename = 'image_' . time() . '.' . $image->extension();
             $location = 'asset/images/' . $filename;
             Image::make($image)->save($location);
             $file_url = url('') . "/asset/images/$filename";
@@ -5155,42 +5097,39 @@ class UserController extends Controller
 
                 ]);
 
-                $first_name = Auth::user()->first_name;
-                $last_name = Auth::user()->last_name;
-                $user_id = Auth::id();
-                $b_name =  Auth::user()->b_name;
-                $phone = Auth::user()->phone;
-                $bvn = Auth::user()->bvn;
-                $b_phone = Auth::user()->b_name;
-                $pnum = preg_replace('/^./', '', $phone);
+            $first_name = Auth::user()->first_name;
+            $last_name = Auth::user()->last_name;
+            $user_id = Auth::id();
+            $b_name =  Auth::user()->b_name;
+            $phone = Auth::user()->phone;
+            $bvn = Auth::user()->bvn;
+            $b_phone = Auth::user()->b_name;
+            $pnum = preg_replace('/^./', '', $phone);
 
-                $create_v = create_p_account();
+            $create_v = create_p_account();
 
-                if( $create_v == 200){
-                    return redirect('user/dashboard')->with('success', 'Your account has been verified.');
-                }
+            if ($create_v == 200) {
+                return redirect('user/dashboard')->with('success', 'Your account has been verified.');
+            }
 
-                $message = "Pending Account Creation for |"  . $first_name. " ".  $last_name;
-
-
-                $check_business_name = Compliance::where('user_id', $user_id)->first()->first_name ?? null;
-                if ($check_business_name == null) {
-                    $get_temp_user = User::where('id', $user_id)->first();
-                    $com = new Compliance();
-                    $com->first_name = $get_temp_user->first_name;
-                    $com->last_name = $get_temp_user->last_name;
-                    $com->user_id = $get_temp_user->id;
-                    $com->state = $get_temp_user->state;
-                    $com->save();
-                }
-
-                return back()->with('alert', "Your verification is pending");
+            $message = "Pending Account Creation for |"  . $first_name . " " .  $last_name;
 
 
+            $check_business_name = Compliance::where('user_id', $user_id)->first()->first_name ?? null;
+            if ($check_business_name == null) {
+                $get_temp_user = User::where('id', $user_id)->first();
+                $com = new Compliance();
+                $com->first_name = $get_temp_user->first_name;
+                $com->last_name = $get_temp_user->last_name;
+                $com->user_id = $get_temp_user->id;
+                $com->state = $get_temp_user->state;
+                $com->save();
+            }
+
+            return back()->with('alert', "Your verification is pending");
         }
 
         return back()->with('alert', "$message");
-
     }
 
     public function submitcompliance(Request $request)
@@ -5295,7 +5234,7 @@ class UserController extends Controller
         }
         $com->save();
 
-        $message = $request->first_name. " " .$request->first_name ."| has submitted a compliance";
+        $message = $request->first_name . " " . $request->first_name . "| has submitted a compliance";
         send_notification($message);
 
 
@@ -5541,13 +5480,13 @@ class UserController extends Controller
 
 
 
-            $data['first_name'] = $request->first_name;
-            $data['last_name'] = $request->last_name;
-            $data['email'] = $request->email;
-            $data['phone'] = $request->phone;
-            $data['message'] = "Invalid code, Try again";
+        $data['first_name'] = $request->first_name;
+        $data['last_name'] = $request->last_name;
+        $data['email'] = $request->email;
+        $data['phone'] = $request->phone;
+        $data['message'] = "Invalid code, Try again";
 
-            return view('auth.verify-email', $data)->with('error', 'Your OTP Code is invalid, Try Again');
+        return view('auth.verify-email', $data)->with('error', 'Your OTP Code is invalid, Try Again');
 
 
 
@@ -5839,26 +5778,46 @@ class UserController extends Controller
     public function transactions()
     {
         $data['title'] = 'Transactions';
+        $date = date('y-m-d');
         $user = Auth::guard('user')->user()->id;
-        $data['all'] = Transactions::latest()->whereuser_id($user)->get();
-        $data['web_pay'] = Transactions::latest()->whereuser_id($user)->where('transaction_type', 'VirtualFundWallet')->get();
-        $data['bank_transfer'] = Transactions::latest()->whereuser_id($user)->get();
-        $data['wallet_fund'] = Transactions::latest()->whereuser_id($user)->get();
-        $data['bill_payment'] = Transactions::latest()->whereuser_id($user)->get();
+        $data['all'] = Transactions::where('user_id', Auth::id())
+            ->whereDate('created_at', $date)
+            ->get();
 
-        $data['total_in'] = Transactions::whereuser_id($user)->where('status', 1)->sum('credit');
-        $data['total_out'] = Transactions::whereuser_id($user)->where('status', 1)->sum('debit');
-        $data['transfer'] = Transactions::whereuser_id($user)->where('type', 'transfer')->sum('debit');
-        $data['bills'] = Transactions::whereuser_id($user)->where('type', 'vas')->sum('debit');
+        $data['cash_out'] = Transactions::whereDate('created_at', $date)
+            ->where([
+                'user_id' => Auth::id(),
+                'title' => 'POS Transasction',
+            ])->get();
+
+        $data['web_pay'] = Transactions::whereDate('created_at', $date)
+            ->where([
+                'user_id' => Auth::id(),
+                'transaction_type' => 'VirtualFundWallet',
+            ])->get();
 
 
 
-        $data['donation'] = Transactions::wheresender_id($user)->wheretype(2)->orWhere('receiver_id', $user)->where('type', 2)->latest()->get();
-        $data['invoice'] = Transactions::wheresender_id($user)->wheretype(3)->orWhere('receiver_id', $user)->where('type', 3)->latest()->get();
-        $data['bank_transfer'] = Banktransfer::whereUser_id(Auth::guard('user')->user()->id)->latest()->get();
-        $data['deposits'] = Deposits::whereUser_id(Auth::guard('user')->user()->id)->latest()->get();
-        $data['ext'] = Exttransfer::whereuser_id($user)->orWhere('receiver_id', $user)->latest()->get();
-        $data['sub'] = Subscribers::whereuser_id(Auth::guard('user')->user()->id)->latest()->get();
+        $data['bill_payment'] = Transactions::whereDate('created_at', $date)
+            ->where([
+                'user_id' => Auth::id(),
+                'type' => 'VAS',
+            ])->get();
+
+
+        $data['bank_transfer'] = Transactions::whereDate('created_at', $date)
+            ->where([
+                'user_id' => Auth::id(),
+                'transaction_type' => 'BankTransfer',
+            ])->get();
+
+
+        $data['reversal'] = Transactions::whereDate('created_at', $date)
+            ->where([
+                'user_id' => Auth::id(),
+                'transaction_type' => 'Reversal',
+            ])->get();
+
         return view('user.transactions.index', $data);
     }
     //End of Logs
@@ -6008,96 +5967,265 @@ class UserController extends Controller
         }
     }
 
-    public function Destroysubacct($id)
-    {
-        $set = Settings::first();
-        if ($set->stripe_connect == 1) {
-            $gate = Gateway::find(103);
-            $stripe = new StripeClient($gate->val2);
-            $data = Subaccounts::findOrFail($id);
-            $stripe->accounts->delete(
-                $data->stripe_id,
-            );
-            $check = Withdraw::wherestatus(0)->wheresub_id($id)->count();
-            if ($check > 0) {
-                return back()->with('alert', 'You cannot delete this sub account as it has pending withdraw request assigned to it!');
-            } else {
-                $ww = Withdraw::wherestatus(0)->wheresub_id($id)->first();
-                $ww->sub_id == null;
-                $ww->save();
-                $res =  $data->delete();
-                return back()->with('success', 'Sub account was Successfully deleted!');
-            }
-        } else {
-            $data = Subaccounts::findOrFail($id);
-            $check = Withdraw::wherestatus(0)->wheresub_id($id)->count();
-            if ($check > 0) {
-                return back()->with('alert', 'You cannot delete this sub account as it has pending withdraw request assigned to it!');
-            } else {
-                $ww = Withdraw::wherestatus(0)->wheresub_id($id)->first();
-                $ww->sub_id == null;
-                $ww->save();
-                $res =  $data->delete();
-                return back()->with('success', 'Sub account was Successfully deleted!');
-            }
-        }
-    }
-    public function Updatesubacct(Request $request)
-    {
-        $set = Settings::first();
-        if ($set->stripe_connect == 1) {
-            $gate = Gateway::find(103);
-            $stripe = new StripeClient($gate->val2);
-            try {
-                $country = Country::whereid(Auth::guard('user')->user()->country)->first();
-                $currency = Currency::whereStatus(1)->first();
-                $bank = Subaccounts::whereId($request->id)->first();
-                $charge = $stripe->accounts->update($bank->stripe_id, [
-                    'external_account' => [
-                        'object' => 'bank_account',
-                        'country' => $country->iso,
-                        'currency' => $currency->name,
-                        'account_holder_name' => $request->acct_name,
-                        'account_holder_type' => $request->account_type,
-                        'routing_number' => $request->routing_number,
-                        'account_number' => $request->acct_no,
-                    ],
-                ]);
-                $bank->name = $request->subname;
-                $bank->bank = $request->name;
-                $bank->acct_no = $request->acct_no;
-                $bank->acct_name = $request->acct_name;
-                $bank->swift_code = $request->swift;
-                $bank->account_type = $request->account_type;
-                $bank->routing_number = $request->routing_number;
-                $bank->save();
-                return back()->with('success', 'Sub account was successfully updated');
-            } catch (\Stripe\Exception\RateLimitException $e) {
-                return back()->with('alert', $e->getMessage());
-            } catch (\Stripe\Exception\InvalidRequestException $e) {
-                return back()->with('alert', $e->getMessage());
-            } catch (\Stripe\Exception\AuthenticationException $e) {
-                return back()->with('alert', $e->getMessage());
-            } catch (\Stripe\Exception\ApiConnectionException $e) {
-                return back()->with('alert', $e->getMessage());
-            } catch (\Stripe\Exception\ApiErrorException $e) {
-                return back()->with('alert', $e->getMessage());
-            } catch (Exception $e) {
-                return back()->with('alert', $e->getMessage());
-            }
-        } else {
-            $bank = Subaccounts::whereId($request->id)->first();
-            $bank->name = $request->subname;
-            $bank->bank = $request->name;
-            $bank->acct_no = $request->acct_no;
-            $bank->acct_name = $request->acct_name;
-            $bank->swift_code = $request->swift;
-            $bank->account_type = $request->account_type;
-            $bank->routing_number = $request->routing_number;
-            $bank->save();
-            return back()->with('success', 'Sub account was successfully updated');
-        }
-    }
-    //End of Sub Accounts
 
+    public function view_transaction(Request $request)
+    {
+
+
+        $data['val']=Transactions::where('user_id', Auth::id())
+        ->where('id', $request->id)
+        ->first();
+
+
+        return view('user.transactions.view-trx', $data);
+
+
+
+
+    }
+
+    public function trx_search(Request $request)
+    {
+
+
+
+
+
+
+        if ($request->from != null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
+
+
+            $data['title'] = 'Transactions';
+            $data['all'] = Transactions::where('user_id', Auth::id())
+                ->whereDate('created_at', $request->from)
+                ->get();
+
+            $data['cash_out'] = Transactions::whereDate('created_at', $request->from)
+                ->where([
+                    'user_id' => Auth::id(),
+                    'title' => 'POS Transasction',
+                ])->get();
+
+            $data['web_pay'] = Transactions::whereDate('created_at', $request->from)
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => 'VirtualFundWallet',
+                ])->get();
+
+
+
+            $data['bill_payment'] = Transactions::whereDate('created_at', $request->from)
+                ->where([
+                    'user_id' => Auth::id(),
+                    'type' => 'VAS',
+                ])->get();
+
+
+            $data['bank_transfer'] = Transactions::whereDate('created_at', $request->from)
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => 'BankTransfer',
+                ])->get();
+
+
+            $data['reversal'] = Transactions::whereDate('created_at', $request->from)
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => 'Reversal',
+                ])->get();
+
+
+            $data['date_from'] = $request->from;
+            $data['date_to'] = $request->to;
+
+            return view('user.transactions.index', $data);
+        }
+
+
+
+
+        if ($request->from == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
+
+
+            $data['title'] = 'Transactions';
+            $user = Auth::guard('user')->user()->id;
+            $data['title'] = 'Transactions';
+            $data['all'] = Transactions::latest()->where('user_id', Auth::id())->get();
+
+            $data['cash_out'] = Transactions::latest()->where('user_id', Auth::id())
+                ->where('title', 'POS Transasction')
+                ->get();
+
+            $data['web_pay'] = Transactions::latest()->where('user_id', Auth::id())
+                ->where('transaction_type', 'VirtualFundWallet')
+                ->get();
+
+
+            $data['bill_payment'] = Transactions::latest()->where('user_id', Auth::id())
+                ->where('type', 'VAS')
+                ->get();
+
+            $data['bank_transfer'] = Transactions::latest()->where('user_id', Auth::id())
+                ->where('transaction_type', 'BankTransfer')
+                ->get();
+
+
+            $data['reversal'] = Transactions::latest()->where('user_id', Auth::id())
+                ->where('transaction_type', 'Reversal')
+                ->get();
+
+            return view('user.transactions.index', $data);
+        }
+
+
+        if ($request->from != null && $request->status == null && $request->to != null && $request->trx_type == null && $request->ref_trans_id == null) {
+
+
+            $data['title'] = 'Transactions';
+            $user = Auth::guard('user')->user()->id;
+            $data['title'] = 'Transactions';
+            $data['all'] = Transactions::where('user_id', Auth::id())
+                ->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->get();
+
+            $data['cash_out'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'user_id' => Auth::id(),
+                    'title' => 'POS Transasction',
+                ])->get();
+
+            $data['web_pay'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => 'VirtualFundWallet',
+                ])->get();
+
+
+
+            $data['bill_payment'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'user_id' => Auth::id(),
+                    'type' => 'VAS',
+                ])->get();
+
+
+            $data['bank_transfer'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => 'BankTransfer',
+                ])->get();
+
+
+            $data['reversal'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => 'Reversal',
+                ])->get();
+
+
+
+            return view('user.transactions.index', $data);
+        }
+
+
+        if ($request->from != null && $request->status == null && $request->to != null && $request->trx_type != null && $request->ref_trans_id == null) {
+
+
+
+            $data['title'] = 'Transactions';
+            $user = Auth::guard('user')->user()->id;
+            $data['title'] = 'Transactions';
+            $data['all'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->trx_type,
+                ])->get();
+
+            $data['cash_out'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->trx_type,
+                ])->get();
+
+            $data['web_pay'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->trx_type,
+                ])->get();
+
+
+
+            $data['bill_payment'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->trx_type,
+                ])->get();
+
+
+            $data['bank_transfer'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->trx_type,
+                ])->get();
+
+
+            $data['reversal'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->trx_type,
+                ])->get();
+
+
+            $data['date_from'] = $request->from;
+            $data['date_to'] = $request->to;
+
+
+            return view('user.transactions.index', $data);
+        }
+
+
+        if ($request->from == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id != null) {
+
+
+            $data['title'] = 'Transactions';
+            $user = Auth::guard('user')->user()->id;
+            $data['title'] = 'Transactions';
+            $data['all'] = Transactions::where([
+                    'user_id' => Auth::id(),
+                    'ref_trans_id' => $request->ref_trans_id,
+                ])->get();
+
+            $data['cash_out'] =Transactions::where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->ref_trans_id,
+            ])->get();
+
+            $data['web_pay'] = Transactions::where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->ref_trans_id,
+                ])->get();
+
+
+
+            $data['bill_payment'] = Transactions::where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->ref_trans_id,
+                ])->get();
+
+
+            $data['bank_transfer'] = Transactions::where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->ref_trans_id,
+                ])->get();
+
+
+            $data['reversal'] = Transactions::where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->ref_trans_id,
+            ])->get();
+
+
+            return view('user.transactions.index', $data);
+        }
+    }
 }

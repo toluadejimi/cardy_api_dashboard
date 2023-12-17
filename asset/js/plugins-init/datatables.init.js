@@ -220,7 +220,79 @@ let dataSet = [
 		  }
 		
 	}); 
+
+	var table = $('#example51').DataTable({
+		searching: false,
+		paging:true,
+		select: false,
+		info: true,         
+		lengthChange:false ,
+		language: {
+			paginate: {
+			  next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
+			  previous: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>' 
+			}
+		  }
+		
+	}); 
+	var table = $('#example52').DataTable({
+		searching: false,
+		paging:true,
+		select: false,
+		info: true,         
+		lengthChange:false ,
+		language: {
+			paginate: {
+			  next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
+			  previous: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>' 
+			}
+		  }
+		
+	}); 
+	var table = $('#example53').DataTable({
+		searching: false,
+		paging:true,
+		select: false,
+		info: true,         
+		lengthChange:false ,
+		language: {
+			paginate: {
+			  next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
+			  previous: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>' 
+			}
+		  }
+		
+	}); 
 	
+	var table = $('#example54').DataTable({
+		searching: false,
+		paging:true,
+		select: false,
+		info: true,         
+		lengthChange:false ,
+		language: {
+			paginate: {
+			  next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
+			  previous: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>' 
+			}
+		  }
+		
+	}); 
+	
+	var table = $('#example55').DataTable({
+		searching: false,
+		paging:true,
+		select: false,
+		info: true,         
+		lengthChange:false ,
+		language: {
+			paginate: {
+			  next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
+			  previous: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>' 
+			}
+		  }
+		
+	}); 
 	// dataTable6
 		var table = $('#example6').DataTable({
 			searching: false,

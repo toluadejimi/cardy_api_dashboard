@@ -316,7 +316,9 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="transactions">All Transactions</a></li>
-                            <li><a href="#">Send Money</a></li>
+                            <li><a href="bank_transfer">Send Money</a></li>
+                            <li><a href="fund">Receive Money</a></li>
+
 
                         </ul>
                     </li>

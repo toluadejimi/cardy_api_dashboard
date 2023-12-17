@@ -1,26 +1,27 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FrontendController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\faController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\AdminController;
+use App\Http\Controllers\Localization;
+use App\Http\Controllers\WebController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CheckController;
-use App\Http\Controllers\WebController;
-use App\Http\Controllers\WithdrawController;
+use App\Http\Controllers\ProxyController;
 use App\Http\Controllers\TradeController;
+use App\Http\Controllers\Auth\faController;
+use App\Http\Controllers\DepositController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\TransferController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\MerchantController;
-use App\Http\Controllers\DepositController;
-use App\Http\Controllers\Localization;
-use App\Http\Controllers\User\ForgotPasswordController;
-use App\Http\Controllers\User\ResetPasswordController;
+use App\Http\Controllers\TransferController;
+use App\Http\Controllers\WithdrawController;
+use App\Http\Controllers\Auth\AdminController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\User\ResetPasswordController;
+use App\Http\Controllers\User\ForgotPasswordController;
 
 
 
@@ -37,6 +38,7 @@ use App\Http\Controllers\LocalizationController;
 */
 
 
+Route::get('/proxy', [ProxyController::class, 'proxy']);
 
 
 Route::get('pricing', [LocalizationController::class, 'pricing']);
@@ -200,6 +202,8 @@ Route::group(['prefix' => 'user', ], function () {
     Route::get('verify-email', [UserController::class, 'sendEmailVcode'])->name('user.send-emailVcode');
     Route::post('postEmailVerify', [UserController::class, 'postEmailVerify'])->name('user.email-verify');
         Route::group(['middleware'=>'auth:user'], function() {
+
+            
             Route::get('no-kyc', [UserController::class, 'no_kyc'])->name('user.no-kyc');
             Route::get('no-country', [UserController::class, 'no_country'])->name('update.support.country');
             Route::post('compliance', [UserController::class, 'submitcompliance'])->name('submit.compliance');
@@ -207,7 +211,9 @@ Route::group(['prefix' => 'user', ], function () {
             Route::middleware(['Ban', 'Country'])->group(function () {
                 Route::middleware([])->group(function () {
                     Route::middleware([])->group(function () {
-                        Route::post('card', [UserController::class, 'card'])->name('card');
+                        Route::post('user-transaction-search', [UserController::class, 'trx_search'])->name('trx-search');
+                        Route::get('view-transaction', [UserController::class, 'view_transaction'])->name('view-transaction');
+
                         Route::get('stripe_card/{id}', [UserController::class, 'stripecard'])->name('stripe.card');
                         Route::post('flutter', [UserController::class, 'newflutter'])->name('flutter');
                         Route::post('search', [UserController::class, 'search'])->name('search');

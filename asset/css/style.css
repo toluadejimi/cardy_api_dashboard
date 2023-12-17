@@ -23269,7 +23269,7 @@ code {
   background: #b1aeae;
   border-color: #b1aeae; }
 
-.overlay-box {
+.overlay2-box {
   position: relative;
   z-index: 1; }
   .overlay-box:after {
@@ -23279,9 +23279,24 @@ code {
     left: 0;
     top: 0;
     position: absolute;
-    opacity: 0.85;
-    background: var(--primary);
+    opacity: 2;
+    background: rgb(255 255 255);
     z-index: -1; }
+
+
+    .overlay2-box {
+        position: relative;
+        z-index: 1; }
+        .overlay-box:after {
+          content: "";
+          width: 100%;
+          height: 100%;
+          left: 0;
+          top: 0;
+          position: absolute;
+          opacity: 2;
+          background: rgb(229 239 241);
+          z-index: -1; }
 
 .rating-bar {
   font-size: 0.8125rem; }
