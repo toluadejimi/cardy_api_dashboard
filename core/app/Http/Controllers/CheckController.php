@@ -127,7 +127,7 @@ class CheckController extends Controller
     {
         $data['title'] = 'Transactions';
 
-        if ($request->from != null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
+        if ($request->from != null && $request->session_id == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
 
 
             $data['title'] = 'Transactions';
@@ -173,7 +173,7 @@ class CheckController extends Controller
 
 
 
-        if ($request->from == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
+        if ($request->from == null && $request->session_id == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
 
 
             $data['title'] = 'Transactions';
@@ -202,7 +202,7 @@ class CheckController extends Controller
         }
 
 
-        if ($request->from != null && $request->status == null && $request->to != null && $request->trx_type == null && $request->ref_trans_id == null) {
+        if ($request->from != null && $request->session_id == null &&  $request->status == null && $request->to != null && $request->trx_type == null && $request->ref_trans_id == null) {
 
 
             $data['title'] = 'Transactions';
@@ -246,7 +246,7 @@ class CheckController extends Controller
         }
 
 
-        if ($request->from != null && $request->status == null && $request->to != null && $request->trx_type != null && $request->ref_trans_id == null) {
+        if ($request->from != null && $request->session_id == null && $request->status == null && $request->to != null && $request->trx_type != null && $request->ref_trans_id == null) {
 
 
 
@@ -296,7 +296,7 @@ class CheckController extends Controller
         }
 
 
-        if ($request->from == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id != null) {
+        if ($request->from == null && $request->session_id == null &&  $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id != null) {
 
 
             $data['title'] = 'Transactions';
@@ -305,6 +305,48 @@ class CheckController extends Controller
             $data['all'] = Transactions::where([
                 
                 'ref_trans_id' => $request->ref_trans_id,
+            ])->get();
+
+            $data['cash_out'] = Transactions::where([
+                'transaction_type' => $request->ref_trans_id,
+            ])->get();
+
+            $data['web_pay'] = Transactions::where([
+                'transaction_type' => $request->ref_trans_id,
+            ])->get();
+
+
+
+            $data['bill_payment'] = Transactions::where([
+                
+                'transaction_type' => $request->ref_trans_id,
+            ])->get();
+
+
+            $data['bank_transfer'] = Transactions::where([
+                
+                'transaction_type' => $request->ref_trans_id,
+            ])->get();
+
+
+            $data['reversal'] = Transactions::where([
+                'transaction_type' => $request->ref_trans_id,
+            ])->get();
+
+
+            return view('admin.all-transactions.index', $data);
+        }
+
+
+        if ($request->session_id != null && $request->from == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
+
+
+            $data['title'] = 'Transactions';
+            //$user = Auth::guard('user')->user()->id;
+            $data['title'] = 'Transactions';
+            $data['all'] = Transactions::where([
+                
+                'p_sessionId' => $request->session_id,
             ])->get();
 
             $data['cash_out'] = Transactions::where([

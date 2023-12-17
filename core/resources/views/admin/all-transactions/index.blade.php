@@ -62,7 +62,14 @@
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-3">
                                 <label for="from">Transaction Refrence</label>
                                 <input type="text" class="form-control" name="ref_trans_id"
-                                    placeholder="Enter Refrence or session ID">
+                                    placeholder="Enter Refrence">
+                            </div>
+
+
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-3">
+                                <label for="from">Transaction Refrence</label>
+                                <input type="text" class="form-control" name="session_id"
+                                    placeholder="Enter session ID">
                             </div>
 
 

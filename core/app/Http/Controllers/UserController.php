@@ -6044,7 +6044,7 @@ class UserController extends Controller
 
 
 
-        if ($request->from == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
+        if ($request->from == null  && $request->session_id == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
 
 
             $data['title'] = 'Transactions';
@@ -6078,7 +6078,7 @@ class UserController extends Controller
         }
 
 
-        if ($request->from != null && $request->status == null && $request->to != null && $request->trx_type == null && $request->ref_trans_id == null) {
+        if ($request->from != null && $request->session_id == null && $request->status == null && $request->to != null && $request->trx_type == null && $request->ref_trans_id == null) {
 
 
             $data['title'] = 'Transactions';
@@ -6128,7 +6128,7 @@ class UserController extends Controller
         }
 
 
-        if ($request->from != null && $request->status == null && $request->to != null && $request->trx_type != null && $request->ref_trans_id == null) {
+        if ($request->from != null && $request->session_id == null && $request->status == null && $request->to != null && $request->trx_type != null && $request->ref_trans_id == null) {
 
 
 
@@ -6184,7 +6184,52 @@ class UserController extends Controller
         }
 
 
-        if ($request->from == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id != null) {
+        if ($request->from == null && $request->session_id == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id != null) {
+
+
+            $data['title'] = 'Transactions';
+            $user = Auth::guard('user')->user()->id;
+            $data['title'] = 'Transactions';
+            $data['all'] = Transactions::where([
+                    'user_id' => Auth::id(),
+                    'ref_trans_id' => $request->ref_trans_id,
+                ])->get();
+
+            $data['cash_out'] =Transactions::where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->ref_trans_id,
+            ])->get();
+
+            $data['web_pay'] = Transactions::where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->ref_trans_id,
+                ])->get();
+
+
+
+            $data['bill_payment'] = Transactions::where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->ref_trans_id,
+                ])->get();
+
+
+            $data['bank_transfer'] = Transactions::where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->ref_trans_id,
+                ])->get();
+
+
+            $data['reversal'] = Transactions::where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->ref_trans_id,
+            ])->get();
+
+
+            return view('user.transactions.index', $data);
+        }
+
+
+        if ($request->from == null && $request->session_id != null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
 
 
             $data['title'] = 'Transactions';
