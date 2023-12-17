@@ -67,7 +67,7 @@
 
 
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-3">
-                                <label for="from">Transaction Refrence</label>
+                                <label for="from">Session ID</label>
                                 <input type="text" class="form-control" name="session_id"
                                     placeholder="Enter session ID">
                             </div>
