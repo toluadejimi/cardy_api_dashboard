@@ -1045,23 +1045,28 @@ if (!function_exists('boomtime')) {
 
 
 
-function guid() {
-    function s4() {
+function guid()
+{
+    function s4()
+    {
         return substr(md5(uniqid(rand(), true)), 0, 4);
     }
 
     return s4() . s4() . s4() . s4() . s4() . s4() . s4() . s4();
 }
 
-function timestamp() {
+function timestamp()
+{
     return substr(strval(time()), 0, 10);
 }
 
-function sha512($message) {
+function sha512($message)
+{
     return hash('sha512', $message);
 }
 
-function ttmfb_balance(){
+function ttmfb_balance()
+{
 
 
     $username = env('MUSERNAME');
@@ -1069,7 +1074,7 @@ function ttmfb_balance(){
     $sckey = env('MSCKEY');
 
     $unixTimeStamp = timestamp();
-    $sha = sha512($unixTimeStamp.$prkey);
+    $sha = sha512($unixTimeStamp . $prkey);
     $authHeader = 'magtipon ' . $username . ':' . base64_encode(hex2bin($sha));
 
 
@@ -1103,18 +1108,13 @@ function ttmfb_balance(){
 
     $status = $var->ResponseCode ?? null;
 
-    if($status == 90000){
+    if ($status == 90000) {
 
         return $balance;
-
-    }else{
+    } else {
 
         return "No Network";
     }
-
-
-
-
 }
 
 
@@ -1619,8 +1619,8 @@ if (!function_exists('get_banks')) {
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => 'GET',
                 CURLOPT_HTTPHEADER => array(
-                "api-key: $vtkey",
-                "public-key: $pkey"
+                    "api-key: $vtkey",
+                    "public-key: $pkey"
                 ),
             ));
 
@@ -1632,7 +1632,7 @@ if (!function_exists('get_banks')) {
             $status = $var->code ?? null;
 
 
-            if($status == 1 ){
+            if ($status == 1) {
                 return $var->contents->balance;
             }
 
@@ -1697,10 +1697,9 @@ if (!function_exists('get_banks')) {
 
             if ($status == 'success') {
                 return $var->data->issuing_balance_USD / 100;
-            }else{
+            } else {
                 return 0;
             }
-
         }
     }
 
@@ -1734,11 +1733,9 @@ if (!function_exists('get_banks')) {
 
             if ($status == 'success') {
                 return $var->data->{'NGN-USD'} / 100;
-            }else{
+            } else {
                 return 0;
             }
-
-
         }
     }
 
@@ -1819,40 +1816,4 @@ if (!function_exists('get_banks')) {
             $var = json_decode($var);
         }
     }
-
-
-
-  
-
-
-
-
-
-
-
-
-}
-
-
-function get_banks(){
-    $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://web.enkpay.com/api/get-banks',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'GET',
-        CURLOPT_HTTPHEADER => array(
-            'Content-Type: application/json',
-        ),
-    ));
-
-    $var = curl_exec($curl);
-    curl_close($curl);
-    $var = json_decode($var);
-    return $var->data;
 }

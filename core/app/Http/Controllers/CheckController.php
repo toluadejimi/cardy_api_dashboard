@@ -75,7 +75,7 @@ class CheckController extends Controller
     public function all_transactions()
     {
         $data['title'] = 'Transactions';
-        $data['transactions'] = Transactions::latest()->take('500')->get();
+        $data['all'] = Transactions::latest()->take('500')->get();
         $data['moneyin'] = Transactions::select('credit')->sum('credit');
         $data['moneyout'] = Transactions::select('debit')->where('status', 1)->sum('debit');
         $data['postransfer'] = Transactions::select('debit')->where('transaction_type', 'FundTransfer')->where('status', 1)->sum('debit');
@@ -84,6 +84,40 @@ class CheckController extends Controller
         $data['walletfund'] = Transactions::select('credit')->where('transaction_type', 'VirtualFundWallet')->where('status', 1)->sum('credit');
         $data['webpay'] = Transactions::select('credit')->where('type', 'webpay')->where('status', 1)->sum('credit');
         $data['vas'] = Transactions::select('debit')->where('type', 'vas')->where('status', 1)->sum('debit');
+   
+
+   
+    $data['cash_out'] = Transactions::where([
+            'title' => 'POS Transasction',
+        ])->take('500')->get();
+
+    $data['web_pay'] = Transactions::where([
+            
+            'transaction_type' => 'VirtualFundWallet',
+        ])->take('500')->get();
+
+
+
+    $data['bill_payment'] = Transactions::where([
+            
+            'type' => 'VAS',
+        ])->take('500')->get();
+
+
+    $data['bank_transfer'] = Transactions::where([
+            
+            'transaction_type' => 'BankTransfer',
+        ])->take('500')->get();
+
+
+    $data['reversal'] = Transactions::where([
+            'transaction_type' => 'Reversal',
+        ])->take('500')->get();
+
+
+        
+
+
 
         return view('admin.all-transactions.index', $data);
     }
@@ -93,50 +127,215 @@ class CheckController extends Controller
     {
         $data['title'] = 'Transactions';
 
-        $transaction_type = $request->type ?? null;
-
-        $data['transactions'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])->get();
-
-        $data['purchase'] = Transactions::select('credit')
-            ->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
-            ->where('transaction_type', 'CashOut')
-            ->where('status', 1)->sum('credit');
+        if ($request->from != null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
 
 
-        $data['mobiletransfer'] = Transactions::select('debit')
-            ->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
-            ->where('transaction_type', 'BankTransfer')
-            ->where('status', 1)->sum('debit');
+            $data['title'] = 'Transactions';
+            $data['all'] = Transactions::whereDate('created_at', $request->from)
+                ->get();
+
+            $data['cash_out'] = Transactions::whereDate('created_at', $request->from)
+                ->where([
+                    'title' => 'POS Transasction',
+                ])->get();
+
+            $data['web_pay'] = Transactions::whereDate('created_at', $request->from)
+                ->where([
+                    'transaction_type' => 'VirtualFundWallet',
+                ])->get();
 
 
-        $data['moneyin'] = Transactions::select('credit')
-            ->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
-            ->sum('credit');
 
-        $data['postransfer'] = 0;
-
-        $data['moneyout'] = Transactions::select('debit')
-            ->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
-            ->where('status', 1)->sum('debit');
-
-        $data['walletfund'] = Transactions::select('credit')
-            ->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
-            ->where('transaction_type', 'VirtualFundWallet')
-            ->where('status', 1)->sum('credit');
+            $data['bill_payment'] = Transactions::whereDate('created_at', $request->from)
+                ->where([
+                    'type' => 'VAS',
+                ])->get();
 
 
-        $data['webpay'] = Transactions::select('credit')
-            ->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
-            ->where('type', 'webpay')->where('status', 1)
-            ->sum('credit');
+            $data['bank_transfer'] = Transactions::whereDate('created_at', $request->from)
+                ->where([
+                    'transaction_type' => 'BankTransfer',
+                ])->get();
 
 
-        $data['vas'] = Transactions::select('debit')
-            ->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
-            ->where('type', 'vas')->where('status', 1)
-            ->sum('debit');
+            $data['reversal'] = Transactions::whereDate('created_at', $request->from)
+                ->where([
+                    'transaction_type' => 'Reversal',
+                ])->get();
 
-        return view('admin.all-transactions.index', $data);
+
+            $data['date_from'] = $request->from;
+            $data['date_to'] = $request->to;
+
+            return view('admin.all-transactions.index', $data);
+        }
+
+
+
+
+        if ($request->from == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
+
+
+            $data['title'] = 'Transactions';
+            $user = Auth::guard('user')->user()->id;
+            $data['title'] = 'Transactions';
+            $data['all'] = Transactions::latest()->get();
+
+            $data['cash_out'] = Transactions::latest()->where('title', 'POS Transasction')
+                ->get();
+
+            $data['web_pay'] = Transactions::latest()->where('transaction_type', 'VirtualFundWallet')
+                ->get();
+
+
+            $data['bill_payment'] = Transactions::latest()->where('type', 'VAS')
+                ->get();
+
+            $data['bank_transfer'] = Transactions::latest()->where('transaction_type', 'BankTransfer')
+                ->get();
+
+
+            $data['reversal'] = Transactions::latest()->where('transaction_type', 'Reversal')
+                ->get();
+
+            return view('admin.all-transactions.index', $data);
+        }
+
+
+        if ($request->from != null && $request->status == null && $request->to != null && $request->trx_type == null && $request->ref_trans_id == null) {
+
+
+            $data['title'] = 'Transactions';
+            $user = Auth::guard('user')->user()->id;
+            $data['title'] = 'Transactions';
+            $data['all'] = Transactions::whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->get();
+
+            $data['cash_out'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'title' => 'POS Transasction',
+                ])->get();
+
+            $data['web_pay'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'transaction_type' => 'VirtualFundWallet',
+                ])->get();
+
+
+
+            $data['bill_payment'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'type' => 'VAS',
+                ])->get();
+
+
+            $data['bank_transfer'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'transaction_type' => 'BankTransfer',
+                ])->get();
+
+
+            $data['reversal'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'transaction_type' => 'Reversal',
+                ])->get();
+
+
+
+            return view('admin.all-transactions.index', $data);
+        }
+
+
+        if ($request->from != null && $request->status == null && $request->to != null && $request->trx_type != null && $request->ref_trans_id == null) {
+
+
+
+            $data['title'] = 'Transactions';
+            $user = Auth::guard('user')->user()->id;
+            $data['title'] = 'Transactions';
+            $data['all'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'transaction_type' => $request->trx_type,
+                ])->get();
+
+            $data['cash_out'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'transaction_type' => $request->trx_type,
+                ])->get();
+
+            $data['web_pay'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'transaction_type' => $request->trx_type,
+                ])->get();
+
+
+
+            $data['bill_payment'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'transaction_type' => $request->trx_type,
+                ])->get();
+
+
+            $data['bank_transfer'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'transaction_type' => $request->trx_type,
+                ])->get();
+
+
+            $data['reversal'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'transaction_type' => $request->trx_type,
+                ])->get();
+
+
+            $data['date_from'] = $request->from;
+            $data['date_to'] = $request->to;
+
+
+            return view('admin.all-transactions.index', $data);
+        }
+
+
+        if ($request->from == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id != null) {
+
+
+            $data['title'] = 'Transactions';
+            //$user = Auth::guard('user')->user()->id;
+            $data['title'] = 'Transactions';
+            $data['all'] = Transactions::where([
+                
+                'ref_trans_id' => $request->ref_trans_id,
+            ])->get();
+
+            $data['cash_out'] = Transactions::where([
+                'transaction_type' => $request->ref_trans_id,
+            ])->get();
+
+            $data['web_pay'] = Transactions::where([
+                'transaction_type' => $request->ref_trans_id,
+            ])->get();
+
+
+
+            $data['bill_payment'] = Transactions::where([
+                
+                'transaction_type' => $request->ref_trans_id,
+            ])->get();
+
+
+            $data['bank_transfer'] = Transactions::where([
+                
+                'transaction_type' => $request->ref_trans_id,
+            ])->get();
+
+
+            $data['reversal'] = Transactions::where([
+                'transaction_type' => $request->ref_trans_id,
+            ])->get();
+
+
+            return view('admin.all-transactions.index', $data);
+        }
     }
 
 
@@ -1315,17 +1514,17 @@ class CheckController extends Controller
         $usr = User::where('id', $userId)->first();
 
         $userTransactions = Transaction::where('user_id', $userId)
-        ->whereBetween('created_at', [$startDate, $endDate])
-        ->get();
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->get();
 
 
         $totalDebit = Transaction::where('user_id', $userId)
-        ->whereBetween('created_at', [$startDate, $endDate])
-        ->sum('debit');
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->sum('debit');
 
         $totalCredit = Transaction::where('user_id', $userId)
-        ->whereBetween('created_at', [$startDate, $endDate])
-        ->sum('credit');
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->sum('credit');
 
         // Create a new FPDF instance
         $pdf = new FPDF();
@@ -1336,7 +1535,7 @@ class CheckController extends Controller
 
         // Add title
         //$pdf->Cell(50, 10, $usr->first_name. $usr->last_name , 0, 1, 'C');
-        $pdf->Cell(40, 10, 'Transaction Report for'.$startDate. $endDate , 0, 1, 'C');
+        $pdf->Cell(40, 10, 'Transaction Report for' . $startDate . $endDate, 0, 1, 'C');
 
         // Add headers
         $pdf->Cell(30, 10, 'Transaction Date', 1);

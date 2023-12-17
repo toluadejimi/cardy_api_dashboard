@@ -682,7 +682,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     Route::get('all-transactions', [CheckController::class, 'all_transactions'])->name('admin.all-transactions');
 
-    Route::get('search-transactions', [CheckController::class, 'search_transactions'])->name('admin.search-transactions');
+    Route::post('search-transactions', [CheckController::class, 'search_transactions'])->name('admin.search-transactions');
 
 
 
