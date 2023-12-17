@@ -1906,4 +1906,18 @@ class CheckController extends Controller
 
         return back()->with('success', 'Terminal Payment  Successfully Paid');
     }
+
+    public function view_transaction(Request $request)
+    {
+
+
+        $data['val']=Transactions::where('id', $request->id)
+        ->first();
+
+        return view('user.transactions.view-trx', $data);
+
+
+
+
+    }
 }

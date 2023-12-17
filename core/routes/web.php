@@ -444,7 +444,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::get('/dashboard', [CheckController::class, 'dashboard'])->name('admin.dashboard');
 
 
-    Route::get('view-transaction', [UserController::class, 'view_transaction'])->name('view-transaction');
+    Route::get('view-transaction', [CheckController::class, 'view_transaction'])->name('view-transaction');
 
     //Blog controller
     Route::post('/createcategory', [PostController::class, 'CreateCategory']);
