@@ -177,8 +177,6 @@ class CheckController extends Controller
 
 
             $data['title'] = 'Transactions';
-            $user = Auth::guard('user')->user()->id;
-            $data['title'] = 'Transactions';
             $data['all'] = Transactions::latest()->get();
 
             $data['cash_out'] = Transactions::latest()->where('title', 'POS Transasction')
@@ -205,8 +203,6 @@ class CheckController extends Controller
         if ($request->from != null && $request->session_id == null &&  $request->status == null && $request->to != null && $request->trx_type == null && $request->ref_trans_id == null) {
 
 
-            $data['title'] = 'Transactions';
-            $user = Auth::guard('user')->user()->id;
             $data['title'] = 'Transactions';
             $data['all'] = Transactions::whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
                 ->get();
@@ -251,8 +247,7 @@ class CheckController extends Controller
 
 
             $data['title'] = 'Transactions';
-            $user = Auth::guard('user')->user()->id;
-            $data['title'] = 'Transactions';
+   
             $data['all'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
                 ->where([
                     'transaction_type' => $request->trx_type,
@@ -341,8 +336,6 @@ class CheckController extends Controller
         if ($request->session_id != null && $request->from == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
 
 
-            $data['title'] = 'Transactions';
-            //$user = Auth::guard('user')->user()->id;
             $data['title'] = 'Transactions';
             $data['all'] = Transactions::where([
                 
