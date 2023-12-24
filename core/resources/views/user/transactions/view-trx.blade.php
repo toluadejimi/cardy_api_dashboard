@@ -20,6 +20,8 @@
                                         <div >
                                             <span class="font-w400 d-block">Transaction ID</span>
                                             <p class="small me-2">{{$val->ref_trans_id}}</p>
+                                            <p class="small me-2">{{$val->e_ref}}</p>
+
                                         </div>
 										<div class="add-btn me-2">
                                             <button class="btn btn-primary"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
