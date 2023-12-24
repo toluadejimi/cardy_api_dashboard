@@ -23924,7 +23924,7 @@ table.dataTable thead th {
 
 table.dataTable tbody td {
   padding: 10px 25px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 100;
   border-bottom: 0;
   color: #fff; }
@@ -23933,7 +23933,7 @@ table.dataTable tbody td {
       padding: 4px 3px; } }
   @media only screen and (max-width: 87.5rem) {
     table.dataTable tbody td {
-      font-size: 7px;
+      font-size: 12px;
       padding: 4px 7px; } }
 
 table.dataTable tr.selected {

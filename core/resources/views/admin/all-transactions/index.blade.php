@@ -100,6 +100,24 @@
                 </div>
             </div>
 
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="col-xl-6 col-md-6 col-sm-12">
+
+                        
+
+
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+
 
 
         </div>

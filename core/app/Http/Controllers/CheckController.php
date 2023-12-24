@@ -84,28 +84,28 @@ class CheckController extends Controller
         $data['walletfund'] = Transactions::select('credit')->where('transaction_type', 'VirtualFundWallet')->where('status', 1)->sum('credit');
         $data['webpay'] = Transactions::select('credit')->where('type', 'webpay')->where('status', 1)->sum('credit');
         $data['vas'] = Transactions::select('debit')->where('type', 'vas')->where('status', 1)->sum('debit');
-   
 
-   
+
+
     $data['cash_out'] = Transactions::where([
             'title' => 'POS Transasction',
         ])->take('500')->get();
 
     $data['web_pay'] = Transactions::where([
-            
+
             'transaction_type' => 'VirtualFundWallet',
         ])->take('500')->get();
 
 
 
     $data['bill_payment'] = Transactions::where([
-            
+
             'type' => 'VAS',
         ])->take('500')->get();
 
 
     $data['bank_transfer'] = Transactions::where([
-            
+
             'transaction_type' => 'BankTransfer',
         ])->take('500')->get();
 
@@ -113,11 +113,6 @@ class CheckController extends Controller
     $data['reversal'] = Transactions::where([
             'transaction_type' => 'Reversal',
         ])->take('500')->get();
-
-
-        
-
-
 
         return view('admin.all-transactions.index', $data);
     }
@@ -247,10 +242,10 @@ class CheckController extends Controller
 
 
             $data['title'] = 'Transactions';
-   
+
             $data['all'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
                 ->where([
-                    'transaction_type' => $request->trx_type,
+                    'title' => $request->trx_type,
                 ])->get();
 
             $data['cash_out'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
@@ -298,7 +293,7 @@ class CheckController extends Controller
             //$user = Auth::guard('user')->user()->id;
             $data['title'] = 'Transactions';
             $data['all'] = Transactions::where([
-                
+
                 'ref_trans_id' => $request->ref_trans_id,
             ])->get();
 
@@ -313,13 +308,13 @@ class CheckController extends Controller
 
 
             $data['bill_payment'] = Transactions::where([
-                
+
                 'transaction_type' => $request->ref_trans_id,
             ])->get();
 
 
             $data['bank_transfer'] = Transactions::where([
-                
+
                 'transaction_type' => $request->ref_trans_id,
             ])->get();
 
@@ -338,7 +333,7 @@ class CheckController extends Controller
 
             $data['title'] = 'Transactions';
             $data['all'] = Transactions::where([
-                
+
                 'p_sessionId' => $request->session_id,
             ])->get();
 
@@ -353,13 +348,13 @@ class CheckController extends Controller
 
 
             $data['bill_payment'] = Transactions::where([
-                
+
                 'transaction_type' => $request->ref_trans_id,
             ])->get();
 
 
             $data['bank_transfer'] = Transactions::where([
-                
+
                 'transaction_type' => $request->ref_trans_id,
             ])->get();
 
