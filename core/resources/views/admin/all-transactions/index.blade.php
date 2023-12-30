@@ -75,6 +75,13 @@
                             </div>
 
 
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-3">
+                                <label for="from">E-Ref</label>
+                                <input type="text" class="form-control" name="e_ref"
+                                    placeholder="Enter E-Refrence">
+                            </div>
+
+
 
 
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mt-4">
@@ -330,7 +337,7 @@
                                                 </td>
 
                                                 <td class="my-3">{{$val->ref_trans_id}}</td>
-                                                <td class="my-3">{{$val->ref_trans_id}}</td>
+                                                <td class="my-3">{{$val->e_ref}}</td>
                                                 <td>₦{{number_format($val->debit, 2)}}</td>
                                                 <td>₦{{number_format($val->credit, 2)}}</td>
                                                 <td>

@@ -69,12 +69,10 @@
 
 
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-3">
-                                <label for="from">Session ID</label>
+                                <label for="from">E-Ref </label>
                                 <input type="text" class="form-control" name="e_ref"
                                     placeholder="Enter E-Refrence">
                             </div>
-
-
 
 
 
