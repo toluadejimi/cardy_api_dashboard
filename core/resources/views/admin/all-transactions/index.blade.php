@@ -278,12 +278,14 @@
                                             <tr>
                                                 <th>{{__('Action')}}</th>
                                                 <th>{{__('Reference ID')}}</th>
-                                                <th>{{__('Date Time')}}</th>
+                                                <th>{{__('E REF')}}</th>
                                                 <th>{{__('Debit')}}</th>
                                                 <th>{{__('Credit')}}</th>
                                                 <th>{{__('Type')}}</th>
                                                 <th>{{__('Status')}}</th>
                                                 <th>{{__('Beneficiary Details')}}</th>
+                                                <th>{{__('Date Time')}}</th>
+
 
 
                                             </tr>
@@ -328,7 +330,7 @@
                                                 </td>
 
                                                 <td class="my-3">{{$val->ref_trans_id}}</td>
-                                                <td>{{date("d/m/Y h:i:A", strtotime($val->created_at))}}</td>
+                                                <td class="my-3">{{$val->ref_trans_id}}</td>
                                                 <td>₦{{number_format($val->debit, 2)}}</td>
                                                 <td>₦{{number_format($val->credit, 2)}}</td>
                                                 <td>
@@ -499,7 +501,9 @@
                                                     <span class=" btn btn-outline-primary btn-xs">Refunded</span>
                                                     @endif
                                                 </td>
-                                                <td>{{$val->sender_name ?? " No Details" }}</td>
+                                                <td>{{$val->sender_name ?? $val->receiver_name ?? " No Details" }}</td>
+                                                <td>{{date("d/m/Y h:i:A", strtotime($val->created_at))}}</td>
+
 
 
                                             </tr>

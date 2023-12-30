@@ -327,6 +327,48 @@ class CheckController extends Controller
         }
 
 
+        if ($request->from == null && $request->session_id == null &&  $request->status == null && $request->to == null && $request->trx_type == null && $request->e_ref != null) {
+
+
+            $data['title'] = 'Transactions';
+            //$user = Auth::guard('user')->user()->id;
+            $data['title'] = 'Transactions';
+            $data['all'] = Transactions::where([
+
+                'e_ref' => $request->e_ref,
+            ])->get();
+
+            $data['cash_out'] = Transactions::where([
+                'transaction_type' => $request->e_ref,
+            ])->get();
+
+            $data['web_pay'] = Transactions::where([
+                'transaction_type' => $request->e_ref,
+            ])->get();
+
+
+
+            $data['bill_payment'] = Transactions::where([
+
+                'transaction_type' => $request->e_ref,
+            ])->get();
+
+
+            $data['bank_transfer'] = Transactions::where([
+
+                'transaction_type' => $request->e_ref,
+            ])->get();
+
+
+            $data['reversal'] = Transactions::where([
+                'transaction_type' => $request->e_ref,
+            ])->get();
+
+
+            return view('admin.all-transactions.index', $data);
+        }
+
+
         if ($request->session_id != null && $request->from == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
 
 

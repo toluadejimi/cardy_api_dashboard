@@ -6229,6 +6229,51 @@ class UserController extends Controller
         }
 
 
+        if ($request->from == null && $request->session_id == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->e_ref != null) {
+
+
+            $data['title'] = 'Transactions';
+            $user = Auth::guard('user')->user()->id;
+            $data['title'] = 'Transactions';
+            $data['all'] = Transactions::where([
+                    'user_id' => Auth::id(),
+                    'e_ref' => $request->e_ref,
+                ])->get();
+
+            $data['cash_out'] =Transactions::where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->e_ref,
+            ])->get();
+
+            $data['web_pay'] = Transactions::where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->e_ref,
+                ])->get();
+
+
+
+            $data['bill_payment'] = Transactions::where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->e_ref,
+                ])->get();
+
+
+            $data['bank_transfer'] = Transactions::where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->e_ref,
+                ])->get();
+
+
+            $data['reversal'] = Transactions::where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->e_ref,
+            ])->get();
+
+
+            return view('user.transactions.index', $data);
+        }
+
+
         if ($request->from == null && $request->session_id != null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
 
 

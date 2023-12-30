@@ -43,6 +43,8 @@
                                     <option value="VirtualFundWallet">Funding</option>
                                     <option value="Reversal">Reversal</option>
                                     <option value="POS Transasction">Cash Out</option>
+                                    <option value="Card Funding">Card Funding</option>
+
                                 </select>
                             </div>
 
@@ -64,6 +66,14 @@
                                 <input type="text" class="form-control" name="ref_trans_id"
                                     placeholder="Enter Refrence">
                             </div>
+
+
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-3">
+                                <label for="from">Session ID</label>
+                                <input type="text" class="form-control" name="e_ref"
+                                    placeholder="Enter E-Refrence">
+                            </div>
+
 
 
 
@@ -190,6 +200,8 @@
                                                             <option value="VirtualFundWallet">Funding</option>
                                                             <option value="Reversal">Reversal</option>
                                                             <option value="POS Transasction">Cash Out</option>
+                                                            <option value="Card Funding">Card Funding</option>
+
 
                                                         </select>
                                                     </div>
@@ -512,12 +524,13 @@
                                             <tr>
                                                 <th>{{__('Action')}}</th>
                                                 <th>{{__('Reference ID')}}</th>
-                                                <th>{{__('Date Time')}}</th>
+                                                <th>{{__('E REF')}}</th>
                                                 <th>{{__('Debit')}}</th>
                                                 <th>{{__('Credit')}}</th>
                                                 <th>{{__('Type')}}</th>
                                                 <th>{{__('Status')}}</th>
                                                 <th>{{__('Beneficiary Details')}}</th>
+                                                <th>{{__('Date Time')}}</th>
 
 
                                             </tr>
@@ -562,7 +575,7 @@
                                                 </td>
 
                                                 <td class="my-3">{{$val->ref_trans_id}}</td>
-                                                <td>{{date("Y/m/d h:i:A", strtotime($val->created_at))}}</td>
+                                                <td class="my-3">{{$val->e_ref}}</td>
                                                 <td>₦{{number_format($val->debit, 2)}}</td>
                                                 <td>₦{{number_format($val->credit, 2)}}</td>
                                                 <td>
@@ -664,7 +677,9 @@
                                                     <span class=" btn btn-outline-white btn-xs">Refunded</span>
                                                     @endif
                                                 </td>
-                                                <td>{{$val->sender_name ?? " No Details" }}</td>
+                                                <td>{{$val->sender_name ?? $val->receiver_name ?? " No Details" }}</td>
+                                                <td>{{date("Y/m/d h:i:A", strtotime($val->created_at))}}</td>
+
 
 
                                             </tr>
