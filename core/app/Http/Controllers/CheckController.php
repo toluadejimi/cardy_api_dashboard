@@ -122,7 +122,6 @@ class CheckController extends Controller
     {
         $data['title'] = 'Transactions';
 
-
         if ($request->from != null && $request->session_id == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
 
 
@@ -132,7 +131,7 @@ class CheckController extends Controller
 
             $data['cash_out'] = Transactions::whereDate('created_at', $request->from)
                 ->where([
-                    'title' => 'POS Transasction',
+                    'title' => 'POS Transaction',
                 ])->get();
 
             $data['web_pay'] = Transactions::whereDate('created_at', $request->from)
@@ -240,8 +239,6 @@ class CheckController extends Controller
 
         if ($request->from != null && $request->session_id == null && $request->status == null && $request->to != null && $request->trx_type != null && $request->ref_trans_id == null) {
 
-
-            dd('tolu');
 
             $data['title'] = 'Transactions';
 
