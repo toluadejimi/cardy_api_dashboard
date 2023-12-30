@@ -122,7 +122,6 @@ class CheckController extends Controller
     {
         $data['title'] = 'Transactions';
 
-        dd($request->all());
 
         if ($request->from != null && $request->session_id == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
 
