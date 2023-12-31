@@ -1258,7 +1258,7 @@ class CheckController extends Controller
         $data['id'] = User::where('id', $id)->first()->id;
 
 
-        $data['transactions'] = Transactions::latest()->where('user_id', $user->id)->get();
+        $data['transactions'] = Transactions::latest()->where('user_id', $user->id)->take(300)->get();
 
         $data['transfer'] = Transfer::wheresender_id($user->id)->orderBy('id', 'DESC')->get();
         $data['withdraw'] = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
