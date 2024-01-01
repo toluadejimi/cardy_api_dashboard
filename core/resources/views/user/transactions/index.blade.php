@@ -369,7 +369,7 @@
                                                     </span>
 
 
-                                                    @elseif($val->transaction_type == "Card Funding")
+                                                    @elseif($val->transaction_type == "CARD")
                                                     <span class="income">
                                                         <span class="me-2">
                                                             <svg width="39" height="39" viewBox="0 0 39 39" fill="none"
