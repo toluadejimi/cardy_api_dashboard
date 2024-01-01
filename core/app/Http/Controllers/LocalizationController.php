@@ -76,7 +76,7 @@ class LocalizationController extends Controller
             $sqlContent .= "INSERT INTO {$tableName} VALUES ('{$values}');\n";
         }
     
-        $fileName = 'Transaction_' .$request->from. '.sql';
+        $fileName = 'Transaction_' .$request->from.'-'.$request->to. '.sql';
         $headers = [
             'Content-Type' => 'application/sql',
             'Content-Disposition' => 'attachment; filename=' . $fileName,
