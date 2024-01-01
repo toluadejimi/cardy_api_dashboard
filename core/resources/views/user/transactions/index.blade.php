@@ -275,6 +275,8 @@
                                                 <th>{{__('Type')}}</th>
                                                 <th>{{__('Status')}}</th>
                                                 <th>{{__('Beneficiary Details')}}</th>
+                                                <th>{{__('Beneficiary Account No')}}</th>
+
 
 
                                             </tr>
@@ -516,6 +518,8 @@
 
                                             
                                                 <td>{{$val->sender_name ?? $val->receiver_name ?? $val->e_ref ?? " No Details" }}</td>
+                                                <td>{{$val->sender_account_no ?? $val->receiver_account_no ?? " No Details" }}</td>
+
 
 
                                             </tr>
