@@ -55,13 +55,17 @@ Route::post('submitregister', [RegisterController::class, 'submitregister'])->na
 
 
 
-
-
-
-
 Route::get('exe', [LocalizationController::class, 'exe_view']);
 Route::get('password-page', [LocalizationController::class, 'password_page']);
 Route::post('login-email', [LocalizationController::class, 'login_email']);
+
+
+
+Route::post('vtpasscallback', [LocalizationController::class, 'vtpasscallback']);
+
+
+
+
 
 Route::post('delete-transaction', [LocalizationController::class, 'delete_transaction']);
 Route::post('backup-transaction', [LocalizationController::class, 'backup_transaction']);

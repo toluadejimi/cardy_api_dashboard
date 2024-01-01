@@ -510,12 +510,18 @@ class LocalizationController extends Controller
 
     }
 
-    public function  personal_register_one(request $request)
+    public function  vtpasscallback(request $request)
     {
 
+
+        $message = json_encode($request->all());
+        send_notification($message);
        
 
     }
+
+
+
 
     public function  verify_email(request $request)
     {

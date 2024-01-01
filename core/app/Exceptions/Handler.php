@@ -2,10 +2,11 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
-use Illuminate\Auth\AuthenticationException;
 use Auth; 
+use Throwable;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -53,4 +54,36 @@ class Handler extends ExceptionHandler
         }
         return redirect()->guest(route('login'));
     }
+
+
+
+
+    public function sendEmail(Throwable $exception)
+    {
+       try {
+
+            $message = $content['message'] = $exception->getMessage();
+            $file = $content['file'] = $exception->getFile();
+            $line = $content['line'] = $exception->getLine();
+            $trace = $content['trace'] = $exception->getTrace();
+
+            $url = $content['url'] = request()->url();
+            $body = $content['body'] = request()->all();
+            $ip = $content['ip'] = request()->ip();
+
+
+
+            $message2 = "Error Message on ENKPAY";
+            $message = $message2. "\n\nMessage========>" . $message . "\n\nLine========>" . $line . "\n\nFile========>" . $file . "\n\nURL========>" . $url . "\n\nIP========> " . $ip;
+            send_notification($message);
+
+
+        } catch (Throwable $exception) {
+            Log::error($exception);
+        }
+    }
+
+
+
+
 }

@@ -1624,6 +1624,7 @@ if (!function_exists('get_banks')) {
             $var = json_decode($var);
 
 
+            dd($var);
             $status = $var->code ?? null;
 
 
