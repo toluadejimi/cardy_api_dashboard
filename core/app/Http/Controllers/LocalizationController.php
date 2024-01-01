@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Order;
@@ -10,16 +9,23 @@ use App\Models\Feature;
 use App\Models\Product;
 use App\Models\Transaction;
 use Ramsey\Uuid\FeatureSet;
+use App\Exports\ExportClass;
 use App\Models\Productimage;
+use App\Models\Transactions;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Laravel\Passport\Passport;
 use App\Models\OauthAccessToken;
 use App\Models\PendingTransaction;
 use App\Rules\AllowedEmailDomains;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+
 
 class LocalizationController extends Controller
 {
@@ -30,6 +36,95 @@ class LocalizationController extends Controller
         session()->put('locale', $locale);
         return redirect()->back();
     }
+
+
+
+    public function delete_transaction(request $request){
+
+    $pin = env('PIN');
+    if($request->pass != $pin){
+        return back()->with('error', 'Pin not correct');
+    }
+
+    Transactions::whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+    ->delete();
+
+    return back()->with('error', 'Transaction Table Deleted');
+
+
+    }
+
+
+    public function downloadExcelData(request $request)
+    {
+        $tableName = 'transactions';
+    
+        $data = DB::table($tableName)->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])->get();
+        $fileName = 'excel_data_export_' . date('Y-m-d_H-i-s') . '.xlsx';
+        return Excel::download(new ExportClass($data), $fileName);
+    }
+
+
+    public function backup_transaction(request $request){
+
+        $tableName = 'transactions'; 
+        $data = DB::table($tableName)->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])->get();
+
+        $sqlContent = '';
+        foreach ($data as $row) {
+            $values = implode("', '", (array)$row);
+            $sqlContent .= "INSERT INTO {$tableName} VALUES ('{$values}');\n";
+        }
+    
+        $fileName = 'Transaction_' .$request->from. '.sql';
+        $headers = [
+            'Content-Type' => 'application/sql',
+            'Content-Disposition' => 'attachment; filename=' . $fileName,
+        ];
+
+
+
+
+        return response($sqlContent, Response::HTTP_OK, $headers);
+    
+    }
+
+
+
+    public function backup_user(request $request){
+
+        $tableName = 'users'; 
+        $data = DB::table($tableName)->get();
+
+        $sqlContent = '';
+        foreach ($data as $row) {
+            $values = implode("', '", (array)$row);
+            $sqlContent .= "INSERT INTO {$tableName} VALUES ('{$values}');\n";
+        }
+    
+        $fileName = 'Users_' . date('Y-m-d_H-i-s') . '.sql';
+        $headers = [
+            'Content-Type' => 'application/sql',
+            'Content-Disposition' => 'attachment; filename=' . $fileName,
+        ];
+        return response($sqlContent, Response::HTTP_OK, $headers);
+    
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

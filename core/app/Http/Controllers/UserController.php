@@ -207,17 +207,15 @@ class UserController extends Controller
         $set = Settings::first();
         $data['title'] = $set->site_name . ' Dashboard';
         $data['balance'] = User::where('id', Auth::id())->first()->main_wallet;
-        $data['all'] = Transactions::latest()->whereuser_id(Auth::id())->get();
+        $data['all'] = Transactions::latest()->whereuser_id(Auth::id())->take(300)->get();
         $data['total_out'] = Transactions::where('user_id', Auth::id())->where('status', 1)->sum('debit');
         $data['total_in'] = Transactions::where('user_id', Auth::id())->where('status', 1)->sum('credit');
         $data['revenue'] = History::whereuser_id(Auth::guard('user')->user()->id)->wheretype(1)->where('amount', '!=', null)->sum('amount');
         $data['t_payout'] = Withdraw::whereuser_id(Auth::guard('user')->user()->id)->wherestatus(1)->sum('amount');
         $data['n_payout'] = Withdraw::whereuser_id(Auth::guard('user')->user()->id)->wherestatus(0)->sum('amount');
         $data['percentage'] = Transactions::where('user_id', Auth::id())->sum('credit') / 100;
-
         $data['message'] = null;
-
-
+        
         return view('user.dashboard.index', $data);
     }
 
@@ -349,11 +347,7 @@ class UserController extends Controller
             return back()->with('alert', 'Nothing Found');
         }
     }
-    //End of Dashboard
-
-
-
-    //webhoook update
+ 
 
     public function webhook_update(Request $request)
     {

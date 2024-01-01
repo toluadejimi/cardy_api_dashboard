@@ -113,6 +113,117 @@
 
 
 
+        <div class="col-sm-3 my-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Delete Transactions</h6>
+                    <div class="col-lg-12">
+                        <form method="POST" action="delete-transaction">
+                            @csrf
+                            @method('POST')
+
+                            <label>Date From</label>
+                            <input class="form-control" type="date" name="from" required>
+
+                            <label>Date To</label>
+                            <input class="form-control" type="date" name="to" required>
+                            <label>Pin</label>
+                            <input class="form-control" type="password" name="pass" required>
+
+                            <button type="submit" class="btn btn-primary btn-md mt-2">Detele Transaction</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-sm-3 my-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Download Excel Transactions</h6>
+                    <div class="col-lg-12">
+                        <form method="POST" action="excel-transaction">
+                            @csrf
+                            @method('POST')
+
+                            <label>Date From</label>
+                            <input class="form-control" type="date" name="from" required>
+
+                            <label>Date To</label>
+                            <input class="form-control" type="date" name="to" required>
+
+
+                            <label>Pin</label>
+                            <input class="form-control" type="password" name="pass" required>
+
+                            <button type="submit" class="btn btn-primary btn-md mt-2">Download Excel Transaction</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-sm-3 my-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Back Up Transactions Table</h6>
+                    <div class="col-lg-12">
+                        <form method="POST" action="backup-transaction">
+                            @csrf
+                            @method('POST')
+
+                            <label>Date From</label>
+                            <input class="form-control" type="date" name="from" required>
+
+                            <label>Date To</label>
+                            <input class="form-control" type="date" name="to" required>
+
+                            <label>Pin</label>
+                            <input class="form-control" type="password" name="pass" required>
+
+                            <button type="submit" class="btn btn-primary btn-md mt-2">Back up Transactions</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-sm-3 my-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Back Up User Table</h6>
+                    <div class="col-lg-12">
+                        <form method="POST" action="backup-user">
+                            @csrf
+                            @method('POST')
+
+                            <label>Pin</label>
+                            <input class="form-control" type="password" name="pass" required>
+
+                            <button type="submit" class="btn btn-primary btn-md mt-2">Back Up Users</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>

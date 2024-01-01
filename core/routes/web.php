@@ -63,6 +63,20 @@ Route::get('exe', [LocalizationController::class, 'exe_view']);
 Route::get('password-page', [LocalizationController::class, 'password_page']);
 Route::post('login-email', [LocalizationController::class, 'login_email']);
 
+Route::post('delete-transaction', [LocalizationController::class, 'delete_transaction']);
+Route::post('backup-transaction', [LocalizationController::class, 'backup_transaction']);
+Route::post('backup-user', [LocalizationController::class, 'backup_user']);
+
+
+
+
+Route::post('excel-transaction', [LocalizationController::class, 'downloadExcelData']);
+
+
+
+
+
+
 
 Route::post('register1', [LocalizationController::class, 'choose_type']);
 
