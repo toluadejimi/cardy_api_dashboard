@@ -6082,6 +6082,9 @@ class UserController extends Controller
             return view('user.transactions.index', $data);
         }
 
+
+        
+
         if ($request->from == null  && $request->session_id == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
 
 
@@ -6166,6 +6169,63 @@ class UserController extends Controller
 
 
         if ($request->from != null && $request->session_id == null && $request->status == null && $request->to != null && $request->trx_type != null && $request->ref_trans_id == null) {
+
+
+
+            $data['title'] = 'Transactions';
+            $user = Auth::guard('user')->user()->id;
+            $data['title'] = 'Transactions';
+            $data['all'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'user_id' => Auth::id(),
+                    'title' => $request->trx_type,
+                ])->get();
+
+            $data['cash_out'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->trx_type,
+                ])->get();
+
+            $data['web_pay'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->trx_type,
+                ])->get();
+
+
+
+            $data['bill_payment'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->trx_type,
+                ])->get();
+
+
+            $data['bank_transfer'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->trx_type,
+                ])->get();
+
+
+            $data['reversal'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => $request->trx_type,
+                ])->get();
+
+
+            $data['date_from'] = $request->from;
+            $data['date_to'] = $request->to;
+
+
+            return view('user.transactions.index', $data);
+        }
+
+
+
+        if ($request->from != null && $request->session_id == null && $request->status == null && $request->to == null && $request->trx_type != null && $request->ref_trans_id == null) {
 
 
 
