@@ -5984,10 +5984,8 @@ class UserController extends Controller
         if ($request->from == null && $request->status == null && $request->to == null && $request->trx_type != null && $request->ref_trans_id == null) {
 
 
-            dd(Auth::id());
             $data['title'] = 'Transactions';
-            $data['all'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
-            ->where([
+            $data['all'] = Transactions::latest()->where([
                     'user_id' => Auth::id(),
                     'title' => $request->trx_type,
             ])->get();
