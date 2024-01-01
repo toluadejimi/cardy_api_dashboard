@@ -5981,13 +5981,64 @@ class UserController extends Controller
     public function trx_search(Request $request)
     {
 
-        if ($request->from == null && $request->status == null && $request->to == null && $request->trx_type != null && $request->ref_trans_id == null) {
+        if ($request->from == null && $request->status == null && $request->to == null && $request->trx_type != null && $request->account_no == null && $request->ref_trans_id == null) {
 
 
             $data['title'] = 'Transactions';
             $data['all'] = Transactions::latest()->where([
                 'user_id' => Auth::id(),
                 'transaction_type' => $request->trx_type,
+            ])->get();
+
+            $data['cash_out'] = Transactions::whereDate('created_at', $request->from)
+                ->where([
+                    'user_id' => Auth::id(),
+                    'title' => 'POS Transasction',
+                ])->get();
+
+            $data['web_pay'] = Transactions::whereDate('created_at', $request->from)
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => 'VirtualFundWallet',
+                ])->get();
+
+
+
+            $data['bill_payment'] = Transactions::whereDate('created_at', $request->from)
+                ->where([
+                    'user_id' => Auth::id(),
+                    'type' => 'VAS',
+                ])->get();
+
+
+            $data['bank_transfer'] = Transactions::whereDate('created_at', $request->from)
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => 'BankTransfer',
+                ])->get();
+
+
+            $data['reversal'] = Transactions::whereDate('created_at', $request->from)
+                ->where([
+                    'user_id' => Auth::id(),
+                    'transaction_type' => 'Reversal',
+                ])->get();
+
+
+            $data['date_from'] = $request->from;
+            $data['date_to'] = $request->to;
+
+            return view('user.transactions.index', $data);
+        }
+
+
+        if ($request->from == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->account_no != null && $request->ref_trans_id == null) {
+
+
+            $data['title'] = 'Transactions';
+            $data['all'] = Transactions::latest()->where([
+                'user_id' => Auth::id(),
+                'sender_account_no' => $request->account_no,
             ])->get();
 
             $data['cash_out'] = Transactions::whereDate('created_at', $request->from)

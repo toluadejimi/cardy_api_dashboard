@@ -83,6 +83,14 @@
                             </div>
 
 
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-3">
+                                <label for="from">Account No</label>
+                                <input type="number" class="form-control" name="account_no"
+                                    placeholder="Enter Account No">
+                            </div>
+
+
+
 
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mt-4">
                                 <button type="submit" class="btn btn-primary">
