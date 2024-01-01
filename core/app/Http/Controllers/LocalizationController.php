@@ -58,7 +58,7 @@ class LocalizationController extends Controller
     public function downloadExcelData(request $request)
     {
         $tableName = 'transactions';
-    
+
         $data = DB::table($tableName)->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])->get();
         $fileName = 'excel_data_export_' . date('Y-m-d_H-i-s') . '.xlsx';
         return Excel::download(new ExportClass($data), $fileName);
@@ -67,7 +67,7 @@ class LocalizationController extends Controller
 
     public function backup_transaction(request $request){
 
-        $tableName = 'transactions'; 
+        $tableName = 'transactions';
         $data = DB::table($tableName)->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])->get();
 
         $sqlContent = '';
@@ -75,7 +75,7 @@ class LocalizationController extends Controller
             $values = implode("', '", (array)$row);
             $sqlContent .= "INSERT INTO {$tableName} VALUES ('{$values}');\n";
         }
-    
+
         $fileName = 'Transaction_' .$request->from.'-'.$request->to. '.sql';
         $headers = [
             'Content-Type' => 'application/sql',
@@ -86,14 +86,14 @@ class LocalizationController extends Controller
 
 
         return response($sqlContent, Response::HTTP_OK, $headers);
-    
+
     }
 
 
 
     public function backup_user(request $request){
 
-        $tableName = 'users'; 
+        $tableName = 'users';
         $data = DB::table($tableName)->get();
 
         $sqlContent = '';
@@ -101,14 +101,14 @@ class LocalizationController extends Controller
             $values = implode("', '", (array)$row);
             $sqlContent .= "INSERT INTO {$tableName} VALUES ('{$values}');\n";
         }
-    
+
         $fileName = 'Users_' . date('Y-m-d_H-i-s') . '.sql';
         $headers = [
             'Content-Type' => 'application/sql',
             'Content-Disposition' => 'attachment; filename=' . $fileName,
         ];
         return response($sqlContent, Response::HTTP_OK, $headers);
-    
+
     }
 
 
@@ -492,7 +492,7 @@ class LocalizationController extends Controller
         }
 
 
-      
+
 
     }
 
@@ -513,10 +513,13 @@ class LocalizationController extends Controller
     public function  vtpasscallback(request $request)
     {
 
-
         $message = json_encode($request->all());
         send_notification($message);
-       
+
+        return response()->with()->json([
+            'response' => 'success'
+        ]);
+
 
     }
 
@@ -540,13 +543,13 @@ class LocalizationController extends Controller
     }
 
 
-   
 
 
-    
 
 
-    
+
+
+
 
 
 
