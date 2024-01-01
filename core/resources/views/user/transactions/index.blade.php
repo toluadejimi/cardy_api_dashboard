@@ -513,7 +513,9 @@
                                                     <span class=" btn btn-outline-primary btn-xs">Refunded</span>
                                                     @endif
                                                 </td>
-                                                <td>{{$val->sender_name ?? " No Details" }}</td>
+
+                                            
+                                                <td>{{$val->sender_name ?? $val->receiver_name ?? $val->e_ref ?? " No Details" }}</td>
 
 
                                             </tr>
