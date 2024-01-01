@@ -1602,11 +1602,6 @@ if (!function_exists('get_banks')) {
             $vtkey = env('APIKEY');
             $pkey = env('PKKEY');
 
-
-            $key = env('BKEY');
-            $curl = curl_init();
-
-
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
