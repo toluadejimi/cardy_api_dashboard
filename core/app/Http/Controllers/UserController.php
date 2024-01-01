@@ -5987,7 +5987,7 @@ class UserController extends Controller
             $data['title'] = 'Transactions';
             $data['all'] = Transactions::latest()->where([
                     'user_id' => Auth::id(),
-                    'title' => $request->trx_type,
+                    'transaction_type' => $request->trx_type,
             ])->get();
 
             $data['cash_out'] = Transactions::whereDate('created_at', $request->from)
@@ -6178,7 +6178,7 @@ class UserController extends Controller
             $data['all'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
                 ->where([
                     'user_id' => Auth::id(),
-                    'title' => $request->trx_type,
+                    'transaction_type' => $request->trx_type,
                 ])->get();
 
             $data['cash_out'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
@@ -6235,7 +6235,7 @@ class UserController extends Controller
             $data['all'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
                 ->where([
                     'user_id' => Auth::id(),
-                    'title' => $request->trx_type,
+                    'transaction_type' => $request->trx_type,
                 ])->get();
 
             $data['cash_out'] = Transactions::latest()->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
