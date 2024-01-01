@@ -1599,8 +1599,8 @@ if (!function_exists('get_banks')) {
         function vt_balance()
         {
 
-            $vtkey = env('VTKEY');
-            $pkey = env('VPKEY');
+            $vtkey = env('APIKEY');
+            $pkey = env('PKKEY');
 
 
             $key = env('BKEY');
