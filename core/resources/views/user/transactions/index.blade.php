@@ -388,7 +388,7 @@
                                                                     fill="#13C28F" />
                                                             </svg>
                                                         </span>
-                                                        Cash Funding
+                                                        Card Funding
                                                     </span>
 
                                                     @elseif($val->transaction_type == "Purchase")
