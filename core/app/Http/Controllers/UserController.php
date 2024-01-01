@@ -5986,8 +5986,8 @@ class UserController extends Controller
 
             $data['title'] = 'Transactions';
             $data['all'] = Transactions::latest()->where([
-                    'user_id' => Auth::id(),
-                    'transaction_type' => $request->trx_type,
+                'user_id' => Auth::id(),
+                'transaction_type' => $request->trx_type,
             ])->get();
 
             $data['cash_out'] = Transactions::whereDate('created_at', $request->from)

@@ -43,7 +43,7 @@
                                     <option value="VirtualFundWallet">Funding</option>
                                     <option value="Reversal">Reversal</option>
                                     <option value="POS Transasction">Cash Out</option>
-                                    <option value="Card Funding">Card Funding</option>
+                                    <option value="CARD">Card Funding</option>
 
                                 </select>
                             </div>
