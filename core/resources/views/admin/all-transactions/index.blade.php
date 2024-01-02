@@ -284,10 +284,13 @@
                                         <thead>
                                             <tr>
                                                 <th>{{__('Action')}}</th>
+                                                <th>{{__('Customer Name')}}</th>
                                                 <th>{{__('Reference ID')}}</th>
                                                 <th>{{__('E REF')}}</th>
+                                                <th>{{__('Amount')}}</th>
                                                 <th>{{__('Debit')}}</th>
                                                 <th>{{__('Credit')}}</th>
+                                                <th>{{__('Balance')}}</th>
                                                 <th>{{__('Type')}}</th>
                                                 <th>{{__('Status')}}</th>
                                                 <th>{{__('Beneficiary Details')}}</th>
@@ -321,7 +324,7 @@
                                                         </a>
                                                         <div class="dropdown-menu dropdown-menu-end">
                                                             <a class="dropdown-item"
-                                                                href="view-transaction?id={{$val->id}};"><svg
+                                                                href="view-trx?id={{$val->id}};"><svg
                                                                     width="20" height="20" viewBox="0 0 20 20"
                                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <path opacity="0.4"
@@ -332,14 +335,30 @@
                                                                         fill="#FF9F00" />
                                                                 </svg>
                                                                 View Details</a>
+
+                                                                <a class="dropdown-item"
+                                                                href="delete-trx?id={{$val->id}};"><svg
+                                                                    width="20" height="20" viewBox="0 0 20 20"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path opacity="0.4"
+                                                                        d="M18.3337 9.99984C18.3337 14.6032 14.6028 18.3332 10.0003 18.3332C5.39783 18.3332 1.66699 14.6032 1.66699 9.99984C1.66699 5.39817 5.39783 1.6665 10.0003 1.6665C14.6028 1.6665 18.3337 5.39817 18.3337 9.99984Z"
+                                                                        fill="#FF9F00" />
+                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                        d="M10.7249 10.5256C10.7249 10.9272 10.3974 11.2547 9.99577 11.2547C9.5941 11.2547 9.2666 10.9272 9.2666 10.5256V6.84225C9.2666 6.44058 9.5941 6.11308 9.99577 6.11308C10.3974 6.11308 10.7249 6.44058 10.7249 6.84225V10.5256ZM9.27077 13.1696C9.27077 12.7679 9.5966 12.4404 9.99577 12.4404C10.4066 12.4404 10.7333 12.7679 10.7333 13.1696C10.7333 13.5712 10.4066 13.8987 10.0041 13.8987C9.59993 13.8987 9.27077 13.5712 9.27077 13.1696Z"
+                                                                        fill="#FF9F00" />
+                                                                </svg>
+                                                                Delete Transation</a>
                                                         </div>
                                                     </div>
                                                 </td>
 
+                                                <td class="my-3">{{$val->user->first_name}} {{$val->user->last_name}}</td>
                                                 <td class="my-3">{{$val->ref_trans_id}}</td>
                                                 <td class="my-3">{{$val->e_ref}}</td>
+                                                <td>₦{{number_format($val->amount, 2)}}</td>
                                                 <td>₦{{number_format($val->debit, 2)}}</td>
                                                 <td>₦{{number_format($val->credit, 2)}}</td>
+                                                <td>₦{{number_format($val->balance, 2)}}</td>
                                                 <td>
                                                     @if($val->transaction_type == "Reversal")
                                                     <span class="income">
@@ -384,6 +403,29 @@
                                                             </svg>
                                                         </span>
                                                         Cash Out
+                                                    </span>
+
+
+                                                    @elseif($val->transaction_type == "CARD")
+                                                    <span class="income">
+                                                        <span class="me-2">
+                                                            <svg width="39" height="39" viewBox="0 0 39 39" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <rect x="39" y="39" width="39" height="39" rx="19.5"
+                                                                    transform="rotate(-180 39 39)" fill="#2BC155"
+                                                                    fill-opacity="0.11" />
+                                                                <path opacity="1"
+                                                                    d="M11.667 19.8333C11.667 19.4167 12.0837 19 12.5003 19C12.917 19 13.3337 19.4167 13.3337 19.8333C13.3337 20.1111 13.3337 21.5 13.3337 24C13.3337 24.9205 14.0799 25.6667 15.0003 25.6667H25.0003C25.9208 25.6667 26.667 24.9205 26.667 24V19.8333C26.667 19.3731 27.0401 19 27.5003 19C27.9606 19 28.3337 19.3731 28.3337 19.8333V24C28.3337 25.8409 26.8413 27.3333 25.0003 27.3333H15.0003C13.1594 27.3333 11.667 25.8409 11.667 24C11.667 21.5 11.667 20.1111 11.667 19.8333Z"
+                                                                    fill="#13C28F" />
+                                                                <path opacity="1"
+                                                                    d="M19.1663 20.6667C19.1663 21.1269 19.5394 21.5 19.9997 21.5C20.4599 21.5 20.833 21.1269 20.833 20.6667V10.6667C20.833 10.2064 20.4599 9.83333 19.9997 9.83333C19.5394 9.83333 19.1663 10.2064 19.1663 10.6667V20.6667Z"
+                                                                    fill="#13C28F" />
+                                                                <path
+                                                                    d="M23.5774 16.7441C23.9028 16.4186 24.4305 16.4186 24.7559 16.7441C25.0814 17.0695 25.0814 17.5972 24.7559 17.9226L20.5893 22.0893C20.2759 22.4027 19.772 22.4159 19.4425 22.1194L15.2759 18.3694C14.9338 18.0615 14.906 17.5346 15.2139 17.1925C15.5218 16.8504 16.0487 16.8227 16.3908 17.1306L19.9698 20.3517L23.5774 16.7441Z"
+                                                                    fill="#13C28F" />
+                                                            </svg>
+                                                        </span>
+                                                        Card Funding
                                                     </span>
 
                                                     @elseif($val->transaction_type == "Purchase")

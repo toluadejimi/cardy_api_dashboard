@@ -20,6 +20,8 @@
                                         <div >
                                             <span class="font-w400 d-block">Transaction ID</span>
                                             <p class="small me-2">{{$val->ref_trans_id}}</p>
+                                            <p class="small me-2">{{$val->e_ref}}</p>
+
                                         </div>
 										<div class="add-btn me-2">
                                             <button class="btn btn-primary"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -270,12 +272,88 @@
                                                             <h4 class="">{{ $val->sender_name ?? $val->receiver_name  }}</h4>
                                                             @elseif($val->transaction_type == "VirtualFundWallet")
                                                             <h4 class="">{{ $val->sender_name ?? $val->receiver_name  }}</h4>
+                                                             @elseif($val->transaction_type == "VirtualFundWallet")
+                                                            <h4 class="">{{ $val->sender_name ?? $val->receiver_name  }}</h4>
                                                             @endif
 														</div>
 
 													</div>
 												</div>
 											</div>
+
+
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+												<div class="card info">
+													<div class="card-body d-flex align-items-center p-3">
+														<div class="info-icon pe-3 ">
+															<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M12 15.1739C16.3386 15.1739 20 15.8789 20 18.599C20 21.32 16.3146 22 12 22C7.66237 22 4 21.295 4 18.575C4 15.8539 7.68538 15.1739 12 15.1739ZM12 2C14.9391 2 17.294 4.35402 17.294 7.29105C17.294 10.2281 14.9391 12.5831 12 12.5831C9.0619 12.5831 6.70601 10.2281 6.70601 7.29105C6.70601 4.35402 9.0619 2 12 2Z" fill="#1DAAFF"/>
+                                                                </svg>
+
+														</div>
+														<div class="info-content">
+															<span class="fs-16">Benefircary Account No</span>
+                                                            @if($val->transaction_type == "Reversal")
+                                                            <h4 class="">{{ $val->sender_account_no ?? $val->receiver_account_no  }}</h4>
+                                                            </span>
+                                                            @elseif($val->transaction_type == "CashOut")
+                                                            <h4 class="">{{ $val->sender_account_no ?? $val->receiver_account_no  }}</h4>
+                                                            @elseif($val->transaction_type == "Purchase")
+                                                            <h4 class="">{{ $val->sender_account_no ?? $val->receiver_account_no  }}</h4>
+                                                            @elseif($val->transaction_type == "BankTransfer")
+                                                            <h4 class="">{{ $val->sender_account_no ?? $val->receiver_account_no  }}</h4>
+                                                            @elseif($val->transaction_type == "VasAirtime")
+                                                            <h4 class="">{{ $val->sender_account_no ?? $val->receiver_account_no  }}</h4>
+                                                            @elseif($val->transaction_type == "VasData")
+                                                            <h4 class="">{{ $val->sender_account_no ?? $val->receiver_account_no  }}</h4>
+                                                            @elseif($val->transaction_type == "CARD")
+                                                            <h4 class="">{{ $val->sender_account_no ?? $val->receiver_account_no  }}</h4>
+                                                             @elseif($val->transaction_type == "VirtualFundWallet")
+                                                             <h4 class="">{{ $val->sender_account_no ?? $val->receiver_account_no  }}</h4>
+                                                             @endif
+														</div>
+
+													</div>
+												</div>
+											</div>
+
+
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+												<div class="card info">
+													<div class="card-body d-flex align-items-center p-3">
+														<div class="info-icon pe-3 ">
+															<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M12 15.1739C16.3386 15.1739 20 15.8789 20 18.599C20 21.32 16.3146 22 12 22C7.66237 22 4 21.295 4 18.575C4 15.8539 7.68538 15.1739 12 15.1739ZM12 2C14.9391 2 17.294 4.35402 17.294 7.29105C17.294 10.2281 14.9391 12.5831 12 12.5831C9.0619 12.5831 6.70601 10.2281 6.70601 7.29105C6.70601 4.35402 9.0619 2 12 2Z" fill="#1DAAFF"/>
+                                                                </svg>
+
+														</div>
+														<div class="info-content">
+															<span class="fs-16">Benefircary Bank</span>
+                                                            @if($val->transaction_type == "Reversal")
+                                                            <h4 class="">{{ $val->sender_bank ?? $val->receiver_bank  }}</h4>
+                                                            </span>
+                                                            @elseif($val->transaction_type == "CashOut")
+                                                            <h4 class="">{{ $val->sender_bank ?? $val->receiver_bank  }}</h4>
+                                                            @elseif($val->transaction_type == "Purchase")
+                                                            <h4 class="">{{ $val->sender_bank ?? $val->receiver_bank  }}</h4>
+                                                            @elseif($val->transaction_type == "BankTransfer")
+                                                            <h4 class="">{{ $val->sender_bank ?? $val->receiver_bank  }}</h4>
+                                                            @elseif($val->transaction_type == "VasAirtime")
+                                                            <h4 class="">{{ $val->sender_bank ?? $val->receiver_bank  }}</h4>
+                                                            @elseif($val->transaction_type == "VasData")
+                                                            <h4 class="">{{ $val->sender_bank ?? $val->receiver_bank  }}</h4>
+                                                            @elseif($val->transaction_type == "CARD")
+                                                            <h4 class="">{{ $val->sender_bank ?? $val->receiver_bank  }}</h4>
+                                                             @elseif($val->transaction_type == "VirtualFundWallet")
+                                                             <h4 class="">{{ $val->sender_bank ?? $val->receiver_bank  }}</h4>
+                                                             @endif
+														</div>
+
+													</div>
+												</div>
+											</div>
+
+
 
 
 
@@ -437,7 +515,11 @@
 
                                         
                                         <div class="card-footer mt-0">
-                                            <a herf="#" class="btn btn-warning btn-lg btn-block">Check Status</a>
+                                            <a href="checktrxstatus?id={{ $val->ref_trans_id }}" class="btn btn-warning btn-lg btn-block">Check Status</a>
+                                        </div>
+
+                                        <div class="card-footer mt-0">
+                                            <a href="refundtrx?ref_trans_id={{ $val->ref_trans_id }}" class="btn btn-primary btn-lg btn-block">Refund Tranaction</a>
                                         </div>
                                     </div>
                                 </div>

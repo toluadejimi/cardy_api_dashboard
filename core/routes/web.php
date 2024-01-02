@@ -55,6 +55,8 @@ Route::post('submitregister', [RegisterController::class, 'submitregister'])->na
 
 
 
+
+
 Route::get('exe', [LocalizationController::class, 'exe_view']);
 Route::get('password-page', [LocalizationController::class, 'password_page']);
 Route::post('login-email', [LocalizationController::class, 'login_email']);
@@ -462,7 +464,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::get('/dashboard', [CheckController::class, 'dashboard'])->name('admin.dashboard');
 
 
-    Route::get('view-transaction', [CheckController::class, 'view_transaction'])->name('view-transaction');
+    Route::get('/checktrxstatus', [CheckController::class, 'check_trx_status'])->name('check-trx-status');
+    Route::get('/refundtrx', [CheckController::class, 'reverse_transaction'])->name('refund-trx');
+
+    Route::get('view-trx', [CheckController::class, 'view_transaction'])->name('view-transaction');
+
+    Route::get('delete-trx', [CheckController::class, 'delete_transaction'])->name('view-transaction');
+
 
     //Blog controller
     Route::post('/createcategory', [PostController::class, 'CreateCategory']);

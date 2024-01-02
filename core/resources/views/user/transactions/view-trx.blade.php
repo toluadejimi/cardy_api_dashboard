@@ -515,8 +515,10 @@
 
                                         
                                         <div class="card-footer mt-0">
-                                            <a herf="#" class="btn btn-warning btn-lg btn-block">Check Status</a>
+                                            <a href="checktrxstatus?id={{ $val->ref_trans_id }}" class="btn btn-warning btn-lg btn-block">Check Status</a>
                                         </div>
+
+                                      
                                     </div>
                                 </div>
 

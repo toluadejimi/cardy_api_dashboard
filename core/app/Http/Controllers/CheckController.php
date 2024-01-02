@@ -285,6 +285,50 @@ class CheckController extends Controller
         }
 
 
+        if ($request->from == null && $request->session_id == null && $request->status != null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
+
+
+            $data['title'] = 'Transactions';
+
+            $data['all'] = Transactions::latest()->where([
+                    'status' => $request->status,
+            ])->get();
+
+            $data['cash_out'] = Transactions::latest()->where([
+                    'status' => $request->status,
+                ])->get();
+
+            $data['web_pay'] = Transactions::latest()
+             ->where([
+                    'status' => $request->status,
+                ])->get();
+
+
+
+            $data['bill_payment'] = Transactions::latest()->where([
+                    'status' => $request->status,
+                ])->get();
+
+
+            $data['bank_transfer'] = Transactions::latest()->where([
+                    'status' => $request->status,
+                ])->get();
+
+
+            $data['reversal'] = Transactions::latest()->where([
+                    'status' => $request->status,
+            ])->get();
+
+
+            $data['date_from'] = $request->from;
+            $data['date_to'] = $request->to;
+
+
+            return view('admin.all-transactions.index', $data);
+        }
+
+
+
         if ($request->from == null && $request->session_id == null &&  $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id != null) {
 
 
@@ -1791,9 +1835,8 @@ class CheckController extends Controller
         User::where('id', $trx->user_id)->increment('main_wallet', $trx->debit);
         Transaction::where('ref_trans_id', $request->ref_trans_id)->update(['status' => 1]);
         $user_b = User::where('id', $trx->user_id)->first()->main_wallet;
-        $balance = (int)$user_b + (int)$trx->debit;
-
-
+        $usr = User::where('id', $trx->user_id)->first();
+        $balance = $user_b;
         $trasnaction = new Transaction();
         $trasnaction->user_id = $trx->user_id;
         $trasnaction->ref_trans_id = $trx->ref_trans_id;
@@ -1801,6 +1844,7 @@ class CheckController extends Controller
         $trasnaction->transaction_type = "Reversal";
         $trasnaction->debit = 0;
         $trasnaction->amount = $trx->debit;
+        $trasnaction->credit = $trx->debit;
         $trasnaction->serial_no = 0;
         $trasnaction->title = "Reversal";
         $trasnaction->note = "Revasal | $trx->receiver_name | $trx->receiver_account_no";
@@ -1809,6 +1853,9 @@ class CheckController extends Controller
         $trasnaction->main_type = "Revasal";
         $trasnaction->status = 3;
         $trasnaction->save();
+
+        $message = "NGN".number_format($trx->debit, 2)." reversed manualy for | $usr->first_name " .$usr->last_name;
+        send_notification($message);
 
         return back()->with('success', 'Reversal  Successfully Done');
     }
@@ -1950,10 +1997,63 @@ class CheckController extends Controller
         $data['val']=Transactions::where('id', $request->id)
         ->first();
 
+        return view('admin.all-transactions.view-trx', $data);
+
+
+
+
+    }
+
+
+
+    public function delete_transaction(Request $request)
+    {
+
+
+        Transactions::where('id', $request->id)
+        ->delete();
+
+        return redirect('admin/all-transactions')->with('success', 'Transaction Deleted');
+
+
+
+
+    }
+
+
+
+    
+
+
+    public function check_trx_status(Request $request)
+    {
+
+        $ref_no = $request->id;
+        $trx = check_status($ref_no);
+      
         return view('user.transactions.view-trx', $data);
 
 
 
 
     }
+
+
+    public function refund_trx(Request $request)
+    {
+
+        $ref_no = $request->id;
+        $trx = refund_trx($ref_no);
+      
+        return view('user.transactions.view-trx', $data);
+
+
+
+
+    }
+
+
+
+
+    
 }

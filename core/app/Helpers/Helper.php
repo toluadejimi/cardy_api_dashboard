@@ -1,32 +1,34 @@
 <?php
 
-use App\Models\Setting;
-use App\Models\VirtualAccount;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\DB;
-use App\Models\Settings;
+use Curl\Curl;
+use Carbon\Carbon;
+use App\Models\Bank;
 use App\Models\Logo;
-use App\Models\Paymentlink;
-use App\Models\Transactions;
-use App\Models\Currency;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Plans;
-use App\Models\Subscribers;
 use App\Models\Invoice;
-use App\Models\Exttransfer;
+use App\Models\Product;
+use App\Models\Setting;
+use App\Models\Currency;
 use App\Models\Merchant;
 use App\Models\Requests;
+use App\Models\Settings;
 use App\Models\Transfer;
 use App\Models\Withdraw;
-use App\Models\Bank;
-use App\Models\Product;
-use App\Models\Order;
+use App\Models\Exttransfer;
+use App\Models\Paymentlink;
 use App\Models\Subaccounts;
+use App\Models\Subscribers;
+use App\Models\Transaction;
+use App\Models\Transactions;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use Curl\Curl;
+use App\Models\Banksupported;
+use App\Models\VirtualAccount;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\ServiceProvider;
 
 
 function send_email($to, $name, $subject, $message)
@@ -1736,9 +1738,6 @@ if (!function_exists('get_banks')) {
 
 
     if (!function_exists('sendFirebaseNotification')) {
-
-
-
         function sendFirebaseNotification($var, $icon, $title, $message, $click_action)
         {
 
@@ -1810,5 +1809,173 @@ if (!function_exists('get_banks')) {
 
             $var = json_decode($var);
         }
+    }
+}
+
+if (!function_exists('trx')) {
+
+    function trx()
+    {
+
+        $refcode = "ENK" . random_int(10, 99).date('YmdHis');
+
+
+        return $refcode;
+
+    }
+}
+
+
+if (!function_exists('check_status')) {
+
+    function check_status($ref_no)
+    {
+
+        // try {
+        if ($ref_no == null) {
+
+            return response()->json([
+
+                'status' => false,
+                'message' => 'Transaction Not Found',
+
+            ], 500);
+        }
+
+
+        $trx = Transaction::where('ref_trans_id', $ref_no)->first();
+        if ($trx->status == 0) {
+
+            $trans_id = trx();
+            $username = env('MUSERNAME');
+            $prkey = env('MPRKEY');
+            $sckey = env('MSCKEY');
+
+            $unixTimeStamp = timestamp();
+            $sha = sha512($unixTimeStamp . $prkey);
+            $authHeader = 'magtipon ' . $username . ':' . base64_encode(hex2bin($sha));
+
+            $ref = sha512($trans_id . $prkey);
+            $signature = base64_encode(hex2bin($ref));
+
+
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "http://magtipon.buildbankng.com/api/v1/transaction/$trx->ttmfb_api_ref",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_HTTPHEADER => array(
+                    "Authorization: $authHeader",
+                    "Timestamp: $unixTimeStamp",
+                    'Content-Type: application/json',
+                ),
+            ));
+
+            $var = curl_exec($curl);
+            $result = json_decode($var);
+            $status = $result->ResponseCode ?? null;
+
+
+            dd($var, $ref_no, $trx->ttmfb_api_ref);
+
+            if ($status == 90000) {
+
+                Transaction::where('ref_trans_id', $ref_no)->update([
+
+                    'status' => 1,
+
+                ]);
+            }
+
+
+            if ($status == 50004 || $status == 60001 || $status == 60002) {
+
+                Transaction::where('ref_trans_id', $ref_no)->update([
+
+                    'status' => 3,
+
+                ]);
+
+                User::where('id', $trx->user_id)->increment('main_wallet', $trx->debit);
+                $trasnaction = new Transaction();
+                $trasnaction->user_id = $trx->user_id;
+                $trasnaction->ref_trans_id = trx();
+                $trasnaction->transaction_type = "Reversal";
+                $trasnaction->debit = 0;
+                $trasnaction->amount = $trx->amount;
+                $trasnaction->serial_no = 0;
+                $trasnaction->title = "Reversal";
+                $trasnaction->note = $trx->e_ref . "| Reversal";
+                $trasnaction->fee = 0;
+                $trasnaction->balance = $trx->debit;
+                $trasnaction->main_type = "Reversal";
+                $trasnaction->status = 3;
+                $trasnaction->save();
+
+                $usr = User::where('id', $trx->user_id)->first();
+                $full_name = $usr->first_name . "  " . $usr->last_name;
+                $message = $trx->e_ref . " | Reversed from Hostory  |  NGN" . number_format($trx->debit);
+
+                $result = $status . "| Message========> " . $message . "\n\nCustomer Name========> " . $full_name;
+                send_notification($result);
+
+
+                return response()->json([
+
+                    'status' => true,
+                    'e_ref' => $trx->p_sessionId,
+                    'amount' => $trx->amount,
+                    'receiver_bank' => $trx->receiver_bank,
+                    'receiver_name' => $trx->receiver_name,
+                    'receiver_account_no' => $trx->receiver_account_no,
+                    'date' => $trx->created_at,
+                    'note' => $trx->ref_trans_id . " | " . $trx->note,
+                    'status' => 3,
+                    'message' => "Transaction Reversed",
+
+
+                ], 200);
+            }
+        }
+
+
+        return response()->json([
+
+            'status' => true,
+            'e_ref' => $trx->p_sessionId,
+            'amount' => $trx->amount,
+            'receiver_bank' => $trx->receiver_bank,
+            'receiver_name' => $trx->receiver_name,
+            'receiver_account_no' => $trx->receiver_account_no,
+            'date' => $trx->created_at,
+            'note' => "$trx->ref_trans_id | $trx->note",
+            'status' => $trx->status,
+            'message' => "If receiver is not credited within 10mins, Please contact us with the EREF ",
+
+
+        ], 200);
+
+        // } catch (\Exception $th) {
+        //     return $th->getMessage();
+        // }
+    }
+}
+
+
+if (!function_exists('refund_trx')) {
+
+    function refund_trx($ref_no)
+    {
+
+
+        
+
+
+
     }
 }
