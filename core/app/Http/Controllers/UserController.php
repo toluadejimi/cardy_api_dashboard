@@ -347,7 +347,7 @@ class UserController extends Controller
             return back()->with('alert', 'Nothing Found');
         }
     }
- 
+
 
     public function webhook_update(Request $request)
     {
@@ -6134,7 +6134,7 @@ class UserController extends Controller
         }
 
 
-        
+
 
         if ($request->from == null  && $request->session_id == null && $request->status == null && $request->to == null && $request->trx_type == null && $request->ref_trans_id == null) {
 
@@ -6428,19 +6428,18 @@ class UserController extends Controller
             $data['title'] = 'Transactions';
             $user = Auth::guard('user')->user()->id;
             $data['title'] = 'Transactions';
-            $data['all'] = Transactions::where([
-                    'user_id' => Auth::id(),
-                    'ref_trans_id' => $request->ref_trans_id,
-                ])->get();
+            $data['all'] = Transactions::where('user_id',Auth::id())
+            ->where('note', 'LIKE', '%' . $request->session_id . '%')
+            ->get();
 
             $data['cash_out'] =Transactions::where([
                     'user_id' => Auth::id(),
-                    'transaction_type' => $request->ref_trans_id,
+                    'transaction_type' => $request->session_id,
             ])->get();
 
             $data['web_pay'] = Transactions::where([
                     'user_id' => Auth::id(),
-                    'transaction_type' => $request->ref_trans_id,
+                    'transaction_type' => $request->session_id,
                 ])->get();
 
 
