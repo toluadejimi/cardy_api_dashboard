@@ -6428,7 +6428,7 @@ class UserController extends Controller
             $data['title'] = 'Transactions';
             $user = Auth::guard('user')->user()->id;
             $data['title'] = 'Transactions';
-            $data['all'] = Transactions::where('note', 'LIKE', "%$keyword%")->get();
+            $data['all'] = Transactions::where('note', 'LIKE', "%$request->session_id%")->get();
 
             $data['cash_out'] =Transactions::where([
                     'user_id' => Auth::id(),
