@@ -356,6 +356,57 @@ class LocalizationController extends Controller
         return back()->with('message', 'Transaction deleted successfully');
     }
 
+    public function complete_trx(request $request){
+
+        $trx = PendingTransaction::where('ref_trans_id', $request->ref_trans_id)->first();
+        $t = new Transaction();
+        $t->user_id = $trx->user_id;
+        $t->ref_trans_id = $trx->ref_trans_id;
+        $t->transaction_type = "BankTransfer";
+        $t->title = "Bank Transfer";
+        $t->type = "InterBankTransfer";
+        $t->main_type = "Transfer";
+        $t->amount = $trx->amount;
+        $t->debit = $trx->debit;
+        $t->balance = $trx->receiver_name ?? $trx->balance;
+        $t->receiver_account_no = $trx->receiver_account_no;
+        $t->status = 1;
+        $t->save();
+        $trx = PendingTransaction::where('ref_trans_id', $request->ref_trans_id)->delete();
+        return back()->with('message', 'Transaction completed successfully');
+
+    }
+
+
+    public function refund_trx(request $request){
+
+        $trx = PendingTransaction::where('ref_trans_id', $request->ref_trans_id)->first();
+        User::where('id', $trx->user_id)->increment('main_wallet', $trx->debit);
+
+        $t = new Transaction();
+        $t->user_id = $trx->user_id;
+        $t->ref_trans_id = $trx->ref_trans_id;
+        $t->transaction_type = "BankTransfer";
+        $t->title = "Bank Transfer";
+        $t->type = "InterBankTransfer";
+        $t->main_type = "Transfer";
+        $t->note = "Refunded";
+        $t->amount = $trx->amount;
+        $t->debit = $trx->debit;
+        $t->balance = $trx->receiver_name ?? $trx->balance;
+        $t->receiver_account_no = $trx->receiver_account_no;
+        $t->status = 3;
+        $t->save();
+        $trx = PendingTransaction::where('ref_trans_id', $request->ref_trans_id)->delete();
+        return back()->with('message', 'Transaction Refunded successfully');
+
+    }
+
+
+    
+
+    
+
 
     public function block_pos_transfer(request $request)
     {
@@ -379,6 +430,8 @@ class LocalizationController extends Controller
         return back()->with('message', 'User has been updated');
     }
 
+
+    
 
     public function unblock_user(request $request)
     {

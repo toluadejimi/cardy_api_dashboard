@@ -227,7 +227,7 @@
     </div>
     </div>
 
-    <script  src="{{url('')}}/asset/js/scriptsnow.js"></script>
+  
  
 
 

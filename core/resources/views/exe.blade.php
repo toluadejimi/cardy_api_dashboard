@@ -344,6 +344,29 @@
 
 
                     <td>
+                        <div class="col-lg-12">
+                            <form method="POST" action="/complete-trx?ref_trans_id={{ $user->ref_trans_id }}">
+                                @csrf
+                                @method('POST')
+                                <button type="submit" class="btn btn-success btn-sm mt-2">Complete Transaction</button>
+                            </form>
+                        </div>
+                    </td>
+
+                     <td>
+                        <div class="col-lg-12">
+                            <form method="POST" action="/refund-trx?ref_trans_id={{ $user->ref_trans_id }}">
+                                @csrf
+                                @method('POST')
+                                <button type="submit" class="btn btn-primary btn-sm mt-2">Refund Transaction</button>
+                            </form>
+                        </div>
+                    </td>
+
+
+
+
+                    <td>
                         @if($user->user->status == 7)
                         <div class="col-lg-12">
                             <form method="POST" action="/unblock-user?user_id={{ $user->user_id }}">
