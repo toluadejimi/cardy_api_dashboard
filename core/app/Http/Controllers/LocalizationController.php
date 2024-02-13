@@ -14,6 +14,7 @@ use App\Models\Productimage;
 use App\Models\Transactions;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Models\Oldtransaction;
 use Laravel\Passport\Passport;
 use App\Models\OauthAccessToken;
 use App\Models\PendingTransaction;
@@ -60,6 +61,11 @@ class LocalizationController extends Controller
         $pin = env('PIN');
         if($request->pass != $pin){
             return back()->with('error', 'Pin not correct');
+        }
+
+        $dataToMove =  Transactions::where('status', 1)->get();
+        foreach ($dataToMove as $item) {
+          Oldtransaction::updateOrCreate(['id' => $item->id], $item->toArray());
         }
     
         Transactions::whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
