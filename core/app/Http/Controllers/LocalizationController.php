@@ -63,13 +63,13 @@ class LocalizationController extends Controller
             return back()->with('error', 'Pin not correct');
         }
 
-        $dataToMove =  Transactions::where('status', 1)->get();
+        $dataToMove =  Transactions::where('status', 1)->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])->get();
         foreach ($dataToMove as $item) {
           Oldtransaction::updateOrCreate(['id' => $item->id], $item->toArray());
         }
     
-        Transactions::whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
-        ->delete();
+        // Transactions::whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+        // ->delete();
     
         return back()->with('error', 'Transaction Table Deleted');
     
