@@ -110,6 +110,31 @@
         </div>
 
 
+        <div class="col-sm-3 my-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Get Transactions</h6>
+                    <div class="col-lg-12">
+                        <form method="POST" action="get-transaction">
+                            @csrf
+                            @method('POST')
+
+                            <label>Date From</label>
+                            <input class="form-control" type="date" name="from" required>
+
+                            <label>Date To</label>
+                            <input class="form-control" type="date" name="to" required>
+                            <label>Pin</label>
+                            <input class="form-control" type="password" name="pass" required>
+
+                            <button type="submit" class="btn btn-primary btn-md mt-2">Get Transaction</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
 
 
 
@@ -224,189 +249,190 @@
 
 
 
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-    @if (session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-    @endif
-    @if (session()->has('error'))
-    <div class="alert alert-danger">
-        {{ session()->get('error') }}
-    </div>
-    @endif
-
-
-
-    <div class="mt-4">
-        <table class="table responsive">
-
-            <thead>
-
-                <tr>
-
-                    <th>TRX ID</th>
-
-                    <th>Name</th>
-
-                    <th>Amount</th>
-                    <th>Time</th>
-
-                    <th>Time Left</th>
-
-
-                    <th>Action</th>
-
-                    <th>Action</th>
-
-
-
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                @foreach($trx as $user)
-
-
-
-                <tr>
-
-                    <td>{{ $user->ref_trans_id }}</td>
-
-                    <td>{{ $user->user->first_name }} {{ $user->user->last_name }}</td>
-
-                    <td>NGN {{ number_format($user->amount, 2) }}</td>
-
-                     <td>{{date("h:i:A", strtotime($user->created_at))}}</td>
-
-
-
-
-
-                    <td>
-
-                        <p id="demo"></p>
-
-                        <script>
-
-                            // Set the date we're counting down to
-                        var countDownDate = new Date ("{{date("F d, Y H:i:s", strtotime($user->created_at))}}").getTime();
-
-                        // Update the count down every 1 second
-                        var x = setInterval(function() {
-
-                          // Get today's date and time
-                          var now = new Date().getTime();
-
-                          // Find the distance between now and the count down date
-                          var distance = now - 60;
-
-                          // Time calculations for days, hours, minutes and seconds
-                          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                          // Output the result in an element with id="demo"
-                          document.getElementById("demo").innerHTML =  seconds + "s ";
-
-                          // If the count down is over, write some text
-                          if (distance < 0) {
-                            clearInterval(x);
-                            document.getElementById("demo").innerHTML = "EXPIRED";
-                          }
-                        }, 1000);
-                        </script>
-                    </td>
-
-
-                    <td>
-                        <div class="col-lg-12">
-                            <form method="POST" action="/delete-trx?ref_trans_id={{ $user->ref_trans_id }}">
-                                @csrf
-                                @method('POST')
-
-                                <button type="submit" class="btn btn-danger btn-sm mt-2">Delete Transaction</button>
-                            </form>
-                        </div>
-                    </td>
-
-
-                    <td>
-                        <div class="col-lg-12">
-                            <form method="POST" action="/complete-trx?ref_trans_id={{ $user->ref_trans_id }}">
-                                @csrf
-                                @method('POST')
-                                <button type="submit" class="btn btn-success btn-sm mt-2">Complete Transaction</button>
-                            </form>
-                        </div>
-                    </td>
-
-                     <td>
-                        <div class="col-lg-12">
-                            <form method="POST" action="/refund-trx?ref_trans_id={{ $user->ref_trans_id }}">
-                                @csrf
-                                @method('POST')
-                                <button type="submit" class="btn btn-primary btn-sm mt-2">Refund Transaction</button>
-                            </form>
-                        </div>
-                    </td>
-
-
-
-
-                    <td>
-                        @if($user->user->status == 7)
-                        <div class="col-lg-12">
-                            <form method="POST" action="/unblock-user?user_id={{ $user->user_id }}">
-                                @csrf
-                                @method('POST')
-
-                                <button type="submit" class="btn btn-success btn-sm mt-2 text-white">Unblock
-                                    User</button>
-                            </form>
-                        </div>
-                        @else
-                        <div class="col-lg-12">
-                            <form method="POST" action="/block-user?user_id={{ $user->user_id }}">
-                                @csrf
-                                @method('POST')
-
-                                <button type="submit" class="btn btn-warning btn-sm mt-2 text-white">Block User</button>
-                            </form>
-                        </div>
-                        @endif
-                    </td>
-
-
-                </tr>
-
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
                 @endforeach
+            </ul>
+        </div>
+        @endif
+        @if (session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+        @endif
+        @if (session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session()->get('error') }}
+        </div>
+        @endif
 
-            </tbody>
 
-        </table>
+
+        <div class="mt-4">
+            <table class="table responsive">
+
+                <thead>
+
+                    <tr>
+
+                        <th>TRX ID</th>
+
+                        <th>Name</th>
+
+                        <th>Amount</th>
+                        <th>Time</th>
+
+                        <th>Time Left</th>
+
+
+                        <th>Action</th>
+
+                        <th>Action</th>
+
+
+
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach($trx as $user)
+
+
+
+                    <tr>
+
+                        <td>{{ $user->ref_trans_id }}</td>
+
+                        <td>{{ $user->user->first_name }} {{ $user->user->last_name }}</td>
+
+                        <td>NGN {{ number_format($user->amount, 2) }}</td>
+
+                        <td>{{date("h:i:A", strtotime($user->created_at))}}</td>
+
+
+
+
+
+                        <td>
+
+                            <p id="demo"></p>
+
+                            <script>
+                                // Set the date we're counting down to
+                                var countDownDate = new Date("{{date("
+                                    F d, Y H: i: s ", strtotime($user->created_at))}}").getTime();
+
+                                // Update the count down every 1 second
+                                var x = setInterval(function() {
+
+                                    // Get today's date and time
+                                    var now = new Date().getTime();
+
+                                    // Find the distance between now and the count down date
+                                    var distance = now - 60;
+
+                                    // Time calculations for days, hours, minutes and seconds
+                                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                                    // Output the result in an element with id="demo"
+                                    document.getElementById("demo").innerHTML = seconds + "s ";
+
+                                    // If the count down is over, write some text
+                                    if (distance < 0) {
+                                        clearInterval(x);
+                                        document.getElementById("demo").innerHTML = "EXPIRED";
+                                    }
+                                }, 1000);
+
+                            </script>
+                        </td>
+
+
+                        <td>
+                            <div class="col-lg-12">
+                                <form method="POST" action="/delete-trx?ref_trans_id={{ $user->ref_trans_id }}">
+                                    @csrf
+                                    @method('POST')
+
+                                    <button type="submit" class="btn btn-danger btn-sm mt-2">Delete Transaction</button>
+                                </form>
+                            </div>
+                        </td>
+
+
+                        <td>
+                            <div class="col-lg-12">
+                                <form method="POST" action="/complete-trx?ref_trans_id={{ $user->ref_trans_id }}">
+                                    @csrf
+                                    @method('POST')
+                                    <button type="submit" class="btn btn-success btn-sm mt-2">Complete Transaction</button>
+                                </form>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="col-lg-12">
+                                <form method="POST" action="/refund-trx?ref_trans_id={{ $user->ref_trans_id }}">
+                                    @csrf
+                                    @method('POST')
+                                    <button type="submit" class="btn btn-primary btn-sm mt-2">Refund Transaction</button>
+                                </form>
+                            </div>
+                        </td>
+
+
+
+
+                        <td>
+                            @if($user->user->status == 7)
+                            <div class="col-lg-12">
+                                <form method="POST" action="/unblock-user?user_id={{ $user->user_id }}">
+                                    @csrf
+                                    @method('POST')
+
+                                    <button type="submit" class="btn btn-success btn-sm mt-2 text-white">Unblock
+                                        User</button>
+                                </form>
+                            </div>
+                            @else
+                            <div class="col-lg-12">
+                                <form method="POST" action="/block-user?user_id={{ $user->user_id }}">
+                                    @csrf
+                                    @method('POST')
+
+                                    <button type="submit" class="btn btn-warning btn-sm mt-2 text-white">Block User</button>
+                                </form>
+                            </div>
+                            @endif
+                        </td>
+
+
+                    </tr>
+
+                    @endforeach
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+
+
+
 
     </div>
 
-
-
-
-
-
-</div>
-
-</body>
+    </body>
 
 </html>

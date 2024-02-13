@@ -23,6 +23,7 @@ return array(
     'App\\Http\\Controllers\\CheckController' => $baseDir . '/app/Http/Controllers/CheckController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\DepositController' => $baseDir . '/app/Http/Controllers/DepositController.php',
+    'App\\Http\\Controllers\\ExportController' => $baseDir . '/app/Http/Controllers/ExportController.php',
     'App\\Http\\Controllers\\FrontendController' => $baseDir . '/app/Http/Controllers/FrontendController.php',
     'App\\Http\\Controllers\\LocalizationController' => $baseDir . '/app/Http/Controllers/LocalizationController.php',
     'App\\Http\\Controllers\\MerchantController' => $baseDir . '/app/Http/Controllers/MerchantController.php',

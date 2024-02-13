@@ -840,6 +840,7 @@ class ComposerStaticInit000dd64ecb3c7fd93681e80eb2357844
         'App\\Http\\Controllers\\CheckController' => __DIR__ . '/../..' . '/app/Http/Controllers/CheckController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DepositController' => __DIR__ . '/../..' . '/app/Http/Controllers/DepositController.php',
+        'App\\Http\\Controllers\\ExportController' => __DIR__ . '/../..' . '/app/Http/Controllers/ExportController.php',
         'App\\Http\\Controllers\\FrontendController' => __DIR__ . '/../..' . '/app/Http/Controllers/FrontendController.php',
         'App\\Http\\Controllers\\LocalizationController' => __DIR__ . '/../..' . '/app/Http/Controllers/LocalizationController.php',
         'App\\Http\\Controllers\\MerchantController' => __DIR__ . '/../..' . '/app/Http/Controllers/MerchantController.php',

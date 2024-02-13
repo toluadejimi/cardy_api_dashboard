@@ -1,0 +1,62 @@
+h4 {
+    margin: 0;
+}
+.w-full {
+    width: 100%;
+}
+.w-half {
+    width: 50%;
+}
+.margin-top {
+    margin-top: 1.25rem;
+}
+.footer {
+    font-size: 0.875rem;
+    padding: 1rem;
+    background-color: rgb(241 245 249);
+}
+table {
+    width: 100%;
+    border-spacing: 0.2rem;
+    font-size: 14px;
+    font-family: Futura;
+
+}
+table.products {
+    font-size: 0.875rem;
+}
+table.products tr {
+    background-color: rgb(238, 238, 238);
+    padding: 0.6rem;
+    font-size: 11px;
+
+}
+table.products th {
+    color: #fefefe;
+    background-color: rgb(1, 0, 83);
+    padding: 0.8rem;
+}
+
+.credit{
+    color: #099401;
+}
+
+.debit{
+    color: #940101;
+}
+
+
+
+table tr.items {
+    background-color: rgb(0, 0, 0);
+    padding: 0.6rem;
+
+}
+table tr.items td {
+    padding: 0.6rem;
+}
+.total {
+    text-align: right;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+}

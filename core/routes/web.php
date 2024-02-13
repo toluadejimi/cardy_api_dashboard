@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CheckController;
 use App\Http\Controllers\ProxyController;
 use App\Http\Controllers\TradeController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\Auth\faController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\PaymentController;
@@ -40,6 +41,27 @@ use App\Http\Controllers\User\ForgotPasswordController;
 
 Route::get('/proxy', [ProxyController::class, 'proxy']);
 
+Route::get('/export-transaction', [ExportController::class, 'export_transaction']);
+Route::any('/export', [ExportController::class, 'export_transaction_view']);
+Route::any('/get-transactions', [ExportController::class, 'export_transaction_view']);
+
+
+
+
+
+
+Route::any('/export-trx', [ExportController::class, 'export_trx']);
+Route::any('/download-pdf', [ExportController::class, 'download_pdf']);
+
+
+
+
+
+
+
+
+
+
 
 Route::get('pricing', [LocalizationController::class, 'pricing']);
 
@@ -71,12 +93,15 @@ Route::post('vtpasscallback', [LocalizationController::class, 'vtpasscallback'])
 
 
 Route::post('delete-transaction', [LocalizationController::class, 'delete_transaction']);
+Route::any('/get-transaction', [LocalizationController::class, 'get_transaction']);
 Route::post('complete-trx', [LocalizationController::class, 'complete_trx']);
 Route::post('refund-trx', [LocalizationController::class, 'refund_trx']);
 
 
 Route::post('backup-transaction', [LocalizationController::class, 'backup_transaction']);
 Route::post('backup-user', [LocalizationController::class, 'backup_user']);
+
+
 
 
 
