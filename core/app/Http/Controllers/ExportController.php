@@ -272,7 +272,15 @@ class ExportController extends Controller
             });
 
 
-            return view('export-trx', $data)->with('message', 'Statement sent successfully');
+            return $pdf->stream();
+
+
+
+            //return view('export-trx', $data)->with('message', 'Statement sent successfully');
+
+
+
+
         } else {
             if ($request->serial_no != null) {
 
@@ -372,8 +380,10 @@ class ExportController extends Controller
                     ->attachData($pdf->output(), "Statement.pdf");
             });
 
+            return $pdf->stream();
 
-            return view('export-trx', $data)->with('message', 'Statement sent successfully');
+
+            //return view('export-trx', $data)->with('message', 'Statement sent successfully');
         }
     }
 }
