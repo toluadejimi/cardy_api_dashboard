@@ -54,7 +54,7 @@
                                                     <tr>
                                                       <td
                                                         style="font-size: 6px; line-height: 10px; padding: 16px 0px 0px 0px;"
-                                                        align="center" valign="top"><img class="m_-5773299331375091765max-width CToWUd" style="display: block; color: #000000; text-decoration: none; font-family: Helvetica,arial,sans-serif; font-size: 16px;" src="{{ url('') }}/asset/images/dark-logo1.svg" width="259" height="51" border="0" data-bit="iit" />
+                                                        align="center" valign="top"><img class="m_-5773299331375091765max-width CToWUd" style="display: block; color: #000000; text-decoration: none; font-family: Helvetica,arial,sans-serif; font-size: 16px;" src="https://enkpay.com/asset/images/blue.png" width="259" height="51" border="0" data-bit="iit" />
                                                       </td>
                                                     </tr>
                                                   </tbody>
