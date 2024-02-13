@@ -11,7 +11,9 @@
     <table class="w-full">
         <tr>
             <td class="w-half">
-                <img src="{{ url('') }}/asset/images/blue.png" alt="ENKPAY" width="150" />
+             <div><h1 class="head">ENKPAY</h1></div>
+             <div><p class="psmall">Seamless Transaction</p></div>
+
             </td>
             <td class="w-half">
                 <h2>Transaction Report</h2>
