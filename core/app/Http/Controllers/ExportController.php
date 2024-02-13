@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Terminal;
 use App\Models\Transaction;
-use App\Models\Oldtransaction;
 use Illuminate\Http\Request;
+use App\Models\Oldtransaction;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -30,9 +31,12 @@ class ExportController extends Controller
     public function export_trx(request $request)
     {
 
-        $transaction_ck = Transaction::where('user_id', $request->id)->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])->sum('debit') ?? null;
+        $from = Carbon::createFromFormat('Y-m-d', $request->from)->format('m');
+        $transaction_ck = Carbon::now()->format('m');
 
-        if ($transaction_ck == 0) {
+
+
+        if ($transaction_ck != $from) {
 
             $data['total_debit'] = Oldtransaction::where('user_id', $request->id)->where('status', 1)->sum('debit') ?? null;
 
@@ -161,9 +165,12 @@ class ExportController extends Controller
     {
 
 
-        $transaction_ck = Transaction::where('user_id', $request->id)->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])->sum('debit') ?? null;
+        $from = Carbon::createFromFormat('Y-m-d', $request->from)->format('m');
+        $transaction_ck = Carbon::now()->format('m');
 
-        if ($transaction_ck == 0) {
+
+
+        if ($transaction_ck != $from) {
 
 
             if ($request->serial_no != null) {
