@@ -11,7 +11,7 @@
     <table class="w-full">
         <tr>
             <td class="w-half">
-                <img src="{{ url('') }}/asset/images/blue.png" alt="laravel daily" width="200" />
+                <img src="{{ url('') }}/asset/images/blue.png" alt="ENKPAY" width="150" />
             </td>
             <td class="w-half">
                 <h2>Transaction Report</h2>
