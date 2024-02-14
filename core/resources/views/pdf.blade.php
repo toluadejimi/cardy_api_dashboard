@@ -50,6 +50,7 @@
             <tr>
                 <th>Date Time</th>
                 <th>Debit</th>
+                <th>Amount</th>
                 <th>Credit</th>
                 <th>Balance</th>
                 <th>Remarks</th>
@@ -60,8 +61,9 @@
 
             <tr>
                 <td>{{date("d/m/Y h:i:A", strtotime($val->created_at))}}</td>
-                <td>{{number_format($val->debit, 2)}}</td>
-                <td>{{number_format($val->credit, 2)}}</td>
+                <td>{{number_format($val->amount, 2)}}</td>
+                <td style="color:#FF4500;">{{number_format($val->debit, 2)}}</td>
+                <td style="color:#2E8B57;">{{number_format($val->credit, 2)}}</td>
                 <td>{{number_format($val->balance, 2)}}</td>
                 <td>{{$val->note}}</td>
 
