@@ -180,42 +180,53 @@
                         @endif
 
 
-                        <h2 class="shared_auth_contentTitle__Iwznb">Set Password & Transaction Pin</h2>
-                        <p class="">Choose a password</p>
+                        @if ($message != null)
+                        <div class="alert alert-danger">
+                            <ul>
+                                <li>{{ $message }}</li>
+                            </ul>
+                        </div>
+                        @endif
 
-                        <p class="text-small">Hi, {{ $first_name }} <br> Kindly set a strong password of your choice.
+
+                        <h2 class="shared_auth_contentTitle__Iwznb">Business Registration</h2>
+                        <p class="">Code Verification</p>
+
+                        <p class="text-small">Hi, {{ $first_name }} <br> An OTP Code has been sent to your Email <br>
+                        <strong>{{$email}}</strong>. <br> Kindly check your inbox, if not found check your spam folder.
+
+                        <br>   <a class="my-2" style="color: aliceblue;" href="/company-register"> Change Email</a>
+
                         </p>
 
 
 
 
-                        <form action="{{ route('submitregister') }}" method="post">
+                        <form action="verify-business-code?email={{ $email }}" method="post">
                             @csrf
 
                             <div class="Input_inputGroup__cOu_0">
 
-                                <label class="Input_label__5uJx3">Enter Password</label><input class="Input_input__gCIPK" name="password"
-                                    placeholder="*****" required type="password" />
+                                <label class="Input_label__5uJx3">Enter OTP</label><input class="Input_input__gCIPK" name="code"
+                                    placeholder="1234" required type="" />
                                     <input type="text" hidden value="{{$email}}" name="email">
                                     <input type="text" hidden value="{{$first_name}}" name="first_name">
                                     <input type="text" hidden value="{{$last_name}}" name="last_name">
                                     <input type="text" hidden value="{{$phone}}" name="phone">
+
+
                             </div>
 
-                            <hr>
 
-                            <h4 class="Input_label__5uJx3 mt-3">Set 4 Digit Transaction Pin</h4>
-
-                            <div class="Input_inputGroup__cOu_0">
-                                <label class="Input_label__5uJx3">Enter Transaction Pin</label><input maxlength="4" class="Input_input__gCIPK" name="pin"
-                                    placeholder="******" required type="password" />
-
+                            <div class=""><br />
+                                <p class="align-center"><a style="color:aliceblue;" rel="noopener noreferrer"
+                                        class="strong no-decor" href="resend-code?email={{ $email }}">Resend Code</a> now!</p>
                             </div>
 
 
                                 <button
                             class="shared_auth_button__6ykOn Button_button__PjVhE Button_primary___XGO6"
-                            type="submit">Continue</button>
+                            type="submit">Verify</button>
 
 
                             <div class=""><br />
@@ -242,7 +253,7 @@
     </div>
     </div>
 
-    <link rel="stylesheet" href="{{url('')}}/asset/css/stylesnow.css">
+
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css'>
 
 

@@ -80,12 +80,58 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class UserController extends Controller
 {
 
+    public function api_docs()
+    {
+        return view('api-docs');
+    }
+
 
     public function __construct()
     {
     }
     //Cart
 
+
+
+    public function generate_test_key(Request $request)
+    {
+
+        $usr = User::where('id', Auth::id())->first() ?? null;
+
+        if($usr->tpublic_key == null){
+
+           $key = "test".Str::randon('10');
+           User::where('id', Auth::id())->update(['tpublic_key'=>$key]);
+
+            return back()->with('success', 'Test Key has been generated successfully');
+
+
+        }
+
+
+        return back()->with('message', 'Test Key has been generated successfully');
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+    public function api_keys()
+    {
+
+        $web_key = Webkey::where('user_id', Auth::id())->first()->key ?? null;
+
+        return view ('user.profile.api-keys', compact('web_key'));
+
+    }
 
 
     public function  verify_email(Request $request)
@@ -4823,10 +4869,12 @@ class UserController extends Controller
     //Settings
     public function profile()
     {
+
         $data['title'] = "Profile";
         $data['country'] = Countrysupported::wherestatus(1)->get();
         $data['bcountry'] = Country::where('phonecode', '!=', 0)->get();
         $data['nationality'] = Country::all();
+
         $data['bnk'] = Banksupported::wherecountry_id(Auth::guard('user')->user()->country)->get();
         $g = new \Sonata\GoogleAuthenticator\GoogleAuthenticator();
         $secret = $g->generateSecret();
@@ -4842,7 +4890,6 @@ class UserController extends Controller
             $com->last_name = $user->last_name;
             $com->save();
         }
-
 
         $qr = Webkey::where('user_id', Auth::guard('user')->user()->id)->first()->qrlink ?? null;
         $webkey = Webkey::where('user_id', Auth::guard('user')->user()->id)->first()->key ?? null;
@@ -4866,6 +4913,9 @@ class UserController extends Controller
         $data['secret'] = $secret;
         $data['image'] = \Sonata\GoogleAuthenticator\GoogleQrUrl::generate($user->email, $secret, $site);
         $data['bank'] = Bank::whereUser_id(Auth::guard('user')->user()->id)->orderBy('id', 'DESC')->paginate(4);
+
+
+
         return view('user.profile.index', $data);
     }
 
@@ -4991,16 +5041,25 @@ class UserController extends Controller
             $file_url = url('') . "/asset/images/$filename";
         }
 
+        if ($request->hasFile('utility')) {
+            $image = $request->file('utility');
+            $filename = 'image_' . time() . '.' . $image->extension();
+            $location = 'asset/images/utility' . $filename;
+            Image::make($image)->save($location);
+            $file_utility = url('') . "/asset/images/utility/$filename";
+        }
+
+
 
 
 
         User::where('id', Auth::user()->id)
             ->update([
                 'identification_type' => $request->identification_type,
-                'identification_number' => $request->identification_number,
                 'bvn' => $request->bvn,
+                'identification_number' => $request->nin,
                 'identification_image' => $file_url,
-
+                'utility_bill' => $file_utility,
 
             ]);
 
@@ -5066,6 +5125,8 @@ class UserController extends Controller
         $message = $var->message ?? null;
         $status = $var->status ?? null;
         // $id = $var[0]->id;
+
+
         if ($status == "success") {
 
             User::where('id', Auth::user()->id)
@@ -5078,7 +5139,6 @@ class UserController extends Controller
                     'last_name' => $request->last_name,
                     'phone' => $request->phone,
                     'identification_type' => $request->identification_type,
-                    'identification_number' => $request->identification_number,
                     'identification_image' => $file_url,
                     'state' => $request->state,
                     'lga' => $request->lga,
@@ -5086,7 +5146,7 @@ class UserController extends Controller
                     'card_holder_id' => $var->data->cardholder_id,
                     'is_kyc_verified' => 1,
                     'is_identification_verified' => 1,
-                    'status' => 2,
+                    'status' => 1,
 
 
                 ]);
@@ -5100,14 +5160,6 @@ class UserController extends Controller
             $b_phone = Auth::user()->b_name;
             $pnum = preg_replace('/^./', '', $phone);
 
-            $create_v = create_p_account();
-
-            if ($create_v == 200) {
-                return redirect('user/dashboard')->with('success', 'Your account has been verified.');
-            }
-
-            $message = "Pending Account Creation for |"  . $first_name . " " .  $last_name;
-
 
             $check_business_name = Compliance::where('user_id', $user_id)->first()->first_name ?? null;
             if ($check_business_name == null) {
@@ -5120,10 +5172,13 @@ class UserController extends Controller
                 $com->save();
             }
 
-            return back()->with('alert', "Your verification is pending");
+            $text = "Verification Submmitted | ". Auth::user()->first_name. " " . Auth::user()->last_name;
+            send_notification($text);
+
+            return back()->with('message', "Your verification is pending");
         }
 
-        return back()->with('alert', "$message");
+        return back()->with('error', "$message");
     }
 
     public function submitcompliance(Request $request)
@@ -5487,6 +5542,48 @@ class UserController extends Controller
 
         // }
     }
+
+
+    public function VerifyBusinessEmail(Request $request)
+    {
+        $set = Settings::first();
+        $code = $request->code;
+
+        if ($code == null) {
+            return back()->with('alert', 'Code can not be empty');
+        }
+
+        $sms_code = User::where('email', $request->email)->first()->sms_code;
+
+        if ($code == $sms_code) {
+
+            User::where('email', $request->email)->update(['is_email_verified' => 1]);
+
+            $data['first_name'] = $request->first_name;
+            $data['last_name'] = $request->last_name;
+            $data['email'] = $request->email;
+            $data['phone'] = $request->phone;
+
+            return view('auth.password', $data);
+        }
+
+
+
+
+        $data['first_name'] = $request->first_name;
+        $data['last_name'] = $request->last_name;
+        $data['email'] = $request->email;
+        $data['phone'] = $request->phone;
+        $data['message'] = "Invalid code, Try again";
+
+        return view('auth.business-verify-email', $data)->with('error', 'Your OTP Code is invalid, Try Again');
+
+
+
+
+        // }
+    }
+
 
 
     public function ResendCode(Request $request)

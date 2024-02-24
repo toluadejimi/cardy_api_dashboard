@@ -51,6 +51,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+
     public function deposit()
     {
         return $this->hasMany('App\Model\Deposit', 'user_id');

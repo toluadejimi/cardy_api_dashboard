@@ -47,7 +47,7 @@
                     <span><i class="mdi mdi-help"></i></span>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
                     </button>
-                    <strong>Alert!</strong> {{ $set->verify_message }}. <a class="text-white" </div>
+                    <strong>Alert!</strong> {{ $set->verify_message }}  <a class="btn btn-sm btn-danger" href="profile"> Verify Now</a> <a class="text-white" </div>
 
 
                         @endif

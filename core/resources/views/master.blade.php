@@ -719,27 +719,9 @@ function exchange(){
 
                                 </div>
                             </a>
-                            <div class="dropdown-menu profile dropdown-menu-end">
-                                <a href="app-profile.html" class="dropdown-item ai-icon ">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="12" cy="7" r="4"></circle>
-                                    </svg>
-                                    <span class="ms-2">Profile </span>
-                                </a>
-                                <a href="email-inbox.html" class="dropdown-item ai-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="text-success" width="18" height="18"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path
-                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
-                                        </path>
-                                        <polyline points="22,6 12,13 2,6"></polyline>
-                                    </svg>
-                                    <span class="ms-2">Inbox </span>
-                                </a>
+
+
+
                                 <a href="logout" class="dropdown-item ai-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -820,7 +802,7 @@ function exchange(){
                                 <path opacity="0.4" d="M7.04483 4.77998C6.8165 4.73315 6.58101 4.70703 6.33567 4.70703C4.07926 4.70703 2.30726 6.84225 2.91255 9.21972C3.31906 10.8218 4.79379 11.8854 6.43685 11.8421C6.60161 11.8376 6.76368 11.8223 6.92037 11.7953C7.03409 11.7755 7.09139 11.6467 7.02692 11.5513C6.40014 10.6237 6.04288 9.5079 6.04288 8.31016C6.04288 7.05928 6.43327 5.89486 7.11109 4.93937C7.13258 4.90966 7.1487 4.86373 7.12721 4.82951C7.1093 4.80159 7.07617 4.78718 7.04483 4.77998Z" fill="black"/>
                                 <path d="M3.32156 13.5127C2.21752 13.7297 1.49225 14.1719 1.19139 14.8167C0.936203 15.3453 0.936203 15.9586 1.19139 16.4872C1.65163 17.4851 3.13531 17.8066 3.71195 17.8885C3.83104 17.9065 3.92595 17.8038 3.91342 17.6832C3.61883 14.9167 5.9621 13.6046 6.56918 13.3029C6.59425 13.2885 6.59962 13.2677 6.59694 13.2542C6.59515 13.2452 6.5853 13.2317 6.5656 13.2299C5.25294 13.2047 3.84358 13.3848 3.32156 13.5127Z" fill="black"/>
                                 </svg>
-                                
+
 
                         </div>
                         <span class="nav-text">Customers</span>
@@ -986,7 +968,7 @@ Scripts
     <script src="{{url('/')}}/asset/dashboard/vendor/clipboard/dist/clipboard.min.js"></script>
     <script src="{{url('/')}}/asset/dashboard/vendor/select2/dist/js/select2.min.js"></script>
     <script src="{{url('/')}}/asset/dashboard/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-  
+
 
 
 </body>

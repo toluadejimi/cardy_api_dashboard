@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Ï<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -15,7 +15,7 @@
 </head>
 
 
-<div class="container">
+<body class="container">
 
     <div class="row">
 

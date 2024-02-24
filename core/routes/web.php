@@ -46,6 +46,8 @@ Route::any('/export', [ExportController::class, 'export_transaction_view']);
 Route::any('/get-transactions', [ExportController::class, 'export_transaction_view']);
 
 
+Route::get('api-docs', [UserController::class, 'api_docs']);
+
 
 
 
@@ -69,6 +71,8 @@ Route::get('buy-product', [LocalizationController::class, 'buy_product']);
 Route::post('pay-now', [LocalizationController::class, 'pay_now']);
 
 Route::post('verify-code', [UserController::class, 'VerifyEmail'])->name('verify.email');
+Route::post('verify-business-code', [UserController::class, 'VerifyBusinessEmail'])->name('verify.business.email');
+
 
 Route::get('verify-email', [LocalizationController::class, 'verify_email']);
 
@@ -124,6 +128,9 @@ Route::get('personal-register', [LocalizationController::class, 'personal_regist
 
 
 Route::get('company-register', [LocalizationController::class, 'company_register']);
+Route::post('business-register', [LocalizationController::class, 'business_register']);
+
+
 
 
 Route::get('check-email', [LocalizationController::class, 'check_email']);
@@ -256,7 +263,7 @@ Route::group(['prefix' => 'user', ], function () {
     Route::post('postEmailVerify', [UserController::class, 'postEmailVerify'])->name('user.email-verify');
         Route::group(['middleware'=>'auth:user'], function() {
 
-            
+
             Route::get('no-kyc', [UserController::class, 'no_kyc'])->name('user.no-kyc');
             Route::get('no-country', [UserController::class, 'no_country'])->name('update.support.country');
             Route::post('compliance', [UserController::class, 'submitcompliance'])->name('submit.compliance');
@@ -293,7 +300,11 @@ Route::group(['prefix' => 'user', ], function () {
                         Route::post('generate-api', [UserController::class, 'generateapi'])->name('generateapi');
                         Route::post('kyc', [UserController::class, 'kyc']);
                         Route::post('account', [UserController::class, 'account']);
+                        Route::get('api-keys', [UserController::class, 'api_keys']);
+                        Route::any('generate-test-key', [UserController::class, 'generate_test_key']);
+
                         Route::post('avatar', [UserController::class, 'avatar']);
+
                         Route::post('delaccount', [UserController::class, 'delaccount'])->name('delaccount');
                         Route::get('deposit-verify/{id}', [UserController::class, 'userDataUpdate'])->name('deposit.verify');
                         Route::get('flutter-deposit-verify/{id}', [UserController::class, 'userDataUpdateFlutter'])->name('flutter.deposit.verify');
@@ -747,7 +758,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
 
 
-    
+
     Route::get('vaccount', [CheckController::class, 'vaccount'])->name('admin.vaccount');
     Route::get('terminals', [CheckController::class, 'terminals'])->name('admin.terminals');
 

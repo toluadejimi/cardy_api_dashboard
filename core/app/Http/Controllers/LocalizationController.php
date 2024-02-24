@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Feature;
 use App\Models\Product;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Mail;
 use Ramsey\Uuid\FeatureSet;
 use App\Exports\ExportClass;
 use App\Models\Productimage;
@@ -33,50 +34,46 @@ class LocalizationController extends Controller
     public function index($locale)
     {
         App::setLocale($locale);
-        //storing the locale in session to get it back in the middleware
         session()->put('locale', $locale);
         return redirect()->back();
     }
 
 
-
-    public function delete_transaction(request $request){
-
-    $pin = env('PIN');
-    if($request->pass != $pin){
-        return back()->with('error', 'Pin not correct');
-    }
-
-    Transactions::whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
-    ->delete();
-
-    return back()->with('error', 'Transaction Table Deleted');
-
-
-    }
-
-
-    public function get_transaction(request $request){
+    public function delete_transaction(request $request)
+    {
 
         $pin = env('PIN');
-        if($request->pass != $pin){
+        if ($request->pass != $pin) {
             return back()->with('error', 'Pin not correct');
         }
 
-        $dataToMove =  Transactions::where('status', 1)->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])->get();
-        foreach ($dataToMove as $item) {
-          Oldtransaction::updateOrCreate(['id' => $item->id], $item->toArray());
-        }
-    
-        // Transactions::whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
-        // ->delete();
-    
+        Transactions::whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])
+            ->delete();
+
         return back()->with('error', 'Transaction Table Deleted');
-    
-    
+
+
+    }
+
+
+    public function get_transaction(request $request)
+    {
+
+        $pin = env('PIN');
+        if ($request->pass != $pin) {
+            return back()->with('error', 'Pin not correct');
         }
 
-    
+        $dataToMove = Transactions::where('status', 1)->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])->get();
+        foreach ($dataToMove as $item) {
+            Oldtransaction::updateOrCreate(['id' => $item->id], $item->toArray());
+        }
+
+
+        return back()->with('error', 'Transaction Table Deleted');
+
+
+    }
 
 
     public function downloadExcelData(request $request)
@@ -89,7 +86,8 @@ class LocalizationController extends Controller
     }
 
 
-    public function backup_transaction(request $request){
+    public function backup_transaction(request $request)
+    {
 
         $tableName = 'transactions';
         $data = DB::table($tableName)->whereBetween('created_at', [$request->from . ' 00:00:00', $request->to . ' 23:59:59'])->get();
@@ -100,13 +98,11 @@ class LocalizationController extends Controller
             $sqlContent .= "INSERT INTO {$tableName} VALUES ('{$values}');\n";
         }
 
-        $fileName = 'Transaction_' .$request->from.'-'.$request->to. '.sql';
+        $fileName = 'Transaction_' . $request->from . '-' . $request->to . '.sql';
         $headers = [
             'Content-Type' => 'application/sql',
             'Content-Disposition' => 'attachment; filename=' . $fileName,
         ];
-
-
 
 
         return response($sqlContent, Response::HTTP_OK, $headers);
@@ -114,8 +110,8 @@ class LocalizationController extends Controller
     }
 
 
-
-    public function backup_user(request $request){
+    public function backup_user(request $request)
+    {
 
         $tableName = 'users';
         $data = DB::table($tableName)->get();
@@ -136,23 +132,6 @@ class LocalizationController extends Controller
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function exe_view()
     {
 
@@ -164,41 +143,118 @@ class LocalizationController extends Controller
         return view('exe', compact('trx', 'set_trx'));
 
 
+    }
+
+    public function business_register(request $request)
+    {
+
+        $user = User::where('email', $request->email)->first() ?? null;
+
+        if ($user != null && $user->email == $request->email && $user->status == 2) {
+            return back()->with('error', "Email Already Exist");
+        }
+
+
+        if ($user != null && $user->email == $request->email && $user->status == 0) {
+
+            $get_code = random_int(1000, 9999);
+            User::where('email', $request->email)->update(['sms_code' => $get_code]);
+            $code = User::where('email', $request->email)->first()->sms_code;
+
+
+            $data = array(
+                'fromsender' => 'noreply@enkpay.com', 'EnkPay',
+                'subject' => "Email Verification",
+                'toreceiver' => $request->email,
+                'code' => $code,
+            );
+
+            Mail::send('emails.email-verify', ["data1" => $data], function ($message) use ($data) {
+                $message->from($data['fromsender']);
+                $message->to($data['toreceiver']);
+                $message->subject($data['subject']);
+            });
+
+
+            $data['first_name'] = $request->first_name;
+            $data['last_name'] = $request->last_name;
+            $data['email'] = $request->email;
+            $data['phone'] = $request->phone;
+            $data['message'] = null;
+
+            return view('auth.business-verify-email', $data);
+        }
+
+        $usr = new User();
+        $usr->first_name = $request->first_name;
+        $usr->last_name = $request->last_name;
+        $usr->business_name = $request->business_name;
+        $usr->b_name = $request->business_name;
+        $usr->phone = $request->phone;
+        $usr->email = $request->email;
+        $usr->save();
+
+
+        $get_code = random_int(1000, 9999);
+        User::where('email', $request->email)->update(['sms_code' => $get_code]);
+        $code = User::where('email', $request->email)->first()->sms_code;
+
+
+        $data = array(
+            'fromsender' => 'noreply@enkpay.com', 'EnkPay',
+            'subject' => "Email Verification",
+            'toreceiver' => $request->email,
+            'code' => $code,
+        );
+
+        Mail::send('emails.email-verify', ["data1" => $data], function ($message) use ($data) {
+            $message->from($data['fromsender']);
+            $message->to($data['toreceiver']);
+            $message->subject($data['subject']);
+        });
+
+
+        $data['first_name'] = $request->first_name;
+        $data['last_name'] = $request->last_name;
+        $data['email'] = $request->email;
+        $data['phone'] = $request->phone;
+        $data['message'] = null;
+
+        return view('auth.business-verify-email', $data);
+
 
     }
 
 
-    public function charge_terminal_fee(request $request){
-
-
-
-    }
-
-
-    public function charge_terminal_fee_weekly(request $request){
-
+    public function charge_terminal_fee(request $request)
+    {
 
 
     }
 
 
-    public function charge_fees(request $request){
+    public function charge_terminal_fee_weekly(request $request)
+    {
 
 
+    }
+
+
+    public function charge_fees(request $request)
+    {
 
 
         $pool_b = get_pool();
 
 
-
-        if($pool_b < 25){
+        if ($pool_b < 25) {
 
             $result = " Message========> Amount is less than NGN 10";
             send_notification($result);
 
         }
 
-        if($pool_b > 250025){
+        if ($pool_b > 250025) {
 
 
             $erran_api_key = errand_api_key();
@@ -246,9 +302,9 @@ class LocalizationController extends Controller
             $status = $var->code ?? null;
 
 
-            if ($status == 200){
+            if ($status == 200) {
 
-                $result = " Message========> 250,000 has been sent out". "\nRef ======> $TransactionReference";
+                $result = " Message========> 250,000 has been sent out" . "\nRef ======> $TransactionReference";
                 send_notification($result);
             }
 
@@ -256,12 +312,9 @@ class LocalizationController extends Controller
             send_notification($result);
 
 
-
-
-
         }
 
-        if($pool_b < 250020){
+        if ($pool_b < 250020) {
 
             $amount = $pool_b - 25;
 
@@ -312,9 +365,9 @@ class LocalizationController extends Controller
             $status = $var->code ?? null;
 
 
-            if ($status == 200){
+            if ($status == 200) {
 
-                $result = " Message========> $amount has been sent out". "\nRef ======> $TransactionReference";
+                $result = " Message========> $amount has been sent out" . "\nRef ======> $TransactionReference";
                 send_notification($result);
             }
 
@@ -322,49 +375,40 @@ class LocalizationController extends Controller
             send_notification($result);
 
 
+        }
+
+        return back()->with('message', 'Charge has been updated');
 
     }
 
-      return back()->with('message', 'Charge has been updated');
-
-}
-
-        // $user1 = User::select('main_wallet')->where('id','203')->first()->main_wallet;
-        // $user2 = User::select('main_wallet')->where('id','293369')->first()->main_wallet;
-        // $user3 = User::select('main_wallet')->where('id','214')->first()->main_wallet;
+    // $user1 = User::select('main_wallet')->where('id','203')->first()->main_wallet;
+    // $user2 = User::select('main_wallet')->where('id','293369')->first()->main_wallet;
+    // $user3 = User::select('main_wallet')->where('id','214')->first()->main_wallet;
 
 
-        // $count1 = Transaction::where('user_id','203')->whereDate('created_at', Carbon::today())->count();
-        // $count2 = Transaction::where('user_id','293369')->whereDate('created_at', Carbon::today())->count();
-        // $count3 = Transaction::where('user_id','214')->whereDate('created_at', Carbon::today())->count();
+    // $count1 = Transaction::where('user_id','203')->whereDate('created_at', Carbon::today())->count();
+    // $count2 = Transaction::where('user_id','293369')->whereDate('created_at', Carbon::today())->count();
+    // $count3 = Transaction::where('user_id','214')->whereDate('created_at', Carbon::today())->count();
 
 
+    // if($count1 > 10 && $user1 > 20000){
+    //     $deuc = 1000;
+    //     User::where('id','203')->first()->decrement('main_wallet', $deuc);
+    //     User::where('id','2')->first()->increment('main_wallet', $deuc);
+    // }
 
-        // if($count1 > 10 && $user1 > 20000){
-        //     $deuc = 1000;
-        //     User::where('id','203')->first()->decrement('main_wallet', $deuc);
-        //     User::where('id','2')->first()->increment('main_wallet', $deuc);
-        // }
-
-        // if($count2 > 10 && $user2 > 20000){
-        //     $deuc = 1000;
-        //     User::where('id','293369')->first()->decrement('main_wallet', $deuc);
-        //     User::where('id','2')->first()->increment('main_wallet', $deuc);
-        // }
-
+    // if($count2 > 10 && $user2 > 20000){
+    //     $deuc = 1000;
+    //     User::where('id','293369')->first()->decrement('main_wallet', $deuc);
+    //     User::where('id','2')->first()->increment('main_wallet', $deuc);
+    // }
 
 
-        // if($count3 > 10 && $user3 > 20000){
-        //     $deuc = 1000;
-        //     User::where('id','214')->first()->decrement('main_wallet', $deuc);
-        //     User::where('id','2')->first()->increment('main_wallet', $deuc);
-        // }
-
-
-
-
-
-
+    // if($count3 > 10 && $user3 > 20000){
+    //     $deuc = 1000;
+    //     User::where('id','214')->first()->decrement('main_wallet', $deuc);
+    //     User::where('id','2')->first()->increment('main_wallet', $deuc);
+    // }
 
 
     public function pricing()
@@ -380,7 +424,8 @@ class LocalizationController extends Controller
         return back()->with('message', 'Transaction deleted successfully');
     }
 
-    public function complete_trx(request $request){
+    public function complete_trx(request $request)
+    {
 
         $trx = PendingTransaction::where('ref_trans_id', $request->ref_trans_id)->first();
         $t = new Transaction();
@@ -402,7 +447,8 @@ class LocalizationController extends Controller
     }
 
 
-    public function refund_trx(request $request){
+    public function refund_trx(request $request)
+    {
 
         $trx = PendingTransaction::where('ref_trans_id', $request->ref_trans_id)->first();
         User::where('id', $trx->user_id)->increment('main_wallet', $trx->debit);
@@ -427,11 +473,6 @@ class LocalizationController extends Controller
     }
 
 
-    
-
-    
-
-
     public function block_pos_transfer(request $request)
     {
         $trx = Feature::where('id', 1)->update(['pos_transfer' => 0]);
@@ -446,7 +487,6 @@ class LocalizationController extends Controller
     }
 
 
-
     public function block_user(request $request)
     {
 
@@ -454,8 +494,6 @@ class LocalizationController extends Controller
         return back()->with('message', 'User has been updated');
     }
 
-
-    
 
     public function unblock_user(request $request)
     {
@@ -476,7 +514,7 @@ class LocalizationController extends Controller
         $amount = $pr->amount;
         $name = $pr->name;
         $amount = $pr->amount;
-        $quantity =$pr->quantity;
+        $quantity = $pr->quantity;
         $quantity_status = $pr->quantity_status;
         $description = $pr->description;
         $shipping_status = $pr->shipping_status;
@@ -488,12 +526,7 @@ class LocalizationController extends Controller
         $user_id = $pr->user_id;
 
 
-
-        return view('user.product.buy-now', compact('b_name', 'amount', 'image', 'user_id', 'status', 'note_status', 'name', 'quantity', 'quantity_status', 'description', 'shipping_status','ref', 'id'));
-
-
-
-
+        return view('user.product.buy-now', compact('b_name', 'amount', 'image', 'user_id', 'status', 'note_status', 'name', 'quantity', 'quantity_status', 'description', 'shipping_status', 'ref', 'id'));
 
 
     }
@@ -530,15 +563,15 @@ class LocalizationController extends Controller
     }
 
 
-
-    public function check_email(request $request){
+    public function check_email(request $request)
+    {
 
 
         $email = User::where('email', $request->email)->first()->email ?? null;
 
-        if($email == null){
+        if ($email == null) {
             return back()->with('error', 'Email not found on our platform');
-        }else{
+        } else {
 
             $email = $request->email;
             return view('auth.password-page', compact('email'));
@@ -548,8 +581,8 @@ class LocalizationController extends Controller
     }
 
 
-
-    public function password_page(request $request){
+    public function password_page(request $request)
+    {
 
         $email = $request->email;
         return view('auth.password-page', compact('email'));
@@ -560,15 +593,13 @@ class LocalizationController extends Controller
     public function choose_type(request $request)
     {
 
-        if($request->user_type == 1){
+        if ($request->user_type == 1) {
             return redirect('company-register');
-        }else{
+        } else {
 
             return redirect('personal-register');
 
         }
-
-
 
 
     }
@@ -576,18 +607,18 @@ class LocalizationController extends Controller
     public function personal_register(request $request)
     {
 
-            return view('auth.personal-register');
+        return view('auth.personal-register');
 
     }
 
     public function company_register(request $request)
     {
 
-            return view('auth.company-register');
+        return view('auth.company-register');
 
     }
 
-    public function  vtpasscallback(request $request)
+    public function vtpasscallback(request $request)
     {
 
         $message = json_encode($request->all());
@@ -601,37 +632,21 @@ class LocalizationController extends Controller
     }
 
 
-
-
-    public function  verify_email(request $request)
+    public function verify_email(request $request)
     {
 
         $usr = User::where('email', $request->email)->first();
 
-            $data['first_name'] = $usr->first_name;
-            $data['last_name'] = $usr->last_name;
-            $data['email'] = $usr->email;
-            $data['phone'] = $usr->phone;
-            $data['message'] = " ";
+        $data['first_name'] = $usr->first_name;
+        $data['last_name'] = $usr->last_name;
+        $data['email'] = $usr->email;
+        $data['phone'] = $usr->phone;
+        $data['message'] = " ";
 
 
-            return view('auth.verify-email', $data);
+        return view('auth.verify-email', $data);
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
