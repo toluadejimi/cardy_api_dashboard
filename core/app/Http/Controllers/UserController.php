@@ -100,7 +100,7 @@ class UserController extends Controller
 
         if($usr->tpublic_key == null){
 
-           $key = "test".Str::randon('10');
+            $key = "test" . Str::random('10');
            User::where('id', Auth::id())->update(['tpublic_key'=>$key]);
 
             return back()->with('success', 'Test Key has been generated successfully');
