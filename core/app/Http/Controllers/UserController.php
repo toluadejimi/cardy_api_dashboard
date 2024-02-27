@@ -5039,6 +5039,14 @@ class UserController extends Controller
             $location = 'asset/images/' . $filename;
             Image::make($image)->save($location);
             $file_url = url('') . "/asset/images/$filename";
+
+
+            User::where('id', Auth::user()->id)
+                ->update([
+
+                    'identification_image' => $file_url
+
+                ]);
         }
 
         if ($request->hasFile('utility')) {
@@ -5047,6 +5055,14 @@ class UserController extends Controller
             $location = 'asset/images/utility' . $filename;
             Image::make($image)->save($location);
             $file_utility = url('') . "/asset/images/utility/$filename";
+
+
+            User::where('id', Auth::user()->id)
+                ->update([
+                    'utility_bill' => $file_utility,
+                ]);
+
+
         }
 
 
@@ -5058,9 +5074,6 @@ class UserController extends Controller
                 'identification_type' => $request->identification_type,
                 'bvn' => $request->bvn,
                 'identification_number' => $request->nin,
-                'identification_image' => $file_url,
-                'utility_bill' => $file_utility,
-
             ]);
 
 
