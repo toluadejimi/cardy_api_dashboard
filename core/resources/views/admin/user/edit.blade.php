@@ -829,7 +829,6 @@
                                     <td>{{number_format($item->credit)}}</td>
                                     <td>{{number_format($item->balance)}}</td>
                                     <td>{{number_format($item->fee)}}</td>
-                                    <td>{{number_format($item->enkPay_Cashout_profit)}}</td>
                                     <td>{{$item->serial_no}}</td>
                                     <td>{{$item->sender_name}}</td>
                                     <td>{{$item->sender_account_no}}</td>
