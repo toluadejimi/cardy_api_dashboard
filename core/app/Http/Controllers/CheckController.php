@@ -628,12 +628,16 @@ class CheckController extends Controller
         $data['agent'] = User::whereType(1)->count();
         $data['customer'] = User::whereType(2)->count();
         $data['business'] = User::whereType(3)->count();
-        $data['issuing_wallet'] = get_issuing_bal();
+
+        $data['issuing_wallet'] = 0;//get_issuing_bal();
+
+
+
         $data['vtbalance'] = (int)vt_balance();
 
-        $data['b_rate'] = get_rate();
+        $data['b_rate'] = 0;//get_rate();
         $diff = Setting::where('id', 1)->first()->virtual_createchargep ?? 0;
-        $updaterate = $diff + get_rate() ?? 0;
+        $updaterate = $diff + 0;//get_rate() ?? 0;
         Setting::where('id', 1)->update(['ngn_rate' => $updaterate]);
 
 
@@ -2022,7 +2026,7 @@ class CheckController extends Controller
 
 
 
-    
+
 
 
     public function check_trx_status(Request $request)
@@ -2030,7 +2034,7 @@ class CheckController extends Controller
 
         $ref_no = $request->id;
         $trx = check_status($ref_no);
-      
+
         return view('user.transactions.view-trx', $data);
 
 
@@ -2044,7 +2048,7 @@ class CheckController extends Controller
 
         $ref_no = $request->id;
         $trx = refund_trx($ref_no);
-      
+
         return view('user.transactions.view-trx', $data);
 
 
@@ -2055,5 +2059,5 @@ class CheckController extends Controller
 
 
 
-    
+
 }
