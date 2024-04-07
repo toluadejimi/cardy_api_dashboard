@@ -286,8 +286,12 @@ class ExportController extends Controller
                     ->attachData($pdf->output(), "Statement.pdf");
             });
 
+            return response()->json([
+                'status' => true,
+                'message' => "Transaction Statement has been successfully sent to your email."
+            ], 200);
 
-            return $pdf->stream();
+            //return $pdf->stream();
 
 
 
@@ -396,7 +400,7 @@ class ExportController extends Controller
 
                 return response()->json([
                     'status' => true,
-                    'message' => "Transaction Statment has been successfully sent to your email."
+                    'message' => "Transaction Statement has been successfully sent to your email."
                 ], 200);
 
 
