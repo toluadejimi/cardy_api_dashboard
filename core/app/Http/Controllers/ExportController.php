@@ -392,7 +392,15 @@ class ExportController extends Controller
                     ->attachData($pdf->output(), "Statement.pdf");
             });
 
-            return $pdf->stream();
+
+
+                return response()->json([
+                    'status' => true,
+                    'message' => "Transaction Statment has been successfully sent to your email."
+                ], 200);
+
+
+            //return $pdf->stream();
 
 
             //return view('export-trx', $data)->with('message', 'Statement sent successfully');
