@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Exttransfer;
@@ -21,6 +22,10 @@ use App\Http\Controllers\WebhookController;
 
 
 Route::post('webhook', [WebhookController::class, 'webhook']);
+
+Route::get('email-report', [ExportCOntroller::class, 'download_pdf']);
+Route::post('webhook', [WebhookController::class, 'webhook']);
+
 
 
 
@@ -70,7 +75,7 @@ Route::get('verify-payment/{txref}/{secretkey}', function ($txref, $secretkey) {
                     'callback_url' => rtrim($verify->callback_url, '/\\'),
                     'tx_ref' => $verify->tx_ref,
                     'status' => $status,
-                    'created_at' => $verify->created_at,                    
+                    'created_at' => $verify->created_at,
                     'updated_at' => $verify->updated_at,
                 ],
             ]);

@@ -164,10 +164,25 @@ class ExportController extends Controller
     public function download_pdf(request $request)
     {
 
+        if($request->from == null && $request->to == null){
+
+            return response()->json([
+                'status' => false,
+                'message' => "Please specify date from and date to"
+            ], 422);
+
+        }
+
+        if($request->id == null){
+            return response()->json([
+                'status' => false,
+                'message' => "User ID is required"
+            ], 422);
+
+        }
 
         $from = Carbon::createFromFormat('Y-m-d', $request->from)->format('m');
         $transaction_ck = Carbon::now()->format('m');
-
 
 
         if ($transaction_ck != $from) {
@@ -300,9 +315,6 @@ class ExportController extends Controller
                         'status' => 1,
                     ])->get();
             }
-
-
-
 
 
             $data['user']  = User::where('id', $request->id)->first();
