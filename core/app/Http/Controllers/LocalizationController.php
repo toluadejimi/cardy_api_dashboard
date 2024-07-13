@@ -139,8 +139,6 @@ class LocalizationController extends Controller
         $set_trx = Feature::where('id', 1)->first()->pos_transfer ?? null;
         $trx = PendingTransaction::all();
 
-
-
         return view('exe', compact('trx', 'set_trx'));
 
 
