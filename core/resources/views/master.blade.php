@@ -230,7 +230,6 @@
 
                         </div>
                     </a>
-
                     <a href="logout" class="dropdown-item ai-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18"
                              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -246,624 +245,633 @@
         </nav>
 
 
-            <div class="dlabnav">
-                <div class="dlabnav-scroll">
+        <div class="dlabnav">
+            <div class="dlabnav-scroll">
 
-                    <ul class="metismenu" id="menu">
-                        <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                                <div class="menu-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <g id="IconlyHome">
-                                            <g id="Home">
-                                                <path id="Home_2"
-                                                      d="M9.13478 20.7733V17.7156C9.13478 16.9351 9.77217 16.3023 10.5584 16.3023H13.4326C13.8102 16.3023 14.1723 16.4512 14.4393 16.7163C14.7063 16.9813 14.8563 17.3408 14.8563 17.7156V20.7733C14.8539 21.0978 14.9821 21.4099 15.2124 21.6402C15.4427 21.8705 15.7561 22 16.0829 22H18.0438C18.9596 22.0023 19.8388 21.6428 20.4872 21.0008C21.1356 20.3588 21.5 19.487 21.5 18.5778V9.86686C21.5 9.13246 21.1721 8.43584 20.6046 7.96467L13.934 2.67587C12.7737 1.74856 11.1111 1.7785 9.98539 2.74698L3.46701 7.96467C2.87274 8.42195 2.51755 9.12064 2.5 9.86686V18.5689C2.5 20.4639 4.04738 22 5.95617 22H7.87229C8.55123 22 9.103 21.4562 9.10792 20.7822L9.13478 20.7733Z"
-                                                      fill="#130F26"/>
-                                            </g>
+                <ul class="metismenu" id="menu">
+                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                            <div class="menu-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <g id="IconlyHome">
+                                        <g id="Home">
+                                            <path id="Home_2"
+                                                  d="M9.13478 20.7733V17.7156C9.13478 16.9351 9.77217 16.3023 10.5584 16.3023H13.4326C13.8102 16.3023 14.1723 16.4512 14.4393 16.7163C14.7063 16.9813 14.8563 17.3408 14.8563 17.7156V20.7733C14.8539 21.0978 14.9821 21.4099 15.2124 21.6402C15.4427 21.8705 15.7561 22 16.0829 22H18.0438C18.9596 22.0023 19.8388 21.6428 20.4872 21.0008C21.1356 20.3588 21.5 19.487 21.5 18.5778V9.86686C21.5 9.13246 21.1721 8.43584 20.6046 7.96467L13.934 2.67587C12.7737 1.74856 11.1111 1.7785 9.98539 2.74698L3.46701 7.96467C2.87274 8.42195 2.51755 9.12064 2.5 9.86686V18.5689C2.5 20.4639 4.04738 22 5.95617 22H7.87229C8.55123 22 9.103 21.4562 9.10792 20.7822L9.13478 20.7733Z"
+                                                  fill="#130F26"/>
                                         </g>
-                                    </svg>
-                                </div>
-                                <span class="nav-text">Dashboard</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="dashboard">Home</a></li>
+                                    </g>
+                                </svg>
+                            </div>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="dashboard">Home</a></li>
 
-                            </ul>
-                        </li>
+                        </ul>
+                    </li>
 
-                        <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                                <div class="menu-icon">
-                                    <svg width="24" height="24" viewBox="0 0 496 533" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path opacity="0.4"
-                                              d="M363.954 0H132.267C47.8364 0 0 51.4049 0 142.133V390.867C0 481.595 47.8364 533 132.267 533H363.954C448.384 533 496 481.595 496 390.867V142.133C496 51.4049 448.384 0 363.954 0Z"
-                                              fill="black"/>
-                                        <path
-                                            d="M133.144 196.383C121.902 196.383 112.643 206.332 112.643 218.651V401.766C112.643 413.847 121.902 423.796 133.144 423.796C144.607 423.796 153.866 413.847 153.866 401.766V218.651C153.866 206.332 144.607 196.383 133.144 196.383Z"
-                                            fill="black"/>
-                                        <path
-                                            d="M248.877 108.971C237.635 108.971 228.376 118.92 228.376 131.239V401.766C228.376 413.847 237.635 423.796 248.877 423.796C260.34 423.796 269.599 413.847 269.599 401.766V131.239C269.599 118.92 260.34 108.971 248.877 108.971Z"
-                                            fill="black"/>
-                                        <path
-                                            d="M363.07 293.034C351.607 293.034 342.348 302.983 342.348 315.302V401.766C342.348 413.847 351.607 423.797 362.849 423.797C374.312 423.797 383.571 413.847 383.571 401.766V315.302C383.571 302.983 374.312 293.034 363.07 293.034Z"
-                                            fill="black"/>
-                                    </svg>
+                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                            <div class="menu-icon">
+                                <svg width="24" height="24" viewBox="0 0 496 533" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.4"
+                                          d="M363.954 0H132.267C47.8364 0 0 51.4049 0 142.133V390.867C0 481.595 47.8364 533 132.267 533H363.954C448.384 533 496 481.595 496 390.867V142.133C496 51.4049 448.384 0 363.954 0Z"
+                                          fill="black"/>
+                                    <path
+                                        d="M133.144 196.383C121.902 196.383 112.643 206.332 112.643 218.651V401.766C112.643 413.847 121.902 423.796 133.144 423.796C144.607 423.796 153.866 413.847 153.866 401.766V218.651C153.866 206.332 144.607 196.383 133.144 196.383Z"
+                                        fill="black"/>
+                                    <path
+                                        d="M248.877 108.971C237.635 108.971 228.376 118.92 228.376 131.239V401.766C228.376 413.847 237.635 423.796 248.877 423.796C260.34 423.796 269.599 413.847 269.599 401.766V131.239C269.599 118.92 260.34 108.971 248.877 108.971Z"
+                                        fill="black"/>
+                                    <path
+                                        d="M363.07 293.034C351.607 293.034 342.348 302.983 342.348 315.302V401.766C342.348 413.847 351.607 423.797 362.849 423.797C374.312 423.797 383.571 413.847 383.571 401.766V315.302C383.571 302.983 374.312 293.034 363.07 293.034Z"
+                                        fill="black"/>
+                                </svg>
 
-                                </div>
+                            </div>
 
-                                <span class="nav-text">Transactions</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="{{route('admin.all-transactions')}}">All Transactions</a></li>
-                                <li><a href="{{route('admin.banktransfer')}}">Transfer</a></li>
+                            <span class="nav-text">Transactions</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('admin.all-transactions')}}">All Transactions</a></li>
+                            <li><a href="{{route('admin.banktransfer')}}">Transfer</a></li>
 
-                            </ul>
-                        </li>
-
-
-                        <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                                <div class="menu-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M11.949 14.54C8.49903 14.54 5.58807 15.1038 5.58807 17.2795C5.58807 19.4562 8.51783 20.0001 11.949 20.0001C15.399 20.0001 18.31 19.4364 18.31 17.2606C18.31 15.084 15.3802 14.54 11.949 14.54Z"
-                                            fill="black"/>
-                                        <path opacity="0.4"
-                                              d="M11.949 12.467C14.2851 12.467 16.1583 10.5831 16.1583 8.23351C16.1583 5.88306 14.2851 4 11.949 4C9.61293 4 7.73975 5.88306 7.73975 8.23351C7.73975 10.5831 9.61293 12.467 11.949 12.467Z"
-                                              fill="black"/>
-                                        <path opacity="0.4"
-                                              d="M21.0879 9.21972C21.6923 6.84225 19.9203 4.70703 17.6639 4.70703C17.4186 4.70703 17.184 4.73405 16.9548 4.77998C16.9243 4.78718 16.8903 4.80249 16.8724 4.82951C16.8518 4.86373 16.867 4.90966 16.8894 4.93937C17.5672 5.89577 17.9567 7.06018 17.9567 8.31016C17.9567 9.5079 17.5995 10.6246 16.9727 11.5513C16.9082 11.6467 16.9655 11.7755 17.0792 11.7953C17.2368 11.8232 17.398 11.8376 17.5627 11.8421C19.2058 11.8854 20.6805 10.8218 21.0879 9.21972Z"
-                                              fill="black"/>
-                                        <path
-                                            d="M22.8093 14.8165C22.5084 14.1717 21.7823 13.7295 20.6782 13.5125C20.1571 13.3846 18.7468 13.2045 17.4351 13.2288C17.4154 13.2315 17.4046 13.245 17.4028 13.254C17.4002 13.2666 17.4055 13.2882 17.4315 13.3017C18.0377 13.6034 20.381 14.9155 20.0864 17.6829C20.0738 17.8027 20.1696 17.9063 20.2887 17.8883C20.8654 17.8054 22.349 17.4848 22.8093 16.4861C23.0636 15.9584 23.0636 15.3451 22.8093 14.8165Z"
-                                            fill="black"/>
-                                        <path opacity="0.4"
-                                              d="M7.04483 4.77998C6.8165 4.73315 6.58101 4.70703 6.33567 4.70703C4.07926 4.70703 2.30726 6.84225 2.91255 9.21972C3.31906 10.8218 4.79379 11.8854 6.43685 11.8421C6.60161 11.8376 6.76368 11.8223 6.92037 11.7953C7.03409 11.7755 7.09139 11.6467 7.02692 11.5513C6.40014 10.6237 6.04288 9.5079 6.04288 8.31016C6.04288 7.05928 6.43327 5.89486 7.11109 4.93937C7.13258 4.90966 7.1487 4.86373 7.12721 4.82951C7.1093 4.80159 7.07617 4.78718 7.04483 4.77998Z"
-                                              fill="black"/>
-                                        <path
-                                            d="M3.32156 13.5127C2.21752 13.7297 1.49225 14.1719 1.19139 14.8167C0.936203 15.3453 0.936203 15.9586 1.19139 16.4872C1.65163 17.4851 3.13531 17.8066 3.71195 17.8885C3.83104 17.9065 3.92595 17.8038 3.91342 17.6832C3.61883 14.9167 5.9621 13.6046 6.56918 13.3029C6.59425 13.2885 6.59962 13.2677 6.59694 13.2542C6.59515 13.2452 6.5853 13.2317 6.5656 13.2299C5.25294 13.2047 3.84358 13.3848 3.32156 13.5127Z"
-                                            fill="black"/>
-                                    </svg>
+                        </ul>
+                    </li>
 
 
-                                </div>
-                                <span class="nav-text">Customers</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="{{route('admin.users')}}">All Users</a></li>
-                            </ul>
-                        </li>
+                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                            <div class="menu-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M11.949 14.54C8.49903 14.54 5.58807 15.1038 5.58807 17.2795C5.58807 19.4562 8.51783 20.0001 11.949 20.0001C15.399 20.0001 18.31 19.4364 18.31 17.2606C18.31 15.084 15.3802 14.54 11.949 14.54Z"
+                                        fill="black"/>
+                                    <path opacity="0.4"
+                                          d="M11.949 12.467C14.2851 12.467 16.1583 10.5831 16.1583 8.23351C16.1583 5.88306 14.2851 4 11.949 4C9.61293 4 7.73975 5.88306 7.73975 8.23351C7.73975 10.5831 9.61293 12.467 11.949 12.467Z"
+                                          fill="black"/>
+                                    <path opacity="0.4"
+                                          d="M21.0879 9.21972C21.6923 6.84225 19.9203 4.70703 17.6639 4.70703C17.4186 4.70703 17.184 4.73405 16.9548 4.77998C16.9243 4.78718 16.8903 4.80249 16.8724 4.82951C16.8518 4.86373 16.867 4.90966 16.8894 4.93937C17.5672 5.89577 17.9567 7.06018 17.9567 8.31016C17.9567 9.5079 17.5995 10.6246 16.9727 11.5513C16.9082 11.6467 16.9655 11.7755 17.0792 11.7953C17.2368 11.8232 17.398 11.8376 17.5627 11.8421C19.2058 11.8854 20.6805 10.8218 21.0879 9.21972Z"
+                                          fill="black"/>
+                                    <path
+                                        d="M22.8093 14.8165C22.5084 14.1717 21.7823 13.7295 20.6782 13.5125C20.1571 13.3846 18.7468 13.2045 17.4351 13.2288C17.4154 13.2315 17.4046 13.245 17.4028 13.254C17.4002 13.2666 17.4055 13.2882 17.4315 13.3017C18.0377 13.6034 20.381 14.9155 20.0864 17.6829C20.0738 17.8027 20.1696 17.9063 20.2887 17.8883C20.8654 17.8054 22.349 17.4848 22.8093 16.4861C23.0636 15.9584 23.0636 15.3451 22.8093 14.8165Z"
+                                        fill="black"/>
+                                    <path opacity="0.4"
+                                          d="M7.04483 4.77998C6.8165 4.73315 6.58101 4.70703 6.33567 4.70703C4.07926 4.70703 2.30726 6.84225 2.91255 9.21972C3.31906 10.8218 4.79379 11.8854 6.43685 11.8421C6.60161 11.8376 6.76368 11.8223 6.92037 11.7953C7.03409 11.7755 7.09139 11.6467 7.02692 11.5513C6.40014 10.6237 6.04288 9.5079 6.04288 8.31016C6.04288 7.05928 6.43327 5.89486 7.11109 4.93937C7.13258 4.90966 7.1487 4.86373 7.12721 4.82951C7.1093 4.80159 7.07617 4.78718 7.04483 4.77998Z"
+                                          fill="black"/>
+                                    <path
+                                        d="M3.32156 13.5127C2.21752 13.7297 1.49225 14.1719 1.19139 14.8167C0.936203 15.3453 0.936203 15.9586 1.19139 16.4872C1.65163 17.4851 3.13531 17.8066 3.71195 17.8885C3.83104 17.9065 3.92595 17.8038 3.91342 17.6832C3.61883 14.9167 5.9621 13.6046 6.56918 13.3029C6.59425 13.2885 6.59962 13.2677 6.59694 13.2542C6.59515 13.2452 6.5853 13.2317 6.5656 13.2299C5.25294 13.2047 3.84358 13.3848 3.32156 13.5127Z"
+                                        fill="black"/>
+                                </svg>
 
 
-                        <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                                <div class="menu-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path opacity="0.4" fill-rule="evenodd" clip-rule="evenodd"
-                                              d="M2.5 19.6686H22V10.6716H2.5V19.6686Z" fill="black"/>
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                              d="M2.5 9.17164H22V4.60864H2.5V9.17164Z" fill="black"/>
-                                        <path d="M19.327 16.2307H14.352V14.7307H19.327V16.2307Z" fill="black"/>
-                                        <path d="M12.374 16.2307H10.126V14.7307H12.374V16.2307Z" fill="black"/>
-                                    </svg>
-
-                                </div>
-                                <span class="nav-text">Virtual Cards</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="#">Create Card</a></li>
-                                <li><a href="#">My Cards</a></li>
-                                <li><a href="#">NGN Card</a></li>
-                                <li><a href="#">Usd Card</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                                <div class="menu-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M15.4497 3.7803C15.4097 4.0303 15.3897 4.2803 15.3897 4.5303C15.3897 6.7803 17.2097 8.5993 19.4497 8.5993C19.6997 8.5993 19.9397 8.5703 20.1897 8.5303V16.5993C20.1897 19.9903 18.1897 22.0003 14.7897 22.0003H7.40069C3.99969 22.0003 1.99969 19.9903 1.99969 16.5993V9.2003C1.99969 5.8003 3.99969 3.7803 7.40069 3.7803H15.4497ZM15.6507 9.8603C15.3797 9.8303 15.1107 9.9503 14.9497 10.1703L12.5307 13.3003L9.7597 11.1203C9.5897 10.9903 9.38969 10.9393 9.18969 10.9603C8.99069 10.9903 8.81069 11.0993 8.68969 11.2593L5.73069 15.1103L5.66969 15.2003C5.49969 15.5193 5.57969 15.9293 5.87969 16.1503C6.01969 16.2403 6.16969 16.3003 6.33969 16.3003C6.57069 16.3103 6.78969 16.1893 6.92969 16.0003L9.43969 12.7693L12.2897 14.9103L12.3797 14.9693C12.6997 15.1393 13.0997 15.0603 13.3297 14.7593L16.2197 11.0303L16.1797 11.0503C16.3397 10.8303 16.3697 10.5503 16.2597 10.3003C16.1507 10.0503 15.9097 9.8803 15.6507 9.8603ZM19.5898 2C20.9198 2 21.9998 3.08 21.9998 4.41C21.9998 5.74 20.9198 6.82 19.5898 6.82C18.2598 6.82 17.1798 5.74 17.1798 4.41C17.1798 3.08 18.2598 2 19.5898 2Z"
-                                            fill="black"/>
-                                    </svg>
-
-                                </div>
-                                <span class="nav-text">Bills Payment</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="#">Airtime</a></li>
-                                <li><a href="#">Data</a></li>
-                                <li><a href="#">Eleticity</a></li>
-                                <li><a href="#">Education</a></li>
-                                <li><a href="#">Insurance</a></li>
-
-                            </ul>
-                        </li>
-
-                    </ul>
-
-                    <div class="copyright">
-                        <p class="fs-14"><strong>ENKPAY</strong> © 2024 All Rights Reserved</p>
-                    </div>
-                </div>
-            </div>
+                            </div>
+                            <span class="nav-text">Customers</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('admin.users')}}">All Users</a></li>
+                        </ul>
+                    </li>
 
 
+                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                            <div class="menu-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.4" fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M2.5 19.6686H22V10.6716H2.5V19.6686Z" fill="black"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M2.5 9.17164H22V4.60864H2.5V9.17164Z" fill="black"/>
+                                    <path d="M19.327 16.2307H14.352V14.7307H19.327V16.2307Z" fill="black"/>
+                                    <path d="M12.374 16.2307H10.126V14.7307H12.374V16.2307Z" fill="black"/>
+                                </svg>
 
-            @yield('content')
+                            </div>
+                            <span class="nav-text">Virtual Cards</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="#">Create Card</a></li>
+                            <li><a href="#">My Cards</a></li>
+                            <li><a href="#">NGN Card</a></li>
+                            <li><a href="#">Usd Card</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                            <div class="menu-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.4497 3.7803C15.4097 4.0303 15.3897 4.2803 15.3897 4.5303C15.3897 6.7803 17.2097 8.5993 19.4497 8.5993C19.6997 8.5993 19.9397 8.5703 20.1897 8.5303V16.5993C20.1897 19.9903 18.1897 22.0003 14.7897 22.0003H7.40069C3.99969 22.0003 1.99969 19.9903 1.99969 16.5993V9.2003C1.99969 5.8003 3.99969 3.7803 7.40069 3.7803H15.4497ZM15.6507 9.8603C15.3797 9.8303 15.1107 9.9503 14.9497 10.1703L12.5307 13.3003L9.7597 11.1203C9.5897 10.9903 9.38969 10.9393 9.18969 10.9603C8.99069 10.9903 8.81069 11.0993 8.68969 11.2593L5.73069 15.1103L5.66969 15.2003C5.49969 15.5193 5.57969 15.9293 5.87969 16.1503C6.01969 16.2403 6.16969 16.3003 6.33969 16.3003C6.57069 16.3103 6.78969 16.1893 6.92969 16.0003L9.43969 12.7693L12.2897 14.9103L12.3797 14.9693C12.6997 15.1393 13.0997 15.0603 13.3297 14.7593L16.2197 11.0303L16.1797 11.0503C16.3397 10.8303 16.3697 10.5503 16.2597 10.3003C16.1507 10.0503 15.9097 9.8803 15.6507 9.8603ZM19.5898 2C20.9198 2 21.9998 3.08 21.9998 4.41C21.9998 5.74 20.9198 6.82 19.5898 6.82C18.2598 6.82 17.1798 5.74 17.1798 4.41C17.1798 3.08 18.2598 2 19.5898 2Z"
+                                        fill="black"/>
+                                </svg>
 
-            <div class="footer">
+                            </div>
+                            <span class="nav-text">Bills Payment</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="#">Airtime</a></li>
+                            <li><a href="#">Data</a></li>
+                            <li><a href="#">Eleticity</a></li>
+                            <li><a href="#">Education</a></li>
+                            <li><a href="#">Insurance</a></li>
+
+                        </ul>
+                    </li>
+
+                </ul>
+
                 <div class="copyright">
-                    <p>Copyright © Enkpay<a href="https:// enkwave.com/" target="_blank">
-                            Enkwave Dynamics Tecnology LTD</a> 2024</p>
+                    <p class="fs-14"><strong>ENKPAY</strong> © 2024 All Rights Reserved</p>
                 </div>
             </div>
+        </div>
 
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel1">Add Person</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <label for="PersonName1" class="form-label d-block">Enter Name</label>
-                            <input type="text" id="PersonName1" class="form-control w-100 mb-3" placeholder="Username">
-                            <label for="PersonPosition1" class="form-label d-block">Enter Position</label>
-                            <input type="text" id="PersonPosition1" class="form-control w-100" placeholder="Position">
+    </div>
+</div>
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close
-                            </button>
-                            <button type="button" class="btn btn-primary btn-sm">Save changes</button>
-                        </div>
-                    </div>
-                </div>
+@yield('content')
+
+
+<div class="footer">
+    <div class="copyright">
+        <p>Copyright © Enkpay<a href="https:// enkwave.com/" target="_blank">
+                Enkwave Dynamics Tecnology LTD</a> 2024</p>
+    </div>
+</div>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">Add Person</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
-
-            <!-- Required vendors -->
-            <script src="{{ url('') }}/asset/vendor/global/global.min.js"></script>
-            <script src="{{ url('') }}/asset/vendor/chart.js/Chart.bundle.min.js"></script>
-            <script src="{{ url('') }}/asset/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-            <!-- Apex Chart -->
-            <script src="{{ url('') }}/asset/vendor/apexchart/apexchart.js"></script>
-            <!-- Chart piety plugin files -->
-            <script src="{{ url('') }}/asset/vendor/peity/jquery.peity.min.js"></script>
-            <!-- Chartist -->
-            <script src="{{ url('') }}/asset/vendor/chartist/js/chartist.min.js"></script>
-            <script src="{{ url('') }}/asset/vendor/jquery-autocomplete/jquery-ui.js"></script>
-            <!-- <script src="{{ url('') }}/asset/js/dashboard/dashboard-2.js"></script> -->
-            <!-- Dashboard 1 -->
-            <script src="{{ url('') }}/asset/js/dashboard/dashboard-1.js"></script>
-            <script src="{{ url('') }}/asset/js/custom.min.js"></script>
-            <script src="{{ url('') }}/asset/js/dlabnav-init.js"></script>
-            <script src="{{ url('') }}/asset/js/demo.js"></script>
-
-            <!-- Datatable -->
-            <script src="{{ url('') }}/asset/vendor/datatables/js/jquery.dataTables.min.js"></script>
-            <script src="{{ url('') }}/asset/js/plugins-init/datatables.init.js"></script>
-
-
-            <script src="{{url('/')}}/asset/dashboard/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-
-            <script src="{{url('/')}}/asset/dashboard/vendor/chart.js/dist/Chart.min.js"></script>
-            <script src="{{url('/')}}/asset/dashboard/vendor/chart.js/dist/Chart.extension.js"></script>
-            <script src="{{url('/')}}/asset/dashboard/vendor/jvectormap-next/jquery-jvectormap.min.js"></script>
-            <script src="{{url('/')}}/asset/dashboard/js/vendor/jvectormap/jquery-jvectormap-world-mill.js"></script>
-            <script src="{{url('/')}}/asset/dashboard/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
-            <script
-                src="{{url('/')}}/asset/dashboard/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-            <script
-                src="{{url('/')}}/asset/dashboard/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-            <script
-                src="{{url('/')}}/asset/dashboard/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-            <script src="{{url('/')}}/asset/dashboard/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
-            <script src="{{url('/')}}/asset/dashboard/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
-            <script src="{{url('/')}}/asset/dashboard/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
-            <script
-                src="{{url('/')}}/asset/dashboard/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
-            <script src="{{url('/')}}/asset/dashboard/vendor/clipboard/dist/clipboard.min.js"></script>
-            <script src="{{url('/')}}/asset/dashboard/vendor/select2/dist/js/select2.min.js"></script>
-            <script
-                src="{{url('/')}}/asset/dashboard/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-
-
-            <script src="{{url('/')}}/asset/static/js/custom.js"></script>
-            <script src="{{url('/')}}/asset/js/toast.js"></script>
-            @yield('script')
-            @if (session('success'))
-                <script>
-                    "use strict";
-                    toastr.success("{{ session('success') }}");
-                </script>
-            @endif
-
-            @if (session('alert'))
-                <script>
-                    "use strict";
-                    toastr.warning("{{ session('alert') }}");
-                </script>
-            @endif
-
-
-
-
-            @yield('script')
-            @if (session('success'))
-                <script>
-                    "use strict";
-                    toastr.success("{{ session('success') }}");
-                </script>
-            @endif
-
-            @if (session('alert'))
-                <script>
-                    "use strict";
-                    toastr.warning("{{ session('alert') }}");
-                </script>
-            @endif
-            <script>
-                populateCountries("country", "state");
-                populateIndustry("industry", "category");
-            </script>
-            <script>
-                "use strict"
-
-                function check() {
-                    if ($("#seeAnotherField").val() == "Registered Business") {
-                        $('#otherFieldDiv').show();
-                        $('#otherField').attr('required', '');
-                        $('#otherField').attr('data-error', 'This field is required.');
-                        $('#6xxotherFieldDiv').show();
-                        $('#6xxotherField').attr('required', '');
-                        $('#6xxotherField').attr('data-error', 'This field is required.');
-                        $('#fFieldDiv').show();
-                        $('#fField').attr('required', '');
-                        $('#fField').attr('data-error', 'This field is required.');
-                        $('#ffFieldDiv').show();
-                        $('#ffField').attr('required', '');
-                        $('#ffField').attr('data-error', 'This field is required.');
-                        $('#otherFieldDiv1').show();
-                        $('#otherField1').attr('required', '');
-                        $('#otherField1').attr('data-error', 'This field is required.');
-                        $('#otherFieldDiv2').show();
-                        $('#customFileLang').attr('required', '');
-                        $('#customFileLang').attr('data-error', 'This field is required.');
-                        $('#otherFieldDiv3').hide();
-                        $('#customFileLang').removeAttr('required');
-                        $('#customFileLang').removeAttr('data-error');
-                        $('#1otherField').removeAttr('required');
-                        $('#1otherField').removeAttr('data-error');
-                        $('#2otherField').removeAttr('required');
-                        $('#2otherField').removeAttr('data-error');
-                        $('#3otherField').removeAttr('required');
-                        $('#3otherField').removeAttr('data-error');
-                        $('#4otherField').removeAttr('required');
-                        $('#4otherField').removeAttr('data-error');
-                        $('#5otherField').removeAttr('required');
-                        $('#5otherField').removeAttr('data-error');
-                        $('#6otherField').removeAttr('required');
-                        $('#6otherField').removeAttr('data-error');
-                        $('#6xotherField').removeAttr('required');
-                        $('#6xotherField').removeAttr('data-error');
-                        $('#60otherField').removeAttr('required');
-                        $('#60otherField').removeAttr('data-error');
-                        $('#60xotherField').removeAttr('required');
-                        $('#60xotherField').removeAttr('data-error');
-                        $('#7otherField').removeAttr('required');
-                        $('#7otherField').removeAttr('data-error');
-                        $('#70otherField').removeAttr('required');
-                        $('#70otherField').removeAttr('data-error');
-                        $('#8otherField').removeAttr('required');
-                        $('#8otherField').removeAttr('data-error');
-                    } else {
-                        $('#otherFieldDiv').hide();
-                        $('#otherField').removeAttr('required');
-                        $('#otherField').removeAttr('data-error');
-                        $('#otherFieldDiv1').hide();
-                        $('#otherField1').removeAttr('required');
-                        $('#otherField1').removeAttr('data-error');
-                        $('#otherFieldDiv2').hide();
-                        $('#otherFieldDiv3').show();
-                        $('#1otherField').attr('required', '');
-                        $('#1otherField').attr('data-error', 'This field is required.');
-                        $('#2otherField').attr('required', '');
-                        $('#3otherField').attr('required', '');
-                        $('#3otherField').attr('data-error', 'This field is required.');
-                        $('#4otherField').attr('required', '');
-                        $('#4otherField').attr('data-error', 'This field is required.');
-                        $('#5otherField').attr('required', '');
-                        $('#5otherField').attr('data-error', 'This field is required.');
-                        $('#6otherField').attr('required', '');
-                        $('#6otherField').attr('data-error', 'This field is required.');
-                        $('#6xotherField').attr('required', '');
-                        $('#6xotherField').attr('data-error', 'This field is required.');
-                        $('#60otherField').attr('required', '');
-                        $('#60otherField').attr('data-error', 'This field is required.');
-                        $('#60xotherField').attr('required', '');
-                        $('#60xotherField').attr('data-error', 'This field is required.');
-                        $('#6xxotherFieldDiv').hide();
-                        $('#6xxotherField').removeAttr('required');
-                        $('#6xxotherField').removeAttr('data-error');
-                        $('#fFieldDiv').hide();
-                        $('#fField').removeAttr('required');
-                        $('#fField').removeAttr('data-error');
-                        $('#ffFieldDiv').hide();
-                        $('#ffField').removeAttr('required');
-                        $('#ffField').removeAttr('data-error');
-                        $('#7otherField').attr('required', '');
-                        $('#7otherField').attr('data-error', 'This field is required.');
-                        $('#70otherField').attr('required', '');
-                        $('#70otherField').attr('data-error', 'This field is required.');
-                        $('#8otherField').attr('required', '');
-                        $('#8otherField').attr('data-error', 'This field is required.');
-
-                    }
-                }
-
-                $("#seeAnotherField").change(check);
-                check();
-            </script>
-
-
-            <script type="text/javascript">
-                "use strict";
-
-                function withdrawcharge() {
-                    var amount = $("#amounttransfer3").val();
-                    var charge = $("#chargetransfer3").val();
-                    var charge1 = $("#chargetransferx").val();
-                    var survix = parseFloat(amount) - parseFloat(charge1) - (parseFloat(amount) * parseFloat(charge) / 100);
-                    var cur = '{{$currency->name}}';
-                    if (isNaN(survix) || survix < 0) {
-                        survix = 0;
-                    }
-                    var ddd = cur + ' ' + survix.toFixed(2);
-                    $("#resulttransfer3").text(ddd);
-                }
-            </script>
-
-
-            <script type="text/javascript">
-                "use strict";
-
-                function createcharge() {
-                    var amount = $("#createamount").val();
-                    var cardfee = $("#chargecreate").val();
-                    var charge1 = $("#chargecreatex").val();
-                    var ngnrate = $("#ngnrate").val();
-
-
-                    var cfeengn = parseFloat(cardfee) * parseFloat(ngnrate);
-                    var diffamount = parseFloat(amount) - parseFloat(cfeengn);
-
-                    var finalamountngn = parseFloat(amount) / parseFloat(ngnrate);
-
-
-                    //var survix =  parseFloat(amount)+parseFloat(charge1)+(parseFloat(amount)*parseFloat(charge)/100);
-
-
-                    var cur = 'USD';
-                    if (isNaN(finalamountngn) || finalamountngn < 0) {
-                        finalamountngn = 0;
-                    }
-                    var ddd = cur + ' ' + finalamountngn.toFixed(2);
-                    $("#resulttransfer6").text(ddd);
-                }
-            </script>
-
-
-            <script type="text/javascript">
-                "use strict";
-
-                function removeusd() {
-                    var w_amount = $("#w_amount").val();
-                    var w_rate = $("#w_rate").val();
-
-
-                    var finalamountngn = parseFloat(w_amount) * parseFloat(w_rate);
-
-
-                    //var survix =  parseFloat(amount)+parseFloat(charge1)+(parseFloat(amount)*parseFloat(charge)/100);
-
-
-                    var cur = 'NGN';
-                    if (isNaN(finalamountngn) || finalamountngn < 0) {
-                        finalamountngn = 0;
-                    }
-                    var ddd = cur + ' ' + finalamountngn.toFixed(2);
-                    $("#resulttransfer9").text(ddd);
-                }
-            </script>
-
-
-            <script type="text/javascript">
-                "use strict";
-
-                function fundusdcharge() {
-                    var amount = $("#ngnamount").val();
-                    var ngnrate = $("#ngnrate").val();
-
-                    var ngntousd = parseFloat(amount) / parseFloat(ngnrate);
-
-                    concole.log(ngntousd);
-
-                    var cur = 'USD';
-                    if (isNaN(ngntousd) || ngntousd < 0) {
-                        ngntousd = 0;
-                    }
-                    var ddd = cur + ' ' + ngntousd.toFixed(2);
-                    $("#ngntousdamount").text(ddd);
-                }
-            </script>
-
-
-            <script type="text/javascript">
-                "use strict";
-
-                function donex() {
-                    var xsp = $("#xxpay").find(":selected").val();
-                    if (xsp == 1) {
-                        $("#subaccount").show();
-                    } else if (xsp == 0) {
-                        $("#subaccount").hide();
-                        $("#flat_share").hide();
-                        $("#percent_share").hide();
-                    }
-                }
-
-                $("#xxpay").change(donex);
-                donex();
-
-                "use strict";
-
-                function donep() {
-                    var spt = $("#spt").find(":selected").val();
-                    if (spt == 1) {
-                        $("#flat_share").show();
-                        $("#percent_share").hide();
-                    } else if (spt == 2) {
-                        $("#flat_share").hide();
-                        $("#percent_share").show();
-                    }
-                }
-
-                $("#spt").change(donep);
-                donep();
-
-                "use strict";
-
-                function countryp() {
-                    var pcountry = $("#xcountry").find(":selected").val();
-                    if (pcountry) {
-                        $(".xbank").hide();
-                        $("#cbank" + pcountry).show();
-                    }
-                }
-
-                $("#xcountry").change(countryp);
-                countryp();
-
-                "use strict";
-
-                function cardcharge() {
-                    var amount = $("#cardamount").val();
-                    var charge = $("#charge").val();
-                    var survix = (parseFloat(amount) * parseFloat(charge) / 100) + parseFloat(amount);
-                    var cur = '{{$currency->name}}';
-                    if (isNaN(survix)) {
-                        survix = 0;
-                    }
-                    var ddd = cur + ' ' + survix.toFixed(2);
-                    $("#cardresult").text(ddd);
-                }
-            </script>
-            <script type="text/javascript">
-                "use strict";
-
-                function cryptocharge() {
-                    var amount = $("#amountcrypto").val();
-                    var charge = $("#chargecrypto").val();
-                    var survix = (parseFloat(amount) * parseFloat(charge) / 100) + parseFloat(amount);
-                    var cur = '{{$currency->name}}';
-                    if (isNaN(survix)) {
-                        survix = 0;
-                    }
-                    var ddd = cur + ' ' + survix.toFixed(2);
-                    $("#resultcrypto").text(ddd);
-                }
-            </script>
-            <script type="text/javascript">
-                "use strict";
-
-                function sellcrypto() {
-                    var amount = $("#amounttransfer").val();
-                    var charge = $("#chargetransfer").val();
-                    var rate = $("#ratetransfer").val();
-                    var survix = (parseFloat(amount) * parseFloat(charge) / 100) + parseFloat(amount);
-                    var gain = parseFloat(amount) * parseFloat(rate);
-                    var cur = 'USD';
-                    if (isNaN(survix)) {
-                        survix = 0;
-                    }
-                    var curr = '{{$currency->name}}';
-                    if (isNaN(gain)) {
-                        gain = 0;
-                    }
-                    var ddd = cur + ' ' + survix.toFixed(2);
-                    var fff = curr + ' ' + gain.toFixed(2);
-                    $("#gain").text(fff);
-                    $("#resulttransfer").text(ddd);
-                }
-
-                "use strict";
-
-                function buycrypto() {
-                    var amount = $("#amounttransfer1").val();
-                    var charge = $("#chargetransfer1").val();
-                    var rate = $("#ratetransfer1").val();
-                    var survix = (parseFloat(amount) * parseFloat(charge) / 100) + parseFloat(amount);
-                    var gain = parseFloat(amount) / parseFloat(rate);
-                    var cur = '{{$currency->name}}';
-                    if (isNaN(survix)) {
-                        survix = 0;
-                    }
-                    var curr = 'USD';
-                    if (isNaN(gain)) {
-                        gain = 0;
-                    }
-                    var ddd = cur + ' ' + survix.toFixed(2);
-                    var fff = curr + ' ' + gain.toFixed(2);
-                    $("#gain1").text(fff);
-                    $("#resulttransfer1").text(ddd);
-                }
-
-
-                "use strict";
-
-                function transfercharge() {
-                    var amount = $("#amounttransfer").val();
-                    var charge = $("#chargetransfer").val();
-                    var charge1 = $("#chargetransfer1").val();
-                    var survix = (parseFloat(amount) * parseFloat(charge) / 100) + parseFloat(amount) + parseFloat(charge1);
-                    var cur = '{{$currency->name}}';
-                    if (isNaN(survix)) {
-                        survix = 0;
-                    }
-                    var ddd = cur + ' ' + survix.toFixed(2);
-                    $("#resulttransfer").text(ddd);
-                }
-
-                "use strict";
-
-                function databundle() {
-                    var biller = $("#biller").find(":selected").text();
-                    var myarr = biller.split("-");
-                    var amount = myarr[1].split("<");
-                    var charge = $("#chargetransfer").val();
-                    var survix = (parseFloat(amount) * parseFloat(charge) / 100) + parseFloat(amount);
-                    var cur = '{{$currency->name}}';
-                    if (isNaN(survix)) {
-                        survix = 0;
-                    }
-                    var ddd = cur + ' ' + survix.toFixed(2);
-                    $("#resulttransfer").text(ddd);
-                    $("#real").val(amount);
-                }
-
-                $("#biller").change(databundle);
-                databundle();
-            </script>
-
+            <div class="modal-body">
+                <label for="PersonName1" class="form-label d-block">Enter Name</label>
+                <input type="text" id="PersonName1" class="form-control w-100 mb-3" placeholder="Username">
+                <label for="PersonPosition1" class="form-label d-block">Enter Position</label>
+                <input type="text" id="PersonPosition1" class="form-control w-100" placeholder="Position">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close
+                </button>
+                <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Required vendors -->
+<script src="{{ url('') }}/asset/vendor/global/global.min.js"></script>
+<script src="{{ url('') }}/asset/vendor/chart.js/Chart.bundle.min.js"></script>
+<script src="{{ url('') }}/asset/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<!-- Apex Chart -->
+<script src="{{ url('') }}/asset/vendor/apexchart/apexchart.js"></script>
+<!-- Chart piety plugin files -->
+<script src="{{ url('') }}/asset/vendor/peity/jquery.peity.min.js"></script>
+<!-- Chartist -->
+<script src="{{ url('') }}/asset/vendor/chartist/js/chartist.min.js"></script>
+<script src="{{ url('') }}/asset/vendor/jquery-autocomplete/jquery-ui.js"></script>
+<!-- <script src="{{ url('') }}/asset/js/dashboard/dashboard-2.js"></script> -->
+<!-- Dashboard 1 -->
+<script src="{{ url('') }}/asset/js/dashboard/dashboard-1.js"></script>
+<script src="{{ url('') }}/asset/js/custom.min.js"></script>
+<script src="{{ url('') }}/asset/js/dlabnav-init.js"></script>
+<script src="{{ url('') }}/asset/js/demo.js"></script>
+
+<!-- Datatable -->
+<script src="{{ url('') }}/asset/vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="{{ url('') }}/asset/js/plugins-init/datatables.init.js"></script>
+
+
+<script src="{{url('/')}}/asset/dashboard/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script src="{{url('/')}}/asset/dashboard/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="{{url('/')}}/asset/dashboard/vendor/chart.js/dist/Chart.extension.js"></script>
+<script src="{{url('/')}}/asset/dashboard/vendor/jvectormap-next/jquery-jvectormap.min.js"></script>
+<script src="{{url('/')}}/asset/dashboard/js/vendor/jvectormap/jquery-jvectormap-world-mill.js"></script>
+<script src="{{url('/')}}/asset/dashboard/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+<script
+    src="{{url('/')}}/asset/dashboard/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script
+    src="{{url('/')}}/asset/dashboard/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script
+    src="{{url('/')}}/asset/dashboard/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="{{url('/')}}/asset/dashboard/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="{{url('/')}}/asset/dashboard/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+<script src="{{url('/')}}/asset/dashboard/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script
+    src="{{url('/')}}/asset/dashboard/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+<script src="{{url('/')}}/asset/dashboard/vendor/clipboard/dist/clipboard.min.js"></script>
+<script src="{{url('/')}}/asset/dashboard/vendor/select2/dist/js/select2.min.js"></script>
+<script
+    src="{{url('/')}}/asset/dashboard/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+
+<script src="{{url('/')}}/asset/static/js/custom.js"></script>
+<script src="{{url('/')}}/asset/js/toast.js"></script>
+
+
+@yield('script')
+@if (session('success'))
+    <script>
+        "use strict";
+        toastr.success("{{ session('success') }}");
+    </script>
+@endif
+
+@if (session('alert'))
+    <script>
+        "use strict";
+        toastr.warning("{{ session('alert') }}");
+    </script>
+@endif
+
+
+
+
+@yield('script')
+@if (session('success'))
+    <script>
+        "use strict";
+        toastr.success("{{ session('success') }}");
+    </script>
+@endif
+
+@if (session('alert'))
+    <script>
+        "use strict";
+        toastr.warning("{{ session('alert') }}");
+    </script>
+@endif
+<script>
+    populateCountries("country", "state");
+    populateIndustry("industry", "category");
+</script>
+<script>
+    "use strict"
+
+    function check() {
+        if ($("#seeAnotherField").val() == "Registered Business") {
+            $('#otherFieldDiv').show();
+            $('#otherField').attr('required', '');
+            $('#otherField').attr('data-error', 'This field is required.');
+            $('#6xxotherFieldDiv').show();
+            $('#6xxotherField').attr('required', '');
+            $('#6xxotherField').attr('data-error', 'This field is required.');
+            $('#fFieldDiv').show();
+            $('#fField').attr('required', '');
+            $('#fField').attr('data-error', 'This field is required.');
+            $('#ffFieldDiv').show();
+            $('#ffField').attr('required', '');
+            $('#ffField').attr('data-error', 'This field is required.');
+            $('#otherFieldDiv1').show();
+            $('#otherField1').attr('required', '');
+            $('#otherField1').attr('data-error', 'This field is required.');
+            $('#otherFieldDiv2').show();
+            $('#customFileLang').attr('required', '');
+            $('#customFileLang').attr('data-error', 'This field is required.');
+            $('#otherFieldDiv3').hide();
+            $('#customFileLang').removeAttr('required');
+            $('#customFileLang').removeAttr('data-error');
+            $('#1otherField').removeAttr('required');
+            $('#1otherField').removeAttr('data-error');
+            $('#2otherField').removeAttr('required');
+            $('#2otherField').removeAttr('data-error');
+            $('#3otherField').removeAttr('required');
+            $('#3otherField').removeAttr('data-error');
+            $('#4otherField').removeAttr('required');
+            $('#4otherField').removeAttr('data-error');
+            $('#5otherField').removeAttr('required');
+            $('#5otherField').removeAttr('data-error');
+            $('#6otherField').removeAttr('required');
+            $('#6otherField').removeAttr('data-error');
+            $('#6xotherField').removeAttr('required');
+            $('#6xotherField').removeAttr('data-error');
+            $('#60otherField').removeAttr('required');
+            $('#60otherField').removeAttr('data-error');
+            $('#60xotherField').removeAttr('required');
+            $('#60xotherField').removeAttr('data-error');
+            $('#7otherField').removeAttr('required');
+            $('#7otherField').removeAttr('data-error');
+            $('#70otherField').removeAttr('required');
+            $('#70otherField').removeAttr('data-error');
+            $('#8otherField').removeAttr('required');
+            $('#8otherField').removeAttr('data-error');
+        } else {
+            $('#otherFieldDiv').hide();
+            $('#otherField').removeAttr('required');
+            $('#otherField').removeAttr('data-error');
+            $('#otherFieldDiv1').hide();
+            $('#otherField1').removeAttr('required');
+            $('#otherField1').removeAttr('data-error');
+            $('#otherFieldDiv2').hide();
+            $('#otherFieldDiv3').show();
+            $('#1otherField').attr('required', '');
+            $('#1otherField').attr('data-error', 'This field is required.');
+            $('#2otherField').attr('required', '');
+            $('#3otherField').attr('required', '');
+            $('#3otherField').attr('data-error', 'This field is required.');
+            $('#4otherField').attr('required', '');
+            $('#4otherField').attr('data-error', 'This field is required.');
+            $('#5otherField').attr('required', '');
+            $('#5otherField').attr('data-error', 'This field is required.');
+            $('#6otherField').attr('required', '');
+            $('#6otherField').attr('data-error', 'This field is required.');
+            $('#6xotherField').attr('required', '');
+            $('#6xotherField').attr('data-error', 'This field is required.');
+            $('#60otherField').attr('required', '');
+            $('#60otherField').attr('data-error', 'This field is required.');
+            $('#60xotherField').attr('required', '');
+            $('#60xotherField').attr('data-error', 'This field is required.');
+            $('#6xxotherFieldDiv').hide();
+            $('#6xxotherField').removeAttr('required');
+            $('#6xxotherField').removeAttr('data-error');
+            $('#fFieldDiv').hide();
+            $('#fField').removeAttr('required');
+            $('#fField').removeAttr('data-error');
+            $('#ffFieldDiv').hide();
+            $('#ffField').removeAttr('required');
+            $('#ffField').removeAttr('data-error');
+            $('#7otherField').attr('required', '');
+            $('#7otherField').attr('data-error', 'This field is required.');
+            $('#70otherField').attr('required', '');
+            $('#70otherField').attr('data-error', 'This field is required.');
+            $('#8otherField').attr('required', '');
+            $('#8otherField').attr('data-error', 'This field is required.');
+
+        }
+    }
+
+    $("#seeAnotherField").change(check);
+    check();
+</script>
+
+
+<script type="text/javascript">
+    "use strict";
+
+    function withdrawcharge() {
+        var amount = $("#amounttransfer3").val();
+        var charge = $("#chargetransfer3").val();
+        var charge1 = $("#chargetransferx").val();
+        var survix = parseFloat(amount) - parseFloat(charge1) - (parseFloat(amount) * parseFloat(charge) / 100);
+        var cur = '{{$currency->name}}';
+        if (isNaN(survix) || survix < 0) {
+            survix = 0;
+        }
+        var ddd = cur + ' ' + survix.toFixed(2);
+        $("#resulttransfer3").text(ddd);
+    }
+</script>
+
+
+<script type="text/javascript">
+    "use strict";
+
+    function createcharge() {
+        var amount = $("#createamount").val();
+        var cardfee = $("#chargecreate").val();
+        var charge1 = $("#chargecreatex").val();
+        var ngnrate = $("#ngnrate").val();
+
+
+        var cfeengn = parseFloat(cardfee) * parseFloat(ngnrate);
+        var diffamount = parseFloat(amount) - parseFloat(cfeengn);
+
+        var finalamountngn = parseFloat(amount) / parseFloat(ngnrate);
+
+
+        //var survix =  parseFloat(amount)+parseFloat(charge1)+(parseFloat(amount)*parseFloat(charge)/100);
+
+
+        var cur = 'USD';
+        if (isNaN(finalamountngn) || finalamountngn < 0) {
+            finalamountngn = 0;
+        }
+        var ddd = cur + ' ' + finalamountngn.toFixed(2);
+        $("#resulttransfer6").text(ddd);
+    }
+</script>
+
+
+<script type="text/javascript">
+    "use strict";
+
+    function removeusd() {
+        var w_amount = $("#w_amount").val();
+        var w_rate = $("#w_rate").val();
+
+
+        var finalamountngn = parseFloat(w_amount) * parseFloat(w_rate);
+
+
+        //var survix =  parseFloat(amount)+parseFloat(charge1)+(parseFloat(amount)*parseFloat(charge)/100);
+
+
+        var cur = 'NGN';
+        if (isNaN(finalamountngn) || finalamountngn < 0) {
+            finalamountngn = 0;
+        }
+        var ddd = cur + ' ' + finalamountngn.toFixed(2);
+        $("#resulttransfer9").text(ddd);
+    }
+</script>
+
+
+<script type="text/javascript">
+    "use strict";
+
+    function fundusdcharge() {
+        var amount = $("#ngnamount").val();
+        var ngnrate = $("#ngnrate").val();
+
+        var ngntousd = parseFloat(amount) / parseFloat(ngnrate);
+
+        concole.log(ngntousd);
+
+        var cur = 'USD';
+        if (isNaN(ngntousd) || ngntousd < 0) {
+            ngntousd = 0;
+        }
+        var ddd = cur + ' ' + ngntousd.toFixed(2);
+        $("#ngntousdamount").text(ddd);
+    }
+</script>
+
+
+<script type="text/javascript">
+    "use strict";
+
+    function donex() {
+        var xsp = $("#xxpay").find(":selected").val();
+        if (xsp == 1) {
+            $("#subaccount").show();
+        } else if (xsp == 0) {
+            $("#subaccount").hide();
+            $("#flat_share").hide();
+            $("#percent_share").hide();
+        }
+    }
+
+    $("#xxpay").change(donex);
+    donex();
+
+    "use strict";
+
+    function donep() {
+        var spt = $("#spt").find(":selected").val();
+        if (spt == 1) {
+            $("#flat_share").show();
+            $("#percent_share").hide();
+        } else if (spt == 2) {
+            $("#flat_share").hide();
+            $("#percent_share").show();
+        }
+    }
+
+    $("#spt").change(donep);
+    donep();
+
+    "use strict";
+
+    function countryp() {
+        var pcountry = $("#xcountry").find(":selected").val();
+        if (pcountry) {
+            $(".xbank").hide();
+            $("#cbank" + pcountry).show();
+        }
+    }
+
+    $("#xcountry").change(countryp);
+    countryp();
+
+    "use strict";
+
+    function cardcharge() {
+        var amount = $("#cardamount").val();
+        var charge = $("#charge").val();
+        var survix = (parseFloat(amount) * parseFloat(charge) / 100) + parseFloat(amount);
+        var cur = '{{$currency->name}}';
+        if (isNaN(survix)) {
+            survix = 0;
+        }
+        var ddd = cur + ' ' + survix.toFixed(2);
+        $("#cardresult").text(ddd);
+    }
+</script>
+<script type="text/javascript">
+    "use strict";
+
+    function cryptocharge() {
+        var amount = $("#amountcrypto").val();
+        var charge = $("#chargecrypto").val();
+        var survix = (parseFloat(amount) * parseFloat(charge) / 100) + parseFloat(amount);
+        var cur = '{{$currency->name}}';
+        if (isNaN(survix)) {
+            survix = 0;
+        }
+        var ddd = cur + ' ' + survix.toFixed(2);
+        $("#resultcrypto").text(ddd);
+    }
+</script>
+<script type="text/javascript">
+    "use strict";
+
+    function sellcrypto() {
+        var amount = $("#amounttransfer").val();
+        var charge = $("#chargetransfer").val();
+        var rate = $("#ratetransfer").val();
+        var survix = (parseFloat(amount) * parseFloat(charge) / 100) + parseFloat(amount);
+        var gain = parseFloat(amount) * parseFloat(rate);
+        var cur = 'USD';
+        if (isNaN(survix)) {
+            survix = 0;
+        }
+        var curr = '{{$currency->name}}';
+        if (isNaN(gain)) {
+            gain = 0;
+        }
+        var ddd = cur + ' ' + survix.toFixed(2);
+        var fff = curr + ' ' + gain.toFixed(2);
+        $("#gain").text(fff);
+        $("#resulttransfer").text(ddd);
+    }
+
+    "use strict";
+
+    function buycrypto() {
+        var amount = $("#amounttransfer1").val();
+        var charge = $("#chargetransfer1").val();
+        var rate = $("#ratetransfer1").val();
+        var survix = (parseFloat(amount) * parseFloat(charge) / 100) + parseFloat(amount);
+        var gain = parseFloat(amount) / parseFloat(rate);
+        var cur = '{{$currency->name}}';
+        if (isNaN(survix)) {
+            survix = 0;
+        }
+        var curr = 'USD';
+        if (isNaN(gain)) {
+            gain = 0;
+        }
+        var ddd = cur + ' ' + survix.toFixed(2);
+        var fff = curr + ' ' + gain.toFixed(2);
+        $("#gain1").text(fff);
+        $("#resulttransfer1").text(ddd);
+    }
+
+
+    "use strict";
+
+    function transfercharge() {
+        var amount = $("#amounttransfer").val();
+        var charge = $("#chargetransfer").val();
+        var charge1 = $("#chargetransfer1").val();
+        var survix = (parseFloat(amount) * parseFloat(charge) / 100) + parseFloat(amount) + parseFloat(charge1);
+        var cur = '{{$currency->name}}';
+        if (isNaN(survix)) {
+            survix = 0;
+        }
+        var ddd = cur + ' ' + survix.toFixed(2);
+        $("#resulttransfer").text(ddd);
+    }
+
+    "use strict";
+
+    function databundle() {
+        var biller = $("#biller").find(":selected").text();
+        var myarr = biller.split("-");
+        var amount = myarr[1].split("<");
+        var charge = $("#chargetransfer").val();
+        var survix = (parseFloat(amount) * parseFloat(charge) / 100) + parseFloat(amount);
+        var cur = '{{$currency->name}}';
+        if (isNaN(survix)) {
+            survix = 0;
+        }
+        var ddd = cur + ' ' + survix.toFixed(2);
+        $("#resulttransfer").text(ddd);
+        $("#real").val(amount);
+    }
+
+    $("#biller").change(databundle);
+    databundle();
+</script>
 
 </body>
-
 </html>
+
+
+
+
 
 
 
