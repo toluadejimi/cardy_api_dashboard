@@ -428,6 +428,7 @@
     </div>
     <!-- /Modal -->
 
+
     <!-- Required vendors -->
     <script src="{{ url('') }}/asset/vendor/global/global.min.js"></script>
     <script src="{{ url('') }}/asset/vendor/chart.js/Chart.bundle.min.js"></script>
@@ -472,9 +473,7 @@
 </script>
 @endif
 
-</body>
 
-</html>
 
 
 
