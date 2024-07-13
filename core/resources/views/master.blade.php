@@ -243,6 +243,7 @@
                     </a>
                 </div>
             </div>
+        </nav>
 
 
             <div class="dlabnav">
@@ -385,7 +386,7 @@
                     </div>
                 </div>
             </div>
-        </nav>
+
 
 
             @yield('content')
