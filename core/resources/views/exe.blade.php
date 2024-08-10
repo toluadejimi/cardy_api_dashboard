@@ -8,8 +8,8 @@
     <title>Document</title>
 
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 
 </head>
@@ -17,9 +17,9 @@
 
 <body class="container">
 
-    <div class="row">
+<div class="row">
 
-        @if($set_trx == '1')
+    @if($set_trx == '1')
         <div class="col-sm-3 my-3">
             <div class="card">
                 <div class="card-body">
@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        @else
+    @else
         <div class="col-sm-3 my-3">
             <div class="card">
                 <div class="card-body">
@@ -53,386 +53,448 @@
                 </div>
             </div>
         </div>
+    @endif
+
+
+    @if($set->opay_trx == '1')
+        <div class="col-sm-3 my-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Opay</h6>
+                    <div class="col-lg-12">
+                        <form method="POST" action="/lock-opay">
+                            @csrf
+                            @method('POST')
+                            <button type="submit" class="btn btn-danger btn-md mt-2">Lock Opay</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    @else
+        <div class="col-sm-3 my-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Opay</h6>
+                    <div class="col-lg-12">
+                        <form method="POST" action="/unlock-opay">
+                            @csrf
+                            @method('POST')
+                            <button type="submit" class="btn btn-success btn-md mt-2">Unlock Opay</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    @endif
+
+        @if($set->pamlpay_trx == '1')
+            <div class="col-sm-3 my-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">Palmpay</h6>
+                        <div class="col-lg-12">
+                            <form method="POST" action="/lock-palmpay">
+                                @csrf
+                                @method('POST')
+                                <button type="submit" class="btn btn-danger btn-md mt-2">Lock Palmpay</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        @else
+            <div class="col-sm-3 my-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">Palmpay</h6>
+                        <div class="col-lg-12">
+                            <form method="POST" action="/unlock-palmpay">
+                                @csrf
+                                @method('POST')
+                                <button type="submit" class="btn btn-success btn-md mt-2">Unlock Palmpay</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         @endif
 
 
-        <div class="col-sm-3 my-3">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="card-title">Charge Daily Termial Fee (NGN 1000)</h6>
-                    <div class="col-lg-12">
-                        <form method="POST" action="/charge-terminal-fee?amount=1000">
-                            @csrf
-                            @method('POST')
+        @if($set->ninepsb == '1')
+            <div class="col-sm-3 my-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">9psb</h6>
+                        <div class="col-lg-12">
+                            <form method="POST" action="/lock-ninepsb">
+                                @csrf
+                                @method('POST')
+                                <button type="submit" class="btn btn-danger btn-md mt-2">Lock Palmpay</button>
+                            </form>
+                        </div>
 
-                            <button type="submit" class="btn btn-success btn-md mt-2">Charge Terminal Fee</button>
-                        </form>
                     </div>
-
                 </div>
             </div>
-        </div>
+        @else
+            <div class="col-sm-3 my-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">9psb</h6>
+                        <div class="col-lg-12">
+                            <form method="POST" action="/unlock-ninepsb">
+                                @csrf
+                                @method('POST')
+                                <button type="submit" class="btn btn-success btn-md mt-2">Unlock 9psb</button>
+                            </form>
+                        </div>
 
-
-        <div class="col-sm-3 my-3">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="card-title">Charge Weekly Termial Fee (NGN 5000)</h6>
-                    <div class="col-lg-12">
-                        <form method="POST" action="/charge-terminal-fee-weekly?amount=5000">
-                            @csrf
-                            @method('POST')
-
-                            <button type="submit" class="btn btn-primary btn-md mt-2">Charge Terminal Fee</button>
-                        </form>
                     </div>
-
                 </div>
             </div>
-        </div>
+        @endif
 
 
-        <div class="col-sm-3 my-3">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="card-title">Charge Monthly</h6>
-                    <div class="col-lg-12">
-                        <form method="POST" action="/charge-fees?amount=1000">
-                            @csrf
-                            @method('POST')
+        @if($set->wema_transfer == '1')
+            <div class="col-sm-3 my-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">Wema</h6>
+                        <div class="col-lg-12">
+                            <form method="POST" action="/lock-wema">
+                                @csrf
+                                @method('POST')
+                                <button type="submit" class="btn btn-danger btn-md mt-2">Lock Wema</button>
+                            </form>
+                        </div>
 
-                            <button type="submit" class="btn btn-primary btn-md mt-2">Charge Terminal Fee</button>
-                        </form>
                     </div>
-
                 </div>
             </div>
-        </div>
+        @else
+            <div class="col-sm-3 my-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">Wema</h6>
+                        <div class="col-lg-12">
+                            <form method="POST" action="/unlock-wema">
+                                @csrf
+                                @method('POST')
+                                <button type="submit" class="btn btn-success btn-md mt-2">Unlock Wema</button>
+                            </form>
+                        </div>
 
-
-        <div class="col-sm-3 my-3">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="card-title">Get Transactions</h6>
-                    <div class="col-lg-12">
-                        <form method="POST" action="get-transaction">
-                            @csrf
-                            @method('POST')
-
-                            <label>Date From</label>
-                            <input class="form-control" type="date" name="from" required>
-
-                            <label>Date To</label>
-                            <input class="form-control" type="date" name="to" required>
-                            <label>Pin</label>
-                            <input class="form-control" type="password" name="pass" required>
-
-                            <button type="submit" class="btn btn-primary btn-md mt-2">Get Transaction</button>
-                        </form>
                     </div>
-
                 </div>
             </div>
-        </div>
+        @endif
 
 
+    <div class="col-sm-3 my-3">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Get Transactions</h6>
+                <div class="col-lg-12">
+                    <form method="POST" action="get-transaction">
+                        @csrf
+                        @method('POST')
 
+                        <label>Date From</label>
+                        <input class="form-control" type="date" name="from" required>
 
-        <div class="col-sm-3 my-3">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="card-title">Delete Transactions</h6>
-                    <div class="col-lg-12">
-                        <form method="POST" action="delete-transaction">
-                            @csrf
-                            @method('POST')
+                        <label>Date To</label>
+                        <input class="form-control" type="date" name="to" required>
+                        <label>Pin</label>
+                        <input class="form-control" type="password" name="pass" required>
 
-                            <label>Date From</label>
-                            <input class="form-control" type="date" name="from" required>
-
-                            <label>Date To</label>
-                            <input class="form-control" type="date" name="to" required>
-                            <label>Pin</label>
-                            <input class="form-control" type="password" name="pass" required>
-
-                            <button type="submit" class="btn btn-primary btn-md mt-2">Detele Transaction</button>
-                        </form>
-                    </div>
-
+                        <button type="submit" class="btn btn-primary btn-md mt-2">Get Transaction</button>
+                    </form>
                 </div>
+
             </div>
         </div>
+    </div>
 
 
+    <div class="col-sm-3 my-3">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Delete Transactions</h6>
+                <div class="col-lg-12">
+                    <form method="POST" action="delete-transaction">
+                        @csrf
+                        @method('POST')
 
-        <div class="col-sm-3 my-3">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="card-title">Download Excel Transactions</h6>
-                    <div class="col-lg-12">
-                        <form method="POST" action="excel-transaction">
-                            @csrf
-                            @method('POST')
+                        <label>Date From</label>
+                        <input class="form-control" type="date" name="from" required>
 
-                            <label>Date From</label>
-                            <input class="form-control" type="date" name="from" required>
+                        <label>Date To</label>
+                        <input class="form-control" type="date" name="to" required>
+                        <label>Pin</label>
+                        <input class="form-control" type="password" name="pass" required>
 
-                            <label>Date To</label>
-                            <input class="form-control" type="date" name="to" required>
-
-
-                            <label>Pin</label>
-                            <input class="form-control" type="password" name="pass" required>
-
-                            <button type="submit" class="btn btn-primary btn-md mt-2">Download Excel Transaction</button>
-                        </form>
-                    </div>
-
+                        <button type="submit" class="btn btn-primary btn-md mt-2">Detele Transaction</button>
+                    </form>
                 </div>
+
             </div>
         </div>
+    </div>
 
 
+    <div class="col-sm-3 my-3">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Download Excel Transactions</h6>
+                <div class="col-lg-12">
+                    <form method="POST" action="excel-transaction">
+                        @csrf
+                        @method('POST')
 
-        <div class="col-sm-3 my-3">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="card-title">Back Up Transactions Table</h6>
-                    <div class="col-lg-12">
-                        <form method="POST" action="backup-transaction">
-                            @csrf
-                            @method('POST')
+                        <label>Date From</label>
+                        <input class="form-control" type="date" name="from" required>
 
-                            <label>Date From</label>
-                            <input class="form-control" type="date" name="from" required>
+                        <label>Date To</label>
+                        <input class="form-control" type="date" name="to" required>
 
-                            <label>Date To</label>
-                            <input class="form-control" type="date" name="to" required>
 
-                            <label>Pin</label>
-                            <input class="form-control" type="password" name="pass" required>
+                        <label>Pin</label>
+                        <input class="form-control" type="password" name="pass" required>
 
-                            <button type="submit" class="btn btn-primary btn-md mt-2">Back up Transactions</button>
-                        </form>
-                    </div>
-
+                        <button type="submit" class="btn btn-primary btn-md mt-2">Download Excel Transaction</button>
+                    </form>
                 </div>
+
             </div>
         </div>
+    </div>
 
 
+    <div class="col-sm-3 my-3">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Back Up Transactions Table</h6>
+                <div class="col-lg-12">
+                    <form method="POST" action="backup-transaction">
+                        @csrf
+                        @method('POST')
 
-        <div class="col-sm-3 my-3">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="card-title">Back Up User Table</h6>
-                    <div class="col-lg-12">
-                        <form method="POST" action="backup-user">
-                            @csrf
-                            @method('POST')
+                        <label>Date From</label>
+                        <input class="form-control" type="date" name="from" required>
 
-                            <label>Pin</label>
-                            <input class="form-control" type="password" name="pass" required>
+                        <label>Date To</label>
+                        <input class="form-control" type="date" name="to" required>
 
-                            <button type="submit" class="btn btn-primary btn-md mt-2">Back Up Users</button>
-                        </form>
-                    </div>
+                        <label>Pin</label>
+                        <input class="form-control" type="password" name="pass" required>
 
+                        <button type="submit" class="btn btn-primary btn-md mt-2">Back up Transactions</button>
+                    </form>
                 </div>
+
             </div>
         </div>
+    </div>
 
 
+    <div class="col-sm-3 my-3">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Back Up User Table</h6>
+                <div class="col-lg-12">
+                    <form method="POST" action="backup-user">
+                        @csrf
+                        @method('POST')
+
+                        <label>Pin</label>
+                        <input class="form-control" type="password" name="pass" required>
+
+                        <button type="submit" class="btn btn-primary btn-md mt-2">Back Up Users</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
-
-
-
-
-        @if ($errors->any())
+    @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                    <li>{{ $error }}</li>
                 @endforeach
             </ul>
         </div>
-        @endif
-        @if (session()->has('message'))
+    @endif
+    @if (session()->has('message'))
         <div class="alert alert-success">
             {{ session()->get('message') }}
         </div>
-        @endif
-        @if (session()->has('error'))
+    @endif
+    @if (session()->has('error'))
         <div class="alert alert-danger">
             {{ session()->get('error') }}
         </div>
-        @endif
+    @endif
 
 
+    <div class="mt-4">
+        <table class="table responsive">
 
-        <div class="mt-4">
-            <table class="table responsive">
+            <thead>
 
-                <thead>
+            <tr>
 
-                    <tr>
+                <th>TRX ID</th>
 
-                        <th>TRX ID</th>
+                <th>Name</th>
 
-                        <th>Name</th>
+                <th>Amount</th>
+                <th>Time</th>
 
-                        <th>Amount</th>
-                        <th>Time</th>
-
-                        <th>Time Left</th>
-
-
-                        <th>Action</th>
-
-                        <th>Action</th>
+                <th>Time Left</th>
 
 
+                <th>Action</th>
+
+                <th>Action</th>
 
 
-                    </tr>
+            </tr>
 
-                </thead>
+            </thead>
 
-                <tbody>
+            <tbody>
 
-                    @foreach($trx as $user)
+            @foreach($trx as $user)
 
+                <tr>
 
+                    <td>{{ $user->ref_trans_id }}</td>
 
-                    <tr>
+                    <td>{{ $user->user->first_name }} {{ $user->user->last_name }}</td>
 
-                        <td>{{ $user->ref_trans_id }}</td>
+                    <td>NGN {{ number_format($user->amount, 2) }}</td>
 
-                        <td>{{ $user->user->first_name }} {{ $user->user->last_name }}</td>
-
-                        <td>NGN {{ number_format($user->amount, 2) }}</td>
-
-                        <td>{{date("h:i:A", strtotime($user->created_at))}}</td>
+                    <td>{{date("h:i:A", strtotime($user->created_at))}}</td>
 
 
+                    <td>
 
+                        <p id="demo"></p>
 
-
-                        <td>
-
-                            <p id="demo"></p>
-
-                            <script>
-                                // Set the date we're counting down to
-                                var countDownDate = new Date("{{date("
+                        <script>
+                            // Set the date we're counting down to
+                            var countDownDate = new Date("{{date("
                                     F d, Y H: i: s ", strtotime($user->created_at))}}").getTime();
 
-                                // Update the count down every 1 second
-                                var x = setInterval(function() {
+                            // Update the count down every 1 second
+                            var x = setInterval(function () {
 
-                                    // Get today's date and time
-                                    var now = new Date().getTime();
+                                // Get today's date and time
+                                var now = new Date().getTime();
 
-                                    // Find the distance between now and the count down date
-                                    var distance = now - 60;
+                                // Find the distance between now and the count down date
+                                var distance = now - 60;
 
-                                    // Time calculations for days, hours, minutes and seconds
-                                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                                // Time calculations for days, hours, minutes and seconds
+                                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                                    // Output the result in an element with id="demo"
-                                    document.getElementById("demo").innerHTML = seconds + "s ";
+                                // Output the result in an element with id="demo"
+                                document.getElementById("demo").innerHTML = seconds + "s ";
 
-                                    // If the count down is over, write some text
-                                    if (distance < 0) {
-                                        clearInterval(x);
-                                        document.getElementById("demo").innerHTML = "EXPIRED";
-                                    }
-                                }, 1000);
+                                // If the count down is over, write some text
+                                if (distance < 0) {
+                                    clearInterval(x);
+                                    document.getElementById("demo").innerHTML = "EXPIRED";
+                                }
+                            }, 1000);
 
-                            </script>
-                        </td>
-
-
-                        <td>
-                            <div class="col-lg-12">
-                                <form method="POST" action="/delete-trx?ref_trans_id={{ $user->ref_trans_id }}">
-                                    @csrf
-                                    @method('POST')
-
-                                    <button type="submit" class="btn btn-danger btn-sm mt-2">Delete Transaction</button>
-                                </form>
-                            </div>
-                        </td>
+                        </script>
+                    </td>
 
 
-                        <td>
-                            <div class="col-lg-12">
-                                <form method="POST" action="/complete-trx?ref_trans_id={{ $user->ref_trans_id }}">
-                                    @csrf
-                                    @method('POST')
-                                    <button type="submit" class="btn btn-success btn-sm mt-2">Complete Transaction</button>
-                                </form>
-                            </div>
-                        </td>
+                    <td>
+                        <div class="col-lg-12">
+                            <form method="POST" action="/delete-trx?ref_trans_id={{ $user->ref_trans_id }}">
+                                @csrf
+                                @method('POST')
 
-                        <td>
-                            <div class="col-lg-12">
-                                <form method="POST" action="/refund-trx?ref_trans_id={{ $user->ref_trans_id }}">
-                                    @csrf
-                                    @method('POST')
-                                    <button type="submit" class="btn btn-primary btn-sm mt-2">Refund Transaction</button>
-                                </form>
-                            </div>
-                        </td>
+                                <button type="submit" class="btn btn-danger btn-sm mt-2">Delete Transaction</button>
+                            </form>
+                        </div>
+                    </td>
 
 
+                    <td>
+                        <div class="col-lg-12">
+                            <form method="POST" action="/complete-trx?ref_trans_id={{ $user->ref_trans_id }}">
+                                @csrf
+                                @method('POST')
+                                <button type="submit" class="btn btn-success btn-sm mt-2">Complete Transaction</button>
+                            </form>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="col-lg-12">
+                            <form method="POST" action="/refund-trx?ref_trans_id={{ $user->ref_trans_id }}">
+                                @csrf
+                                @method('POST')
+                                <button type="submit" class="btn btn-primary btn-sm mt-2">Refund Transaction</button>
+                            </form>
+                        </div>
+                    </td>
 
 
-                        <td>
-                            @if($user->user->status == 7)
+                    <td>
+                        @if($user->user->status == 7)
                             <div class="col-lg-12">
                                 <form method="POST" action="/unblock-user?user_id={{ $user->user_id }}">
                                     @csrf
                                     @method('POST')
 
                                     <button type="submit" class="btn btn-success btn-sm mt-2 text-white">Unblock
-                                        User</button>
+                                        User
+                                    </button>
                                 </form>
                             </div>
-                            @else
+                        @else
                             <div class="col-lg-12">
                                 <form method="POST" action="/block-user?user_id={{ $user->user_id }}">
                                     @csrf
                                     @method('POST')
 
-                                    <button type="submit" class="btn btn-warning btn-sm mt-2 text-white">Block User</button>
+                                    <button type="submit" class="btn btn-warning btn-sm mt-2 text-white">Block User
+                                    </button>
                                 </form>
                             </div>
-                            @endif
-                        </td>
+                        @endif
+                    </td>
 
 
-                    </tr>
+                </tr>
 
-                    @endforeach
+            @endforeach
 
-                </tbody>
+            </tbody>
 
-            </table>
-
-        </div>
-
-
-
-
-
+        </table>
 
     </div>
 
-    </body>
+
+</div>
+
+</body>
 
 </html>

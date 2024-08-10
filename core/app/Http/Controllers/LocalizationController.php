@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setting;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Order;
@@ -136,10 +137,11 @@ class LocalizationController extends Controller
     {
 
 
-        $set_trx = Feature::where('id', 1)->first()->pos_transfer ?? null;
-        $trx = PendingTransaction::all();
+        $data['set_trx'] = Feature::where('id', 1)->first()->pos_transfer ?? null;
+        $data['set'] = Setting::where('id', 1)->first() ?? null;
 
-        return view('exe', compact('trx', 'set_trx'));
+
+        return view('exe', $data);
 
 
     }
@@ -484,6 +486,75 @@ class LocalizationController extends Controller
         $trx = Feature::where('id', 1)->update(['pos_transfer' => 1]);
         return back()->with('message', 'Status updated successfully');
     }
+
+
+
+
+    public function block_opay(request $request)
+    {
+        $trx = Setting::where('id', 1)->update(['opay_trx' => 0]);
+        return back()->with('message', 'Status updated successfully');
+    }
+
+
+    public function unblock_opay(request $request)
+    {
+        $trx = Setting::where('id', 1)->update(['opay_trx' => 1]);
+        return back()->with('message', 'Status updated successfully');
+    }
+
+
+    public function block_palmpay(request $request)
+    {
+        $trx = Setting::where('id', 1)->update(['palmpay_trx' => 0]);
+        return back()->with('message', 'Status updated successfully');
+    }
+
+
+    public function unblock_palmpay(request $request)
+    {
+        $trx = Setting::where('id', 1)->update(['palmpay_trx' => 1]);
+        return back()->with('message', 'Status updated successfully');
+    }
+
+
+
+
+
+    public function block_ninepsb(request $request)
+    {
+        $trx = Setting::where('id', 1)->update(['ninepsb' => 0]);
+        return back()->with('message', 'Status updated successfully');
+    }
+
+
+    public function unblock_ninepsb(request $request)
+    {
+        $trx = Setting::where('id', 1)->update(['ninepsb' => 1]);
+        return back()->with('message', 'Status updated successfully');
+    }
+
+
+    public function block_wema(request $request)
+    {
+        $trx = Setting::where('id', 1)->update(['wema_transfer' => 0]);
+        return back()->with('message', 'Status updated successfully');
+    }
+
+
+    public function unblock_wema(request $request)
+    {
+        $trx = Setting::where('id', 1)->update(['wema_transfer' => 1]);
+        return back()->with('message', 'Status updated successfully');
+    }
+
+
+
+
+
+
+
+
 
 
     public function block_user(request $request)

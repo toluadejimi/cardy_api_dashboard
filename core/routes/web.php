@@ -147,13 +147,20 @@ Route::post('delete-trx', [LocalizationController::class, 'delete_trx']);
 Route::post('block-user', [LocalizationController::class, 'block_user']);
 Route::post('unblock-user', [LocalizationController::class, 'unblock_user']);
 
-Route::post('unblock-pos', [LocalizationController::class, 'unblock_pos_transfer']);
-Route::post('block-pos', [LocalizationController::class, 'block_pos_transfer']);
+Route::post('unlock-pos', [LocalizationController::class, 'unblock_pos_transfer']);
+Route::post('lock-pos', [LocalizationController::class, 'block_pos_transfer']);
 
+Route::post('unlock-opay', [LocalizationController::class, 'unblock_opay']);
+Route::post('lock-opay', [LocalizationController::class, 'block_opay']);
 
+Route::post('unlock-palmpay', [LocalizationController::class, 'unblock_palmpay']);
+Route::post('lock-palmpay', [LocalizationController::class, 'block_palmpay']);
 
+Route::post('unlock-wema', [LocalizationController::class, 'unblock_wema']);
+Route::post('lock-wema', [LocalizationController::class, 'block_wema']);
 
-
+Route::post('unlock-ninepsb', [LocalizationController::class, 'unblock_ninepsb']);
+Route::post('lock-ninepsb', [LocalizationController::class, 'block_ninepsb']);
 
 
 
