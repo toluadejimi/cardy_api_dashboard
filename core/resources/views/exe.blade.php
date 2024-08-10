@@ -65,7 +65,7 @@
                         <form method="POST" action="/lock-opay">
                             @csrf
                             @method('POST')
-                            <button type="submit" class="btn btn-danger btn-md mt-2">Lock Opay</button>
+                            <button type="submit" class="btn btn-danger btn-md mt-2">Lock</button>
                         </form>
                     </div>
 
@@ -81,7 +81,7 @@
                         <form method="POST" action="/unlock-opay">
                             @csrf
                             @method('POST')
-                            <button type="submit" class="btn btn-success btn-md mt-2">Unlock Opay</button>
+                            <button type="submit" class="btn btn-success btn-md mt-2">Unlock</button>
                         </form>
                     </div>
 
@@ -99,7 +99,7 @@
                             <form method="POST" action="/lock-palmpay">
                                 @csrf
                                 @method('POST')
-                                <button type="submit" class="btn btn-danger btn-md mt-2">Lock Palmpay</button>
+                                <button type="submit" class="btn btn-danger btn-md mt-2">Lock</button>
                             </form>
                         </div>
 
@@ -115,7 +115,7 @@
                             <form method="POST" action="/unlock-palmpay">
                                 @csrf
                                 @method('POST')
-                                <button type="submit" class="btn btn-success btn-md mt-2">Unlock Palmpay</button>
+                                <button type="submit" class="btn btn-success btn-md mt-2">Unlock</button>
                             </form>
                         </div>
 
@@ -134,7 +134,7 @@
                             <form method="POST" action="/lock-ninepsb">
                                 @csrf
                                 @method('POST')
-                                <button type="submit" class="btn btn-danger btn-md mt-2">Lock Palmpay</button>
+                                <button type="submit" class="btn btn-danger btn-md mt-2">Lock</button>
                             </form>
                         </div>
 
@@ -150,7 +150,7 @@
                             <form method="POST" action="/unlock-ninepsb">
                                 @csrf
                                 @method('POST')
-                                <button type="submit" class="btn btn-success btn-md mt-2">Unlock 9psb</button>
+                                <button type="submit" class="btn btn-success btn-md mt-2">Unlock</button>
                             </form>
                         </div>
 
@@ -169,7 +169,7 @@
                             <form method="POST" action="/lock-wema">
                                 @csrf
                                 @method('POST')
-                                <button type="submit" class="btn btn-danger btn-md mt-2">Lock Wema</button>
+                                <button type="submit" class="btn btn-danger btn-md mt-2">Lock</button>
                             </form>
                         </div>
 
@@ -185,7 +185,7 @@
                             <form method="POST" action="/unlock-wema">
                                 @csrf
                                 @method('POST')
-                                <button type="submit" class="btn btn-success btn-md mt-2">Unlock Wema</button>
+                                <button type="submit" class="btn btn-success btn-md mt-2">Unlock</button>
                             </form>
                         </div>
 

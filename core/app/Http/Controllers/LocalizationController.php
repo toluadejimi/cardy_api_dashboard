@@ -506,14 +506,14 @@ class LocalizationController extends Controller
 
     public function block_palmpay(request $request)
     {
-        $trx = Setting::where('id', 1)->update(['palmpay_trx' => 0]);
+        Setting::where('id', 1)->update(['palmpay_trx' => 0]);
         return back()->with('message', 'Status updated successfully');
     }
 
 
     public function unblock_palmpay(request $request)
     {
-        $trx = Setting::where('id', 1)->update(['palmpay_trx' => 1]);
+         Setting::where('id', 1)->update(['palmpay_trx' => 1]);
         return back()->with('message', 'Status updated successfully');
     }
 
