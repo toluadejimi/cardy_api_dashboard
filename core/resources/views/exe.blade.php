@@ -90,7 +90,7 @@
         </div>
     @endif
 
-        @if($set->pamlpay_trx == '1')
+        @if($set->palmpay_trx == '1')
             <div class="col-sm-3 my-3">
                 <div class="card">
                     <div class="card-body">
