@@ -25,7 +25,7 @@
                 <div class="card-body">
                     <h6 class="card-title">POS Transfer</h6>
                     <div class="col-lg-12">
-                        <form method="POST" action="/block-pos?ref_trans_id={{ $set->pos_transfer }}">
+                        <form method="POST" action="/block-pos">
                             @csrf
                             @method('POST')
 
