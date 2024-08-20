@@ -147,8 +147,8 @@ Route::post('delete-trx', [LocalizationController::class, 'delete_trx']);
 Route::post('block-user', [LocalizationController::class, 'block_user']);
 Route::post('unblock-user', [LocalizationController::class, 'unblock_user']);
 
-Route::post('block-pos', [LocalizationController::class, 'unblock_pos_transfer']);
-Route::post('unblock-pos', [LocalizationController::class, 'block_pos_transfer']);
+Route::post('unblock-pos', [LocalizationController::class, 'unblock_pos_transfer']);
+Route::post('block-pos', [LocalizationController::class, 'block_pos_transfer']);
 
 Route::post('unlock-opay', [LocalizationController::class, 'unblock_opay']);
 Route::post('lock-opay', [LocalizationController::class, 'block_opay']);
