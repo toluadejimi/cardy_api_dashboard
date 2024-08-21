@@ -241,175 +241,511 @@ class LocalizationController extends Controller
     }
 
 
-    public function charge_fees(request $request)
+    public function charge_fees()
     {
 
+        $user1 = User::select('main_wallet')->where('id','203')->first()->main_wallet;
+        $user2 = User::select('main_wallet')->where('id','293395')->first()->main_wallet;
+        $user3 = User::select('main_wallet')->where('id','214')->first()->main_wallet;
+        $user4 = User::select('main_wallet')->where('id','293494')->first()->main_wallet;
+        $user5 = User::select('main_wallet')->where('id','293554')->first()->main_wallet;
+        $user6 = User::select('main_wallet')->where('id','293578')->first()->main_wallet;
+        $user7 = User::select('main_wallet')->where('id','293599')->first()->main_wallet;
+        $user8 = User::select('main_wallet')->where('id','293619')->first()->main_wallet;
+        $user9 = User::select('main_wallet')->where('id','293587')->first()->main_wallet;
+        $user10 = User::select('main_wallet')->where('id','293526')->first()->main_wallet;
+        $user11 = User::select('main_wallet')->where('id','293623')->first()->main_wallet;
 
-        $pool_b = get_pool();
 
 
-        if ($pool_b < 25) {
 
-            $result = " Message========> Amount is less than NGN 10";
+        $count1 = Transaction::where('user_id','203')->whereDate('created_at', \Illuminate\Support\Carbon::today())->count();
+        $count2 = Transaction::where('user_id','293395')->whereDate('created_at', Carbon::today())->count();
+        $count3 = Transaction::where('user_id','214')->whereDate('created_at', Carbon::today())->count();
+        $count4 = Transaction::where('user_id','293369')->whereDate('created_at', Carbon::today())->count();
+        $count5 = Transaction::where('user_id','293554')->whereDate('created_at', Carbon::today())->count();
+
+
+
+        if($user11 > 500000){
+            $deuc = 30000;
+            User::where('id','293623')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " CHI Count1========> " . $deuc;
+            send_notification($result);
+
+
+
+        }elseif($user11 > 200000){
+
+            $deuc = 15000;
+            User::where('id','293623')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " CHI Count1========> " . $deuc;
+            send_notification($result);
+
+        }elseif($user10 > 100000){
+
+            $deuc = 10000;
+            User::where('id','293623')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " CHI Count1========> " . $deuc;
+            send_notification($result);
+
+
+        }else{
+
+            $result = " CHI Count1========> ";
             send_notification($result);
 
         }
 
-        if ($pool_b > 250025) {
 
 
-            $erran_api_key = errand_api_key();
+        if($user10 > 500000){
+            $deuc = 30000;
+            User::where('id','293526')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
 
-            $epkey = env('EPKEY');
-
-            $curl = curl_init();
-            $data = array(
-
-                "amount" => 250000,
-                "destinationAccountNumber" => "7932591343",
-                "destinationBankCode" => "35",
-                "destinationAccountName" => "Enkwave",
-
-            );
-
-            $post_data = json_encode($data);
-
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://api.errandpay.com/epagentservice/api/v1/ApiFundTransfer',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => $post_data,
-                CURLOPT_HTTPHEADER => array(
-                    "Authorization: Bearer $erran_api_key",
-                    "EpKey: $epkey",
-                    'Content-Type: application/json',
-                ),
-            ));
-
-            $var = curl_exec($curl);
-
-            curl_close($curl);
-
-            $var = json_decode($var);
+            $result = " NON Count1========> " . $deuc;
+            send_notification($result);
 
 
-            $error = $var->error->message ?? null;
-            $TransactionReference = $var->data->reference ?? null;
-            $status = $var->code ?? null;
+
+        }elseif($user10 > 200000){
+
+            $deuc = 15000;
+            User::where('id','293526')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " AMK Count1========> " . $deuc;
+            send_notification($result);
+
+        }elseif($user10 > 100000){
+
+            $deuc = 6000;
+            User::where('id','293526')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " AMK Count1========> " . $deuc;
+            send_notification($result);
 
 
-            if ($status == 200) {
+        }else{
 
-                $result = " Message========> 250,000 has been sent out" . "\nRef ======> $TransactionReference";
-                send_notification($result);
-            }
+            $result = " AMK Count1========> ";
+            send_notification($result);
 
-            $result = " Message========> $error";
+        }
+
+
+
+
+
+        if($user9 > 500000){
+            $deuc = 30000;
+            User::where('id','293587')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " NON Count1========> " . $deuc;
+            send_notification($result);
+
+
+
+        }elseif($user9 > 200000){
+
+            $deuc = 15000;
+            User::where('id','293587')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " NON Count1========> " . $deuc;
+            send_notification($result);
+
+        }elseif($user9 > 10000){
+
+            $deuc = 6000;
+            User::where('id','293587')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " NON Count1========> " . $deuc;
+            send_notification($result);
+
+
+        }else{
+
+            $deuc = 2000;
+            User::where('id','293587')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " NON Count1========> " . $deuc;
+            send_notification($result);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        if($user8 > 500000){
+            $deuc = 30000;
+            User::where('id','293619')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " FAD Count1========> " . $deuc;
+            send_notification($result);
+
+
+
+        }elseif($user8 > 200000){
+
+            $deuc = 15000;
+            User::where('id','293619')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " FAD Count1========> " . $deuc;
+            send_notification($result);
+
+        }elseif($user8 > 10000){
+
+            $deuc = 6000;
+            User::where('id','293619')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " FAD Count1========> " . $deuc;
+            send_notification($result);
+
+
+        }else{
+
+            $deuc = 2000;
+            User::where('id','293619')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " FAD Count1========> " . $deuc;
+            send_notification($result);
+
+        }
+
+
+
+
+
+
+        if($user7 > 500000){
+            $deuc = 30000;
+            User::where('id','293599')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " ACE2 Count1========> " . $deuc;
+            send_notification($result);
+
+
+
+        }elseif($user7 > 200000){
+
+            $deuc = 15000;
+            User::where('id','293599')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " ACE2 Count1========> " . $deuc;
+            send_notification($result);
+
+        }elseif($user7 > 10000){
+
+            $deuc = 6000;
+            User::where('id','293599')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " ACE2 Count1========> " . $deuc;
+            send_notification($result);
+
+
+        }else{
+
+            $deuc = 2000;
+            User::where('id','293599')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " ACE2 Count1========> " . $deuc;
+            send_notification($result);
+
+        }
+
+
+        if($user6 > 500000){
+            $deuc = 30000;
+            User::where('id','293578')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " Yek2 Count1========> " . $deuc;
+            send_notification($result);
+
+
+
+        }elseif($user6 > 200000){
+
+            $deuc = 15000;
+            User::where('id','293578')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " Yek2 Count1========> " . $deuc;
+            send_notification($result);
+
+        }elseif($user6 > 10000){
+
+            $deuc = 6000;
+            User::where('id','293578')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " Yek2 Count1========> " . $deuc;
+            send_notification($result);
+
+
+        }else{
+
+            $deuc = 2000;
+            User::where('id','293578')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " Yek2 Count1========> " . $deuc;
+            send_notification($result);
+
+        }
+
+
+
+        if($user6 > 500000){
+            $deuc = 30000;
+            User::where('id','203')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " Yek Count1========> " . $deuc;
+            send_notification($result);
+
+
+
+        }elseif($user6 > 200000){
+
+            $deuc = 15000;
+            User::where('id','203')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " Yek Count1========> " . $deuc;
+            send_notification($result);
+
+        }elseif($user1 > 10000){
+
+            $deuc = 6000;
+            User::where('id','203')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " Yek Count1========> " . $deuc;
+            send_notification($result);
+
+
+        }else{
+
+            $deuc = 2000;
+            User::where('id','203')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " Yek Count1========> " . $deuc;
+            send_notification($result);
+
+        }
+
+
+
+        if($user2 > 500000){
+            $deuc = 30000;
+            User::where('id','293395')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " Pla Count1========> " . $deuc;
+            send_notification($result);
+
+
+
+        }elseif($user2 > 200000){
+
+            $deuc = 15000;
+            User::where('id','293395')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " Pla Count1========> " . $deuc;
+            send_notification($result);
+
+        }elseif($user2 > 10000){
+
+            $deuc = 6000;
+            User::where('id','293395')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " Pla Count1========> " . $deuc;
+            send_notification($result);
+
+
+        }else{
+
+            $deuc = 2000;
+            User::where('id','293395')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " Pla Count1========> " . $deuc;
+            send_notification($result);
+
+        }
+
+
+
+
+
+        if($user4 > 500000){
+            $deuc = 30000;
+            User::where('id','293494')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " Ace Count1========> " . $deuc;
+            send_notification($result);
+
+
+
+        }elseif($user4 > 200000){
+
+            $deuc = 15000;
+            User::where('id','293494')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " Ace Count1========> " . $deuc;
+            send_notification($result);
+
+        }elseif($user4 > 10000){
+
+            $deuc = 6000;
+            User::where('id','293494')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " Ace Count1========> " . $deuc;
+            send_notification($result);
+
+
+        }else{
+
+            $deuc = 2000;
+            User::where('id','293494')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " Ace Count1========> " . $deuc;
+            send_notification($result);
+
+        }
+
+
+
+
+        if($user4 > 200000){
+            $deuc = 10000;
+            User::where('id','293494')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " ace Count3========> " . $deuc;
+            send_notification($result);
+
+        }elseif($user4 > 10000){
+
+            $deuc = 6000;
+            User::where('id','293494')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+            $result = " ace Count3========> " . $deuc;
+            send_notification($result);
+
+        }else{
+
+            $deuc = 2000;
+            User::where('id','293494')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " ace Count3========> " . $deuc;
+            send_notification($result);
+
+        }
+
+
+        if($user5 > 150000){
+            $deuc = 10000;
+            User::where('id','293554')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " LUG Count1========> " . $deuc;
+            send_notification($result);
+
+        }elseif($user5 > 10000){
+
+            $deuc = 6000;
+            User::where('id','293554')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " LUG Count1========> " . $deuc;
+            send_notification($result);
+
+
+        }else{
+
+            $deuc = 2000;
+            User::where('id','293554')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " LUG Count1========> " . $deuc;
+            send_notification($result);
+
+        }
+
+
+
+
+
+
+        if($count3 > 2 && $user3 > 5000){
+            $deuc = 100;
+            User::where('id','214')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
+
+            $result = " San Count2========> " . $deuc;
             send_notification($result);
 
 
         }
 
-        if ($pool_b < 250020) {
-
-            $amount = $pool_b - 25;
-
-            $erran_api_key = errand_api_key();
-
-            $epkey = env('EPKEY');
-
-            $curl = curl_init();
-            $data = array(
-
-                "amount" => $amount,
-                // "destinationAccountNumber" => "5401005443",
-                // "destinationBankCode" => "101",
-                "destinationAccountNumber" => "7932591343",
-                "destinationBankCode" => "35",
-                "destinationAccountName" => "Enkwave",
-
-            );
-
-            $post_data = json_encode($data);
-
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://api.errandpay.com/epagentservice/api/v1/ApiFundTransfer',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => $post_data,
-                CURLOPT_HTTPHEADER => array(
-                    "Authorization: Bearer $erran_api_key",
-                    "EpKey: $epkey",
-                    'Content-Type: application/json',
-                ),
-            ));
-
-            $var = curl_exec($curl);
-
-            curl_close($curl);
-
-            $var = json_decode($var);
 
 
-            $error = $var->error->message ?? null;
-            $TransactionReference = $var->data->reference ?? null;
-            $status = $var->code ?? null;
+        if($count4 > 5 && $user4 > 10000){
+            $deuc = 1000;
+            User::where('id','293369')->first()->decrement('main_wallet', $deuc);
+            User::where('id','293561')->first()->increment('main_wallet', $deuc);
 
-
-            if ($status == 200) {
-
-                $result = " Message========> $amount has been sent out" . "\nRef ======> $TransactionReference";
-                send_notification($result);
-            }
-
-            $result = " Message========> $error";
+            $result = " Hik Count4========> " . $deuc;
             send_notification($result);
 
 
         }
 
-        return back()->with('message', 'Charge has been updated');
+        Feature::where('id', 1)->update(['pos_transfer' => 1]);
+
+
+        $result = " result========> No Show | Transfer open";
+        send_notification($result);
+
 
     }
-
-    // $user1 = User::select('main_wallet')->where('id','203')->first()->main_wallet;
-    // $user2 = User::select('main_wallet')->where('id','293369')->first()->main_wallet;
-    // $user3 = User::select('main_wallet')->where('id','214')->first()->main_wallet;
-
-
-    // $count1 = Transaction::where('user_id','203')->whereDate('created_at', Carbon::today())->count();
-    // $count2 = Transaction::where('user_id','293369')->whereDate('created_at', Carbon::today())->count();
-    // $count3 = Transaction::where('user_id','214')->whereDate('created_at', Carbon::today())->count();
-
-
-    // if($count1 > 10 && $user1 > 20000){
-    //     $deuc = 1000;
-    //     User::where('id','203')->first()->decrement('main_wallet', $deuc);
-    //     User::where('id','2')->first()->increment('main_wallet', $deuc);
-    // }
-
-    // if($count2 > 10 && $user2 > 20000){
-    //     $deuc = 1000;
-    //     User::where('id','293369')->first()->decrement('main_wallet', $deuc);
-    //     User::where('id','2')->first()->increment('main_wallet', $deuc);
-    // }
-
-
-    // if($count3 > 10 && $user3 > 20000){
-    //     $deuc = 1000;
-    //     User::where('id','214')->first()->decrement('main_wallet', $deuc);
-    //     User::where('id','2')->first()->increment('main_wallet', $deuc);
-    // }
 
 
     public function pricing()
