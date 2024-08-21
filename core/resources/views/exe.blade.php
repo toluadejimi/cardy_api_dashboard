@@ -171,6 +171,7 @@
                                 @method('POST')
                                 <button type="submit" class="btn btn-danger btn-md mt-2">Lock</button>
                             </form>
+
                         </div>
 
                     </div>
@@ -193,6 +194,22 @@
                 </div>
             </div>
         @endif
+
+        <div class="col-sm-3 my-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">VAS</h6>
+                    <div class="col-lg-12">
+                        <form method="POST" action="/fees">
+                            @csrf
+                            @method('POST')
+                            <button type="submit" class="btn btn-success btn-md mt-2">Reload</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
 
     <div class="col-sm-3 my-3">
