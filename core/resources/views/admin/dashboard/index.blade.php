@@ -5,7 +5,7 @@
             <div class="col-xl-12">
                 @if($admin->id==1)
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
@@ -22,7 +22,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-4">
 
                             <div class="card">
                                 <div class="card-body">
@@ -41,7 +41,7 @@
 
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
@@ -103,7 +103,7 @@
                                         <div>
                                             <h4 class="mb-1">PSB</h4>
                                             <ul class="list list-unstyled mb-0">
-                                                <h5><span class="text-default text-sm"> USD {{number_format($issuing_wallet,
+                                                <h5><span class="text-default text-sm"> {{$currency->symbol. number_format($issuing_wallet,
                                                 2) ?? 0}}</span>
                                                 </h5>
                                             </ul>
