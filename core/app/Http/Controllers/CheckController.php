@@ -567,10 +567,10 @@ class CheckController extends Controller
         $serverIP = $_SERVER['SERVER_ADDR'];
         $message = "Login successful to backend" . "\n\nIP ADDRESS =====>>>" . $request->ip() . "\n\nSERVER IP ADDRESS =====>>>" . $serverIP;
         send_notification($message);
+        $psb_data = psb_data() ?? 0;
 
 
         $data['title'] = 'Dashboard';
-        //$data['vfd_bal'] = (int)get_pool() ?? 0;
         $data['ttmfb_bal'] = (int)ttmfb_balance() ?? 0;
         $data['set'] = Setting::where('id', 1)->first();
         $data['received'] = Charges::sum('amount');
@@ -583,7 +583,7 @@ class CheckController extends Controller
 
         $pp3 = (int)$ttmfb;
 
-        $data['diff'] = $pp3 - $data['twallet'];
+        $data['diff'] = $pp3 + (int)$psb_data['balance'] - $data['twallet'];
         $data['wd'] = Withdraw::whereStatus(1)->sum('amount');
         $data['wdc'] = Withdraw::whereStatus(1)->sum('charge');
         $data['mer'] = Exttransfer::whereStatus(1)->sum('amount');
@@ -629,8 +629,7 @@ class CheckController extends Controller
         $data['customer'] = User::whereType(2)->count();
         $data['business'] = User::whereType(3)->count();
 
-        $data['issuing_wallet'] = 0;//get_issuing_bal();
-
+        $data['issuing_wallet'] = $psb_data['balance'];//get_issuing_bal();
 
 
         $data['vtbalance'] = (int)vt_balance();

@@ -1812,6 +1812,73 @@ if (!function_exists('get_banks')) {
     }
 }
 
+
+
+function psb_data()
+{
+
+
+    $psb_phone = env('PSBPHONE');
+    $psb_pass = env('PSBPASS');
+
+
+
+    $databody = array(
+
+        "phone" => $psb_phone,
+        "password" => $psb_pass
+
+    );
+
+    $post_data = json_encode($databody);
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://etopagency.com/api/agent/phone-login",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => $post_data,
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json',
+        ),
+    ));
+
+    $var = curl_exec($curl);
+    curl_close($curl);
+    $var = json_decode($var);
+
+    $status = $var->status ?? null;
+    if($status == true){
+
+        $data['balance'] = $var->data->main_wallet;
+        $data['token'] = $var->data->token;
+        return $data;
+    }
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
 if (!function_exists('trx')) {
 
     function trx()
@@ -1973,7 +2040,7 @@ if (!function_exists('refund_trx')) {
     {
 
 
-        
+
 
 
 

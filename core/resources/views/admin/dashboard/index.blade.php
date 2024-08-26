@@ -101,7 +101,7 @@
                                 <div class="card-body">
                                     <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
                                         <div>
-                                            <h4 class="mb-1">USD</h4>
+                                            <h4 class="mb-1">PSB</h4>
                                             <ul class="list list-unstyled mb-0">
                                                 <h5><span class="text-default text-sm"> USD {{number_format($issuing_wallet,
                                                 2) ?? 0}}</span>
