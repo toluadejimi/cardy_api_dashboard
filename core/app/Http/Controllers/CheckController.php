@@ -578,12 +578,16 @@ class CheckController extends Controller
         $bwall = User::all()->sum('bonus_wallet') ?? 0;
         $data['twallet'] = $mainw + $bwall;
 
+        $data['woven_bal'] = Transactions::where('main_type', 'WOVEN')->whereDate('created_at', Carbon::today())
+            ->sum('charge');
+
+
         //$pool = get_pool();
         $ttmfb = ttmfb_balance();
 
         $pp3 = (int)$ttmfb;
 
-        $data['diff'] = $pp3 + (int)$psb_data['balance'] - $data['twallet'];
+        $data['diff'] = $pp3 + (int)$psb_data['balance'] + (int)$data['woven_bal'] - $data['twallet'];
         $data['wd'] = Withdraw::whereStatus(1)->sum('amount');
         $data['wdc'] = Withdraw::whereStatus(1)->sum('charge');
         $data['mer'] = Exttransfer::whereStatus(1)->sum('amount');
@@ -628,7 +632,6 @@ class CheckController extends Controller
         $data['agent'] = User::whereType(1)->count();
         $data['customer'] = User::whereType(2)->count();
         $data['business'] = User::whereType(3)->count();
-
         $data['issuing_wallet'] = $psb_data['balance'];//get_issuing_bal();
 
 
