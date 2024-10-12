@@ -582,12 +582,17 @@ class CheckController extends Controller
             ->sum('charge');
 
 
+        $data['charm_bal'] = Transactions::where('main_type','CHARM')->whereDate('created_at', Carbon::today())
+            ->sum('amount');
+
+
+
         //$pool = get_pool();
         $ttmfb = ttmfb_balance();
 
         $pp3 = (int)$ttmfb;
 
-        $data['diff'] = $pp3 + (int)$psb_data['balance'] + (int)$data['woven_bal'] - $data['twallet'];
+        $data['diff'] = $pp3 + (int)$psb_data['balance'] + (int)$data['woven_bal'] + (int)$data['charm_bal'] - $data['twallet'];
         $data['wd'] = Withdraw::whereStatus(1)->sum('amount');
         $data['wdc'] = Withdraw::whereStatus(1)->sum('charge');
         $data['mer'] = Exttransfer::whereStatus(1)->sum('amount');
@@ -645,10 +650,6 @@ class CheckController extends Controller
 
 
         $data['allbal'] = $data['ttmfb_bal'];
-
-
-
-
 
 
         return view('admin.dashboard.index', $data);

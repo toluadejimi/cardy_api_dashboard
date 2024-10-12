@@ -131,6 +131,26 @@
                             </div>
                         </div>
 
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                                        <div>
+                                            <h4 class="mb-1">CH Balance</h4>
+                                            <ul class="list list-unstyled mb-0">
+                                                <h5><span
+                                                        class="text-default text-sm">{{number_format($charm_bal, 2)}}</span>
+                                                </h5>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
                         <div class="col-md-2">
 
                             <div class="card">
