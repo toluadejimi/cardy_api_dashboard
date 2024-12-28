@@ -637,7 +637,7 @@ class CheckController extends Controller
         $data['agent'] = User::whereType(1)->count();
         $data['customer'] = User::whereType(2)->count();
         $data['business'] = User::whereType(3)->count();
-        $data['issuing_wallet'] = $psb_data['balance'];//get_issuing_bal();
+        $data['issuing_wallet'] = $psb_data['balance'] ?? 0;//get_issuing_bal();
 
 
         $data['vtbalance'] = (int)vt_balance();
