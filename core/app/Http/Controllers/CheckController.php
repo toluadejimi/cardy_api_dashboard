@@ -592,7 +592,7 @@ class CheckController extends Controller
 
         $pp3 = (int)$ttmfb;
 
-        $data['diff'] = $pp3 ?? 0 + (int)$psb_data['balance'] ?? 0 + (int)$data['woven_bal'] ?? 0 + (int)$data['charm_bal'] ?? 0 - $data['twallet'] ?? 0;
+        $data['diff'] = $pp3  + (int)$psb_data['balance']  + (int)$data['woven_bal']  + (int)$data['charm_bal']  - $data['twallet'];
         $data['wd'] = Withdraw::whereStatus(1)->sum('amount');
         $data['wdc'] = Withdraw::whereStatus(1)->sum('charge');
         $data['mer'] = Exttransfer::whereStatus(1)->sum('amount');
