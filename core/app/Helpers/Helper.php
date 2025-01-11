@@ -1859,6 +1859,8 @@ function psb_data()
         $data['balance'] = $var->data->main_wallet;
         $data['token'] = $var->data->token;
         return $data;
+    }else{
+        return 0;
     }
 
 
