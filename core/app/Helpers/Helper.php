@@ -1856,12 +1856,9 @@ function psb_data()
     $status = $var->status ?? null;
     if($status == true){
 
-       ;
+        $data['balance'] = $var->data->main_wallet;
         $data['token'] = $var->data->token;
-        return $var->data->main_wallet;
-
-    }else{
-        return 0;
+        return $data;
     }
 
 
