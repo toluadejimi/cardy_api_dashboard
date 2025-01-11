@@ -1850,6 +1850,8 @@ function psb_data()
     ));
 
     $var = curl_exec($curl);
+
+    dd($var);
     curl_close($curl);
     $var = json_decode($var);
 
@@ -1859,6 +1861,7 @@ function psb_data()
         $data['balance'] = $var->data->main_wallet;
         $data['token'] = $var->data->token;
         return $data;
+
     }else{
         return 0;
     }
