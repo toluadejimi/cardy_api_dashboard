@@ -569,12 +569,6 @@ class CheckController extends Controller
         send_notification($message);
         $psb_data = psb_data() ?? 0;
 
-
-
-        $pbbalance = (int)$psb_data['balance'] ?? 0 ;
-
-
-
         $data['title'] = 'Dashboard';
         $data['ttmfb_bal'] = (int)ttmfb_balance() ?? 0;
         $data['set'] = Setting::where('id', 1)->first();
@@ -597,7 +591,7 @@ class CheckController extends Controller
 
         $pp3 = (int)$ttmfb;
 
-        $data['diff'] = $pp3  +  $pbbalance  +  (int)$data['woven_bal']   + (int)$data['charm_bal']   - $data['twallet'];
+        $data['diff'] = $pp3  +  $psb_data  +  (int)$data['woven_bal']   + (int)$data['charm_bal']   - $data['twallet'];
 
 
         $data['wd'] = Withdraw::whereStatus(1)->sum('amount');
