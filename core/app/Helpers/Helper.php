@@ -1850,8 +1850,6 @@ function psb_data()
     ));
 
     $var = curl_exec($curl);
-
-    dd($var);
     curl_close($curl);
     $var = json_decode($var);
 

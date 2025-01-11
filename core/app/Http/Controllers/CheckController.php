@@ -569,6 +569,8 @@ class CheckController extends Controller
         send_notification($message);
         $psb_data = psb_data() ?? 0;
 
+        dd($psb_data);
+
 
         $data['title'] = 'Dashboard';
         $data['ttmfb_bal'] = (int)ttmfb_balance() ?? 0;
